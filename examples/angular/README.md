@@ -2,6 +2,8 @@
 
 This example shows how Nutrient Web SDK can be integrated in an Angular project. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2., although some simplifications have been made to focus on integrating PSPDFKit. For more guided instructions, check out our [blog post](https://www.nutrient.io/blog/2021/how-to-build-an-angular-pdf-viewer/).
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPSPDFKit%2Fnutrient-examples%2Ftree%2Fmain%2Fexamples%2Fangular)
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org)
