@@ -14,9 +14,9 @@ jobs:
         with:
           node-version: lts/*
       - name: Install dependencies
-        run: npm run install-dependencies
+        run: npm install && npm run install-dependencies
       - name: Install Playwright Browsers
-        run: npm exec playwright install --with-deps chromium
+        run: npm exec playwright install chromium --with-deps
       - name: Run Playwright tests
         run: npm run e2e-tests
       - uses: actions/upload-artifact@v4
