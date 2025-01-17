@@ -17,17 +17,13 @@
   },
   "scripts": {
     "install-dependencies": "npx ts-node ./scripts/install-dependencies.ts",
-    "format": "biome format --write .",
-    "lint": "biome lint --write .",
+    "format": "biome check --write .",
     "prepare": "husky",
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
     "test": "playwright test"
   },
   "lint-staged": {
-    "*": [
-      "biome format --write --no-errors-on-unmatched",
-      "biome lint --write --no-errors-on-unmatched"
-    ]
+    "*": ["biome check --write --no-errors-on-unmatched"]
   }
 }

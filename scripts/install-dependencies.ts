@@ -1,6 +1,6 @@
+import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
 
 const rootDir = path.resolve(__dirname, "..");
 const examplesDir = path.join(rootDir, "examples");
