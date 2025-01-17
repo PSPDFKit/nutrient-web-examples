@@ -9,6 +9,5 @@
     "stripInternal": true,
     "baseUrl": ".",
     "resolveJsonModule": true
-  },
-  "exclude": ["packages/*/dist/**"]
+  }
 }
