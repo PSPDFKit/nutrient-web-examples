@@ -7,10 +7,10 @@ const examplesDir = path.join(rootDir, "examples");
 
 const examples = fs.readdirSync(examplesDir);
 
-examples.forEach((example) => {
+for (const example of examples) {
   const exampleDir = path.join(examplesDir, example);
   console.log(`Installing dependencies for ${exampleDir}`);
-  execSync(`npm install`, {
+  execSync("npm install", {
     cwd: exampleDir,
   });
-});
+}
