@@ -16,7 +16,7 @@
     "typescript": "^5.7.3"
   },
   "scripts": {
-    "install-dependencies": "npx ts-node ./scripts/install-dependencies.ts",
+    "install-dependencies": "./scripts/install-dependencies.sh",
     "format": "biome check --write .",
     "prepare": "husky",
     "e2e-tests": "./scripts/e2e-tests.sh",
