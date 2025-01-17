@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
-export const baseConfig = defineConfig({
+export default defineConfig({
   testDir: "./tests",
+  testMatch: "**/*.test.ts",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -30,4 +31,9 @@ export const baseConfig = defineConfig({
       },
     },
   ],
+  webServer: {
+    command: `cd ${process.env.SERVER_DIR} && npm run start`,
+    url: "http://localhost:4200",
+    reuseExistingServer: true,
+  },
 });

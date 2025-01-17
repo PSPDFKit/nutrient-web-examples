@@ -18,7 +18,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npm exec playwright install --with-deps
       - name: Run Playwright tests
-        run: cd examples/angular && npm run e2e
+        run: npm run e2e-tests
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

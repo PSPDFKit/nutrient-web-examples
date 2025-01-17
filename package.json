@@ -10,16 +10,19 @@
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.7",
+    "concurrently": "^9.1.2",
     "husky": "^9.1.7",
-    "lint-staged": "^15.4.1"
+    "lint-staged": "^15.4.1",
+    "typescript": "^5.7.3"
   },
   "scripts": {
     "install-dependencies": "npx ts-node ./scripts/install-dependencies.ts",
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "prepare": "husky",
-    "e2e-tests": "pnpm run install-dependencies && npx ts-node ./scripts/e2e-tests.ts",
-    "lint-staged": "lint-staged"
+    "e2e-tests": "./scripts/e2e-tests.sh",
+    "lint-staged": "lint-staged",
+    "test": "playwright test"
   },
   "lint-staged": {
     "*": [
