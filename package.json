@@ -22,6 +22,9 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*": ["biome format --write", "biome lint --write"]
+    "*": [
+      "biome format --write --no-errors-on-unmatched",
+      "biome lint --write --no-errors-on-unmatched"
+    ]
   }
 }
