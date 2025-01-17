@@ -32,8 +32,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `cd ${process.env.SERVER_DIR} && npm run start`,
-    url: "http://localhost:4200",
+    command: `cd ${process.env.SERVER_DIR} && npm run start:e2e`,
+    url: "http://localhost:3000",
     reuseExistingServer: true,
   },
 });

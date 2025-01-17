@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Nutrient Web SDK", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200");
+    await page.goto("http://localhost:3000");
   });
 
   test("should load the viewer", async ({ page }) => {
