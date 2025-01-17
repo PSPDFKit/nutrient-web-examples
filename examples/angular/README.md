@@ -35,6 +35,10 @@ npm start
 
 The example will now be running at `http://localhost:4200`
 
+To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html.
+
+To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options.
+
 ## Troubleshooting
 
 If you encounter any issues running Nutrient Web SDK in an Angular application, please check our dedicated [Troubleshooting guide](https://www.nutrient.io/guides/web/current/troubleshooting/common-issues) to see if there is already a solution.
