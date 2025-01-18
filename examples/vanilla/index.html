@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+
+    <meta name="author" content="" />
+
+    <title>Vanilla</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #container {
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <!-- Uncomment to use production build -->
+    <!-- <script src="node_modules/pspdfkit/dist/pspdfkit.js"></script> -->
+    <!-- Uncomment to use development build -->
+    <script src="http://localhost:8080/pspdfkit.js"></script>
+
+    <script type="application/javascript">
+      PSPDFKit.load({
+        container: "#container",
+        document: "example.pdf",
+      }).catch(function (err) {
+        console.error(err);
+
+        instance.getFormFields().then(async function (formFields) {
+          console.log("All form fields", formFields.toJS());
+          const updatedFormFields = formFields.map((ff) => {
+            if (ff.constructor.name === "TextFormField") {
+              return ff.set("readOnly", true);
+            }
+
+            return ff;
+          });
+
+          await instance.update(updatedFormFields);
+        });
+      });
+    </script>
+  </body>
+</html>
