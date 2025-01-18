@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "ignore": ["examples/angular/.angular/cache/*"],
+    "ignore": ["examples/angular/.angular/cache/*", "./examples/*/public/*"],
     "ignoreUnknown": true
   },
   "formatter": {

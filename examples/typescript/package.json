@@ -1,0 +1,60 @@
+{
+  "name": "pspdfkit-web-example-typescript",
+  "version": "1.0.0",
+  "description": "Standalone and offline PDF viewer web application built with Nutrient Web SDK and Typescript",
+  "main": "index.js",
+  "keywords": [
+    "typescript",
+    "wasm",
+    "web",
+    "assembly",
+    "pdf",
+    "pdf",
+    "viewer",
+    "webpack",
+    "asm.js",
+    "offline",
+    "indexeddb"
+  ],
+  "author": "PSPDFKit (https://www.nutrient.io)",
+  "homepage": "https://www.nutrient.io/web",
+  "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
+  "readme": "https://www.nutrient.io/guides/web",
+  "dependencies": {
+    "pspdfkit": "2024.8.1",
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/node": "^22.9.1",
+    "ajv": "^8.17.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.15.0",
+    "html-webpack-plugin": "^5.6.3",
+    "jiti": "^2.0.0",
+    "ncp": "^2.0.0",
+    "prettier": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.js",
+    "prestart": "node bin/verify-install.js && npm run build",
+    "dev": "tsc",
+    "start": "serve -l 8080 ./dist",
+    "prestart:dev": "node bin/verify-install.js",
+    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.js --progress",
+    "lint": "eslint src",
+    "verify-installation": "node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "start:e2e": "npm run start:dev"
+  },
+  "overrides": {
+    "path-to-regexp": "^3.3.0",
+    "cross-spawn": "^7.0.5"
+  }
+}
