@@ -17,7 +17,7 @@
   },
   "scripts": {
     "install-dependencies": "./scripts/install-dependencies.sh",
-    "format": "biome check --write .",
+    "format": "biome check --unsafe --write .",
     "prepare": "husky",
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
