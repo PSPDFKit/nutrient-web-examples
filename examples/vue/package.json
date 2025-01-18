@@ -1,0 +1,53 @@
+{
+  "name": "pspdfkit-web-example-vue",
+  "version": "1.0.0",
+  "scripts": {
+    "verify-installation": "mkdir -p public/js && node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "dev": "npm run verify-installation && vite",
+    "build": "npm run verify-installation && vite build",
+    "serve": "npm run verify-installation && vite preview",
+    "start:e2e": "npm run dev -- --port 3000"
+  },
+  "dependencies": {
+    "pspdfkit": "2024.8.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.0",
+    "@vue/compiler-sfc": "^3.5.6",
+    "eslint": "^9.15.0",
+    "eslint-plugin-vue": "^9.31.0",
+    "ncp": "^2.0.0",
+    "vite": "^5.4.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "es2022": true
+    },
+    "extends": ["plugin:vue/vue3-essential", "eslint:recommended"],
+    "parserOptions": {
+      "requireConfigFile": false
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "Firefox ESR",
+    "last 2 Chrome versions",
+    "last 2 firefox versions",
+    "last 2 edge versions",
+    "last 2 safari versions",
+    "last 2 and_chr versions",
+    "last 2 ios_saf versions"
+  ],
+  "overrides": {
+    "loader-utils@>= 0.0.0 < 2.0.0": "^1.4.2",
+    "loader-utils@>= 2.0.0 < 3.0.0": "^2.0.4",
+    "loader-utils@>= 3.0.0 < 3.2.1": "^3.2.1",
+    "json5": "^2.2.2",
+    "postcss": "^8.4.31",
+    "cross-spawn": "^7.0.5"
+  }
+}
