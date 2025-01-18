@@ -1,0 +1,5 @@
+/node_modules/
+/public/build/
+/public/pspdfkit.js
+.DS_Store
+/public/pspdfkit-lib
