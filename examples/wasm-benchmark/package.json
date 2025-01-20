@@ -1,0 +1,48 @@
+{
+  "name": "pspdfkit-webassembly-benchmark",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "npm": ">=8.3.0"
+  },
+  "dependencies": {
+    "details-polyfill": "^1.1.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    "Firefox ESR",
+    "last 2 Chrome versions",
+    "last 2 firefox versions",
+    "Edge 18",
+    "last 2 safari versions",
+    "last 2 and_chr versions",
+    "last 2 ios_saf versions",
+    "safari >= 15.4",
+    "ios_saf >= 15.4"
+  ],
+  "overrides": {
+    "colors": "^1.4.0",
+    "minimist": "^1.2.6",
+    "nth-check": "^2.0.1",
+    "url-parse": "^1.5.9",
+    "handlebars": "^4.7.7",
+    "async@>= 3.0.0 < 3.2.2": "^3.2.2",
+    "async@< 2.6.4": "^2.6.4",
+    "loader-utils": "^2.0.4",
+    "json5": "^2.2.2",
+    "postcss": "^8.4.31",
+    "rollup": "^3.29.5",
+    "cross-spawn": "^7.0.5",
+    "path-to-regexp": "^0.1.12",
+    "cookie": "^0.7.0",
+    "http-proxy-middleware": "^2.0.7"
+  }
+}

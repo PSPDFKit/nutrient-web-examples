@@ -34,7 +34,8 @@
     "prebuild": "npm run verify-installation",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:e2e": "npm run start"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

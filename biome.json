@@ -4,7 +4,8 @@
     "ignore": [
       "examples/angular/.angular/cache/*",
       "./examples/*/public/*",
-      "./examples/blazor/wasm/wwwroot/css/*"
+      "./examples/blazor/wasm/wwwroot/css/*",
+      "./examples/wasm-benchmark/*"
     ],
     "ignoreUnknown": true
   },

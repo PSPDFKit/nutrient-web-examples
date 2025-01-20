@@ -1,0 +1,311 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1em;
+  line-height: 1.375rem;
+  margin: 0;
+  padding: 0 2rem;
+  color: #434549;
+  background-color: #eceded;
+  font-weight: 300;
+}
+
+@media (max-width: 1085px) {
+  html {
+    font-size: 18px;
+  }
+  body {
+    padding: 0 3.25rem;
+  }
+}
+
+a {
+  color: #06478e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.App {
+  max-width: 795px;
+  width: 100%;
+  margin: 5.625rem auto;
+  counter-reset: bench-number;
+}
+
+.Logo {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+}
+
+.Description {
+  margin: 5.625rem 0 3.75rem 0;
+  font-size: 1.25rem;
+  line-height: 2.0625rem;
+}
+
+.Switch {
+  padding: 1.25rem;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+
+.Switch p {
+  margin: 0;
+  line-height: 1.8125rem;
+}
+
+.BenchsHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7.5rem;
+  font-size: 1rem;
+  line-height: 1.8125rem;
+  font-weight: 600;
+  color: #9ea0a5;
+  border-bottom: 0.125rem solid #9ea0a5;
+}
+
+.BenchsHeader + .Bench {
+  margin-top: 3.75rem;
+}
+
+.Bench {
+  margin-top: 7.5rem;
+  position: relative;
+}
+
+.Bench:before {
+  counter-increment: bench-number;
+  content: counter(bench-number);
+  position: absolute;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  line-height: 1.6875rem;
+  top: 0;
+  left: calc(-1em + -2.1875rem);
+  text-align: center;
+  border-radius: 100%;
+  background-color: #fff;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.Bench--running {
+  margin-left: 0;
+}
+
+.Bench--running:before {
+  background-color: #3b81da;
+  color: #fff;
+}
+
+.Bench--complete:before {
+  background-color: #9ea0a5;
+  color: #fff;
+}
+
+.Bench-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+  line-height: 1.6875rem;
+  font-weight: 600;
+  margin-top: -1.25em;
+  margin-left: 1em;
+  padding-bottom: 0.3125rem;
+}
+
+.Bench-heading h3 {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 1;
+  margin: 0;
+}
+
+.Bench-info {
+  display: flex;
+  white-space: nowrap;
+  color: #9ea0a5;
+}
+
+.Bench--running .Bench-info {
+  color: #3b81da;
+}
+
+.Bench--running .Bench-heading {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.Bench--complete .Bench-info {
+  color: #434549;
+}
+
+.Bench-description,
+.Bench-partials {
+  line-height: 1.375rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.Bench-description {
+  margin-top: 1.375rem;
+  line-height: 1.8125rem;
+}
+
+.Bench-description p {
+  margin: 0;
+  margin-top: 1.375rem;
+}
+
+.Bench-partialResult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.125rem solid;
+}
+
+.ProgressBar {
+  background-color: #fff;
+}
+
+.ProgressBar-percentage {
+  height: 0.25rem;
+  background-color: #9ea0a5;
+  transition: max-width 2s ease-out;
+}
+
+.Bench--running .ProgressBar-percentage {
+  background-color: #3b81da;
+}
+
+.Progress {
+  width: 1.25rem;
+  text-align: left;
+}
+
+.Progress-dots {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  animation: progress 0.65s linear infinite;
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 1.25rem;
+  }
+}
+
+.Result {
+  margin: 3.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  color: #3b81da;
+  font-size: 1.25rem;
+  line-height: 1.6875rem;
+  font-weight: 600;
+}
+
+.Result-message,
+.Score-label,
+.Score-value {
+  padding: 0.625rem 1.25rem;
+}
+
+.Score {
+  display: flex;
+}
+
+.Score-label {
+  color: #434549;
+}
+
+.Score-value {
+  background-color: #3b81da;
+  color: #fff;
+  text-align: center;
+}
+
+.ResultDetails {
+  margin-top: 5.625rem;
+}
+
+.ResultDetails p {
+  margin: 0;
+  line-height: 1.8125rem;
+}
+
+.ResultDetails p + p {
+  margin-top: 1.375rem;
+}
+
+.LoadTime {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 3.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.LoadTime-bar {
+  height: 1rem;
+  background-color: #f34579;
+}
+
+.Error {
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #feeeee;
+}
+
+.PSPDFKit-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  margin-top: 3.75rem;
+  background-color: #fff;
+}
+
+#PSPDFKit-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ResultCTA {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.Button {
+  background: #3b81da;
+  color: white;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+
+.Footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #3b81da;
+  color: whitesmoke;
+}
