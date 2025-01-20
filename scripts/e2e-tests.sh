@@ -1,9 +1,10 @@
 #!/bin/bash
 
-exclude_dirs="examples/vanilla"
+# array of directories to exclude
+exclude_dirs=("examples/vanilla" "examples/webpack")
 
 for dir in examples/*; do
-  if [ -d "$dir" ] && ! [[ $exclude_dirs =~ $dir ]]; then
+  if [ -d "$dir" ] && [[ ! " ${exclude_dirs[@]} " =~ " ${dir} " ]]; then
     echo "Running e2e tests in $dir"
     (SERVER_DIR="$dir" npm run test)
   fi

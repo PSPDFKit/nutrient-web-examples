@@ -1,0 +1,47 @@
+{
+  "name": "pspdfkit-web-example-webpack",
+  "description": "Standalone and offline PDF viewer web application built with PSPDFKit for Web and Webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [
+    "wasm",
+    "web",
+    "assembly",
+    "pdf",
+    "pdf",
+    "viewer",
+    "webpack",
+    "asm.js",
+    "offline",
+    "indexeddb"
+  ],
+  "author": "PSPDFKit (https://www.nutrient.io)",
+  "homepage": "https://www.nutrient.io/web",
+  "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
+  "readme": "https://www.nutrient.io/guides/web",
+  "dependencies": {
+    "drag-drop": "^7.2.0",
+    "pspdfkit": "2024.8.1",
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.js",
+    "prestart": "node bin/verify-install.js && npm run build",
+    "start": "serve -l 8080 ./dist",
+    "prestart:dev": "node bin/verify-install.js",
+    "start:dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.js --progress"
+  },
+  "overrides": {
+    "path-to-regexp": "^3.3.0",
+    "cross-spawn": "^7.0.5"
+  }
+}
