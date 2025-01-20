@@ -1,0 +1,32 @@
+{
+  "name": "pspdfkit-web-example-elm",
+  "description": "PDF viewer web application built with Nutrient Web SDK and Elm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": ["elm", "pdf", "viewer", "webpack"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PSPDFKit/pspdfkit-web-example-elm.git"
+  },
+  "author": "PSPDFKit (https://www.nutrient.io)",
+  "homepage": "https://www.nutrient.io/web",
+  "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
+  "readme": "https://www.nutrient.io/guides/web",
+  "devDependencies": {
+    "elm": "^0.19.1-6",
+    "elm-webpack-loader": "^8.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "pspdfkit": "2024.8.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "scripts": {
+    "start": "webpack serve --config config/webpack.js",
+    "start:e2e": "npm run start"
+  },
+  "overrides": {
+    "loader-utils": "^2.0.4",
+    "cross-spawn": "^7.0.5"
+  }
+}
