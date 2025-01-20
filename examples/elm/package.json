@@ -13,6 +13,7 @@
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
   "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
     "elm": "^0.19.1-6",
     "elm-webpack-loader": "^8.0.0",
     "html-webpack-plugin": "^5.6.3",
@@ -28,5 +29,8 @@
   "overrides": {
     "loader-utils": "^2.0.4",
     "cross-spawn": "^7.0.5"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.7.5"
   }
 }

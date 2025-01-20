@@ -1,0 +1,41 @@
+body {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 2rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.viewport {
+  height: calc(100vh - 2rem);
+}
+
+.centered {
+  height: calc(100vh - 2rem);
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menuItem a {
+  border-radius: 0.5rem;
+  padding: 0.25rem 2rem;
+  color: black;
+}
+
+.active {
+  background-color: #c0c0c0;
+}

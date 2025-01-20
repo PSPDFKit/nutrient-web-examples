@@ -1,0 +1,50 @@
+{
+  "name": "pspdfkit-web-example-gatsbyjs",
+  "private": true,
+  "description": "Basic integration of PSPDFKit in GatsbyJS",
+  "version": "1.0.0",
+  "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
+  "engines": {
+    "npm": ">=8.3.0"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop --port 3000",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "postinstall": "node scripts/copy-pspdfkit-files",
+    "start:e2e": "npm run start"
+  },
+  "dependencies": {
+    "gatsby": "^5.13.7",
+    "gatsby-source-filesystem": "^5.13.1",
+    "pspdfkit": "2024.8.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "ncp": "^2.0.0",
+    "prettier": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PSPDFKit/pspdfkit-web-example-gatsbyjs"
+  },
+  "bugs": {
+    "url": "https://github.com/PSPDFKit/pspdfkit-web-example-gatsbyjs/issues"
+  },
+  "overrides": {
+    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
+      "react": "^18.2.0"
+    },
+    "webpack-dev-middleware": "^5.3.4",
+    "path-to-regexp": "^0.1.12",
+    "body-parser": "^1.20.3",
+    "send": "^0.19.0",
+    "axios": "^1.7.4",
+    "cookie": "^0.7.0",
+    "cross-spawn": "^7.0.5"
+  }
+}
