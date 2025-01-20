@@ -1,0 +1,25 @@
+{
+  "name": "pspdfkit-web-example-nuxtjs",
+  "version": "1.0.0",
+  "node": ">=18.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "postinstall": "node scripts/copy-pspdfkit-files",
+    "start:e2e": "npm run dev"
+  },
+  "dependencies": {
+    "nuxt": "^3.14.1592",
+    "pspdfkit": "2024.8.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "ncp": "^2.0.0"
+  },
+  "overrides": {
+    "cross-spawn": "^7.0.5"
+  }
+}
