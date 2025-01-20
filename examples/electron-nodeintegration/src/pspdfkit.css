@@ -1,0 +1,18 @@
+/**
+ * You can use this style sheet to theme PSPDFKit for Electron.
+ * https://www.nutrient.io/blog/2018/theming-pspdfkit-for-web/
+ */
+
+.PSPDFKit-Toolbar {
+  /* Allow to drag the electron app using the whole PSPDFKit toolbar */
+  -webkit-app-region: drag;
+}
+
+.PSPDFKit-Toolbar-DropdownGroup {
+  background: transparent;
+}
+
+.PSPDFKit-Toolbar .PSPDFKit-Toolbar-Button,
+.PSPDFKit-Toolbar > div {
+  border: none;
+}

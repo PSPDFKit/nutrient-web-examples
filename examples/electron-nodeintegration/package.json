@@ -1,0 +1,39 @@
+{
+  "name": "pspdfkit-electron-example",
+  "productName": "PSPDFKit for Electron Example App",
+  "version": "1.0.0",
+  "description": "WebAssembly based PDF viewer web application built with PSPDFKit for Electron",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron .",
+    "package-mac-intel": "electron-packager . --no-prune --overwrite --platform=darwin --arch=x64 --out=release-builds --icon=icons/mac/application.icns",
+    "package-mac-apple": "electron-packager . --no-prune --overwrite --platform=darwin --arch=arm64 --out=release-builds --icon=icons/mac/application.icns",
+    "package-win": "electron-packager . --no-prune --overwrite --platform=win32 --arch=x64  --out=release-builds --icon=icons/win/application.ico",
+    "package-linux": "electron-packager . --no-prune --overwrite --platform=linux --arch=x64 --out=release-builds --icon=icons/png/application.png"
+  },
+  "repository": "https://github.com/PSPDFKit/pspdfkit-electron-example",
+  "author": "PSPDFKit (https://www.nutrient.io)",
+  "homepage": "https://www.nutrient.io/web",
+  "readme": "https://www.nutrient.io/guides/web",
+  "keywords": [
+    "wasm",
+    "assembly",
+    "pdf",
+    "viewer",
+    "pspdfkit",
+    "asm.js",
+    "electron"
+  ],
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "@electron/remote": "^2.1.2",
+    "electron": "^33.2.0"
+  },
+  "dependencies": {
+    "pspdfkit": "2024.8.1"
+  },
+  "overrides": {
+    "minimatch": "^3.0.5",
+    "cross-spawn": "^7.0.5"
+  }
+}

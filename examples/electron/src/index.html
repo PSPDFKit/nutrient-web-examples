@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PSPDFKit for Electron Example App</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f6f7fa;
+      }
+
+      header {
+        display: none;
+      }
+
+      #root {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /**
+       * Offset the frame less window alternative on macOS.
+       * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
+       */
+
+      body.platform-darwin header {
+        -webkit-app-region: drag;
+        display: block;
+        height: 22px;
+        background-color: rgb(252, 253, 254);
+      }
+
+      body.platform-darwin #root {
+        height: calc(100vh - 22px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <div id="root"></div>
+
+    <script src="./pspdfkit.js"></script>
+
+    <script type="module">
+      import { dragAndDrop } from "./lib/drag-and-drop.js";
+      import { makeToolbarItems } from "./lib/toolbar.js";
+
+      /**
+       * We append `process.platform` ass a CSS class to `<body>` so we can offset
+       * the frame less window alternative on macOS.
+       * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
+       */
+      document.body.classList.add(
+        `platform-${window.electron.processPlatform()}`
+      );
+
+      /**
+       * We store the `PSPDFKit.Instance` in this variable so we can access it from
+       * everywhere.
+       */
+      let instance = null;
+
+      const { documentExport, documentImport, askUserToDiscardChanges } =
+        window.electron;
+
+      /**
+       * Creates an onAnnotationsChange handler that keeps track of changes.
+       *
+       * We skip the first call since `annotations.change` fires when the PDF is
+       * initialized and populated with annotations.
+       */
+      let hasUnsavedAnnotations = false;
+
+      function createOnAnnotationsChange() {
+        let initialized = false;
+
+        return () => {
+          if (initialized) {
+            hasUnsavedAnnotations = true;
+          } else {
+            initialized = true;
+          }
+        };
+      }
+
+      /**
+       * If there is an existing running instance of PSPDFKit, it is destroyed before
+       * a creating a new one.
+       *
+       * This process will make sure that the WebAssembly module is optimally reused.
+       */
+      async function load(document) {
+        if (instance) {
+          PSPDFKit.unload(instance);
+          hasUnsavedAnnotations = false;
+          instance = null;
+        }
+
+        // Create our custom toolbar
+        const toolbarItems = makeToolbarItems(
+          PSPDFKit.defaultToolbarItems,
+          function exportFile() {
+            documentExport(instance, () => (hasUnsavedAnnotations = false));
+          },
+          function importFile() {
+            if (hasUnsavedAnnotations) {
+              askUserToDiscardChanges(() => documentImport(load));
+            } else {
+              documentImport(load);
+            }
+          }
+        );
+
+        // Set up the configuration object. A custom style sheet is used to customize
+        // the look and feel of PSPDFKit.
+        const configuration = {
+          document,
+          container: "#root",
+          styleSheet: ["./pspdfkit.css"],
+          // appName must match the license's bundle ID
+          appName: "pspdfkit-electron-example",
+          // Add when using a license key
+          // licenseKey: "LICENSE KEY GOES HERE",
+        };
+
+        instance = await PSPDFKit.load(configuration);
+
+        instance.setToolbarItems(toolbarItems);
+        instance.addEventListener(
+          "annotations.change",
+          createOnAnnotationsChange()
+        );
+
+        dragAndDrop(instance, (file) => {
+          if (hasUnsavedAnnotations) {
+            askUserToDiscardChanges(() => load(file));
+          } else {
+            load(file);
+          }
+        });
+      }
+
+      // Open a default document, when the app is started.
+      window.onload = () => load("./assets/example.pdf");
+    </script>
+  </body>
+</html>

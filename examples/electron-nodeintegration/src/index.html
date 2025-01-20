@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PSPDFKit for Electron Example App</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f6f7fa;
+      }
+
+      header {
+        display: none;
+      }
+
+      #root {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /**
+     * Offset the frame less window alternative on macOS.
+     * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
+     */
+
+      body.platform-darwin header {
+        -webkit-app-region: drag;
+        display: block;
+        height: 22px;
+        background-color: rgb(252, 253, 254);
+      }
+
+      body.platform-darwin #root {
+        height: calc(100vh - 22px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <div id="root"></div>
+
+    <script>
+      /**
+       * We append `process.platform` ass a CSS class to `<body>` so we can offset
+       * the frame less window alternative on macOS.
+       * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
+       */
+      document.body.classList.add(`platform-${process.platform}`);
+
+      /**
+       * Invoke the JavaScript for the renderer process.
+       */
+      require("./renderer.js");
+    </script>
+  </body>
+</html>

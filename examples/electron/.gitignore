@@ -1,0 +1,5 @@
+node_modules
+release-builds
+src/pspdfkit-lib
+src/pspdfkit.js
+dist
