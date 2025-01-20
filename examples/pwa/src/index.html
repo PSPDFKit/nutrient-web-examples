@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PSPDFKit</title>
+
+    <script src="./scripts/analytics.js"></script>
+
+    <script>
+      let newWorker;
+      let isReloading = false;
+
+      function checkSwReload() {
+        // Has service worker state changed?
+        if (newWorker.state === "installed") {
+          if (navigator.serviceWorker.controller) {
+            if (
+              window.confirm(
+                "An update is available. Would you like to update and reload?"
+              )
+            ) {
+              newWorker.postMessage({ action: "skipWaiting" });
+            }
+          }
+        }
+      }
+
+      // Register the Service Worker to enable offline capabilities
+      // and caching.
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then(function(reg) {
+              if (reg.waiting) {
+                newWorker = reg.waiting;
+                checkSwReload();
+              } else {
+                reg.addEventListener("updatefound", function() {
+                  console.log("New service worker update found.");
+                  newWorker = reg.installing;
+                  newWorker.addEventListener("statechange", function() {
+                    // New service worker should be installed now.
+                    checkSwReload();
+                  });
+                });
+              }
+            });
+
+          navigator.serviceWorker.addEventListener(
+            // Fired when the service worker updates
+            "controllerchange",
+            function() {
+              if (isReloading) {
+                console.log("Already refreshing.. ");
+                return;
+              }
+
+              console.log("Reloading now...");
+              window.location.reload();
+              isReloading = true;
+            }
+          );
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="./styles/index.css" />
+
+    <!-- Add to home screen feature -->
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#267ad3" />
+    <meta name="apple-mobile-web-app-title" content="Nutrient Web SDK PWA" />
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+
+    <!-- Tile Icon for Windows -->
+    <meta
+      name="msapplication-TileImage"
+      content="images/icons/icon-144x144.png"
+    />
+    <meta name="msapplication-TileColor" content="#267ad3" />
+
+    <!-- Them color for Android -->
+    <meta name="theme-color" content="#267ad3" />
+  </head>
+
+  <body>
+    <!-- Initialize the sidebar before we render it -->
+    <script type="text/javascript">
+      if (
+        document.body.clientWidth >= 1080 &&
+        localStorage.getItem("sidebarVisible") !== "false"
+      ) {
+        document.documentElement.classList.add("root--sidebar-visible");
+      }
+    </script>
+
+    <div class="app">
+      <div class="sidebar">
+        <div class="logo-container">
+          <img src="images/logo-light.png" height="20" alt="PSPDFKit Logo" />
+          <button
+            id="hide-sidebar"
+            class="button button--hide-sidebar button--secondary"
+          >
+            Hide Sidebar
+          </button>
+        </div>
+
+        <p>
+          The
+          <a
+            href="https://github.com/PSPDFKit/pspdfkit-web-example-pwa"
+            target="_blank"
+            rel="noopener"
+            >PWA example</a
+          >
+          app comes with an offline IndexedDB document storage. You can fill
+          this storage by either downloading a remote PDF or selecting one from
+          your local file system.
+        </p>
+
+        <div class="file-manager">
+          <label class="button">
+            <span class="file-picker">
+              <input
+                type="file"
+                name="file"
+                id="file-picker-input"
+                class="file-picker__input"
+                accept="application/pdf"
+              />
+
+              <span>Open Local File</span>
+            </span>
+          </label>
+
+          <form class="url-picker">
+            <div class="field-with-button">
+              <input
+                type="url"
+                name="file"
+                placeholder="https://example.com/example.pdf"
+                class="text-field field-with-button__field url-picker__input"
+                id="url-picker-input"
+              />
+              <button
+                class="button field-with-button__button"
+                id="download-remote"
+              >
+                Open URL
+              </button>
+            </div>
+          </form>
+
+          <div class="dnd-area" id="dnd-area">
+            Drag Files Here
+          </div>
+        </div>
+
+        <div class="files-list" id="files-list"></div>
+
+        <div class="sidebar__spacer"></div>
+
+        <div class="sidebar__secondary-actions">
+          <button
+            id="clear-service-worker"
+            class="sidebar__secondary-actions__button"
+          >
+            Clear service worker
+          </button>
+
+          <button id="delete-files" class="sidebar__secondary-actions__button">
+            Delete files
+          </button>
+        </div>
+      </div>
+
+      <div class="viewer">
+        <div class="headerbar">
+          <div class="headerbar__sticky-container">
+            <button
+              id="sidebar-toggle"
+              class="icon-button"
+              type="button"
+              title="Toggle Sidebar"
+              aria-label="Toggle Sidebar"
+              aria-controls="sidebar"
+              aria-expanded="false"
+            >
+              ☰
+            </button>
+
+            <h1 class="headerbar__title">
+              Nutrient Web SDK PWA
+              <span class="online-status" id="online-status">offline</span>
+            </h1>
+          </div>
+        </div>
+
+        <div id="pspdf-container" class="pspdf-container"></div>
+      </div>
+    </div>
+
+    <script src="./scripts/vendor/pspdfkit.js"></script>
+    <script src="./scripts/vendor/idb.js"></script>
+    <script src="./scripts/PSPDFKitFileStore.js"></script>
+    <script src="./scripts/app.js"></script>
+  </body>
+</html>
