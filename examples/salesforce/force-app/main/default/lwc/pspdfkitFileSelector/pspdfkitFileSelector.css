@@ -1,0 +1,196 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 11px;
+}
+
+.wrapper {
+  height: 100vh;
+  background: #ffffff;
+  font-weight: 510;
+  line-height: 140%;
+  max-width: 100%;
+  width: 500px;
+}
+
+.heading {
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #000000;
+  background: #fcfdfe;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.heading_text {
+  color: #4d525d;
+  font-size: 16px;
+}
+.heading_info {
+  color: #717885;
+  font-size: 14px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.fileUpload {
+  margin: 20px;
+  height: 160px;
+  max-width: 100%;
+  width: 458px;
+  background: #f6f9fd;
+  border: 2px dashed #a9aeb7;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 80px;
+}
+
+.fileUpload.dragover {
+  background-color: white;
+}
+
+.icon {
+  padding-bottom: 12px;
+}
+
+.button {
+  --sds-c-button-brand-color-background: #4537de;
+  --sds-c-button-brand-border-radius: 4px;
+  --sds-c-button-brand-color-text: white;
+  --slds-c-button-spacing-block-end: 9px;
+  --slds-c-button-spacing-block-start: 9px;
+  --slds-c-button-brand-color-border: #4537de;
+  --slds-c-button-brand-color-background-hover: #2b1cc1;
+  --slds-c-button-brand-color-border-hover: #2b1cc1;
+  --slds-c-button-brand-color-background-active: #2b1cc1;
+  margin: 20px 18px;
+  font-size: 16px;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 19px;
+  text-align: center;
+  color: #000;
+}
+
+.link {
+  color: #4537de;
+}
+
+@media only screen and (max-width: 1440px) {
+  .page {
+    grid-template-columns: 1fr 4fr;
+  }
+  .wrapper {
+    width: 274px;
+  }
+
+  .fileUpload {
+    padding: 24px 16px;
+    width: 234px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .wrapper {
+    width: 1000px;
+    height: 293px;
+  }
+
+  .icon {
+    padding-bottom: 0px;
+  }
+
+  .container {
+    padding-bottom: 20px;
+  }
+
+  .fileUpload {
+    width: 95%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    height: 102px;
+  }
+
+  .button {
+    margin: 20px auto;
+    width: 373px;
+  }
+
+  .heading_text {
+    text-align: left;
+  }
+
+  .heading_info {
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 564px) {
+  .wrapper {
+    width: 540px;
+    height: 280px;
+    margin-bottom: 12px;
+  }
+
+  .fileUpload {
+    padding: 24px 16px;
+    width: fit-content;
+  }
+
+  .button {
+    margin: 10px auto 20px;
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .wrapper {
+    height: 360px;
+    max-width: 295px;
+  }
+
+  .fileUpload {
+    flex-direction: column;
+    justify-content: center;
+    height: 182px;
+    width: 256px;
+    gap: 11px;
+  }
+
+  .icon {
+    padding-bottom: 0;
+  }
+
+  .fileUpload {
+    padding: 13px 32px;
+  }
+
+  .button {
+    width: 256px;
+  }
+
+  .heading_text {
+    text-align: center;
+  }
+
+  .heading_info {
+    text-align: center;
+  }
+}

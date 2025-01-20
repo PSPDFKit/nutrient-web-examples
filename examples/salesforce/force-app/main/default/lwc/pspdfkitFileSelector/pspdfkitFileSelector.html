@@ -1,0 +1,91 @@
+<template>
+  <div class="page">
+    <div class="wrapper">
+      <div>
+        <div>
+          <p title="Upload File" class="heading">Upload File</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div
+          class="fileUpload"
+          data-id="file"
+          ondragover={handleDragover}
+          ondrop={handleDrop}
+          onclick={handleClick}
+        >
+          <svg
+            class="icon"
+            width="72"
+            height="54"
+            viewBox="0 0 72 54"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M63.7705 26.1738C63.557 26.9565 63.8375 27.7906 64.4806 28.2852C67.9372 30.9442 70 34.88 70 39C70 46.2954 64.2954 52 57 52H18C9.20457 52 2 44.7954 2 36C2 27.7509 8.39681 20.7935 16.6926 19.9907C17.6493 19.8981 18.4048 19.1382 18.4918 18.1811C19.3021 9.26776 26.8775 2 36 2C42.9926 2 49.4644 6.31452 52.1538 12.7692C52.4644 13.5145 53.1926 14 54 14C57.2556 14 60.2562 15.4902 62.2825 18.2763C62.2864 18.2817 62.2904 18.2871 62.2944 18.2925C62.3032 18.3044 62.3122 18.3162 62.3213 18.3279C64.0033 20.4904 64.5188 23.4298 63.7705 26.1738Z"
+              stroke="#D7DCE4"
+              stroke-width="4"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M36 39.5V22M36 22L28 30M36 22L44 30"
+              stroke="#D7DCE4"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <div>
+            <p class="heading_text">
+              Drop your document here, or <a class="link">browse</a>
+            </p>
+            <p class="heading_info">Supports PDF, JPG, PNG, TIF</p>
+          </div>
+        </div>
+
+        <p class="text">or</p>
+
+        <lightning-button
+          class="button"
+          label="Open a file from Salesforce"
+          title="Primary action"
+          variant="brand"
+          stretch
+          onclick={handleOpenModal}
+        ></lightning-button>
+      </div>
+    </div>
+
+    <div class="viewer">
+      <iframe
+        src="/apex/PSPDFKit_InitPSPDFKit"
+        style="border: none; height: 100vh"
+        width="100%"
+      ></iframe>
+    </div>
+  </div>
+
+  <template if:true={openModal}>
+    <div class="slds-modal slds-fade-in-open slds-backdrop slds-modal_medium">
+      <div class="slds-modal__container" style="width: 80%">
+        <div class="slds-modal__header">
+          <lightning-button-icon
+            icon-name="utility:close"
+            alternative-text="Close this window"
+            size="large"
+            variant="bare-inverse"
+            onclick={closeModal}
+            class="slds-modal__close"
+          >
+          </lightning-button-icon>
+          <h1 style="font-size: 22px; font-weight: bold">Salesforce Files</h1>
+        </div>
+        <c-pspdfkit-open-salesforce-files
+          onpass={openVfPage}
+        ></c-pspdfkit-open-salesforce-files>
+      </div>
+    </div>
+  </template>
+</template>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>  
+        <targetConfig targets="lightning__RecordPage">
+            <property name="newTab" type="Boolean" default="false" label="Open edit mode in new tab"/>
+            <property name="btnColor" type="String" default="#0059b3" placeholder="eg- #0059b3 or red" label="Enter the color of Button"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

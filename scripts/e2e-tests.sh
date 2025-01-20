@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # array of directories to exclude
-exclude_dirs=("examples/vanilla" "examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel")
+exclude_dirs=("examples/vanilla" "examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel" "examples/salesforce")
 
 for dir in examples/*; do
   if [ -d "$dir" ]; then
