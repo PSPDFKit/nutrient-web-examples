@@ -1,0 +1,14 @@
+@page "/"
+@inject IJSRuntime JS
+
+<div id='container' style='background: gray; width: 100vw; height: 100vh; margin: 0 auto;'></div>
+
+@code {
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+      if (firstRender) {
+        await JS.InvokeVoidAsync("loadPDF", "#container", "document.pdf");
+      }
+    }
+}
