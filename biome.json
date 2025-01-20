@@ -5,7 +5,8 @@
       "examples/angular/.angular/cache/*",
       "./examples/*/public/*",
       "./examples/blazor/wasm/wwwroot/css/*",
-      "./examples/wasm-benchmark/*"
+      "./examples/wasm-benchmark/*",
+      "./examples/asp-net/*"
     ],
     "ignoreUnknown": true
   },
