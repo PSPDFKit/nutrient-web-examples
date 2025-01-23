@@ -12,9 +12,8 @@ export default function App() {
   useEffect(() => {
     const container = containerRef.current;
 
-    if (container && typeof PSPDFKit !== "undefined" && window.PSPDFKit) {
-      const { PSPDFKit } = window;
-
+    const { PSPDFKit } = window;
+    if (container && PSPDFKit) {
       PSPDFKit.load({
         container,
         document: "/example.pdf",
@@ -22,7 +21,9 @@ export default function App() {
       });
     }
 
-    return () => PSPDFKit?.unload(container);
+    return () => {
+      PSPDFKit?.unload(container);
+    };
   }, []);
 
   return (
