@@ -17,7 +17,7 @@ onMounted(async () => {
       baseUrl: `${window.location.protocol}//${window.location.host}/${import.meta.env.PUBLIC_URL ?? ""}`,
     });
   }
-})
+});
 
 onUnmounted(() => {
   const container = containerRef.value;
@@ -25,7 +25,7 @@ onUnmounted(() => {
   if (container && PSPDFKit) {
     PSPDFKit.unload(container);
   }
-})
+});
 </script>
 
 <template>
