@@ -2,14 +2,14 @@
 import { onMounted, onUnmounted, useTemplateRef } from "vue";
 
 const containerRef = useTemplateRef("container");
-let PSPDFKit: typeof import("pspdfkit").default | undefined;
+let NutrientViewer: typeof import("@nutrient-sdk/viewer").default | undefined;
 
 onMounted(async () => {
-  PSPDFKit = (await import("pspdfkit")).default;
+  NutrientViewer = (await import("@nutrient-sdk/viewer")).default;
   const container = containerRef.value;
 
-  if (container && PSPDFKit) {
-    PSPDFKit.load({
+  if (container && NutrientViewer) {
+    NutrientViewer.load({
       container,
       // you may also specify a file in public directory e.g. /document.pdf
       document: "https://www.nutrient.io/downloads/pspdfkit-web-demo.pdf",
@@ -22,8 +22,8 @@ onMounted(async () => {
 onUnmounted(() => {
   const container = containerRef.value;
 
-  if (container && PSPDFKit) {
-    PSPDFKit.unload(container);
+  if (container && NutrientViewer) {
+    NutrientViewer.unload(container);
   }
 });
 </script>
