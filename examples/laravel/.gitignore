@@ -12,4 +12,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-pspdfkit.js
+nutrient-viewer.js
+public/assets/nutrient

@@ -1,6 +1,6 @@
 # Nutrient Web SDK Example – Laravel
 
-This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/web/) into a [Laravel](https://laravel.com/) app.
+This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/sdk/web/) into a [Laravel](https://laravel.com/) app.
 
 ## Prerequisites
 
@@ -21,9 +21,9 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 1. Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-laravel.git
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
 
-cd pspdfkit-web-example-laravel
+cd nutrient-web-examples/examples/laravel
 ```
 
 2. Run `composer install` on your terminal.
@@ -35,15 +35,15 @@ cd pspdfkit-web-example-laravel
 
 4. Generate your application encryption key using `php artisan key:generate`.
 
-5. Install PSPDFKit as a dependency:
+5. Install Nutrient Web SDK as a dependency:
 
 ```bash
 npm install
 ```
 
-6. Run `npm run dev` to copy the PSPDFKit artifacts to your `public/assets/pspdfkit/` folder.
+6. Run `npm run dev` to copy the PSPDFKit artifacts to your `public/assets/nutrient/` folder.
 
-Make sure your `/public/assets/pspdfkit/` folder contains the file `pspdfkit.js` and a `pspdfkit-lib` directory with library assets.
+Make sure your `/public/assets/nutrient/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
 ## Running the Example
 

@@ -8,13 +8,13 @@
 	</head>
 	<body>
  		<!-- Element where PSPDFKit will be mounted. -->
-		<div id="pspdfkit" style="height: 100vh"></div>
+		<div id="nutrient" style="height: 100vh"></div>
 
-		<script src="assets/pspdfkit/pspdfkit.js"></script>
+		<script src="assets/nutrient/nutrient-viewer.js"></script>
 
 		<script>
 			PSPDFKit.load({
-				container: "#pspdfkit",
+				container: "#nutrient",
 				document: "document.pdf", // Add the path to your document here.
 			})
 			.then(function(instance) {
