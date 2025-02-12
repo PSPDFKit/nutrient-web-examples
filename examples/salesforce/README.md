@@ -45,12 +45,12 @@ To deploy the PSPDFKit package to your Salesforce organization, follow these ste
    yarn install
    ```
 
-3. The PSPDFKit for Salesforce integration example now makes use of the PSPDFKit version available from our CDN at https://cdn.cloud.www.nutrient.io/pspdfkit-web, which means it's no longer limited by Salesforce's upload assets size 5MB limit.
+3. The PSPDFKit for Salesforce integration example now makes use of the PSPDFKit version available from our CDN at https://cdn.cloud.pspdfkit.com/pspdfkit-web, which means it's no longer limited by Salesforce's upload assets size 5MB limit.
 
 In order to set the PSPDFKit version you want to use, open `./force-app/main/default/pages/PSPDFKit_InitPSPDFKit.page` and edit the line 7 to reflect the PSPDFKit version. For example, in order to use version 2024.4.0, you should change the URL pointing to the CDN to:
 
     ```html
-    <script src="https://cdn.cloud.www.nutrient.io/pspdfkit-web@2024.4.0/pspdfkit.js" type="text/javascript"></script>
+    <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@2024.4.0/pspdfkit.js" type="text/javascript"></script>
     ```
 
     You can find the latest version of Nutrient Web SDK in the [PSPDFKit changelog](https://www.nutrient.io/changelog/web/).

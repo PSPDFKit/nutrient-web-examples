@@ -1,6 +1,6 @@
 # Nutrient Web SDK Example – Gatsby.js
 
-This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/web/) into a GatsbyJS project.
+This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/sdk/web/) into a GatsbyJS project.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/w
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -17,8 +17,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-gatsbyjs.git
-cd pspdfkit-web-example-gatsbyjs
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/gatsbyjs
 ```
 
 Install the project dependencies:
@@ -46,14 +46,14 @@ nom run serve
 
 Enjoy 🍕
 
-## PSPDFKit assets
+## Nutrient Web SDK assets
 
-In order to make the example work, the PSPDFKit assets need to be copied from their original location in `./node_modules/pspdfkit/dist` to `./static`. This is done automatically from a postinstall script in located in `./scripts/copy-pspdfkit-files.js`.
+In order to make the example work, the Nutrient assets need to be copied from their original location in `./node_modules/@nutrient-sdk/viewer/dist` to `./static`. This is done automatically from a postinstall script in located in `./scripts/copy-nutrient-files.js`.
 
 In case copying the files fails, you can copy them manually:
 
-- Copy `./node_modules/pspdfkit/dist/pspdfkit.js` to `./static/pspdfkit.js`.
-- Copy `./node_modules/pspdfkit/dist/pspdfkit-lib/` to `./static/pspdfkit-lib/`.
+- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js` to `./static/nutrient-viewer.js`.
+- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib/` to `./static/nutrient-viewer-lib/`.
 
 That's it!
 

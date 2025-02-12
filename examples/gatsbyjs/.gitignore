@@ -17,3 +17,4 @@ yarn-debug.log*
 yarn-error.log*
 
 static/pspdfkit-lib
+static/nutrient-viewer-lib

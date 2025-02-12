@@ -1,8 +1,8 @@
 # Nutrient Web SDK Angular Example
 
-This example shows how Nutrient Web SDK can be integrated in an Angular project. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2., although some simplifications have been made to focus on integrating PSPDFKit. For more guided instructions, check out our [blog post](https://www.nutrient.io/blog/2021/how-to-build-an-angular-pdf-viewer/).
+This example shows how Nutrient Web SDK can be integrated in an Angular project. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2., although some simplifications have been made to focus on integrating Nutrient Web SDK. For more guided instructions, check out our [blog post](https://www.nutrient.io/blog/2021/how-to-build-an-angular-pdf-viewer/).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPSPDFKit%2Fnutrient-examples%2Ftree%2Fmain%2Fexamples%2Fangular)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPSPDFKit%2Fnutrient-web-examples%2Ftree%2Fmain%2Fexamples%2Fangular)
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ This example shows how Nutrient Web SDK can be integrated in an Angular project.
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via [https://www.nutrient.io/support/request](https://www.nutrient.io/support/request)
+Nutrient Web SDK offers support for customers with an active SDK license via [https://www.nutrient.io/support/request](https://www.nutrient.io/support/request)
 
 Are you evaluating our SDK? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: [https://www.nutrient.io/sales](https://www.nutrient.io/sales)
 
@@ -19,8 +19,8 @@ Are you evaluating our SDK? That's great, we're happy to help out! To make sure 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-angular
-cd pspdfkit-web-example-angular
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/angular
 ```
 
 Install the project dependencies:
