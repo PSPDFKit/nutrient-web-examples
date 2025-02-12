@@ -19,8 +19,8 @@ Are you evaluating our SDK? That's great, we're happy to help out! To make sure 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/nutrient-web-examples
-cd examples/angular
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/angular
 ```
 
 Install the project dependencies:
