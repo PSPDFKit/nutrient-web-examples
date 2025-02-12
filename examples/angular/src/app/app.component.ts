@@ -2,7 +2,9 @@ import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import NutrientViewer from "@nutrient-sdk/viewer";
 
-type NutrientWindow = Window & { instance: NutrientViewer.Instance };
+import type * as Nutrient from "@nutrient-sdk/viewer";
+
+type NutrientWindow = Window & { instance: Nutrient.Instance };
 
 @Component({
   selector: "app-root",
@@ -20,7 +22,7 @@ export class AppComponent {
       baseUrl: `${location.protocol}//${location.host}/assets/`,
       document: "/assets/example.pdf",
       container: "#nutrient-container",
-    }).then((instance: NutrientViewer.Instance) => {
+    }).then((instance: Nutrient.Instance) => {
       // For the sake of this demo, store the Nutrient Web SDK instance
       // on the global object so that you can open the dev tools and
       // play with the Nutrient Web SDK API.
