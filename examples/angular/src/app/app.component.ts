@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import PSPDFKit from "pspdfkit";
+import NutrientViewer from "@nutrient-sdk/viewer";
+
+type NutrientWindow = Window & { instance: NutrientViewer.Instance };
 
 @Component({
   selector: "app-root",
@@ -13,17 +15,16 @@ export class AppComponent {
   title = "Nutrient Web SDK Angular Example";
 
   ngAfterViewInit() {
-    PSPDFKit.load({
-      // Use the assets directory URL as a base URL. PSPDFKit will download its library assets from here.
+    NutrientViewer.load({
+      // Use the assets directory URL as a base URL. Nutrient Web SDK will download its library assets from here.
       baseUrl: `${location.protocol}//${location.host}/assets/`,
       document: "/assets/example.pdf",
-      container: "#pspdfkit-container",
-    }).then((instance) => {
+      container: "#nutrient-container",
+    }).then((instance: NutrientViewer.Instance) => {
       // For the sake of this demo, store the Nutrient Web SDK instance
       // on the global object so that you can open the dev tools and
-      // play with the PSPDFKit API.
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      (window as any).instance = instance;
+      // play with the Nutrient Web SDK API.
+      (window as unknown as NutrientWindow).instance = instance;
     });
   }
 }

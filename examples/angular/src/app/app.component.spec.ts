@@ -30,7 +30,7 @@ describe("AppComponent", () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector(".toolbar")?.textContent).toContain(
-      " PSPDFKit Angular Application",
+      " Nutrient Angular Application",
     );
   });
 });
