@@ -9,10 +9,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <head>
-        {/* Load PSPDFKit script using Next.js Script component */}
+        {/* Load Nutrient script using Next.js Script component */}
         <Script
-          src="/pspdfkit-lib/pspdfkit.js"
-          strategy="beforeInteractive" // Load before the page becomes interactive to reference window.PSPDFKit in the client
+          src="/nutrient-viewer/nutrient-viewer.js"
+          strategy="beforeInteractive" // Load before the page becomes interactive to reference window.NutrientViewer in the client
         />
       </head>
       <body>{children}</body>

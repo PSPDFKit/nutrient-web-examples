@@ -17,7 +17,7 @@ export default function App() {
       PSPDFKit.load({
         container,
         document: "/example.pdf",
-        baseUrl: `${window.location.protocol}//${window.location.host}/`,
+        // baseUrl: `${window.location.protocol}//${window.location.host}/`,
       });
     }
 

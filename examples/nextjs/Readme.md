@@ -8,7 +8,7 @@ This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/w
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -17,19 +17,11 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-nextjs.git
-cd pspdfkit-web-example-nextjs
+git clone https://github.com/PSPDFKit/nutrient-web-examples
+cd nutrient-web-examples/examples/nextjs
 ```
 
 Install the project dependencies:
-
-yarn:
-
-```bash
-yarn
-```
-
-npm:
 
 ```shell script
 npm install
@@ -38,14 +30,6 @@ npm install
 ## Running the Example
 
 We are ready to launch the app! 🎉
-
-yarn:
-
-```bash
-yarn dev
-```
-
-npm:
 
 ```shell script
 npm run dev
