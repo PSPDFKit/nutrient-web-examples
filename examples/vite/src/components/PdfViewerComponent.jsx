@@ -10,14 +10,14 @@ export default function PdfViewerComponent(props) {
     (async () => {
       NutrientViewer = await import("@nutrient-sdk/viewer");
 
-      NutrientViewer.unload(container); // Ensure that there's only one PSPDFKit instance.
+      NutrientViewer.unload(container); // Ensure that there's only one NutrientViewer instance.
 
       await NutrientViewer.load({
-        // Container where PSPDFKit should be mounted.
+        // Container where NutrientViewer should be mounted.
         container,
         // The document to open.
         document: props.document,
-        // Use the public directory URL as a base URL. PSPDFKit will download its library assets from here.
+        // Use the public directory URL as a base URL. NutrientViewer will download its library assets from here.
         baseUrl: `${window.location.protocol}//${window.location.host}/${
           import.meta.env.PUBLIC_URL ?? ""
         }`,
