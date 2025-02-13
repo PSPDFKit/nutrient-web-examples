@@ -21,7 +21,8 @@
     "prepare": "husky",
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
-    "test": "playwright test"
+    "test": "playwright test",
+    "audit-fix": "./scripts/audit-dependencies.sh"
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]
