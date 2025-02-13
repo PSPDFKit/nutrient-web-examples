@@ -1,6 +1,6 @@
 # Nutrient Web SDK Example – Vite.js
 
-This example shows how to integrate [PSPDFKit for Web](https://www.nutrient.io/web/) into a [Vite.js](https://vitejs.dev/) with React app.
+This example shows how to integrate [Nutrient for Web](https://www.nutrient.io/web/) into a [Vite.js](https://vitejs.dev/) with React app.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ This example shows how to integrate [PSPDFKit for Web](https://www.nutrient.io/w
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -17,8 +17,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-vite.git
-cd pspdfkit-web-example-vite
+git clone https://github.com/PSPDFKit/nutrient-web-examples
+cd nutrient-web-examples/examples/vite
 ```
 
 Install the project dependencies:
@@ -50,9 +50,9 @@ Enjoy 🍕
 
 ## React Component
 
-The React component which implements the PSPDFKit for Web integration can be found at `src/components/PdfViewerComponent.jsx`.
+The React component which implements the Nutrient for Web integration can be found at `src/components/PdfViewerComponent.jsx`.
 
-In order to make the PSPDFKit SDK assets available they have to be copied from the `node_modules/pspdfkit/dist` folder to `public/pspdfkit-lib` folder. For that purpose this example uses a copy plugin which you can find at `vite.config.js`.
+In order to make the Nutrient SDK assets available they have to be copied from the `node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib` folder to `public/nutrient-viewer-lib` folder. For that purpose this example uses a copy plugin which you can find at `vite.config.js`.
 
 ## License
 

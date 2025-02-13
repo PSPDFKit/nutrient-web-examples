@@ -12,17 +12,16 @@ export default function App() {
   useEffect(() => {
     const container = containerRef.current;
 
-    const { PSPDFKit } = window;
-    if (container && PSPDFKit) {
-      PSPDFKit.load({
+    const { NutrientViewer } = window;
+    if (container && NutrientViewer) {
+      NutrientViewer.load({
         container,
         document: "/example.pdf",
-        baseUrl: `${window.location.protocol}//${window.location.host}/`,
       });
     }
 
     return () => {
-      PSPDFKit?.unload(container);
+      NutrientViewer?.unload(container);
     };
   }, []);
 

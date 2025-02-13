@@ -10,7 +10,7 @@ export default defineConfig({
     copy({
       targets: [
         {
-          src: "node_modules/pspdfkit/dist/pspdfkit-lib",
+          src: "node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
           dest: "public/",
         },
       ],

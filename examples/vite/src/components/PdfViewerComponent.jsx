@@ -5,14 +5,14 @@ export default function PdfViewerComponent(props) {
 
   useEffect(() => {
     const container = containerRef.current;
-    let PSPDFKit;
+    let NutrientViewer;
 
     (async () => {
-      PSPDFKit = await import("pspdfkit");
+      NutrientViewer = await import("@nutrient-sdk/viewer");
 
-      PSPDFKit.unload(container); // Ensure that there's only one PSPDFKit instance.
+      NutrientViewer.unload(container); // Ensure that there's only one PSPDFKit instance.
 
-      await PSPDFKit.load({
+      await NutrientViewer.load({
         // Container where PSPDFKit should be mounted.
         container,
         // The document to open.
@@ -24,7 +24,7 @@ export default function PdfViewerComponent(props) {
       });
     })();
 
-    return () => PSPDFKit?.unload(container);
+    return () => NutrientViewer?.unload(container);
   }, [props.document]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "100vh" }} />;

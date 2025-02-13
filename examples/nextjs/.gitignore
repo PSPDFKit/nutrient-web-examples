@@ -3,3 +3,4 @@ node_modules
 public/pspdfkit-lib
 .next
 .tool-versions
+public/nutrient-viewer
