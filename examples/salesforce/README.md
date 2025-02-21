@@ -1,3 +1,9 @@
+> ⚠️ **Repository Moved**
+> This repository has been moved to https://github.com/PSPDFKit/nutrient-web-examples/tree/main/examples/salesforce.
+> Please update your bookmarks and issues accordingly.
+>
+> This repo is now archived and will no longer receive updates.
+
 # Nutrient Salesforce SDK Integration
 
 ## Integrate into a New Salesforce Project as a Lightning Web Component
@@ -21,11 +27,33 @@ Before continuing, perform all of the following actions:
 
 ## Deploying the Package
 
-To deploy the Nutrient Web SDK package to your Salesforce organization, follow these steps:
+To deploy the Nutrient Web SDK package to your Salesforce organization, follow these steps.
 
-1. The Nutrient Salesforce SDK integration example now makes use of the Nutrient Web SDK version available from our CDN at https://cdn.cloud.pspdfkit.com/pspdfkit-web, which means it's not limited by Salesforce's upload assets size 5MB limit.
+1. Download the [Nutrient Salesforce SDK project][zip] from GitHub, and then unpack the ZIP file.
 
-In order to set the Nutrient Web SDK version you want to use, open `./force-app/main/default/pages/Nutrient_InitNutrient.page` and edit the line 7 to reflect the Nutrient Web SDK version. For example, in order to use version 1.0.0, you should change the URL pointing to the CDN to:
+   Alternatively, run the following terminal command to clone the [Nutrient Salesforce SDK repository][repo] from GitHub:
+
+   ```bash
+   git clone https://github.com/PSPDFKit/salesforce.git
+   ```
+
+2. In the terminal, go to the Nutrient Salesforce SDK project folder and run the following command to install the Nutrient Web SDK npm module.
+
+   Use the following code for npm:
+
+   ```npm
+   npm install
+   ```
+
+   Use the following code for Yarn:
+
+   ```yarn
+   yarn install
+   ```
+
+3. The Nutrient Salesforce SDK integration example now makes use of the Nutrient Web SDK version available from our CDN at https://cdn.cloud.pspdfkit.com/pspdfkit-web, which means it's no longer limited by Salesforce's upload assets size 5MB limit.
+
+In order to set the Nutrient Web SDK version you want to use, open `./force-app/main/default/pages/Nutrient_InitNutrient.page` and edit the line 7 to reflect the Nutrient Web SDK version. For example, in order to use version 2024.4.0, you should change the URL pointing to the CDN to:
 
     ```html
     <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.0.0/nutrient-viewer.js" type="text/javascript"></script>
@@ -33,15 +61,15 @@ In order to set the Nutrient Web SDK version you want to use, open `./force-app/
 
     You can find the latest version of Nutrient Web SDK in the [Nutrient Web SDK changelog](https://www.nutrient.io/changelog/web/).
 
-2. Run the following command in the terminal to start the Salesforce authentication process:
+4. Run the following command in the terminal to start the Salesforce authentication process:
 
    ```bash
    sfdx force:auth:web:login --setalias mySalesforceOrg --instanceurl https://login.salesforce.com --setdefaultusername
    ```
 
-3. In the browser window that opens, log in to your Salesforce organization and authorize the Salesforce CLI.
+5. In the browser window that opens, log in to your Salesforce organization and authorize the Salesforce CLI.
 
-4. In the terminal, run the following command from the Nutrient Salesforce SDK project’s root folder:
+6. In the terminal, run the following command from the Nutrient Salesforce SDK project’s root folder:
 
    ```bash
    sfdx force:source:deploy -x manifest/package.xml

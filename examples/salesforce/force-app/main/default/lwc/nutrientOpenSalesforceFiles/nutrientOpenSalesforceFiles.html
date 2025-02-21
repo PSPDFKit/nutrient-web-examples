@@ -18,13 +18,13 @@
       </thead>
       <tbody>
         <template
-          if:false="{noRecordFound}"
-          for:each="{fileDetails}"
+          if:false={noRecordFound}
+          for:each={fileDetails}
           for:item="item"
           for:index="index"
         >
-          <tr data-index="{index}" class="slds-hint-parent" key="{item.Id}">
-            <td data-index="{index}">
+          <tr data-index={index} class="slds-hint-parent" key={item.Id}>
+            <td data-index={index}>
               <div>{item.Title}</div>
             </td>
             <td>
@@ -35,9 +35,9 @@
             </td>
             <td class="slds-align_absolute-center">
               <lightning-button
-                data-index="{index}"
+                data-index={index}
                 label="Edit With Nutrient"
-                onclick="{viewButton}"
+                onclick={viewButton}
                 variant="Brand"
               ></lightning-button>
             </td>
@@ -45,7 +45,7 @@
         </template>
       </tbody>
     </table>
-    <template if:true="{noRecordFound}">
+    <template if:true={noRecordFound}>
       <div class="slds-align_absolute-center" style="height: 5rem">
         No Record Found
       </div>
