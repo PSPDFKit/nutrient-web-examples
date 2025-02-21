@@ -10,8 +10,11 @@
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:debug": "sfdx-lwc-jest --debug",
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
-    "postinstall": "node ./scripts/pspdfkit/update-pspdfkit-version.js",
-    "prepare": "test -f ./.git && husky install || echo 'Not a git repository, skipping husky install.'"
+    "postinstall": "node ./scripts/nutrient/update-nutrient-version.js",
+    "prepare": "test -f ./.git && husky install || echo 'Not a git repository, skipping husky install.'",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^1.1.2",
@@ -35,7 +38,15 @@
     "json5@>= 2.0.0": "^2.2.2",
     "cross-spawn": "^7.0.5"
   },
+  "lint-staged": {
+    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
+      "prettier --write"
+    ],
+    "**/{aura,lwc}/**": [
+      "eslint"
+    ]
+  },
   "dependencies": {
-    "pspdfkit": "2024.8.1"
+    "@nutrient-sdk/viewer": "1.0.0"
   }
 }

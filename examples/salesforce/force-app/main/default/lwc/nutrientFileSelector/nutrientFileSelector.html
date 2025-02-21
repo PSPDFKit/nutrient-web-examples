@@ -11,9 +11,9 @@
         <div
           class="fileUpload"
           data-id="file"
-          ondragover={handleDragover}
-          ondrop={handleDrop}
-          onclick={handleClick}
+          ondragover="{handleDragover}"
+          ondrop="{handleDrop}"
+          onclick="{handleClick}"
         >
           <svg
             class="icon"
@@ -41,7 +41,9 @@
             <p class="heading_text">
               Drop your document here, or <a class="link">browse</a>
             </p>
-            <p class="heading_info">Supports PDF, JPG, PNG, TIF</p>
+            <p class="heading_info">
+              Supports PDF, JPG, PNG, TIF, DOCX, PPTX and XLSX
+            </p>
           </div>
         </div>
 
@@ -53,21 +55,21 @@
           title="Primary action"
           variant="brand"
           stretch
-          onclick={handleOpenModal}
+          onclick="{handleOpenModal}"
         ></lightning-button>
       </div>
     </div>
 
     <div class="viewer">
       <iframe
-        src="/apex/PSPDFKit_InitPSPDFKit"
+        src="/apex/Nutrient_InitNutrient"
         style="border: none; height: 100vh"
         width="100%"
       ></iframe>
     </div>
   </div>
 
-  <template if:true={openModal}>
+  <template if:true="{openModal}">
     <div class="slds-modal slds-fade-in-open slds-backdrop slds-modal_medium">
       <div class="slds-modal__container" style="width: 80%">
         <div class="slds-modal__header">
@@ -76,15 +78,15 @@
             alternative-text="Close this window"
             size="large"
             variant="bare-inverse"
-            onclick={closeModal}
+            onclick="{closeModal}"
             class="slds-modal__close"
           >
           </lightning-button-icon>
           <h1 style="font-size: 22px; font-weight: bold">Salesforce Files</h1>
         </div>
-        <c-pspdfkit-open-salesforce-files
-          onpass={openVfPage}
-        ></c-pspdfkit-open-salesforce-files>
+        <c-nutrient-open-salesforce-files
+          onpass="{openVfPage}"
+        ></c-nutrient-open-salesforce-files>
       </div>
     </div>
   </template>
