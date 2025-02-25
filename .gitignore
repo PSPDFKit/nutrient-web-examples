@@ -10,3 +10,4 @@ open-iconic
 .nuxt/
 dist/
 analytics.js
+.DS_Store

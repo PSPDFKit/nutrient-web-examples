@@ -1,5 +1,5 @@
 @IsTest
-public class PSPDFKitControllerTest {
+public class NutrientControllerTest {
 
     @testSetup static void setup() {
         Account testAccts = new Account(Name = 'TestAcct');
@@ -27,7 +27,7 @@ public class PSPDFKitControllerTest {
     static void testGetAttacmentDetails() {
         Account act = [SELECT id FROM Account];
         Test.startTest();
-        List <ContentDocument> conDocList = PSPDFKitController.getAttachmentDetails(act.Id);
+        List <ContentDocument> conDocList = NutrientController.getAttachmentDetails(act.Id);
         Test.stopTest();
         System.assertEquals(1,conDocList.size());
     }
@@ -37,7 +37,7 @@ public class PSPDFKitControllerTest {
         Account act = [SELECT id FROM Account];
         ContentDocumentLink docLink = [SELECT contentDocumentId From ContentDocumentLink where LinkedEntityId=:act.Id];
         Test.startTest();
-        Map<String,String> base64Data =  PSPDFKitController.getbase64Data(docLink.contentDocumentId);
+        Map<String,String> base64Data =  NutrientController.getbase64Data(docLink.contentDocumentId);
         Test.stopTest();
         System.assertEquals(3,base64Data.size());
     }
@@ -48,9 +48,9 @@ public class PSPDFKitControllerTest {
         ContentDocumentLink docLink = [SELECT contentDocumentId From ContentDocumentLink where LinkedEntityId=:act.Id];
         Test.StartTest();
         ApexPages.StandardController sc = new ApexPages.StandardController(docLink);
-        PSPDFKitController testAccPlan = new PSPDFKitController();
+        NutrientController testAccPlan = new NutrientController();
 
-        PageReference pageRef = Page.PSPDFKit_InitPSPDFKit;
+        PageReference pageRef = Page.Nutrient_InitNutrient;
         pageRef.getParameters().put('id', String.valueOf(docLink.contentDocumentId));
         Test.setCurrentPage(pageRef);
 

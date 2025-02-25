@@ -1,8 +1,8 @@
-import getAttachmentDetails from "@salesforce/apex/PSPDFKitController.getAttachmentDetails";
+import { LightningElement, wire, track } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
-import { LightningElement, track, wire } from "lwc";
+import getAttachmentDetails from "@salesforce/apex/NutrientController.getAttachmentDetails";
 
-export default class pspdfkitOpenSalesforceFiles extends LightningElement {
+export default class nutrientOpenSalesforceFiles extends LightningElement {
   @track isModalOpen;
   @track recordId;
   @track fileDetails = [];
@@ -19,7 +19,7 @@ export default class pspdfkitOpenSalesforceFiles extends LightningElement {
     getAttachmentDetails({ record_Id: this.recordId }).then((data) => {
       this.fileDetails = data;
       if (
-        this.fileDetails === undefined ||
+        this.fileDetails == undefined ||
         this.fileDetails == null ||
         this.fileDetails.length === 0
       ) {
@@ -36,8 +36,8 @@ export default class pspdfkitOpenSalesforceFiles extends LightningElement {
   viewButton(event) {
     if (
       this.recordId == null ||
-      this.recordId === undefined ||
-      this.recordId === ""
+      this.recordId == undefined ||
+      this.recordId == ""
     ) {
       const itemIndex = event.currentTarget.dataset.index;
       this.rowSelected = this.fileDetails[itemIndex].Id;
@@ -46,8 +46,8 @@ export default class pspdfkitOpenSalesforceFiles extends LightningElement {
       const itemIndex = event.currentTarget.dataset.index;
       this.rowSelected = this.fileDetails[itemIndex].Id;
       window.open(
-        `/apex/PSPDFKit_InitPSPDFKit?id=${this.rowSelected}`,
-        "_blank",
+        "/apex/Nutrient_InitNutrient?id=" + this.rowSelected,
+        "_blank"
       );
     }
   }

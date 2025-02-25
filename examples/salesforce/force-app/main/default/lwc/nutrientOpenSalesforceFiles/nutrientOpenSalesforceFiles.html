@@ -1,0 +1,54 @@
+<template>
+  <lightning-card>
+    <table
+      class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+    >
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th>
+            <div class="slds-truncate" title="Title">Title</div>
+          </th>
+          <th>
+            <div class="slds-truncate" title="Extension">Extension</div>
+          </th>
+          <th>
+            <div class="slds-truncate" title="Document Id">Document Id</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <template
+          if:false={noRecordFound}
+          for:each={fileDetails}
+          for:item="item"
+          for:index="index"
+        >
+          <tr data-index={index} class="slds-hint-parent" key={item.Id}>
+            <td data-index={index}>
+              <div>{item.Title}</div>
+            </td>
+            <td>
+              <div>{item.FileExtension}</div>
+            </td>
+            <td>
+              <div>{item.Id}</div>
+            </td>
+            <td class="slds-align_absolute-center">
+              <lightning-button
+                data-index={index}
+                label="Edit With Nutrient"
+                onclick={viewButton}
+                variant="Brand"
+              ></lightning-button>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <template if:true={noRecordFound}>
+      <div class="slds-align_absolute-center" style="height: 5rem">
+        No Record Found
+      </div>
+    </template>
+  </lightning-card>
+</template>

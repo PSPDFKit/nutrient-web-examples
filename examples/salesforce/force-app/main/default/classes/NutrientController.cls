@@ -1,4 +1,4 @@
-global with sharing class PSPDFKitController {
+global with sharing class NutrientController {
     public static contentVersion contVersion{get;set;}
     public static String conbase{get;set;}
 

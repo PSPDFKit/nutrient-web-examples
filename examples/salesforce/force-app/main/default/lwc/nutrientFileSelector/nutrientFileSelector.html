@@ -41,7 +41,9 @@
             <p class="heading_text">
               Drop your document here, or <a class="link">browse</a>
             </p>
-            <p class="heading_info">Supports PDF, JPG, PNG, TIF</p>
+            <p class="heading_info">
+              Supports PDF, JPG, PNG, TIF, DOCX, PPTX and XLSX
+            </p>
           </div>
         </div>
 
@@ -60,7 +62,7 @@
 
     <div class="viewer">
       <iframe
-        src="/apex/PSPDFKit_InitPSPDFKit"
+        src="/apex/Nutrient_InitNutrient"
         style="border: none; height: 100vh"
         width="100%"
       ></iframe>
@@ -82,9 +84,9 @@
           </lightning-button-icon>
           <h1 style="font-size: 22px; font-weight: bold">Salesforce Files</h1>
         </div>
-        <c-pspdfkit-open-salesforce-files
+        <c-nutrient-open-salesforce-files
           onpass={openVfPage}
-        ></c-pspdfkit-open-salesforce-files>
+        ></c-nutrient-open-salesforce-files>
       </div>
     </div>
   </template>
