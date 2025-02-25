@@ -12,7 +12,7 @@ const version = execSync("npm view @nutrient-sdk/viewer version")
   .trim();
 
 const updatedNutrientPage = initNutrientPage.replace(
-  // Matches the URL token indicating the current Nutrient Web SDK version (eg. 2024.4.0)
+  // Matches the URL token indicating the current Nutrient Web SDK version (eg. 1.0.0)
   /pspdfkit-web@([0-9]+.[0-9]+.[0-9]+)?/g,
   `pspdfkit-web@${version}`
 );

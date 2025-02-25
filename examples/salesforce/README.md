@@ -53,7 +53,7 @@ To deploy the Nutrient Web SDK package to your Salesforce organization, follow t
 
 3. The Nutrient Salesforce SDK integration example now makes use of the Nutrient Web SDK version available from our CDN at https://cdn.cloud.pspdfkit.com/pspdfkit-web, which means it's no longer limited by Salesforce's upload assets size 5MB limit.
 
-In order to set the Nutrient Web SDK version you want to use, open `./force-app/main/default/pages/Nutrient_InitNutrient.page` and edit the line 7 to reflect the Nutrient Web SDK version. For example, in order to use version 2024.4.0, you should change the URL pointing to the CDN to:
+In order to set the Nutrient Web SDK version you want to use, open `./force-app/main/default/pages/Nutrient_InitNutrient.page` and edit the line 7 to reflect the Nutrient Web SDK version. For example, in order to use version 1.0.0, you should change the URL pointing to the CDN to:
 
     ```html
     <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.0.0/nutrient-viewer.js" type="text/javascript"></script>
