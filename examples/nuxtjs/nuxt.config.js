@@ -31,4 +31,6 @@ export default defineNuxtConfig({
 
   // Target Configuration: https://go.nuxtjs.dev/config-target
   target: "public",
+
+  compatibilityDate: "2025-03-19",
 });

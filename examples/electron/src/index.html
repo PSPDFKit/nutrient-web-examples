@@ -63,7 +63,7 @@
       );
 
       /**
-       * We store the `PSPDFKit.Instance` in this variable so we can access it from
+       * We store the `NutrientViewer.Instance` in this variable so we can access it from
        * everywhere.
        */
       let instance = null;
@@ -92,21 +92,21 @@
       }
 
       /**
-       * If there is an existing running instance of PSPDFKit, it is destroyed before
+       * If there is an existing running instance of Nutrient, it is destroyed before
        * a creating a new one.
        *
        * This process will make sure that the WebAssembly module is optimally reused.
        */
       async function load(document) {
         if (instance) {
-          PSPDFKit.unload(instance);
+          NutrientViewer.unload(instance);
           hasUnsavedAnnotations = false;
           instance = null;
         }
 
         // Create our custom toolbar
         const toolbarItems = makeToolbarItems(
-          PSPDFKit.defaultToolbarItems,
+          NutrientViewer.defaultToolbarItems,
           function exportFile() {
             documentExport(instance, () => (hasUnsavedAnnotations = false));
           },
@@ -120,7 +120,7 @@
         );
 
         // Set up the configuration object. A custom style sheet is used to customize
-        // the look and feel of PSPDFKit.
+        // the look and feel of Nutrient.
         const configuration = {
           document,
           container: "#root",
@@ -131,7 +131,7 @@
           // licenseKey: "LICENSE KEY GOES HERE",
         };
 
-        instance = await PSPDFKit.load(configuration);
+        instance = await NutrientViewer.load(configuration);
 
         instance.setToolbarItems(toolbarItems);
         instance.addEventListener(

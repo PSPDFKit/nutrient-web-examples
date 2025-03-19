@@ -12,7 +12,7 @@
     "package-linux": "electron-packager . --no-prune --overwrite --platform=linux --arch=x64 --out=release-builds --icon=icons/png/application.png",
     "postinstall": "node scripts/copy-nutrient-files.js"
   },
-  "author": "PSPDFKit (https://www.nutrient.io)",
+  "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io/web",
   "readme": "https://www.nutrient.io/guides/web",
   "keywords": [

@@ -5,11 +5,11 @@ This example shows how to integrate [PSPDFKit for Web](https://www.nutrient.io/w
 ## Prerequisites
 
 - [Node.js](http://nodejs.org/)
-- PSPDFKit for Web (get your free trial [here](https://www.nutrient.io/try/))
+- Nutrient Web SDK (get your free trial [here](https://www.nutrient.io/try/))
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -18,8 +18,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-vue.git
-cd pspdfkit-web-example-vue
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/vue
 ```
 
 Install the project dependencies with `npm`:
@@ -30,15 +30,16 @@ npm install
 
 ## Vue Component
 
-The Vue component which implements the PSPDFKit for Web integration is included at `src/App.vue` with the rest of the example.
+The Vue component which implements the Nutrient Web SDK integration is included at `src/App.vue` with the rest of the example.
 
-In order to make the PSPDFKit for Web's library available for building, we have to copy the `pspdfkit-lib/` directory from `node_modules/pspdfkit/dist/` into the `public/js/` directory. This is done in the `package.json` script `verify-installation` which is executed by `serve`.
+In order to make the Nutrient Web SDK's library available for building, we have to copy the `nutrient-viewer-lib/` directory from `node_modules/@nutrient-sdk/viewer/dist/` into the `public/js/` directory. This is done in the `package.json` script `verify-installation` which is executed by `serve`.
 
 ## Running the Example
 
 We are ready to launch the app! 🎉
 
 ```bash
+npm run build
 npm run serve
 ```
 

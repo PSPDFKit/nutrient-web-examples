@@ -5,19 +5,19 @@ const ipcMain = electron.ipcMain;
 const { showMessageBox, showOpenDialog, showSaveDialog, showErrorBox } =
   electron.dialog;
 
-// Output a readable error message, when the PSPDFKit for Electron dependency is
+// Output a readable error message, when the Nutrient Electron SDK dependency is
 // missing.
-// We verify that the PSPDFKit dependency was correctly added.
+// We verify that the Nutrient dependency was correctly added.
 try {
-  // This will throw when `pspdfkit` is not installed.
+  // This will throw when `@nutrient-sdk/viewer` is not installed.
   require("@nutrient-sdk/viewer");
 } catch (error) {
-  if (error.message === "Cannot find module 'pspdfkit'") {
+  if (error.message === "Cannot find module '@nutrient-sdk/viewer'") {
     showErrorBox(
-      "Missing PSPDFKit Dependency",
-      `In order to start the PSPDFKit for Electron example app, you'll need to install PSPDFKit via npm.
+      "Missing Nutrient Dependency",
+      `In order to start the Nutrient Electron SDK example app, you'll need to install Nutrient via npm.
 
-If you are evaluating PSPDFKit, you can find the npm URL at:
+If you are evaluating Nutrient, you can find the npm URL at:
 
 https://www.nutrient.io/guides/web/current/pspdfkit-for-electron/example-project/
 

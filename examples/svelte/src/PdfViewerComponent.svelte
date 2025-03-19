@@ -1,5 +1,5 @@
 <script>
-import PSPDFKit from "@nutrient-sdk/viewer";
+import NutrientViewer from "@nutrient-sdk/viewer";
 import { afterUpdate, onDestroy, onMount } from "svelte";
 
 let currentDocument;
@@ -10,7 +10,7 @@ export let document;
 
 async function load() {
   currentDocument = document;
-  instance = await PSPDFKit.load({
+  instance = await NutrientViewer.load({
     baseUrl: `${window.location.protocol}//${window.location.host}/`,
     container: container,
     document: document,
@@ -18,7 +18,7 @@ async function load() {
 }
 
 function unload() {
-  PSPDFKit.unload(instance);
+  NutrientViewer.unload(instance);
   instance = null;
 }
 

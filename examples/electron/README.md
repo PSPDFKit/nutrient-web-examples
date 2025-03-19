@@ -14,7 +14,7 @@ This example uses context isolation, with node integration disabled. If you're l
 The example will work out of the box in demo mode, when no license key is passed. However, if used with a license key, we need to make sure that the corresponding bundle ID is passed in the `electronAppName` property of the configuration object passed to `PSPDFKit.load()` in `src/index.html`:
 
 ```js
-PSPDFKit.load({
+NutrientViewer.load({
   // other options
   licenseKey: "LICENSE KEY GOES HERE",
   electronAppName: "BUNDLE ID GOES HERE",
@@ -30,8 +30,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-electron-example.git
-cd pspdfkit-electron-example
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/electron
 ```
 
 Install the project dependencies with `npm`:

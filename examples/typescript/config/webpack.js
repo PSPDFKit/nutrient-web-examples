@@ -7,11 +7,11 @@
  *
  * This configuration file creates two main bundles:
  *
- * - vendor.js - contains external libraries (including pspdfkit.js).
+ * - vendor.js - contains external libraries (including nutrient-viewer.js).
  * - app.js - contains the application code.
  *
  * It also copies the WASM/ASM and CSS files from the npm package folder, since
- * `PSPDFKit.load` loads them relative to the application execution path.
+ * `NutrientViewer.load` loads them relative to the application execution path.
  */
 
 const path = require("node:path");

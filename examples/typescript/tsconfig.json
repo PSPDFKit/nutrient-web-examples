@@ -7,7 +7,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": false
   },
   "include": ["src/**/*"]
 }

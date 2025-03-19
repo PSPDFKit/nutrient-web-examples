@@ -13,14 +13,14 @@ This example demonstrates Standalone only.
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-blazor.git
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
 
-cd pspdfkit-web-example-blazor
+cd nutrient-web-examples/examples/blazor
 ```
 
 After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the `dist` directory in `/wwwroot/pspdfkit/`.
 
-Make sure your `/wwwroot/pspdfkit/` folder contains the file `pspdfkit.js` and a `pspdfkit-lib` directory with library assets.
+Make sure your `/wwwroot/pspdfkit/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
 You can then build and run the example using `dotnet watch run` from the root folder.
 

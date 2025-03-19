@@ -24,8 +24,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-pwa.git
-cd pspdfkit-web-example-pwa
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/pwa
 ```
 
 Install the project dependencies with `npm`:

@@ -12,7 +12,7 @@ You can install PHP via [XAMPP](https://www.mamp.info/en/mac/), [MAMP](https://w
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -41,7 +41,7 @@ cd nutrient-web-examples/examples/laravel
 npm install
 ```
 
-6. Run `npm run dev` to copy the PSPDFKit artifacts to your `public/assets/nutrient/` folder.
+6. Run `npm run dev` to copy the Nutrient artifacts to your `public/assets/nutrient/` folder.
 
 Make sure your `/public/assets/nutrient/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 

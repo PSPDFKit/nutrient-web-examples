@@ -42,10 +42,10 @@ export default {
   methods: {
     async loadNutrient() {
       import("@nutrient-sdk/viewer")
-        .then((PSPDFKit) => {
-          this.Nutrient = PSPDFKit;
-          PSPDFKit.unload(".pdf-container");
-          return PSPDFKit.load({
+        .then((NutrientViewer) => {
+          this.Nutrient = NutrientViewer;
+          NutrientViewer.unload(".pdf-container");
+          return NutrientViewer.load({
             document: this.pdfFile,
             container: ".pdf-container",
             baseUrl: "http://localhost:3000/js/",

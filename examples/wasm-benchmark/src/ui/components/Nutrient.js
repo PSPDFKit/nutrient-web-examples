@@ -6,11 +6,12 @@ export default class Nutrient extends React.Component {
   async componentDidMount() {
     const { pdf, licenseKey } = this.props;
 
-    window.PSPDFKit.load({
+    window.NutrientViewer.load({
       document: pdf,
       licenseKey,
       container: this.ref.current,
       standaloneInstancesPoolSize: 1,
+      disableWebAssemblyStreaming: false,
     });
   }
 

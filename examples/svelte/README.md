@@ -17,8 +17,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-svelte.git
-cd pspdfkit-web-example-svelte
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/svelte
 ```
 
 Install the project dependencies with `npm`:

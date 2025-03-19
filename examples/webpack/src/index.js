@@ -3,15 +3,15 @@
  *
  * We create a drag and drop area and a file picker that are used to load PDFs.
  * Once a PDF is dropped or selected we read it from disk as an ArrayBuffer
- * which we can then pass to PSPDFKit.load() to initialize the viewer with the given PDF.
+ * which we can then pass to NutrientViewer.load() to initialize the viewer with the given PDF.
  *
  * We also add an `Export PDF` button to the main toolbar and monitor changes to
  * inform the users when they are about to leave the page or open a new document
  * and there is unsaved(exported) work.
  */
 
+import NutrientViewer from "@nutrient-sdk/viewer";
 import dragDrop from "drag-drop";
-import PSPDFKit from "pspdfkit";
 import { processFiles } from "./lib/utils";
 
 let hasUnsavedAnnotations = false;
@@ -40,7 +40,7 @@ const createOnAnnotationsChange = () => {
  * Main load function invoked when a dropped or selected file (PDF)
  * has been successfully read as ArrayBuffer.
  *
- * If there is an existing running instance of PSPDFKit it is destroyed
+ * If there is an existing running instance of Nutrient it is destroyed
  * before a creating a new one.
  */
 function load(pdfArrayBuffers) {
@@ -48,7 +48,7 @@ function load(pdfArrayBuffers) {
 
   if (isAlreadyLoaded) {
     console.info("Destroyed previous instance");
-    PSPDFKit.unload(".App");
+    NutrientViewer.unload(".App");
     hasUnsavedAnnotations = false;
   }
 
@@ -59,7 +59,7 @@ function load(pdfArrayBuffers) {
     document: pdfArrayBuffer,
   };
 
-  PSPDFKit.load(configuration)
+  NutrientViewer.load(configuration)
     .then((instance) => {
       instance.addEventListener(
         "annotations.change",
@@ -70,7 +70,7 @@ function load(pdfArrayBuffers) {
 }
 
 /**
- * The code present below is not required to make PSPDFKit work. They just provide the file picking
+ * The code present below is not required to make Nutrient work. They just provide the file picking
  * and drag n drop functionality.
  */
 

@@ -12,25 +12,25 @@ const Viewport = (props) => {
     const containerElement = containerRef.current;
 
     if (containerElement) {
-      let PSPDFKit;
-      const pspdfkitScript = document.createElement("script");
+      let NutrientViewer;
+      const nutrientScript = document.createElement("script");
 
-      pspdfkitScript.onload = () => {
-        PSPDFKit = window.PSPDFKit;
-        PSPDFKit.load({
+      nutrientScript.onload = () => {
+        NutrientViewer = window.NutrientViewer;
+        NutrientViewer.load({
           container: containerElement,
           document: `../assets/${title}`,
         });
       };
       // Gatsby needs client-side only packages need to be imported asynchronously
       // https://www.gatsbyjs.com/docs/using-client-side-only-packages/
-      pspdfkitScript.src =
+      nutrientScript.src =
         "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.1.0/nutrient-viewer.js";
-      document.head.appendChild(pspdfkitScript);
+      document.head.appendChild(nutrientScript);
 
       return () => {
-        PSPDFKit?.unload(containerElement);
-        pspdfkitScript.remove();
+        NutrientViewer?.unload(containerElement);
+        nutrientScript.remove();
       };
     }
     // We only want this callback to run once, hence the empty array

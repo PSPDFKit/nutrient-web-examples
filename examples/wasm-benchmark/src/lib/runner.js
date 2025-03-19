@@ -121,10 +121,10 @@ export function createRunner(licenseKey) {
       conf,
     );
 
-    return window.PSPDFKit.load(configuration).then((instance) => ({
+    return window.NutrientViewer.load(configuration).then((instance) => ({
       instance,
       unload: () => {
-        window.PSPDFKit.unload(instance);
+        window.NutrientViewer.unload(instance);
         instance = null;
         pdf = null;
       },

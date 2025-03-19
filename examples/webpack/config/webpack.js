@@ -11,7 +11,7 @@
  * - app.js - contains the application code.
  *
  * It also copies the WASM/ASM and CSS files from the npm package folder, since
- * `PSPDFKit.load` loads them relative to the application execution path.
+ * `NutrientViewer.load` loads them relative to the application execution path.
  */
 
 const path = require("node:path");
@@ -82,7 +82,7 @@ const config = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        // Creates a `vendor.js` bundle which contains external libraries (including pspdfkit.js).
+        // Creates a `vendor.js` bundle which contains external libraries (including nutrient-viewer.js).
         vendor: {
           test: /node_modules/,
           chunks: "initial",

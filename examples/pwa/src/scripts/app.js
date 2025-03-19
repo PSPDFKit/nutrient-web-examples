@@ -406,13 +406,13 @@
 
         // Once we have the license key we can finally load Nutrient.
         licenseKeyPromise.then((licenseKey) => {
-          loadPromise = Nutrient.load({
+          loadPromise = NutrientViewer.load({
             container: $("#pspdf-container"),
             document: pdfBuffer,
             licenseKey: licenseKey.trim().length > 0 ? licenseKey : null,
             // We need to enable this to store the stylesheets loaded by Nutrient Web SDK in the
             // localStorage, otherwise those requests would be bypassed.
-            toolbarItems: Nutrient.defaultToolbarItems.concat([
+            toolbarItems: NutrientViewer.defaultToolbarItems.concat([
               { type: "cloudy-rectangle", dropdownGroup: "shapes" },
               { type: "dashed-rectangle", dropdownGroup: "shapes" },
               { type: "cloudy-ellipse", dropdownGroup: "shapes" },
@@ -606,7 +606,7 @@
    *  2. Tries to save this PDF as ArrayBuffer in IndexedDB with
    *     NutrientFileStore.set(filename, file)
    *
-   * After this operation calls Nutrient.unload(nutrientInstance) to unload the
+   * After this operation calls NutrientViewer.unload(nutrientInstance) to unload the
    * current instance.
    */
   function unload() {
@@ -669,7 +669,7 @@
     }
 
     return unsavedChangesPromise.then(() => {
-      Nutrient.unload(nutrientInstance);
+      NutrientViewer.unload(nutrientInstance);
       window.nutrientInstance = nutrientInstance = null;
       hasUnsavedChanges = false;
     });

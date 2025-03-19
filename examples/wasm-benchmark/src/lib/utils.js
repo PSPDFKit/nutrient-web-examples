@@ -68,7 +68,7 @@ export function getConfigOptionsFromURL() {
   return {
     nutrientConfig: {
       disableWebAssemblyStreaming:
-        params.disableWebAssemblyStreaming !== "false",
+      params.disableWebAssemblyStreaming !== undefined && params.disableWebAssemblyStreaming !== "false",
       standaloneInstancesPoolSize: Number.isNaN(standaloneInstancesPoolSize)
         ? 0
         : standaloneInstancesPoolSize,

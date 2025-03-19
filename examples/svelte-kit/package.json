@@ -26,5 +26,8 @@
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.1.0"
+  },
+  "overrides": {
+    "cookie": "^0.7.0"
   }
 }
