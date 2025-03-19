@@ -1,10 +1,10 @@
-// This file ensures that PSPDFKit is properly installed as an npm dependency
+// This file ensures that Nutrient is properly installed as an npm dependency
 // and shows a meaningful error message if this is not the case.
 //
 // It acts as an additional safeguard for the example application and might not
 // be necessary in your application.
 try {
-  require("pspdfkit");
+  require("@nutrient-sdk/viewer");
 } catch (error) {
   if (!/cannot find module/i.test(error.message)) {
     process.exit(0);

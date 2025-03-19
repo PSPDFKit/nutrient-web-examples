@@ -1,5 +1,5 @@
 {
-  "name": "pspdfkit-web-example-react",
+  "name": "nutrient-web-example-react",
   "version": "1.0.0",
   "description": "Standalone and offline PDF viewer web application built with Nutrient Web SDK and React",
   "keywords": [
@@ -14,21 +14,21 @@
     "offline",
     "indexeddb"
   ],
-  "author": "PSPDFKit (https://www.nutrient.io)",
+  "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
   "dependencies": {
+    "@nutrient-sdk/viewer": "1.1.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.4",
-    "pspdfkit": "2024.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "verify-installation": "node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
     "prestart": "npm run verify-installation",
     "start": "react-scripts start",
     "prebuild": "npm run verify-installation",

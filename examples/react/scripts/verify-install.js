@@ -1,5 +1,5 @@
 try {
-  require("pspdfkit");
+  require("@nutrient-sdk/viewer");
 } catch (error) {
   if (!/cannot find module/i.test(error.message)) {
     process.exit(0);

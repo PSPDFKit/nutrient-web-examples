@@ -277,7 +277,7 @@ a:focus {
   background-color: #feeeee;
 }
 
-.PSPDFKit-container {
+.Nutrient-container {
   position: relative;
   width: 100%;
   padding-bottom: 100%;
@@ -285,7 +285,7 @@ a:focus {
   background-color: #fff;
 }
 
-#PSPDFKit-container {
+#Nutrient-container {
   position: absolute;
   width: 100%;
   height: 100%;

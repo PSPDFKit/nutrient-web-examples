@@ -1,5 +1,5 @@
 <script>
-import Pspdfkit from "./PdfViewerComponent.svelte";
+import Nutrient from "./PdfViewerComponent.svelte";
 
 let doc = "document.pdf";
 const errorMsg = "";
@@ -20,7 +20,7 @@ function openDocument(e) {
     />
   </form>
   <span class="error">{errorMsg}</span>
-  <Pspdfkit document={doc} bind:errorMsg />
+  <Nutrient document={doc} bind:errorMsg />
 </main>
 
 <style>

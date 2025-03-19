@@ -1,5 +1,5 @@
 /**
- * PSPDFKitFileStore is a general purpose IndexedDB storage that can be used for
+ * NutrientFileStore is a general purpose IndexedDB storage that can be used for
  * storing your PDFs offline.
  *
  * In the PWA example, we use it to allow documents to be downloaded and be
@@ -14,7 +14,7 @@
     window.msIndexedDB;
 
   const NOT_SUPPORTED_ERROR_MESSAGE =
-    "PSPDFKit File Store works only in browsers that support IndexedDB";
+    "Nutrient File Store works only in browsers that support IndexedDB";
 
   function notSupported() {
     return Promise.reject(new Error(NOT_SUPPORTED_ERROR_MESSAGE));
@@ -22,7 +22,7 @@
 
   if (!window.indexedDB) {
     console.warn(NOT_SUPPORTED_ERROR_MESSAGE);
-    window.PSPDFKitFileStore = {
+    window.NutrientFileStore = {
       get: notSupported,
       set: notSupported,
       delete: notSupported,
@@ -32,16 +32,16 @@
     return;
   }
 
-  const STORE_NAME = "PSPDFKIT_FILES_STORE";
+  const STORE_NAME = "NUTRIENT_FILES_STORE";
   const STORE_VERSION = 1;
 
   const dbPromise = idb.open(STORE_NAME, STORE_VERSION, (upgradeDB) => {
     upgradeDB.createObjectStore(STORE_NAME);
   });
 
-  window.PSPDFKitFileStore = {
+  window.NutrientFileStore = {
     /**
-     * Retrieve the contents of a file stored in the PSPDFKitFileStore.
+     * Retrieve the contents of a file stored in the NutrientFileStore.
      *
      * @param {string} filename
      */
@@ -51,7 +51,7 @@
       ),
 
     /**
-     * Persists a file in the PSPDFKitFileStore. A file is referenced by its
+     * Persists a file in the NutrientFileStore. A file is referenced by its
      * filename.
      *
      * @param {string} filename
@@ -72,7 +72,7 @@
       }),
 
     /**
-     * Deletes a file in the PSPDFKitFileStore.
+     * Deletes a file in the NutrientFileStore.
      *
      * @param {string} filename
      */
@@ -84,7 +84,7 @@
       }),
 
     /**
-     * Resets the PSPDFKitFileStore. After that, every file will be deleted.
+     * Resets the NutrientFileStore. After that, every file will be deleted.
      *
      * @returns {Promise}
      */
@@ -97,7 +97,7 @@
 
     /**
      * Returns a promise that resolves to all files that are currently stored
-     * in the PSPDFKitFileStore.
+     * in the NutrientFileStore.
      *
      * @returns {Array<string>}
      */

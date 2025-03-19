@@ -1,5 +1,5 @@
 <script>
-import PSPDFKit from "pspdfkit";
+import PSPDFKit from "@nutrient-sdk/viewer";
 import { afterUpdate, onDestroy, onMount } from "svelte";
 
 let currentDocument;

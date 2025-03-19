@@ -2,20 +2,20 @@
   <div id="app">
     <label for="file-upload" class="custom-file-upload"> Open PDF </label>
     <input id="file-upload" type="file" @change="openDocument" class="btn" />
-    <PSPDFKitContainer :pdfFile="pdfFile" @loaded="handleLoaded" />
+    <NutrientContainer :pdfFile="pdfFile" @loaded="handleLoaded" />
   </div>
 </template>
 
 <script>
-import PSPDFKitContainer from "../components/PSPDFKitContainer.vue";
+import NutrientContainer from "../components/NutrientContainer.vue";
 
 export default {
   name: "app",
   /**
-   * Render the `PSPDFKitContainer` component.
+   * Render the `NutrientContainer` component.
    */
   components: {
-    PSPDFKitContainer,
+    NutrientContainer,
   },
 
   data() {
@@ -29,7 +29,7 @@ export default {
    */
   methods: {
     handleLoaded(instance) {
-      console.log("PSPDFKit has loaded: ", instance);
+      console.log("Nutrient has loaded: ", instance);
       // Do something.
     },
 

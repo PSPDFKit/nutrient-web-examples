@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "PSPDFKit",
+  name: "NutrientViewer",
   /**
    * The component receives `pdfFile` prop which is type of String and required
    */
@@ -18,7 +18,7 @@ export default {
    * We wait until the template has been rendered to load the document into the library.
    */
   mounted() {
-    this.loadPSPDFKit().then((instance) => {
+    this.loadNutrient().then((instance) => {
       this.$emit("loaded", instance);
     });
   },
@@ -28,17 +28,17 @@ export default {
   watch: {
     pdfFile(val) {
       if (val) {
-        this.loadPSPDFKit();
+        this.loadNutrient();
       }
     },
   },
   /**
-   * Our component has `loadPSPDFKit` method, this unloads and cleanup the component and triggers document loading.
+   * Our component has `loadNutrient` method, this unloads and cleanup the component and triggers document loading.
    */
   methods: {
-    async loadPSPDFKit() {
-      PSPDFKit.unload(".pdf-container");
-      return PSPDFKit.load({
+    async loadNutrient() {
+      NutrientViewer.unload(".pdf-container");
+      return NutrientViewer.load({
         // access the pdfFile from props
         document: this.pdfFile,
         container: ".pdf-container",
@@ -50,7 +50,7 @@ export default {
    * Clean up when the component is unmounted; so, it is ready to load another document.
    */
   beforeUnmount() {
-    PSPDFKit.unload(".pdf-container");
+    Nutrient.unload(".pdf-container");
   },
 };
 </script>

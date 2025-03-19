@@ -13,6 +13,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["pspdfkit"],
+    exclude: ["@nutrient-sdk/viewer"],
   },
 });

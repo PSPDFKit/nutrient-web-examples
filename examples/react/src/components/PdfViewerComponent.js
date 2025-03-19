@@ -8,7 +8,7 @@ export default function PdfViewerComponent(props) {
     let PSPDFKit;
 
     (async () => {
-      PSPDFKit = await import("pspdfkit");
+      PSPDFKit = await import("@nutrient-sdk/viewer");
       await PSPDFKit.load({
         // Container where PSPDFKit should be mounted.
         container,

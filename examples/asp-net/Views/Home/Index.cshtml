@@ -2,17 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="pspdfkit" style="width: 100%; height: 100vh;"></div>
+<div id="nutrient" style="width: 100%; height: 100vh;"></div>
 
-<script src="/lib/pspdfkit/pspdfkit.js"></script>
+<script src="/lib/nutrient/nutrient-viewer.js"></script>
 
 <script>
 	PSPDFKit.load({
-		container: "#pspdfkit",
+		container: "#nutrient",
 		document: "document.pdf",
 	})
 		.then(function(instance) {
-			console.log("PSPDFKit loaded", instance);
+			console.log("Nutrient loaded", instance);
 		})
 		.catch(function(error) {
 			console.error(error.message);

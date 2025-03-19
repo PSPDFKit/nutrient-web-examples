@@ -7,7 +7,7 @@
  *
  * This configuration file creates two main bundles:
  *
- * - vendor.js - contains external libraries (including pspdfkit.js).
+ * - vendor.js - contains external libraries (including nutrient-viewer.js).
  * - app.js - contains the application code.
  *
  * It also copies the WASM/ASM and CSS files from the npm package folder, since
@@ -26,10 +26,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const isDev = process.env.NODE_ENV === "development";
 
 const filesToCopy = [
-  // PSPDFKit files.
+  // Nutrient files.
   {
-    from: "./node_modules/pspdfkit/dist/pspdfkit-lib",
-    to: "./pspdfkit-lib",
+    from: "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+    to: "./nutrient-viewer-lib",
   },
   // Application CSS.
   {

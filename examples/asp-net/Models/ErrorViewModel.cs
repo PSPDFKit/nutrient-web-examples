@@ -1,4 +1,4 @@
-namespace pspdfkit_aspnet_example.Models;
+namespace nutrient_aspnet_example.Models;
 
 public class ErrorViewModel
 {

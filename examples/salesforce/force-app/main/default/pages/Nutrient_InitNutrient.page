@@ -4,7 +4,7 @@
 
     <script type="text/javascript"> __sfdcSessionId = '{!$Api.Session_Id}';</script>
     <script src="../../soap/ajax/54.0/connection.js" type="text/javascript"></script>
-    <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.0.0/nutrient-viewer.js" type="text/javascript"></script>
+    <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.1.0/nutrient-viewer.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         var recId = '{!fileDetail}';
@@ -13,7 +13,7 @@
         var contVersion;
         var state;
         var pdf;
-        var baseUrl = `https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.0.0/`;
+        var baseUrl = `https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.1.0/`;
 
         const saveButton = {
             type: "custom",

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "pspdfkit-blazor-wasm-example": {
+    "nutrient-blazor-wasm-example": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

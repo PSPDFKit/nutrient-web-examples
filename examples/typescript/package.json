@@ -1,5 +1,5 @@
 {
-  "name": "pspdfkit-web-example-typescript",
+  "name": "nutrient-web-example-typescript",
   "version": "1.0.0",
   "description": "Standalone and offline PDF viewer web application built with Nutrient Web SDK and Typescript",
   "main": "index.js",
@@ -16,12 +16,12 @@
     "offline",
     "indexeddb"
   ],
-  "author": "PSPDFKit (https://www.nutrient.io)",
+  "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io/web",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
   "dependencies": {
-    "pspdfkit": "2024.8.1",
+    "@nutrient-sdk/viewer": "1.1.0",
     "serve": "^14.2.4"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "prestart:dev": "node bin/verify-install.js",
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.js --progress",
     "lint": "eslint src",
-    "verify-installation": "node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
     "start:e2e": "npm run start:dev"
   },
   "overrides": {

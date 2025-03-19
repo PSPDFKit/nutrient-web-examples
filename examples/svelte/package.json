@@ -1,10 +1,10 @@
 {
-  "name": "pspdfkit-svelte",
+  "name": "nutrient-web-svelte-example",
   "version": "1.0.0",
   "private": true,
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "scripts": {
-    "verify-installation": "node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
     "dev": "npm run verify-installation && rollup -c -w --bundleConfigAsCjs",
     "build": "npm run verify-installation && rollup -c --bundleConfigAsCjs",
     "start": "sirv public --no-clear",
@@ -22,7 +22,7 @@
     "svelte": "^4.2.19"
   },
   "dependencies": {
-    "pspdfkit": "2024.8.1",
+    "@nutrient-sdk/viewer": "1.1.0",
     "sirv-cli": "^2.0.2"
   }
 }

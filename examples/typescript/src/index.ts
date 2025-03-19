@@ -1,4 +1,4 @@
-import PSPDFKit from "pspdfkit";
+import PSPDFKit from "@nutrient-sdk/viewer";
 
 let instance: unknown = null;
 

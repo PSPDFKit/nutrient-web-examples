@@ -133,10 +133,10 @@
     e.preventDefault();
 
     // Clear the IndexedDB-based PDF store.
-    PSPDFKitFileStore.listAll().then((files) => {
+    NutrientFileStore.listAll().then((files) => {
       $("#files-list").innerHTML = "";
       Promise.all(
-        files.map((filename) => PSPDFKitFileStore.delete(filename)),
+        files.map((filename) => NutrientFileStore.delete(filename)),
       ).then(() => {
         window.history.replaceState(null, "", window.location.pathname);
       });
@@ -151,13 +151,13 @@
     filesList.innerHTML = "";
 
     let filenames;
-    PSPDFKitFileStore.listAll()
+    NutrientFileStore.listAll()
       .then((result) => {
         filenames = result;
         filenames.sort();
 
         return Promise.all(
-          filenames.map((filename) => PSPDFKitFileStore.get(filename)),
+          filenames.map((filename) => NutrientFileStore.get(filename)),
         );
       })
       .then((files) => files.map((file, index) => [filenames[index], file]))
@@ -252,7 +252,7 @@
       filename = atob(e.target.dataset.file);
 
       // Remove the file from the store.
-      PSPDFKitFileStore.delete(filename)
+      NutrientFileStore.delete(filename)
         .then(() => {
           renderFileList();
         })
@@ -302,7 +302,7 @@
 
   /**
    * Given a filename and an optional URL, we try to open it from the local
-   * PSPDFKitFileStore first.
+   * NutrientFileStore first.
    * If the file is not found, we then tries to fetch it from the network using
    * the URL and and store the file locally.
    *
@@ -311,7 +311,7 @@
    */
   function openPDF(filename, url) {
     // Try to get the file from the IndexedDB store.
-    PSPDFKitFileStore.get(filename)
+    NutrientFileStore.get(filename)
       .then((file) => {
         const pdfBuffer = file.pdfBuffer;
 
@@ -366,8 +366,8 @@
 
   // Keep track of the current load promise.
   let loadPromise = Promise.resolve();
-  // Keep a reference to the PSPDFKit instance.
-  let pspdfkitInstance = null;
+  // Keep a reference to the Nutrient instance.
+  let nutrientInstance = null;
   // We want to fetch the license only once so we requesting it for the first time
   // we save the promise returned by fetch("./config/license-key")
   let licenseKeyPromise = null;
@@ -391,7 +391,7 @@
     // We wait for any potential ongoing PDF loading.
     loadPromise.then(() => {
       // Unload an existing pdf if any.
-      const unloadPromise = pspdfkitInstance ? unload() : Promise.resolve();
+      const unloadPromise = nutrientInstance ? unload() : Promise.resolve();
 
       unloadPromise.then(() => {
         // Fetch the Nutrient Web SDK license.
@@ -404,15 +404,15 @@
             });
         }
 
-        // Once we have the license key we can finally load PSPDFKit.
+        // Once we have the license key we can finally load Nutrient.
         licenseKeyPromise.then((licenseKey) => {
-          loadPromise = PSPDFKit.load({
+          loadPromise = Nutrient.load({
             container: $("#pspdf-container"),
             document: pdfBuffer,
             licenseKey: licenseKey.trim().length > 0 ? licenseKey : null,
             // We need to enable this to store the stylesheets loaded by Nutrient Web SDK in the
             // localStorage, otherwise those requests would be bypassed.
-            toolbarItems: PSPDFKit.defaultToolbarItems.concat([
+            toolbarItems: Nutrient.defaultToolbarItems.concat([
               { type: "cloudy-rectangle", dropdownGroup: "shapes" },
               { type: "dashed-rectangle", dropdownGroup: "shapes" },
               { type: "cloudy-ellipse", dropdownGroup: "shapes" },
@@ -439,7 +439,7 @@
                 createOnChange(),
               );
 
-              window.pspdfkitInstance = pspdfkitInstance = instance;
+              window.nutrientInstance = nutrientInstance = instance;
 
               if (storeLocally) {
                 const pageInfo = instance.pageInfoForIndex(0);
@@ -448,7 +448,7 @@
                   .renderPageAsArrayBuffer({ width: thumbnailRenderedWidth }, 0)
                   .then((thumbnailBuffer) => {
                     // Save the PDF to the IndexedDB store.
-                    PSPDFKitFileStore.set(filename, pdfBufferCopy, {
+                    NutrientFileStore.set(filename, pdfBufferCopy, {
                       width: pageInfo.width,
                       height: pageInfo.height,
                       buffer: thumbnailBuffer,
@@ -466,7 +466,7 @@
             })
             .catch((e) => {
               console.error(e);
-              pspdfkitInstance = null;
+              nutrientInstance = null;
               hasUnsavedChanges = false;
             });
         });
@@ -598,24 +598,24 @@
   /**
    * Unload helper.
    *
-   * Checks whether there are unsaved changes before unloading PSPDFKit.
+   * Checks whether there are unsaved changes before unloading Nutrient.
    * When that's the case it saves the PDF to the IndexedDB store in two steps:
    *
    *  1. Uses the Instance#exportPDF() to export the current version of the PDF
    *     to ArrayBuffer.
    *  2. Tries to save this PDF as ArrayBuffer in IndexedDB with
-   *     PSPDFKitFileStore.set(filename, file)
+   *     NutrientFileStore.set(filename, file)
    *
-   * After this operation calls PSPDFKit.unload(pspdfkitInstance) to unload the
+   * After this operation calls Nutrient.unload(nutrientInstance) to unload the
    * current instance.
    */
   function unload() {
-    if (!pspdfkitInstance) {
+    if (!nutrientInstance) {
       return;
     }
 
-    console.log("unload", pspdfkitInstance.filename);
-    const filename = pspdfkitInstance.filename;
+    console.log("unload", nutrientInstance.filename);
+    const filename = nutrientInstance.filename;
 
     // If there are no changes `unsavedChangesPromise` will resolve immediately.
     let unsavedChangesPromise = Promise.resolve();
@@ -628,11 +628,11 @@
       )
     ) {
       unsavedChangesPromise = new Promise((resolve) => {
-        // We use PSPDFKit's Instance#exportPDF() method to export the PDF to
+        // We use Nutrient's Instance#exportPDF() method to export the PDF to
         // an ArrayBuffer.
         Promise.all([
-          pspdfkitInstance.exportPDF(),
-          pspdfkitInstance.renderPageAsArrayBuffer(
+          nutrientInstance.exportPDF(),
+          nutrientInstance.renderPageAsArrayBuffer(
             { width: thumbnailRenderedWidth },
             0,
           ),
@@ -640,10 +640,10 @@
           .then((results) => {
             const pdfBuffer = results[0];
             const thumbnailBuffer = results[1];
-            const pageInfo = pspdfkitInstance.pageInfoForIndex(0);
+            const pageInfo = nutrientInstance.pageInfoForIndex(0);
 
             console.log(`Saving exported PDF as ${filename}`);
-            PSPDFKitFileStore.set(filename, pdfBuffer, {
+            NutrientFileStore.set(filename, pdfBuffer, {
               width: pageInfo.width,
               height: pageInfo.height,
               buffer: thumbnailBuffer,
@@ -669,8 +669,8 @@
     }
 
     return unsavedChangesPromise.then(() => {
-      PSPDFKit.unload(pspdfkitInstance);
-      window.pspdfkitInstance = pspdfkitInstance = null;
+      Nutrient.unload(nutrientInstance);
+      window.nutrientInstance = nutrientInstance = null;
       hasUnsavedChanges = false;
     });
   }

@@ -14,7 +14,7 @@ ncp("./src", "./dist", (err) => {
 
   ncp("./config", "./dist/config");
 
-  ncp("./node_modules/pspdfkit/dist/", "./dist/scripts/vendor/", (err) => {
+  ncp("./node_modules/@nutrient-sdk/viewer/dist/", "./dist/scripts/vendor/", (err) => {
     if (err) {
       console.error(err);
       process.exit(1);

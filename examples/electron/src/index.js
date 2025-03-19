@@ -3,14 +3,14 @@ const electron = require("electron");
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-// PSPDFKit helper for main process
-const pspdfkitMain = require("./lib/pspdfkit-main");
+// Nutrient helper for main process
+const nutrientMain = require("./lib/nutrient-main");
 
 const path = require("node:path");
 const url = require("node:url");
 
 // Make sure to enable access to the local file system. This is required
-// in order to load PDF files and PSPDFKit dependencies from the local
+// in order to load PDF files and Nutrient SDK dependencies from the local
 // file system.
 electron.protocol.registerSchemesAsPrivileged([
   {
@@ -26,7 +26,7 @@ let windowInCreation = false;
 
 function createWindow() {
   windowInCreation = true;
-  pspdfkitMain.initialize();
+  nutrientMain.initialize();
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -60,7 +60,7 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
-    pspdfkitMain.cleanup();
+    nutrientMain.cleanup();
   });
 }
 

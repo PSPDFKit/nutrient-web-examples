@@ -6,16 +6,16 @@ if (!fs.existsSync("./public/js")) {
 }
 
 ncp(
-  "./node_modules/pspdfkit/dist/pspdfkit-lib",
-  "./public/js/pspdfkit-lib",
+  "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+  "./public/js/nutrient-viewer-lib",
   (err) => {
     err && console.error(err);
   },
 );
 
 ncp(
-  "./node_modules/pspdfkit/dist/pspdfkit.js",
-  "./public/js/pspdfkit.js",
+  "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js",
+  "./public/js/nutrient-viewer.js",
   (err) => {
     err && console.error(err);
   },

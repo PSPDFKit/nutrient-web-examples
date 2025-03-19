@@ -45,8 +45,5 @@
     "**/{aura,lwc}/**": [
       "eslint"
     ]
-  },
-  "dependencies": {
-    "@nutrient-sdk/viewer": "1.0.0"
   }
 }

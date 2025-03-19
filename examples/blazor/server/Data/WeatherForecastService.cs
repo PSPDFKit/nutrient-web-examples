@@ -1,4 +1,4 @@
-namespace PSPDFKit_BlazorServer.Data;
+namespace Nutrient_BlazorServer.Data;
 
 public class WeatherForecastService
 {

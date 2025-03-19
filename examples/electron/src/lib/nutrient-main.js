@@ -10,7 +10,7 @@ const { showMessageBox, showOpenDialog, showSaveDialog, showErrorBox } =
 // We verify that the PSPDFKit dependency was correctly added.
 try {
   // This will throw when `pspdfkit` is not installed.
-  require("pspdfkit");
+  require("@nutrient-sdk/viewer");
 } catch (error) {
   if (error.message === "Cannot find module 'pspdfkit'") {
     showErrorBox(

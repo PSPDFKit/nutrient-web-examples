@@ -22,7 +22,8 @@
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
     "test": "playwright test",
-    "audit-fix": "./scripts/audit-dependencies.sh"
+    "audit-fix": "./scripts/audit-dependencies.sh",
+    "update-nutrient-version": "./scripts/update-nutrient-in-examples.sh"
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]

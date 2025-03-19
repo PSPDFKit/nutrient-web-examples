@@ -110,7 +110,7 @@ export function createRunner(licenseKey) {
   }
 
   function load(pdf, conf = {}) {
-    const defaultConf = getConfigOptionsFromURL().pspdfkitConfig;
+    const defaultConf = getConfigOptionsFromURL().nutrientConfig;
     const configuration = Object.assign(
       {
         document: pdf,

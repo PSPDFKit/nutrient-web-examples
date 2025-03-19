@@ -19,10 +19,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const filesToCopy = [
-  // PSPDFKit files.
+  // Nutrient files.
   {
-    from: "./node_modules/pspdfkit/dist/pspdfkit-lib",
-    to: "./pspdfkit-lib",
+    from: "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+    to: "./nutrient-viewer-lib",
   },
   // Application CSS.
   {
@@ -75,7 +75,7 @@ const config = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        // Creates a `vendor.js` bundle which contains external libraries (including pspdfkit.js).
+        // Creates a `vendor.js` bundle which contains external libraries (including nutrient-viewer.js).
         vendor: {
           test: /node_modules/,
           chunks: "initial",

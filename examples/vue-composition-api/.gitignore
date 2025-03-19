@@ -30,5 +30,4 @@ coverage
 *.tsbuildinfo
 
 # Web SDK static files
-public/pspdfkit-lib/
 public/nutrient-viewer-lib/

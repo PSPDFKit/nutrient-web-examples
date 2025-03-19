@@ -4,12 +4,12 @@
     Open PDF
     </label>
     <input id="file-upload" type="file" @change="openDocument" class="btn" />
-    <PSPDFKitContainer :pdfFile="pdfFile" @loaded="handleLoaded" />
+    <NutrientContainer :pdfFile="pdfFile" @loaded="handleLoaded" />
   </div>
 </template>
 
 <script>
-import PSPDFKitContainer from "@/components/PSPDFKitContainer.vue";
+import NutrientContainer from "@/components/NutrientContainer.vue";
 
 export default {
   data() {
@@ -18,17 +18,17 @@ export default {
     };
   },
   /**
-   * render PSPDFKitContainer component
+   * render NutrientContainer component
    */
   components: {
-    PSPDFKitContainer,
+    NutrientContainer,
   },
   /**
    * Our component has two methods - one to check when the document is loaded, and the other to open the document.
    */
   methods: {
     handleLoaded(instance) {
-      console.log("PSPDFKit has loaded: ", instance);
+      console.log("Nutrient has loaded: ", instance);
       // do something
     },
 

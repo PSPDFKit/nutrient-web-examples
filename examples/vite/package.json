@@ -1,8 +1,8 @@
 {
-  "name": "pspdfkit-vite",
+  "name": "nutrient-vite",
   "version": "1.0.0",
   "type": "module",
-  "description": "Standalone and offline PDF viewer web application built with PSPDFKit for Web and React",
+  "description": "Standalone and offline PDF viewer web application built with Nutrient Web SDK and React",
   "keywords": [
     "wasm",
     "web",
@@ -15,7 +15,7 @@
     "offline",
     "indexeddb"
   ],
-  "author": "PSPDFKit (https://www.nutrient.io)",
+  "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
@@ -26,7 +26,7 @@
     "start:e2e": "vite --port 3000"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "^1.0.0",
+    "@nutrient-sdk/viewer": "1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

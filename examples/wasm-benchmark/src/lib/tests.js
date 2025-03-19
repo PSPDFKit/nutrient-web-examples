@@ -3,7 +3,7 @@ import { clearAllTimings, isMobileOS, isWasmSupported } from "./utils";
 
 export function createBenchmark(pdf, licenseKey, conf) {
   // Factory to create our test suite. It will register all tests in the runner.
-  const isWasm = isWasmSupported() && !conf.disableWebAssembly;
+  const isWasm = isWasmSupported()
 
   const runner = createRunner(licenseKey);
 
@@ -215,6 +215,6 @@ export function createBenchmark(pdf, licenseKey, conf) {
 
   return {
     run: runner.run,
-    isWasm: isWasm,
+    isWasm,
   };
 }

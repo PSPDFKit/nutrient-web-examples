@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>pspdfkit_aspnet_example</RootNamespace>
+    <RootNamespace>nutrient_aspnet_example</RootNamespace>
   </PropertyGroup>
 
 </Project>

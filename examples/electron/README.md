@@ -1,6 +1,6 @@
-# PSPDFKit for Electron Example App
+# Nutrient Electron Example App
 
-This example shows how to build a [PSPDFKit for Electron](https://www.nutrient.io/electron/) application with
+This example shows how to build a [Nutrient Electron](https://www.nutrient.io/electron/) application with
 [Electron](https://electronjs.org/).
 
 This example uses context isolation, with node integration disabled. If you're looking for an example with node integration enabled, you can switch to the [`nodeintegration` branch](https://github.com/PSPDFKit/pspdfkit-electron-example/tree/nodeintegration).
@@ -61,7 +61,7 @@ mainWindow.webContents.openDevTools();
 
 ## What's in This Repository
 
-This repository contains an example integration of [PSPDFKit for Electron](https://www.nutrient.io/electron). The project structure is influenced by the default Electron example app and comes with the following files, among other:
+This repository contains an example integration of [Nutrient Electron](https://www.nutrient.io/electron). The project structure is influenced by the default Electron example app and comes with the following files, among other:
 
 | Filename         | Description                                                                                                                                                                                                                              |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,5 +1,5 @@
 import { a } from "@react-spring/web";
-import PSPDFKit from "pspdfkit";
+import PSPDFKit from "@nutrient-sdk/viewer";
 import { Elm } from "./Main";
 
 let instance;
@@ -16,8 +16,8 @@ app.ports.configure.subscribe((data) => {
   const initialViewState = new PSPDFKit.ViewState(data.viewState);
   const config = { ...data, initialViewState };
 
-  PSPDFKit.load(config).then(async (pspdfkit) => {
-    instance = pspdfkit;
+  PSPDFKit.load(config).then(async (nutrient) => {
+    instance = nutrient;
   });
 });
 

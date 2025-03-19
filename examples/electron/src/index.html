@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>PSPDFKit for Electron Example App</title>
+    <title>Nutrient Electron SDK Example App</title>
 
     <style>
       html,
@@ -47,7 +47,7 @@
     <header></header>
     <div id="root"></div>
 
-    <script src="./pspdfkit.js"></script>
+    <script src="./nutrient-viewer.js"></script>
 
     <script type="module">
       import { dragAndDrop } from "./lib/drag-and-drop.js";
@@ -124,9 +124,9 @@
         const configuration = {
           document,
           container: "#root",
-          styleSheet: ["./pspdfkit.css"],
+          styleSheet: ["./nutrient.css"],
           // appName must match the license's bundle ID
-          appName: "pspdfkit-electron-example",
+          appName: "nutrient-electron-example",
           // Add when using a license key
           // licenseKey: "LICENSE KEY GOES HERE",
         };

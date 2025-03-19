@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using pspdfkit_aspnet_example.Models;
+using nutrient_aspnet_example.Models;
 
-namespace pspdfkit_aspnet_example.Controllers;
+namespace nutrient_aspnet_example.Controllers;
 
 public class HomeController : Controller
 {

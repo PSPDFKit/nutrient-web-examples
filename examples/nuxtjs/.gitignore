@@ -89,8 +89,8 @@ sw.*
 # Vim swap files
 *.swp
 
-public/js/pspdfkit.js
-public/js/pspdfkit-lib/*.*
+public/js/nutrient-viewer.js
+public/js/nutrient-viewer-lib
 
 .output
 .tool-versions

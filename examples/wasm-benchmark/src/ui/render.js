@@ -5,23 +5,21 @@ import "./index.css";
 import App from "./components/App";
 
 export default function render({
-  isWasm,
   tests,
   state,
   error,
-  pspdfkitScore,
-  loadTimeInPspdfkitScore,
+  nutrientScore,
+  loadTimeInNutrientScore,
   pdf,
   licenseKey,
 }) {
   ReactDOM.render(
     <App
-      isWasm={isWasm}
       tests={tests}
       state={state}
       error={error}
-      pspdfkitScore={pspdfkitScore}
-      loadTimeInPspdfkitScore={loadTimeInPspdfkitScore}
+      nutrientScore={nutrientScore}
+      loadTimeInNutrientScore={loadTimeInNutrientScore}
       pdf={pdf}
       licenseKey={licenseKey}
     />,

@@ -7,7 +7,7 @@
  * Nutrient Web SDK example component.
  */
 export default {
-  name: "PSPDFKit",
+  name: "Nutrient",
   /**
    * The component receives `pdfFile` as a prop, which is type of `String` and is required.
    */
@@ -17,12 +17,12 @@ export default {
       required: true,
     },
   },
-  PSPDFKit: null,
+  Nutrient: null,
   /**
    * We wait until the template has been rendered to load the document into the library.
    */
   mounted() {
-    this.loadPSPDFKit().then((instance) => {
+    this.loadNutrient().then((instance) => {
       this.$emit("loaded", instance);
     });
   },
@@ -32,18 +32,18 @@ export default {
   watch: {
     pdfFile(val) {
       if (val) {
-        this.loadPSPDFKit();
+        this.loadNutrient();
       }
     },
   },
   /**
-   * Our component has the `loadPSPDFKit` method. This unloads and cleans up the component and triggers document loading.
+   * Our component has the `loadNutrient` method. This unloads and cleans up the component and triggers document loading.
    */
   methods: {
-    async loadPSPDFKit() {
-      import("pspdfkit")
+    async loadNutrient() {
+      import("@nutrient-sdk/viewer")
         .then((PSPDFKit) => {
-          this.PSPDFKit = PSPDFKit;
+          this.Nutrient = PSPDFKit;
           PSPDFKit.unload(".pdf-container");
           return PSPDFKit.load({
             document: this.pdfFile,
