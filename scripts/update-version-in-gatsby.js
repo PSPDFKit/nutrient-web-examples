@@ -1,23 +1,23 @@
-const fs = require('node:fs')
-const path = require('node:path')
+const fs = require("node:fs");
+const path = require("node:path");
 
 const viewportTemplate = fs.readFileSync(
-  path.resolve('./examples/gatsbyjs/src/templates/Viewport.js'),
-  'utf8',
-)
+  path.resolve("./examples/gatsbyjs/src/templates/Viewport.js"),
+  "utf8",
+);
 
-const version = execSync('npm view @nutrient-sdk/viewer version')
+const version = execSync("npm view @nutrient-sdk/viewer version")
   .toString()
-  .trim()
+  .trim();
 
 const updatedViewportTemplate = viewportTemplate.replace(
   /pspdfkit-web@([0-9]+.[0-9]+.[0-9]+)?/g,
   `pspdfkit-web@${version}`,
-)
+);
 
 fs.writeFileSync(
-  path.resolve('./examples/gatsbyjs/src/templates/Viewport.js'),
+  path.resolve("./examples/gatsbyjs/src/templates/Viewport.js"),
   updatedViewportTemplate,
-)
+);
 
-console.log('Updated version in Gatsby example.')
+console.log("Updated version in Gatsby example.");
