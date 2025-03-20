@@ -14,16 +14,20 @@ ncp("./src", "./dist", (err) => {
 
   ncp("./config", "./dist/config");
 
-  ncp("./node_modules/pspdfkit/dist/", "./dist/scripts/vendor/", (err) => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
+  ncp(
+    "./node_modules/@nutrient-sdk/viewer/dist/",
+    "./dist/scripts/vendor/",
+    (err) => {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
 
-    ncp(
-      "./node_modules/workbox-sw/build/",
-      "./dist/scripts/vendor/workbox-sw/",
-    );
-    ncp("./node_modules/idb/lib/idb.js", "./dist/scripts/vendor/idb.js");
-  });
+      ncp(
+        "./node_modules/workbox-sw/build/",
+        "./dist/scripts/vendor/workbox-sw/",
+      );
+      ncp("./node_modules/idb/lib/idb.js", "./dist/scripts/vendor/idb.js");
+    },
+  );
 });

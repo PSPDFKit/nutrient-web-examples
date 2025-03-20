@@ -2,7 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-const PSPDFKit = require("pspdfkit");
+const NutrientViewer = require("@nutrient-sdk/viewer");
 
 const {
   documentExport,
@@ -13,7 +13,7 @@ const dragAndDrop = require("./lib/drag-and-drop");
 const makeToolbarItems = require("./lib/toolbar");
 
 /**
- * We store the `PSPDFKit.Instance` in this variable so we can access it from
+ * We store the `NutrientViewer.Instance` in this variable so we can access it from
  * everywhere.
  */
 let instance = null;
@@ -39,14 +39,14 @@ function createOnAnnotationsChange() {
 }
 
 /**
- * If there is an existing running instance of PSPDFKit, it is destroyed before
+ * If there is an existing running instance of Nutrient, it is destroyed before
  * a creating a new one.
  *
  * This process will make sure that the WebAssembly module is optimally reused.
  */
 async function load(document) {
   if (instance) {
-    PSPDFKit.unload(instance);
+    NutrientViewer.unload(instance);
     hasUnsavedAnnotations = false;
     instance = null;
   }
@@ -67,14 +67,14 @@ async function load(document) {
   );
 
   // Set up the configuration object. A custom style sheet is used to customize
-  // the look and feel of PSPDFKit.
+  // the look and feel of Nutrient.
   const configuration = {
     document,
     container: "#root",
-    styleSheets: ["./pspdfkit.css"],
+    styleSheets: ["./nutrient.css"],
   };
 
-  instance = await PSPDFKit.load(configuration);
+  instance = await NutrientViewer.load(configuration);
 
   instance.setToolbarItems(toolbarItems);
   instance.addEventListener("annotations.change", createOnAnnotationsChange());

@@ -1,9 +1,9 @@
 # Nutrient Web SDK Example – Webpack
 
-This example shows how to build a [PSPDFKit for Web](https://www.nutrient.io/web/) web application with
+This example shows how to build a [Nutrient Web SDK](https://www.nutrient.io/web/) web application with
 [webpack](https://webpack.js.org/).
 
-This example uses the Standalone version of [PSPDFKit for Web](https://www.nutrient.io/web/)
+This example uses the Standalone version of [Nutrient Web SDK](https://www.nutrient.io/web/)
 distributed as an npm package.
 
 ## Prerequisites
@@ -12,7 +12,7 @@ distributed as an npm package.
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -21,8 +21,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-webpack.git
-cd pspdfkit-web-example-webpack
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/webpack
 ```
 
 Install the project dependencies with `npm`:

@@ -3,7 +3,7 @@ import { clearAllTimings, isMobileOS, isWasmSupported } from "./utils";
 
 export function createBenchmark(pdf, licenseKey, conf) {
   // Factory to create our test suite. It will register all tests in the runner.
-  const isWasm = isWasmSupported() && !conf.disableWebAssembly;
+  const isWasm = isWasmSupported()
 
   const runner = createRunner(licenseKey);
 
@@ -95,10 +95,10 @@ export function createBenchmark(pdf, licenseKey, conf) {
     async () => {
       const instance = await prepareInstance();
 
-      const annotation = new window.PSPDFKit.Annotations.TextAnnotation({
+      const annotation = new window.NutrientViewer.Annotations.TextAnnotation({
         pageIndex: 0,
         text: { format: "plain", value: "test" },
-        boundingBox: new window.PSPDFKit.Geometry.Rect({
+        boundingBox: new window.NutrientViewer.Geometry.Rect({
           width: 200,
           height: 30,
         }),
@@ -215,6 +215,6 @@ export function createBenchmark(pdf, licenseKey, conf) {
 
   return {
     run: runner.run,
-    isWasm: isWasm,
+    isWasm,
   };
 }

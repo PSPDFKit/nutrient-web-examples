@@ -6,19 +6,18 @@ import Introduction from "./Introduction";
 class App extends Component {
   render() {
     const {
-      isWasm,
       error,
       state,
       tests,
-      pspdfkitScore,
-      loadTimeInPspdfkitScore,
+      nutrientScore,
+      loadTimeInNutrientScore,
       pdf,
       licenseKey,
     } = this.props;
 
     return (
       <div className="App">
-        <Introduction isWasm={isWasm} />
+        <Introduction />
         {error ? (
           <div className="Error">
             An error occurred: {error.message}. Please{" "}
@@ -29,11 +28,10 @@ class App extends Component {
           </div>
         ) : (
           <Benchmark
-            isWasm={isWasm}
             state={state}
             tests={tests}
-            pspdfkitScore={pspdfkitScore}
-            loadTimeInPspdfkitScore={loadTimeInPspdfkitScore}
+            nutrientScore={nutrientScore}
+            loadTimeInNutrientScore={loadTimeInNutrientScore}
             pdf={pdf}
             licenseKey={licenseKey}
           />

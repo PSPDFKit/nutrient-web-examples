@@ -1,5 +1,5 @@
 node_modules
 release-builds
-src/pspdfkit-lib
-src/pspdfkit.js
+src/nutrient-viewer-lib
+src/nutrient-viewer.js
 dist

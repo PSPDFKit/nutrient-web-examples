@@ -4,28 +4,28 @@
   </a>
 </center>
 
-# WebAssembly Benchmark by PSPDFKit
+# WebAssembly Benchmark by Nutrient
 
-A Benchmark for WebAssembly (Wasm, WA) that uses [PSPDFKit for Web](https://www.nutrient.io/web/) Standalone.
+A Benchmark for WebAssembly (Wasm, WA) that uses [Nutrient Web SDK](https://www.nutrient.io/web/) Standalone.
 
-The rendering engine of [PSPDFKit for Web](https://www.nutrient.io/web/) Standalone is written in C/C++ and compiled to Wasm.
+The rendering engine of [Nutrient Web SDK](https://www.nutrient.io/web/) Standalone is written in C/C++ and compiled to Wasm.
 
 Get your score in the [live demo](http://iswebassemblyfastyet.com/) and learn more in our [blog post](https://www.nutrient.io/blog/2018/a-real-world-webassembly-benchmark/).
 
 ## Prerequisites
 
 - [Node.js](http://nodejs.org/) (with npm or Yarn)
-- A PSPDFKit for Web license. If you don't already have one
+- A Nutrient Web SDK license. If you don't already have one
   you can [request a free trial here](https://www.nutrient.io/try/).
 
 ## Getting Started
 
-Install the `pspdfkit` npm package and move all contents to the vendor directory.
+Install the `@nutrient-sdk/viewer` npm package and move all contents to the vendor directory.
 
 ```bash
-npm install --save pspdfkit
+npm install --save @nutrient-sdk/viewer
 mkdir -p public/vendor
-cp -R node_modules/pspdfkit/dist public/vendor/pspdfkit
+cp -R node_modules/@nutrient-sdk/viewer/dist public/vendor/nutrient
 ```
 
 Bootstrap the project by installing all the other dependencies.
@@ -36,7 +36,7 @@ npm install
 
 ## Running the Benchmark
 
-Now that PSPDFKit for Web is installed, you need to copy your product (license) key to the `public/license-key` file.
+Now that Nutrient Web SDK is installed, you need to copy your product (license) key to the `public/license-key` file.
 
 We can now run the benchmark server:
 
@@ -60,13 +60,13 @@ Where `PUBLIC_URL` must be set according to the final URL, where the application
 
 The following optimizations can be enabled via URL parameter:
 
-- `disableWebAssemblyStreaming`, `true` by default
+- `disableWebAssemblyStreaming`, `false` by default
 - `standaloneInstancesPoolSize`, `0` by default
 - `runsScaleFactor`, scales the number of test runs, `1` by default
 
 ## What's in This Repository
 
-This repository contains files used to build the [PSPDFKit WebAssembly benchmark](http://iswebassemblyfastyet.com/).
+This repository contains files used to build the [Nutrient WebAssembly benchmark](http://iswebassemblyfastyet.com/).
 
 The source files are structured into two different categories:
 

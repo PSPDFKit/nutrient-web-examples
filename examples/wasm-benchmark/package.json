@@ -1,11 +1,12 @@
 {
-  "name": "pspdfkit-webassembly-benchmark",
+  "name": "nutrient-webassembly-benchmark",
   "version": "1.0.0",
   "private": true,
   "engines": {
     "npm": ">=8.3.0"
   },
   "dependencies": {
+    "@nutrient-sdk/viewer": "^1.1.0",
     "details-polyfill": "^1.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -21,7 +22,6 @@
     "Firefox ESR",
     "last 2 Chrome versions",
     "last 2 firefox versions",
-    "Edge 18",
     "last 2 safari versions",
     "last 2 and_chr versions",
     "last 2 ios_saf versions",

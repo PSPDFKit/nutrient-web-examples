@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>PSPDFKit for Electron Example App</title>
+    <title>Nutrient Electron SDK Example App</title>
 
     <style>
       html,
@@ -47,7 +47,7 @@
     <header></header>
     <div id="root"></div>
 
-    <script src="./pspdfkit.js"></script>
+    <script src="./nutrient-viewer.js"></script>
 
     <script type="module">
       import { dragAndDrop } from "./lib/drag-and-drop.js";
@@ -63,7 +63,7 @@
       );
 
       /**
-       * We store the `PSPDFKit.Instance` in this variable so we can access it from
+       * We store the `NutrientViewer.Instance` in this variable so we can access it from
        * everywhere.
        */
       let instance = null;
@@ -92,21 +92,21 @@
       }
 
       /**
-       * If there is an existing running instance of PSPDFKit, it is destroyed before
+       * If there is an existing running instance of Nutrient, it is destroyed before
        * a creating a new one.
        *
        * This process will make sure that the WebAssembly module is optimally reused.
        */
       async function load(document) {
         if (instance) {
-          PSPDFKit.unload(instance);
+          NutrientViewer.unload(instance);
           hasUnsavedAnnotations = false;
           instance = null;
         }
 
         // Create our custom toolbar
         const toolbarItems = makeToolbarItems(
-          PSPDFKit.defaultToolbarItems,
+          NutrientViewer.defaultToolbarItems,
           function exportFile() {
             documentExport(instance, () => (hasUnsavedAnnotations = false));
           },
@@ -120,18 +120,18 @@
         );
 
         // Set up the configuration object. A custom style sheet is used to customize
-        // the look and feel of PSPDFKit.
+        // the look and feel of Nutrient.
         const configuration = {
           document,
           container: "#root",
-          styleSheet: ["./pspdfkit.css"],
+          styleSheet: ["./nutrient.css"],
           // appName must match the license's bundle ID
-          appName: "pspdfkit-electron-example",
+          appName: "nutrient-electron-example",
           // Add when using a license key
           // licenseKey: "LICENSE KEY GOES HERE",
         };
 
-        instance = await PSPDFKit.load(configuration);
+        instance = await NutrientViewer.load(configuration);
 
         instance.setToolbarItems(toolbarItems);
         instance.addEventListener(

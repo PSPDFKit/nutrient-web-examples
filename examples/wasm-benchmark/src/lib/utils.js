@@ -1,7 +1,7 @@
 // This function takes a `duration` and subtracts the time to load chunks
 // (Wasm artifacts) which otherwise would influence the final benchmark
 // result.
-const ignoredResourceRegex = /.*pspdfkit.w?asm.*/;
+const ignoredResourceRegex = /.*nutrient-viewer.w?asm.*/;
 
 export function cleanupMeasurement(duration) {
   const ignoredResources = performance
@@ -50,7 +50,7 @@ export function median(arr) {
   return (arr[half - 1] + arr[half]) / 2.0;
 }
 
-// Parses the url to retrieve the configuration options for PSPDFKit for Web.
+// Parses the url to retrieve the configuration options for Nutrient Web SDK.
 export function getConfigOptionsFromURL() {
   const params = {};
 
@@ -66,10 +66,9 @@ export function getConfigOptionsFromURL() {
   );
 
   return {
-    pspdfkitConfig: {
-      disableWebAssembly: params.disableWebAssembly === "true",
+    nutrientConfig: {
       disableWebAssemblyStreaming:
-        params.disableWebAssemblyStreaming !== "false",
+      params.disableWebAssemblyStreaming !== undefined && params.disableWebAssemblyStreaming !== "false",
       standaloneInstancesPoolSize: Number.isNaN(standaloneInstancesPoolSize)
         ? 0
         : standaloneInstancesPoolSize,
@@ -78,7 +77,7 @@ export function getConfigOptionsFromURL() {
   };
 }
 
-// The same Wasm test that is used in PSPDFKit for Web
+// The same Wasm test that is used in Nutrient Web SDK
 export function isWasmSupported() {
   try {
     // iOS ~11.2.2 has a known Wasm problem.
@@ -99,7 +98,7 @@ export function isWasmSupported() {
   );
 }
 
-// We don't want to show the final PSPDFKit for Web view if we're on a mobile
+// We don't want to show the final Nutrient Web SDK view if we're on a mobile
 // browser and only have limited resources available.
 export function isMobileOS() {
   const { userAgent } = navigator;

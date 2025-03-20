@@ -1,7 +1,2 @@
 node_modules
-force-app/main/default/staticresources/PSPDFKit_lib
-force-app/main/default/staticresources/PSPDFKit_lib.zip
-force-app/main/default/staticresources/PSPDFKit_core
-force-app/main/default/staticresources/PSPDFKit_core.zip
-force-app/main/default/staticresources/PSPDFKit.js
 .DS_Store

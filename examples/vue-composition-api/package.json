@@ -11,7 +11,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "^1.0.0",
+    "@nutrient-sdk/viewer": "1.1.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {

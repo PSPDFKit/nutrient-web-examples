@@ -12,11 +12,10 @@ const state = {
     // We set the first test to running so we avoid a state where all is idle.
     "Test-Initialization": { state: "running", progress: 0 },
   },
-  isWasm: true,
   error: null,
   state: "running",
-  pspdfkitScore: 0,
-  loadTimeInPspdfkitScore: 0,
+  nutrientScore: 0,
+  loadTimeInNutrientScore: 0,
   document: null,
   licenseKey: null,
 };
@@ -31,22 +30,18 @@ render(state);
       await fetch("./license-key").then((response) => response.text()),
     ]);
 
-    const { pspdfkitConfig } = getConfigOptionsFromURL();
+    const { nutrientConfig } = getConfigOptionsFromURL();
 
-    const benchmark = createBenchmark(pdf, licenseKey, pspdfkitConfig);
+    const benchmark = createBenchmark(pdf, licenseKey, nutrientConfig);
 
     state.pdf = pdf;
     state.licenseKey = licenseKey;
-    state.isWasm = benchmark.isWasm;
     render(state);
 
     // We pre-fetch some assets in order to not affect the benchmark results.
     const preFetchAssets = [
-      !state.isWasm && "./vendor/pspdfkit/pspdfkit-lib/pspdfkit.asm.js",
-      !state.isWasm && "./vendor/pspdfkit/pspdfkit-lib/pspdfkit.asm.js.mem",
-
-      state.isWasm && "./vendor/pspdfkit/pspdfkit-lib/pspdfkit.wasm.js",
-      state.isWasm && "./vendor/pspdfkit/pspdfkit-lib/pspdfkit.wasm",
+       "./vendor/@nutrient-sdk/viewer/nutrient-viewer-lib/nutrient-viewer.wasm.js",
+       "./vendor/@nutrient-sdk/viewer/nutrient-viewer-lib/nutrient-viewer.wasm",
     ]
       .filter(Boolean)
       .map((asset) => fetch(asset));
@@ -59,9 +54,9 @@ render(state);
     });
 
     state.state = "done";
-    state.pspdfkitScore = Math.round(score.load + score.rest);
-    state.loadTimeInPspdfkitScore = Math.round(
-      (100 * score.load) / state.pspdfkitScore,
+    state.nutrientScore = Math.round(score.load + score.rest);
+    state.loadTimeInNutrientScore = Math.round(
+      (100 * score.load) / state.nutrientScore,
     );
     render(state);
 
@@ -71,16 +66,16 @@ render(state);
         "event",
         "wasmbench",
         "score",
-        state.isWasm ? "wasm-score" : "asmjs-score",
-        state.pspdfkitScore,
+        "wasm-score",
+        state.nutrientScore,
       );
       window.ga(
         "send",
         "event",
         "wasmbench",
         "ratio",
-        state.isWasm ? "wasm-ratio" : "asmjs-ratio",
-        state.loadTimeInPspdfkitScore,
+        "wasm-ratio",
+        state.loadTimeInNutrientScore,
       );
     }
   } catch (e) {

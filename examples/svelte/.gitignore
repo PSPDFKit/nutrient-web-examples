@@ -1,5 +1,5 @@
 /node_modules/
 /public/build/
-/public/pspdfkit.js
+/public/nutrient-viewer.js
+/public/nutrient-viewer-lib
 .DS_Store
-/public/pspdfkit-lib

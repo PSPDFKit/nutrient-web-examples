@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using PSPDFKit_BlazorServer.Data;
+using Nutrient_BlazorServer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

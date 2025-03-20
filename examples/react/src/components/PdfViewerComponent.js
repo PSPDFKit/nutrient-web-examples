@@ -5,21 +5,21 @@ export default function PdfViewerComponent(props) {
 
   useEffect(() => {
     const container = containerRef.current;
-    let PSPDFKit;
+    let NutrientViewer;
 
     (async () => {
-      PSPDFKit = await import("pspdfkit");
-      await PSPDFKit.load({
-        // Container where PSPDFKit should be mounted.
+      NutrientViewer = await import("@nutrient-sdk/viewer");
+      await NutrientViewer.load({
+        // Container where Nutrient should be mounted.
         container,
         // The document to open.
         document: props.document,
-        // Use the public directory URL as a base URL. PSPDFKit will download its library assets from here.
+        // Use the public directory URL as a base URL. Nutrient will download its library assets from here.
         baseUrl: `${window.location.protocol}//${window.location.host}/${process.env.PUBLIC_URL}`,
       });
     })();
 
-    return () => PSPDFKit?.unload(container);
+    return () => NutrientViewer?.unload(container);
   }, [props.document]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "100vh" }} />;

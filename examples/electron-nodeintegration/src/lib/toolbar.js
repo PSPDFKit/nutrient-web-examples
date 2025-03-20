@@ -1,4 +1,4 @@
-const PSPDFKit = require("pspdfkit");
+const NutrientViewer = require("@nutrient-sdk/viewer");
 
 /**
  * Prepares the toolbar for our PDF viewer. This will add two additional buttons to import and
@@ -6,7 +6,7 @@ const PSPDFKit = require("pspdfkit");
  * This will also enable the `layout-config` toolbar module.
  */
 module.exports = function makeToolbarItems(exportFile, importFile) {
-  const toolbarItems = PSPDFKit.defaultToolbarItems
+  const toolbarItems = NutrientViewer.defaultToolbarItems
     // Remove built-in export PDF button.
     .filter((item) => item.type !== "export-pdf");
 

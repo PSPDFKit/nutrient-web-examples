@@ -1,8 +1,8 @@
 {
-  "name": "pspdfkit-web-example-vue",
+  "name": "nutrient-web-example-vue",
   "version": "1.0.0",
   "scripts": {
-    "verify-installation": "mkdir -p public/js && node scripts/verify-install.js && node scripts/copy-pspdfkit-files.js",
+    "verify-installation": "mkdir -p public/js && node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "dev": "npm run verify-installation && vite",
     "build": "npm run verify-installation && vite build",
@@ -10,16 +10,16 @@
     "start:e2e": "npm run dev -- --port 3000"
   },
   "dependencies": {
-    "pspdfkit": "2024.8.1",
+    "@nutrient-sdk/viewer": "1.1.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.0",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@vue/compiler-sfc": "^3.5.6",
     "eslint": "^9.15.0",
     "eslint-plugin-vue": "^9.31.0",
     "ncp": "^2.0.0",
-    "vite": "^5.4.11"
+    "vite": "^6.2.2"
   },
   "eslintConfig": {
     "root": true,

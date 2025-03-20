@@ -21,7 +21,7 @@ async function documentImport(onPicked) {
 }
 
 /**
- * Use the native document picker to save the resulting PDF file of the given `PSPDFKit.Instance`.
+ * Use the native document picker to save the resulting PDF file of the given `NutrientViewer.Instance`.
  *
  * Will invoke `onDone`, when the operation is complete.
  */

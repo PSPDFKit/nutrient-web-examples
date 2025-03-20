@@ -1,10 +1,10 @@
-import PSPDFKit from "pspdfkit";
+import NutrientViewer from "@nutrient-sdk/viewer";
 
 let instance: unknown = null;
 
 function load(document: string) {
   console.log(`Loading ${document}...`);
-  PSPDFKit.load({
+  NutrientViewer.load({
     document,
     container: ".container",
     baseUrl: "",
@@ -14,7 +14,7 @@ function load(document: string) {
         title: "Random annotation",
         className: "randomAnnotation",
         onPress: () => {
-          if (!(instance instanceof PSPDFKit.Instance)) return;
+          if (!(instance instanceof NutrientViewer.Instance)) return;
 
           // Get page 0 dimensions
           const { width, height } = instance.pageInfoForIndex(0);
@@ -22,23 +22,23 @@ function load(document: string) {
           // and dimensions
           const left =
             Math.random() *
-            (width - PSPDFKit.Options.MIN_SHAPE_ANNOTATION_SIZE);
+            (width - NutrientViewer.Options.MIN_SHAPE_ANNOTATION_SIZE);
           const top =
             Math.random() *
-            (height - PSPDFKit.Options.MIN_SHAPE_ANNOTATION_SIZE);
+            (height - NutrientViewer.Options.MIN_SHAPE_ANNOTATION_SIZE);
           const annotationProperties = {
-            boundingBox: new PSPDFKit.Geometry.Rect({
+            boundingBox: new NutrientViewer.Geometry.Rect({
               left,
               top,
               width: Math.random() * (width - left),
               height: Math.random() * (height - top),
             }),
-            strokeColor: new PSPDFKit.Color({
+            strokeColor: new NutrientViewer.Color({
               r: Math.floor(Math.random() * 255),
               g: Math.floor(Math.random() * 255),
               b: Math.floor(Math.random() * 255),
             }),
-            fillColor: new PSPDFKit.Color({
+            fillColor: new NutrientViewer.Color({
               r: Math.floor(Math.random() * 255),
               g: Math.floor(Math.random() * 255),
               b: Math.floor(Math.random() * 255),
@@ -49,8 +49,8 @@ function load(document: string) {
             strokeWidth: Math.random() * 30,
           };
           const annotationClass = [
-            PSPDFKit.Annotations.RectangleAnnotation,
-            PSPDFKit.Annotations.EllipseAnnotation,
+            NutrientViewer.Annotations.RectangleAnnotation,
+            NutrientViewer.Annotations.EllipseAnnotation,
           ][Math.floor(Math.random() * 2)];
 
           instance.create(
@@ -84,7 +84,7 @@ document.addEventListener("change", (event: HTMLInputEvent) => {
     event.target.className === "chooseFile" &&
     event.target.files instanceof FileList
   ) {
-    PSPDFKit.unload(".container");
+    NutrientViewer.unload(".container");
 
     if (objectUrl) {
       URL.revokeObjectURL(objectUrl);

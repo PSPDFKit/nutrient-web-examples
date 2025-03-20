@@ -1,6 +1,6 @@
 {
-  "name": "pspdfkit-web-example-webpack",
-  "description": "Standalone and offline PDF viewer web application built with PSPDFKit for Web and Webpack",
+  "name": "nutrient-web-example-webpack",
+  "description": "Standalone and offline PDF viewer web application built with Nutrient Web SDK and Webpack",
   "version": "1.0.0",
   "main": "index.js",
   "keywords": [
@@ -15,13 +15,13 @@
     "offline",
     "indexeddb"
   ],
-  "author": "PSPDFKit (https://www.nutrient.io)",
+  "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io/web",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
   "dependencies": {
+    "@nutrient-sdk/viewer": "1.1.0",
     "drag-drop": "^7.2.0",
-    "pspdfkit": "2024.8.1",
     "serve": "^14.2.4"
   },
   "devDependencies": {

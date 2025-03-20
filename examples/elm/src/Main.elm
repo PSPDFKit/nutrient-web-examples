@@ -55,7 +55,7 @@ init flags =
     let
         model =
             { document = "example.pdf"
-            , container = "#PSPDFKitContainer"
+            , container = "#NutrientContainer"
             , annotations = []
             , viewState =
                 { currentPageIndex = 1
@@ -123,7 +123,7 @@ port annotate : Model -> Cmd msg
 view model =
     div
         []
-        [ div [ id "PSPDFKitContainer", style "height" "90vh" ] []
+        [ div [ id "NutrientContainer", style "height" "90vh" ] []
         , footer [ style "text-align" "center", style "line-height" "10vh" ]
             [ button [ onClick CreateAnnotation ] [ text "Create Annotation" ]
             ]

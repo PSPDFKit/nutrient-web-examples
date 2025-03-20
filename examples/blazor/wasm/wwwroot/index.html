@@ -6,11 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>PSPDFKit Blazor WASM example</title>
+    <title>Nutrient Blazor WASM example</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
-    <link href="PSPDFKit_BlazorWASM.styles.css" rel="stylesheet" />
+    <link href="Nutrient_BlazorWASM.styles.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -23,11 +23,11 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
 
-    <script src="pspdfkit/pspdfkit.js"></script>
+    <script src="nutrient/nutrient-viewer.js"></script>
 
     <script>
       function loadPDF(container, document) {
-        PSPDFKit.load({
+        NutrientViewer.load({
           container,
           document,
         });

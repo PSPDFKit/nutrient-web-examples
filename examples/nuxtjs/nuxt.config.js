@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "pspdfkit-nuxt-example",
+    title: "nutrient-nuxt-example",
     htmlAttrs: {
       lang: "en",
     },
@@ -31,4 +31,6 @@ export default defineNuxtConfig({
 
   // Target Configuration: https://go.nuxtjs.dev/config-target
   target: "public",
+
+  compatibilityDate: "2025-03-19",
 });

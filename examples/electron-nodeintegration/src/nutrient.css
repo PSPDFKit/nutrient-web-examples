@@ -1,10 +1,10 @@
 /**
- * You can use this style sheet to theme PSPDFKit for Electron.
- * https://www.nutrient.io/blog/theming-pspdfkit-for-web/
+ * You can use this style sheet to theme Nutrient Electron SDK.
+ * https://www.nutrient.io/blog/2018/theming-pspdfkit-for-web/
  */
 
 .PSPDFKit-Toolbar {
-  /* Allow to drag the electron app using the whole PSPDFKit toolbar */
+  /* Allow to drag the electron app using the whole Nutrient toolbar */
   -webkit-app-region: drag;
 }
 

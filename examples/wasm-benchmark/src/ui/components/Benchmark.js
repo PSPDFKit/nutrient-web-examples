@@ -2,17 +2,16 @@ import React from "react";
 
 import { isMobileOS } from "../../lib/utils";
 import Footer from "./Footer";
-import PSPDFKit from "./PSPDFKit";
+import Nutrient from "./Nutrient";
 import Test from "./Test";
 
 export default class Benchmark extends React.Component {
   render() {
     const {
-      isWasm,
       state,
       tests,
-      pspdfkitScore,
-      loadTimeInPspdfkitScore,
+      nutrientScore,
+      loadTimeInNutrientScore,
       pdf,
       licenseKey,
     } = this.props;
@@ -81,7 +80,7 @@ export default class Benchmark extends React.Component {
                 InstantJSON, and to XFDF.
               </p>
               <p>
-                PSPDFKit developed a JSON spec for PDF annotations and form
+                Nutrient developed a JSON spec for PDF annotations and form
                 fields called{" "}
                 <a
                   href="https://www.nutrient.io/guides/web/importing-exporting/instant-json/"
@@ -90,11 +89,11 @@ export default class Benchmark extends React.Component {
                 >
                   InstantJSON
                 </a>
-                . This is a modern and clean JSON spec that all PSPDFKit
+                . This is a modern and clean JSON spec that all Nutrient
                 products use to import and export metadata.
               </p>
               <p>
-                PSPDFKit also comes with full{" "}
+                Nutrient also comes with full{" "}
                 <a
                   href="https://www.nutrient.io/guides/web/current/importing-exporting/xfdf-support/"
                   target="_blank"
@@ -131,13 +130,8 @@ export default class Benchmark extends React.Component {
         <Test
           id="Test-Initialization"
           data={tests["Test-Initialization"]}
-          heading={
-            isWasm
-              ? "Initialization: compilation and instantiation of the Wasm module"
-              : "Initialization of PSPDFKit"
-          }
+          heading="Initialization: compilation and instantiation of the Wasm module"
           description={
-            isWasm ? (
               <React.Fragment>
                 <p>
                   The initialization process consists of three steps:
@@ -162,12 +156,6 @@ export default class Benchmark extends React.Component {
                   slows down tests that run afterwards.
                 </p>
               </React.Fragment>
-            ) : (
-              <p>
-                PSPDFKit loads the core PDF engine that is compiled to a variant
-                of asm.js.
-              </p>
-            )
           }
         />
 
@@ -188,13 +176,10 @@ export default class Benchmark extends React.Component {
             {state === "done" && (
               <div className="Result-score">
                 <div className="Score">
-                  {isWasm && (
-                    <div className="Score-label">PSPDFKit Wasm Score</div>
+                  { (
+                    <div className="Score-label">Nutrient Wasm Score</div>
                   )}
-                  {!isWasm && (
-                    <div className="Score-label">PSPDFKit JavaScript Score</div>
-                  )}
-                  <div className="Score-value">{pspdfkitScore}</div>
+                  <div className="Score-value">{nutrientScore}</div>
                 </div>
               </div>
             )}
@@ -215,12 +200,12 @@ export default class Benchmark extends React.Component {
               <div className="LoadTime">
                 <div
                   className="LoadTime-bar"
-                  style={{ width: `${loadTimeInPspdfkitScore}%` }}
+                  style={{ width: `${loadTimeInNutrientScore}%` }}
                 />
               </div>
               <p>
                 For this browser, compilation/instantiation time accounts for{" "}
-                {loadTimeInPspdfkitScore}% of the total time.
+                {loadTimeInNutrientScore}% of the total time.
               </p>
             </div>
           )}
@@ -229,13 +214,13 @@ export default class Benchmark extends React.Component {
         {state === "done" && (
           <div className="ResultCTA">
             <a href="https://www.nutrient.io/web/" className="Button">
-              Learn more about PSPDFKit for Web
+              Learn more about Nutrient Web SDK
             </a>
           </div>
         )}
 
         {state === "done" && !isMobileOS() && (
-          <PSPDFKit pdf={pdf} licenseKey={licenseKey} isWasm={isWasm} />
+          <Nutrient pdf={pdf} licenseKey={licenseKey} />
         )}
 
         <Footer />

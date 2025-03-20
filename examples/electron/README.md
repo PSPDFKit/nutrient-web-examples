@@ -1,6 +1,6 @@
-# PSPDFKit for Electron Example App
+# Nutrient Electron Example App
 
-This example shows how to build a [PSPDFKit for Electron](https://www.nutrient.io/electron/) application with
+This example shows how to build a [Nutrient Electron](https://www.nutrient.io/electron/) application with
 [Electron](https://electronjs.org/).
 
 This example uses context isolation, with node integration disabled. If you're looking for an example with node integration enabled, you can switch to the [`nodeintegration` branch](https://github.com/PSPDFKit/pspdfkit-electron-example/tree/nodeintegration).
@@ -14,7 +14,7 @@ This example uses context isolation, with node integration disabled. If you're l
 The example will work out of the box in demo mode, when no license key is passed. However, if used with a license key, we need to make sure that the corresponding bundle ID is passed in the `electronAppName` property of the configuration object passed to `PSPDFKit.load()` in `src/index.html`:
 
 ```js
-PSPDFKit.load({
+NutrientViewer.load({
   // other options
   licenseKey: "LICENSE KEY GOES HERE",
   electronAppName: "BUNDLE ID GOES HERE",
@@ -30,8 +30,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-electron-example.git
-cd pspdfkit-electron-example
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/electron
 ```
 
 Install the project dependencies with `npm`:
@@ -61,7 +61,7 @@ mainWindow.webContents.openDevTools();
 
 ## What's in This Repository
 
-This repository contains an example integration of [PSPDFKit for Electron](https://www.nutrient.io/electron). The project structure is influenced by the default Electron example app and comes with the following files, among other:
+This repository contains an example integration of [Nutrient Electron](https://www.nutrient.io/electron). The project structure is influenced by the default Electron example app and comes with the following files, among other:
 
 | Filename         | Description                                                                                                                                                                                                                              |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -10,7 +10,7 @@ This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/w
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -19,8 +19,8 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-web-example-elm.git
-cd pspdfkit-web-example-elm
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/elm
 ```
 
 Install the project dependencies with `npm`:

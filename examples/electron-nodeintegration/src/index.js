@@ -14,15 +14,15 @@ const remoteMain = require("@electron/remote/main");
 remoteMain.initialize();
 
 // Make sure to enable access to the local file system. This is required
-// in order to load PDF files and PSPDFKit dependencies from the local
+// in order to load PDF files and Nutrient dependencies from the local
 // file system.
 electron.protocol.registerSchemesAsPrivileged([
   { scheme: "file", privileges: { secure: true, standard: true } },
 ]);
 
-// Output a readable error message, when the PSPDFKit for Electron dependency is
+// Output a readable error message, when the Nutrient Electron SDK dependency is
 // missing.
-require("./lib/require-pspdfkit");
+require("./lib/require-nutrient");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

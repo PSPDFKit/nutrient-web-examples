@@ -1,4 +1,4 @@
-# PSPDFKit Web Example – ASP.NET
+# Nutrient Web SDK Example – ASP.NET
 
 This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/web/) into an ASP.NET backend app.
 
@@ -11,7 +11,7 @@ This example demonstrates both Standalone and Server backend.
 
 ## Support, Issues and License Questions
 
-PSPDFKit offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+Nutrient Web SDK offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
 
 Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
 
@@ -20,17 +20,17 @@ Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're 
 Clone the repo:
 
 ```bash
-git clone https://github.com/PSPDFKit/pspdfkit-server-example-asp-net.git
-cd pspdfkit-server-example-asp-net
+git clone https://github.com/PSPDFKit/nutrient-web-examples.git
+cd nutrient-web-examples/examples/asp-net
 ```
 
 If Visual Studio informs you that some packages are missing then click on the "Restore" on the right.
 
 ## Standalone
 
-After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the dist directory in `/wwwroot/lib/pspdfkit/`.
+After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the dist directory in `/wwwroot/lib/nutrient/`.
 
-Make sure your `/wwwroot/lib/pspdfkit/` folder contains the file `pspdfkit.js` and a `pspdfkit-lib` directory with library assets.
+Make sure your `/wwwroot/lib/nutrient/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
 You can then build and run the example using `dotnet watch run` from the root folder.
 

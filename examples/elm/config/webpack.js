@@ -27,8 +27,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "./node_modules/pspdfkit/dist/pspdfkit-lib",
-          to: "./pspdfkit-lib",
+          from: "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+          to: "./nutrient-viewer-lib",
         },
         {
           from: "./assets/example.pdf",
@@ -37,7 +37,6 @@ module.exports = {
       ],
     }),
   ],
-
   devServer: {
     port: 3000,
   },
