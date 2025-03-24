@@ -32,7 +32,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `cd ${process.env.SERVER_DIR} && npm run start:e2e`,
+    command: `cd ${process.env.SERVER_DIR} && npm run e2e-tests`,
     url: "http://localhost:3000",
     reuseExistingServer: true,
   },
