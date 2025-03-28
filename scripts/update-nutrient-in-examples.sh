@@ -15,11 +15,17 @@ upgrade_npm_in_example() {
   echo -e "\n${Green}Upgrading npm in ${Yellow}${directory}${Green} example${NoColor}"
 
   if [ -f "pnpm-lock.yaml" ]; then
-    pnpm install @nutrient-sdk/viewer@latest --save --save-exact
+    if [[ "$directory" != "salesforce" ]]; then
+      pnpm install @nutrient-sdk/viewer@latest --save --save-exact
+    fi
+
     pnpm install
     pnpm audit fix --audit-level=none
   elif [ -f "package-lock.json" ]; then
-    npm install @nutrient-sdk/viewer@latest --save --save-exact
+    if [[ "$directory" != "salesforce" ]]; then
+      npm install @nutrient-sdk/viewer@latest --save --save-exact
+    fi
+
     npm install
     npm audit fix --package-lock-only --audit-level=none
   fi
