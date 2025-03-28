@@ -22,8 +22,13 @@
     "npm-run-all2": "^7.0.2",
     "rollup-plugin-copy": "^3.5.0",
     "typescript": "~5.7.3",
-    "vite": "^6.2.2",
+    "vite": "^6.2.3",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.8"
+  },
+  "pnpm": {
+    "overrides": {
+      "@babel/helpers": "^7.26.10"
+    }
   }
 }
