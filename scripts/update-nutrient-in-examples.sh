@@ -14,11 +14,15 @@ upgrade_npm_in_example() {
 
   echo -e "\n${Green}Upgrading npm in ${Yellow}${directory}${Green} example${NoColor}"
 
-  npm install @nutrient-sdk/viewer@latest --save --save-exact
-
-  npm install
-
-  npm audit fix --package-lock-only --audit-level=none
+  if [ -f "pnpm-lock.yaml" ]; then
+    pnpm install @nutrient-sdk/viewer@latest --save --save-exact
+    pnpm install
+    pnpm audit fix --audit-level=none
+  elif [ -f "package-lock.json" ]; then
+    npm install @nutrient-sdk/viewer@latest --save --save-exact
+    npm install
+    npm audit fix --package-lock-only --audit-level=none
+  fi
 
   popd > /dev/null
 }
