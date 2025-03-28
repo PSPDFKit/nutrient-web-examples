@@ -28,16 +28,17 @@ upgrade_npm_in_example() {
 }
 
 upgrade_version_in_gatsbyjs() {
-  node ./script/update-version-in-gatsby.js
+  node ./scripts/update-version-in-gatsby.js
 }
 
 upgrade_version_in_salesforce() {
-  node ./script/update-version-in-salesforce.js
+  node ./scripts/update-version-in-salesforce.js
 }
 
 upgrade_npm_in_example "webpack"
 upgrade_npm_in_example "react"
 upgrade_npm_in_example "vue"
+upgrade_npm_in_example "vue-composition-api"
 upgrade_npm_in_example "pwa"
 upgrade_npm_in_example "electron"
 upgrade_npm_in_example "typescript"
