@@ -21,6 +21,6 @@
   },
   "overrides": {
     "cross-spawn": "^7.0.5",
-    "vite": "^6.2.4"
+    "vite": "^6.2.6"
   }
 }
