@@ -7,7 +7,9 @@ const viewportTemplate = fs.readFileSync(
   "utf8"
 );
 
-const version = execSync("npm view @nutrient-sdk/viewer version").toString().trim();
+const version = execSync("npm view @nutrient-sdk/viewer version")
+  .toString()
+  .trim();
 
 const updatedViewportTemplate = viewportTemplate.replace(
   /pspdfkit-web@([0-9]+.[0-9]+.[0-9]+)?/g,
