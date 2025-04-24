@@ -18,7 +18,7 @@ const updatedViewportTemplate = viewportTemplate.replace(
 
 fs.writeFileSync(
   path.resolve("./examples/gatsbyjs/src/templates/Viewport.js"),
-  updatedViewportTemplate
+  updatedViewportTemplate,
 );
 
 console.log("Updated version in Gatsby example.");
