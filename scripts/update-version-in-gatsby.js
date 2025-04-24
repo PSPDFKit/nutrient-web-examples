@@ -4,7 +4,7 @@ const { execSync } = require("child_process");
 
 const viewportTemplate = fs.readFileSync(
   path.resolve("./examples/gatsbyjs/src/templates/Viewport.js"),
-  "utf8"
+  "utf8",
 );
 
 const version = execSync("npm view @nutrient-sdk/viewer version")
@@ -13,7 +13,7 @@ const version = execSync("npm view @nutrient-sdk/viewer version")
 
 const updatedViewportTemplate = viewportTemplate.replace(
   /pspdfkit-web@([0-9]+.[0-9]+.[0-9]+)?/g,
-  `pspdfkit-web@${version}`
+  `pspdfkit-web@${version}`,
 );
 
 fs.writeFileSync(
