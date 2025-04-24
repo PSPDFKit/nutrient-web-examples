@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { execSync } = require("child_process");
+const { execSync } = require("node:child_process");
 
 const viewportTemplate = fs.readFileSync(
   path.resolve("./examples/gatsbyjs/src/templates/Viewport.js"),
