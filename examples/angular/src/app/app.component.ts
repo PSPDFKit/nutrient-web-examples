@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
 import NutrientViewer from "@nutrient-sdk/viewer";
 
 import type * as Nutrient from "@nutrient-sdk/viewer";
@@ -9,7 +8,6 @@ type NutrientWindow = Window & { instance: Nutrient.Instance };
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
