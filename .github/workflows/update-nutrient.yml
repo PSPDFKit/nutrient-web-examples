@@ -1,0 +1,67 @@
+name: Update Nutrient SDK Version
+
+on:
+  schedule:
+    # Run at 00:00 every Monday
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  update-nutrient-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Check for new version of @nutrient-sdk/viewer
+        id: check-version
+        run: |
+          CURRENT_VERSION=$(grep -o '"@nutrient-sdk/viewer": "[^"]*"' ./examples/react/package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+          LATEST_VERSION=$(npm view @nutrient-sdk/viewer version)
+          echo "Current version: $CURRENT_VERSION"
+          echo "Latest version: $LATEST_VERSION"
+          if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
+            echo "new_version_available=true" >> $GITHUB_OUTPUT
+          else
+            echo "new_version_available=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run update script if new version available
+        if: steps.check-version.outputs.new_version_available == 'true'
+        run: |
+          chmod +x ./scripts/update-nutrient-in-examples.sh
+          ./scripts/update-nutrient-in-examples.sh
+
+      - name: Create Pull Request
+        if: steps.check-version.outputs.new_version_available == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "chore: update @nutrient-sdk/viewer to latest version"
+          title: "Update @nutrient-sdk/viewer to latest version"
+          body: |
+            This PR updates all examples to use the latest version of @nutrient-sdk/viewer.
+
+            This is an automated PR created by the weekly update workflow.
+          branch: update-nutrient-sdk
+          delete-branch: true
+          base: main
+        id: create-pr
+
+      - name: Auto-merge Pull Request
+        if: steps.create-pr.outputs.pull-request-number
+        run: |
+          PR_NUMBER=${{ steps.create-pr.outputs.pull-request-number }}
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Enabling auto-merge for PR #$PR_NUMBER"
+            gh pr merge $PR_NUMBER --auto --merge
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
