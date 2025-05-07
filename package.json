@@ -28,5 +28,10 @@
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]
+  },
+  "pnpm": {
+    "overrides": {
+      "http-proxy-middleware": "^2.0.9"
+    }
   }
 }

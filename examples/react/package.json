@@ -58,6 +58,7 @@
     "postcss": "^8.4.31",
     "rollup": "^3.29.5",
     "cross-spawn": "^7.0.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "http-proxy-middleware": "^2.0.9"
   }
 }
