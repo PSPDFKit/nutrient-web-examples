@@ -14,7 +14,6 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
-    "postinstall": "node scripts/copy-nutrient-files",
     "start:e2e": "npm run start"
   },
   "dependencies": {
@@ -25,7 +24,6 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "ncp": "^2.0.0",
     "prettier": "^3.3.2"
   },
   "overrides": {
