@@ -9,8 +9,7 @@
     "package-mac-intel": "electron-packager . --no-prune --overwrite --platform=darwin --arch=x64 --out=release-builds --icon=icons/mac/application.icns",
     "package-mac-apple": "electron-packager . --no-prune --overwrite --platform=darwin --arch=arm64 --out=release-builds --icon=icons/mac/application.icns",
     "package-win": "electron-packager . --no-prune --overwrite --platform=win32 --arch=x64  --out=release-builds --icon=icons/win/application.ico",
-    "package-linux": "electron-packager . --no-prune --overwrite --platform=linux --arch=x64 --out=release-builds --icon=icons/png/application.png",
-    "postinstall": "node scripts/copy-nutrient-files.js"
+    "package-linux": "electron-packager . --no-prune --overwrite --platform=linux --arch=x64 --out=release-builds --icon=icons/png/application.png"
   },
   "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io/web",
