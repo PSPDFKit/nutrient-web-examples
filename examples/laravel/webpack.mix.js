@@ -16,3 +16,11 @@ mix
   .postCss("resources/css/app.css", "public/css", [
     //
   ]);
+mix.copy(
+  "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js",
+  "./public/assets/nutrient/nutrient-viewer.js",
+);
+mix.copy(
+  "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+  "./public/assets/nutrient/nutrient-viewer-lib",
+);

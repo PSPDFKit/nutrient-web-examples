@@ -41,15 +41,12 @@ cd nutrient-web-examples/examples/laravel
 npm install
 ```
 
-6. Run `npm run dev` to copy the Nutrient artifacts to your `public/assets/nutrient/` folder.
-
-Make sure your `/public/assets/nutrient/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
-
 ## Running the Example
 
 We are ready to launch the app! 🎉
 
 ```bash
+npm run dev
 php artisan serve
 ```
 

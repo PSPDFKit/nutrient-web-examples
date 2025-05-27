@@ -1,9 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
-    "dev": "npm run verify-installation && npm run development",
-    "prod": "npm run verify-installation && npm run production",
+    "dev": "npm run development",
+    "prod": "npm run production",
     "development": "mix",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -14,7 +13,6 @@
     "axios": "^1.7.7",
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
-    "ncp": "^2.0.0",
     "postcss": "^8.1.14"
   },
   "dependencies": {
