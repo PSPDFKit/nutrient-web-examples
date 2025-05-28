@@ -5,14 +5,14 @@
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "dependencies": {
     "@nutrient-sdk/viewer": "1.3.0",
+    "copy-webpack-plugin": "^13.0.0",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "scripts": {
-    "copy-assets": "cp -R ./node_modules/@nutrient-sdk/viewer/dist/ ./public/nutrient-viewer",
-    "dev": "npm run copy-assets && next dev --turbo",
-    "build": "npm run copy-assets && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "start:e2e": "npm run dev"
   }
