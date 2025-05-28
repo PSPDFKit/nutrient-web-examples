@@ -24,9 +24,7 @@ npm install
 
 ## Nuxt.js Component
 
-The Nuxt.js component which implements the Nutrient Web SDK integration is included at `pages/index.vue` with the rest of the example.
-
-In order to make the Nutrient Web SDK's library available for building, we have to copy the `pspdfkit-lib/` directory from `node_modules/pspdfkit/dist/` into the `public/js/` directory. This is done in the `package.json` `postinstall` script.
+The Nuxt.js component which implements the Nutrient Web SDK integration is included at `pages/index.vue` and `components/NutrientContainer.vue` with the rest of the example.
 
 ## Running the Example
 

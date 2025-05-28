@@ -3,6 +3,22 @@
 </template>
 
 <script>
+let loadPromiseResolve;
+
+const loadPromise = new Promise((resolve) => {
+  loadPromiseResolve = resolve;
+});
+
+useHead({
+  script: [
+    {
+      src: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.3.0/nutrient-viewer.js",
+      type: "text/javascript",
+      onload: () => loadPromiseResolve(),
+    },
+  ],
+});
+
 /**
  * Nutrient Web SDK example component.
  */
@@ -22,8 +38,10 @@ export default {
    * We wait until the template has been rendered to load the document into the library.
    */
   mounted() {
-    this.loadNutrient().then((instance) => {
-      this.$emit("loaded", instance);
+    loadPromise.then(() => {
+      this.loadNutrient().then((instance) => {
+        this.$emit("loaded", instance);
+      });
     });
   },
   /**
@@ -41,19 +59,16 @@ export default {
    */
   methods: {
     async loadNutrient() {
-      import("@nutrient-sdk/viewer")
-        .then((NutrientViewer) => {
-          this.Nutrient = NutrientViewer;
-          NutrientViewer.unload(".pdf-container");
-          return NutrientViewer.load({
-            document: this.pdfFile,
-            container: ".pdf-container",
-            baseUrl: "http://localhost:3000/js/",
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      if (this.Nutrient) {
+        this.Nutrient.unload(".pdf-container");
+      }
+
+      this.Nutrient = window.NutrientViewer;
+
+      return window.NutrientViewer.load({
+        document: this.pdfFile,
+        container: ".pdf-container",
+      });
     },
   },
 };
