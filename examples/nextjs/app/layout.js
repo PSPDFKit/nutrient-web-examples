@@ -11,7 +11,7 @@ const RootLayout = ({ children }) => {
       <head>
         {/* Load Nutrient script using Next.js Script component */}
         <Script
-          src="/nutrient-viewer/nutrient-viewer.js"
+          src="/nutrient-viewer.js"
           strategy="beforeInteractive" // Load before the page becomes interactive to reference window.NutrientViewer in the client
         />
       </head>

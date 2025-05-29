@@ -2,3 +2,5 @@ dist
 node_modules
 src/index.js
 src/index.js.map
+src/nutrient-viewer-lib
+src/nutrient-viewer.js

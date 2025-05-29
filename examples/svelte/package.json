@@ -4,9 +4,8 @@
   "private": true,
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "scripts": {
-    "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
-    "dev": "npm run verify-installation && rollup -c -w --bundleConfigAsCjs",
-    "build": "npm run verify-installation && rollup -c --bundleConfigAsCjs",
+    "dev": "rollup -c -w --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs",
     "start": "sirv public --no-clear",
     "start:e2e": "sirv public --no-clear --port 3000"
   },
@@ -14,8 +13,8 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "ncp": "^2.0.0",
     "rollup": "^4.27.3",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-css-only": "^4.5.2",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-svelte": "^7.2.2",

@@ -1,6 +1,7 @@
 .idea
 node_modules
-public/nutrient-viewer
+public/nutrient-viewer.js
 public/nutrient-viewer-lib
+public/index.d.ts
 .next
 .tool-versions
