@@ -1,25 +1,25 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+import { onDestroy, onMount } from "svelte";
 
-  let container: HTMLDivElement | null = null;
-  let NutrientViewer: typeof import("@nutrient-sdk/viewer").default | undefined;
+const container: HTMLDivElement | null = null;
+let NutrientViewer: typeof import("@nutrient-sdk/viewer").default | undefined;
 
-  onMount(async () => {
-    NutrientViewer = (await import("@nutrient-sdk/viewer")).default;
-    if (container && NutrientViewer) {
-      NutrientViewer.load({
-        container,
-        // you may also specify a file in public directory e.g. /document.pdf
-        document: "https://www.nutrient.io/downloads/pspdfkit-web-demo.pdf",
-        // baseUrl tells the SDK where to load the assets from
-        baseUrl: `${window.location.protocol}//${window.location.host}/${import.meta.env.PUBLIC_URL ?? ""}`,
-      });
-    }
-  });
+onMount(async () => {
+  NutrientViewer = (await import("@nutrient-sdk/viewer")).default;
+  if (container && NutrientViewer) {
+    NutrientViewer.load({
+      container,
+      // you may also specify a file in public directory e.g. /document.pdf
+      document: "/document.pdf",
+      // baseUrl tells the SDK where to load the assets from
+      baseUrl: `${window.location.protocol}//${window.location.host}/${import.meta.env.PUBLIC_URL ?? ""}`,
+    });
+  }
+});
 
-  onDestroy(() => {
-    NutrientViewer?.unload(container);
-  });
+onDestroy(() => {
+  NutrientViewer?.unload(container);
+});
 </script>
 
 <div class="container" bind:this={container}></div>
