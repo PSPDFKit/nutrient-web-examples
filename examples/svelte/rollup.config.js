@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
+import copy from "rollup-plugin-copy";
 import css from "rollup-plugin-css-only";
 import livereload from "rollup-plugin-livereload";
 import svelte from "rollup-plugin-svelte";
@@ -42,6 +43,15 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    copy({
+      targets: [
+        {
+          src: "node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+          dest: "public/",
+        },
+      ],
+      hook: "buildStart",
+    }),
     svelte({
       compilerOptions: {
         // enable run-time checks when not in production
