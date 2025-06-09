@@ -29,7 +29,7 @@ We are ready to launch the app! 🎉
 npm start
 ```
 
-You can now open http://localhost:3000 in your browser and enjoy!
+You can now open http://localhost:8080 in your browser and enjoy!
 
 ## Support, Issues and License Questions
 
