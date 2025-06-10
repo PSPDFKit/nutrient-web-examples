@@ -39,6 +39,7 @@
     "typescript": "~5.5.2"
   },
   "overrides": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "webpack-dev-server": "^5.2.2"
   }
 }
