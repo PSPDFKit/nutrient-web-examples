@@ -59,6 +59,7 @@
     "rollup": "^3.29.5",
     "cross-spawn": "^7.0.5",
     "express": "^4.21.2",
-    "http-proxy-middleware": "^2.0.9"
+    "http-proxy-middleware": "^2.0.9",
+    "webpack-dev-server": "^5.2.2"
   }
 }

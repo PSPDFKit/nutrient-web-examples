@@ -14,7 +14,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.4.1",
     "typescript": "^5.7.3",
-    "webpack-dev-server": "^5.2.0"
+    "webpack-dev-server": "^5.2.2"
   },
   "scripts": {
     "install-dependencies": "./scripts/install-dependencies.sh",

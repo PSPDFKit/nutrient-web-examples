@@ -41,7 +41,7 @@
     "typescript-eslint": "^8.15.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.1.0"
+    "webpack-dev-server": "^5.2.2"
   },
   "scripts": {
     "copy-files": "copyfiles -u 5 ./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib/**/*.* ./src/nutrient-viewer-lib",
