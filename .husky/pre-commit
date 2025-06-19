@@ -1,1 +1,2 @@
 npm run lint-staged
+npm run check-biome-version
