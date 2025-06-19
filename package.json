@@ -24,7 +24,8 @@
     "lint-staged": "lint-staged",
     "test": "playwright test",
     "audit-fix": "./scripts/audit-dependencies.sh",
-    "update-nutrient-version": "./scripts/update-nutrient-in-examples.sh"
+    "update-nutrient-version": "./scripts/update-nutrient-in-examples.sh",
+    "check-biome-version": "./scripts/check-biome-version.sh"
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]
