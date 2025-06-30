@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutrient-BlazorServer", "Nutrient-BlazorServer\Nutrient-BlazorServer.csproj", "{9A460DB3-FFA5-4DBE-B535-66882696BAAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutrient-BlazorWASM", "Nutrient-BlazorWASM\Nutrient-BlazorWASM\Nutrient-BlazorWASM.csproj", "{1BCB3380-02EF-4586-B3E8-7C701EBAC858}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutrient-BlazorWASM.Client", "Nutrient-BlazorWASM\Nutrient-BlazorWASM.Client\Nutrient-BlazorWASM.Client.csproj", "{F3111550-3A64-426B-8C39-FB32334BF4C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{9A460DB3-FFA5-4DBE-B535-66882696BAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A460DB3-FFA5-4DBE-B535-66882696BAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A460DB3-FFA5-4DBE-B535-66882696BAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCB3380-02EF-4586-B3E8-7C701EBAC858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCB3380-02EF-4586-B3E8-7C701EBAC858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCB3380-02EF-4586-B3E8-7C701EBAC858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCB3380-02EF-4586-B3E8-7C701EBAC858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3111550-3A64-426B-8C39-FB32334BF4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3111550-3A64-426B-8C39-FB32334BF4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3111550-3A64-426B-8C39-FB32334BF4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3111550-3A64-426B-8C39-FB32334BF4C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
