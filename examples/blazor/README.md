@@ -6,7 +6,7 @@ This example demonstrates Standalone only.
 
 ## Prerequisites
 
-- [.Net 6.0](https://dotnet.microsoft.com/en-us/download)
+- [.Net 8.0](https://dotnet.microsoft.com/en-us/download)
 
 ## Getting Started
 
@@ -18,13 +18,13 @@ git clone https://github.com/PSPDFKit/nutrient-web-examples.git
 cd nutrient-web-examples/examples/blazor
 ```
 
-After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the `dist` directory in `/wwwroot/pspdfkit/`.
+After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the `dist` directory in `/wwwroot/`.
 
-Make sure your `/wwwroot/pspdfkit/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
+Make sure your `/wwwroot/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
-You can then build and run the example using `dotnet watch run` from the root folder.
+You can then build and run the example using `dotnet watch run` from the root folder of each project i.e. from [Nutrient-BlazorServer](./Nutrient-BlazorServer/) & [Nutrient-BlazorWASM](./Nutrient-BlazorWASM/) folders.
 
-You can also follow along with our [Getting Started guides](https://www.nutrient.io/getting-started/web/?frontend=blazor&project=wasm) for Blazor.
+You can also follow along with our [Getting Started guides](https://www.nutrient.io/sdk/web/getting-started/blazor/) for Blazor.
 
 ## License
 
