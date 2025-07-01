@@ -22,7 +22,7 @@ After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/d
 
 Make sure your `/wwwroot/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
-You can then build and run the example using `dotnet watch run` from the root folder of each project.
+You can then build and run the example using `dotnet watch run` from the root folder of each project i.e. from [Nutrient-BlazorServer](./Nutrient-BlazorServer/) & [Nutrient-BlazorWASM](./Nutrient-BlazorWASM/) folders.
 
 You can also follow along with our [Getting Started guides](https://www.nutrient.io/sdk/web/getting-started/blazor/) for Blazor.
 
