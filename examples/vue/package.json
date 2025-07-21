@@ -10,7 +10,7 @@
     "start:e2e": "npm run dev -- --port 3000"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.4.1",
+    "@nutrient-sdk/viewer": "1.5.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -27,7 +27,10 @@
       "node": true,
       "es2022": true
     },
-    "extends": ["plugin:vue/vue3-essential", "eslint:recommended"],
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
     "parserOptions": {
       "requireConfigFile": false
     },
