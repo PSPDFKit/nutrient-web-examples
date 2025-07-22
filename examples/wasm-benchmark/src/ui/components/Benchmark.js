@@ -33,7 +33,7 @@ export default class Benchmark extends React.Component {
                 In this benchmark, we measure the rendering time for all pages
                 using the{" "}
                 <a
-                  href="https://www.nutrient.io/api/web/PSPDFKit.Instance.html#renderPageAsArrayBuffer"
+                  href="https://www.nutrient.io/api/web/NutrientViewer.Instance.html#renderPageAsArrayBuffer"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -58,7 +58,7 @@ export default class Benchmark extends React.Component {
             <p>
               In this benchmark, we use our{" "}
               <a
-                href="https://www.nutrient.io/api/web/PSPDFKit.Instance.html#search"
+                href="https://www.nutrient.io/api/web/NutrientViewer.Instance.html#search"
                 target="_blank"
                 rel="noopener noreferrer"
               >
