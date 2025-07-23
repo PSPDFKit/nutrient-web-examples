@@ -5,15 +5,21 @@ import {
   median,
 } from "./utils";
 
-export function createRunner(licenseKey) {
-  const tests = {};
+export function createRunner(licenseKey: string) {
+  const tests = {} as Record<
+    string,
+    {
+      benchmarkFn: () => Promise<any>;
+      opts: Record<string, any>;
+      state: string;
+      progress: number;
+      totalTime: number;
+      medians: Array<{ name: string; median: number }>;
+    }
+  >;
 
   // Register a benchmark to test
-  function bench(id, benchmarkFn, opts) {
-    if (typeof opts === "undefined") {
-      opts = {};
-    }
-
+  function bench(id: string, benchmarkFn: () => Promise<any>, opts: Record<string, any> = {}) {
     tests[id] = {
       benchmarkFn,
       opts,
