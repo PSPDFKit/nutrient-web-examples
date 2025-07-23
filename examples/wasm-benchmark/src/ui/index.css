@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "ABC Monument Grotesk";
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("./nutrient-fonts/ABCMonumentGroteskVariable.woff2") format("woff2-variations");
+}
+
 * {
   box-sizing: border-box;
 }
@@ -37,21 +45,53 @@ a:focus {
   text-decoration: underline;
 }
 
+p {
+  text-align: justify;
+}
+
 .App {
   max-width: 795px;
   width: 100%;
-  margin: 5.625rem auto;
+  margin: 0 auto 5.625rem;
   counter-reset: bench-number;
 }
 
-.Logo {
-  width: 40%;
-  margin: 0 auto;
-  display: block;
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: left;
+  padding: 27.5px 0;
+}
+
+.HeaderLogo {
+  display: flex;
+  align-items: center;
+  height: 50px
+}
+
+.HeaderLogo img {
+  display: inline-block;
+  height: 35px;
+}
+
+.HeaderTitle {
+  display: inline-block;
+  align-items: center;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: "ABC Monument Grotesk", Arial;
+  width: min-content;
+  border-left: 1px solid black;
+  padding-left: 12px;
+  padding-top: 4px;
+  height: 50px;
 }
 
 .Description {
-  margin: 5.625rem 0 3.75rem 0;
+  margin: 0 0 3.75rem 0;
   font-size: 1.25rem;
   line-height: 2.0625rem;
 }

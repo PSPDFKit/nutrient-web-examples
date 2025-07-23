@@ -1,17 +1,22 @@
 import React from "react";
 
-import logo from "../logo.png";
+import logo from "../logo.svg";
 
 export default function Introduction() {
   return (
     <React.Fragment>
-      <a href="https://www.nutrient.io/web">
-        <img
-          className="Logo"
-          src={logo}
-          alt="WebAssembly Benchmark by Nutrient"
-        />
-      </a>
+      <header className="Header">
+        <a href="https://www.nutrient.io/web" className="HeaderLogo">
+          <img
+            className="Logo"
+            src={logo}
+            alt="WebAssembly Benchmark by Nutrient"
+          />
+        </a>
+        <h1 className="HeaderTitle">
+          Wasm Benchmark
+        </h1>
+      </header>
       <div className="Description">
         <p>
           Welcome to the WebAssembly Benchmark by Nutrient, a real-world
