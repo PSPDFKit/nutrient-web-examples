@@ -3,16 +3,14 @@ import React, { Component } from "react";
 import Benchmark from "./Benchmark";
 import Introduction from "./Introduction";
 
-import type { AppState } from "../..";
-
 type Props = {
-  tests: any[];
-  state: AppState;
-  error?: Error;
+  tests: Record<string, { state: string; progress: number }>;
+  state: string;
+  error?: Error | unknown | null;
   nutrientScore: number;
   loadTimeInNutrientScore: number;
-  pdf: ArrayBuffer;
-  licenseKey: string;
+  pdf?: ArrayBuffer | null;
+  licenseKey?: string | null;
 };
 
 class App extends Component<Props> {
@@ -32,7 +30,7 @@ class App extends Component<Props> {
         <Introduction />
         {error ? (
           <div className="Error">
-            An error occurred: {error.message}. Please{" "}
+            An error occurred: {error instanceof Error ? error.message : String(error)}. Please{" "}
             <a href="#" onClick={location.reload}>
               reload
             </a>
@@ -44,8 +42,8 @@ class App extends Component<Props> {
             tests={tests}
             nutrientScore={nutrientScore}
             loadTimeInNutrientScore={loadTimeInNutrientScore}
-            pdf={pdf}
-            licenseKey={licenseKey}
+            pdf={pdf || null}
+            licenseKey={licenseKey || null}
           />
         )}
       </div>

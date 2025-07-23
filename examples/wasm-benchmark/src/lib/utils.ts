@@ -3,7 +3,7 @@
 // result.
 const ignoredResourceRegex = /.*nutrient-viewer.w?asm.*/;
 
-export function cleanupMeasurement(duration) {
+export function cleanupMeasurement(duration: number) {
   const ignoredResources = performance
     .getEntriesByType("resource")
     .filter((r) => ignoredResourceRegex.test(r.name));
@@ -37,10 +37,10 @@ export function clearAllTimings() {
 }
 
 // Given an array of numbers it calculates the median value.
-export function median(arr) {
+export function median(arr: number[]) {
   arr = arr.slice(0);
 
-  arr.sort((a, b) => a - b);
+  arr.sort((a: number, b: number) => a - b);
 
   const half = Math.floor(arr.length / 2);
 
@@ -52,12 +52,13 @@ export function median(arr) {
 
 // Parses the url to retrieve the configuration options for Nutrient Web SDK.
 export function getConfigOptionsFromURL() {
-  const params = {};
+  const params: Record<string, string> = {};
 
   window.location.search
     .substring(1)
-    .replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
+    .replace(/([^=&]+)=([^&]*)/g, (m: string, key: string, value: string) => {
       params[decodeURIComponent(key)] = decodeURIComponent(value);
+      return m;
     });
 
   const standaloneInstancesPoolSize = Number.parseInt(
