@@ -5,7 +5,16 @@ import Footer from "./Footer";
 import Nutrient from "./Nutrient";
 import Test from "./Test";
 
-export default class Benchmark extends React.Component {
+type Props = {
+  state: string;
+  tests: Record<string, { state: string; progress: number }>;
+  nutrientScore: number;
+  loadTimeInNutrientScore: number;
+  pdf: ArrayBuffer | null;
+  licenseKey: string | null;
+};
+
+export default class Benchmark extends React.Component<Props> {
   render() {
     const {
       state,
@@ -33,7 +42,7 @@ export default class Benchmark extends React.Component {
                 In this benchmark, we measure the rendering time for all pages
                 using the{" "}
                 <a
-                  href="https://www.nutrient.io/api/web/PSPDFKit.Instance.html#renderPageAsArrayBuffer"
+                  href="https://www.nutrient.io/api/web/NutrientViewer.Instance.html#renderPageAsArrayBuffer"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -58,7 +67,7 @@ export default class Benchmark extends React.Component {
             <p>
               In this benchmark, we use our{" "}
               <a
-                href="https://www.nutrient.io/api/web/PSPDFKit.Instance.html#search"
+                href="https://www.nutrient.io/api/web/NutrientViewer.Instance.html#search"
                 target="_blank"
                 rel="noopener noreferrer"
               >
