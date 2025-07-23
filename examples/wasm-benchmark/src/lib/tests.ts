@@ -1,3 +1,4 @@
+import { NutrientWindow } from "..";
 import { createRunner } from "./runner";
 import { clearAllTimings, isMobileOS, isWasmSupported } from "./utils";
 
@@ -95,10 +96,10 @@ export function createBenchmark(pdf, licenseKey, conf) {
     async () => {
       const instance = await prepareInstance();
 
-      const annotation = new window.NutrientViewer.Annotations.TextAnnotation({
+      const annotation = new NutrientWindow.NutrientViewer.Annotations.TextAnnotation({
         pageIndex: 0,
         text: { format: "plain", value: "test" },
-        boundingBox: new window.NutrientViewer.Geometry.Rect({
+        boundingBox: new NutrientWindow.NutrientViewer.Geometry.Rect({
           width: 200,
           height: 30,
         }),
@@ -158,8 +159,8 @@ export function createBenchmark(pdf, licenseKey, conf) {
 
   // We want to reuse the instance in the following tests. To achieve this, we
   // store it in the function closure.
-  let instance;
-  let unload;
+  let instance: typeof NutrientWindow.NutrientViewer.Instance | null = null;
+  let unload: typeof NutrientWindow.NutrientViewer.unload | null = null;
 
   async function prepareInstance(canReuseLastOne = true, clearTimings = true) {
     if (!canReuseLastOne) {
@@ -185,12 +186,14 @@ export function createBenchmark(pdf, licenseKey, conf) {
   //
   // This will always return at least one.
   function scaleRuns(runs) {
-    const params = {};
+    const params = {} as Record<string, string>;
 
-    window.location.search
+    NutrientWindow.location.search
       .substring(1)
-      .replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
+      .replace(/([^=&]+)=([^&]*)/g, (m: string, key: string, value: string) => {
         params[decodeURIComponent(key)] = decodeURIComponent(value);
+
+        return "";
       });
 
     let runsScaleFactor = 1;

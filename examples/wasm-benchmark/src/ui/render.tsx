@@ -1,8 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import "./index.css";
 import App from "./components/App";
+
+import type { AppState } from "..";
 
 export default function render({
   tests,
@@ -12,8 +14,10 @@ export default function render({
   loadTimeInNutrientScore,
   pdf,
   licenseKey,
-}) {
-  ReactDOM.render(
+}: AppState) {
+  const root = createRoot(document.getElementById("root")!);
+
+  root.render(
     <App
       tests={tests}
       state={state}
@@ -22,7 +26,5 @@ export default function render({
       loadTimeInNutrientScore={loadTimeInNutrientScore}
       pdf={pdf}
       licenseKey={licenseKey}
-    />,
-    document.getElementById("root"),
-  );
+    />);
 }

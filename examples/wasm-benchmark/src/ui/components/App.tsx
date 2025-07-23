@@ -3,7 +3,19 @@ import React, { Component } from "react";
 import Benchmark from "./Benchmark";
 import Introduction from "./Introduction";
 
-class App extends Component {
+import type { AppState } from "../..";
+
+type Props = {
+  tests: any[];
+  state: AppState;
+  error?: Error;
+  nutrientScore: number;
+  loadTimeInNutrientScore: number;
+  pdf: ArrayBuffer;
+  licenseKey: string;
+};
+
+class App extends Component<Props> {
   render() {
     const {
       error,

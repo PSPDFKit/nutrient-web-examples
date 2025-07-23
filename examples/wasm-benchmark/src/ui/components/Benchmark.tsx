@@ -5,7 +5,18 @@ import Footer from "./Footer";
 import Nutrient from "./Nutrient";
 import Test from "./Test";
 
-export default class Benchmark extends React.Component {
+import type { AppState } from "../..";
+
+type Props = {
+  state: AppState;
+  tests: Record<string, { state: string; progress: number }>;
+  nutrientScore: number;
+  loadTimeInNutrientScore: number;
+  pdf: ArrayBuffer | null;
+  licenseKey: string | null;
+};
+
+export default class Benchmark extends React.Component<Props> {
   render() {
     const {
       state,
