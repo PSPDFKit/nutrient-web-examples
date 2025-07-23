@@ -96,7 +96,6 @@ export function createBenchmark(pdf: any, licenseKey: any, conf: any) {
     async () => {
       const instance = await prepareInstance();
 
-      // TypeScript is failing to recognize NutrientViewer.Annotations and Geometry
       const annotation = new NutrientWindow.NutrientViewer.Annotations.TextAnnotation({
         pageIndex: 0,
         text: { format: "plain", value: "test" },
