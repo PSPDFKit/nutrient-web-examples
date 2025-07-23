@@ -51,10 +51,8 @@ The benchmark is available at `http://localhost:3000`.
 You can build an optimized version using the following command:
 
 ```bash
-PUBLIC_URL="/webassembly-benchmark/" npm run build
+npm run build
 ```
-
-Where `PUBLIC_URL` must be set according to the final URL, where the application is hosted.
 
 ## Optimizations
 
