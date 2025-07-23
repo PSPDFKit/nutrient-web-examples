@@ -6,6 +6,8 @@ import App from "./components/App";
 
 import type { AppState } from "..";
 
+let root: ReturnType<typeof createRoot>;
+
 export default function render(appState: AppState) {
   const {
     tests,
@@ -16,7 +18,11 @@ export default function render(appState: AppState) {
     document: pdf,
     licenseKey,
   } = appState;
-  const root = createRoot(document.getElementById("root")!);
+
+  if (!root) {
+    // Initialize the React root only once.
+    root = createRoot(document.getElementById("root")!);
+  }
 
   root.render(
     <App

@@ -96,7 +96,7 @@ export function createBenchmark(pdf: any, licenseKey: any, conf: any) {
     async () => {
       const instance = await prepareInstance();
 
-      const annotation = new (NutrientWindow.NutrientViewer.Annotation as any).TextAnnotation({
+      const annotation = new (NutrientWindow.NutrientViewer.Annotations as any).TextAnnotation({
         pageIndex: 0,
         text: { format: "plain", value: "test" },
         boundingBox: new (NutrientWindow.NutrientViewer as any).Geometry.Rect({
