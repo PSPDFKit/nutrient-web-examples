@@ -2,8 +2,10 @@ import { createBenchmark } from "./lib/tests";
 import { getConfigOptionsFromURL } from "./lib/utils";
 import render from "./ui/render";
 
+import type NutrientViewer from "@nutrient-sdk/viewer";
+
 export const NutrientWindow = window as unknown as Window & {
-  NutrientViewer: typeof import("@nutrient-sdk/viewer"),
+  NutrientViewer: typeof NutrientViewer,
   ga: any
 }
 
