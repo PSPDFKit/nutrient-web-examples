@@ -5,10 +5,8 @@ import Footer from "./Footer";
 import Nutrient from "./Nutrient";
 import Test from "./Test";
 
-import type { AppState } from "../..";
-
 type Props = {
-  state: AppState;
+  state: string;
   tests: Record<string, { state: string; progress: number }>;
   nutrientScore: number;
   loadTimeInNutrientScore: number;

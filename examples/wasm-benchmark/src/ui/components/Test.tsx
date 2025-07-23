@@ -1,6 +1,18 @@
 import React from "react";
 
-export default class Test extends React.Component {
+interface TestProps {
+  id: string;
+  heading: string;
+  description: React.ReactElement;
+  data: {
+    state: string;
+    progress: number;
+    totalTime?: number;
+    medians?: Array<{ name: string; median: number }>;
+  };
+}
+
+export default class Test extends React.Component<TestProps> {
   render() {
     const { id, heading, description, data } = this.props;
 
@@ -25,7 +37,7 @@ export default class Test extends React.Component {
 
           {state === "complete" && (
             <span className="Bench-info Bench-info--complete">
-              {Math.round(totalTime)} ms
+              {Math.round(totalTime || 0)} ms
             </span>
           )}
         </div>
@@ -53,7 +65,7 @@ export default class Test extends React.Component {
         {medians && medians.length > 1 && state === "complete" && (
           <div className="Bench-partials">
             <h4>Partial results</h4>
-            {medians.map(({ name, median }) => (
+            {medians.map(({ name, median }: { name: string; median: number }) => (
               <p className="Bench-partialResult" key={name}>
                 <span>{name}</span>
                 <span>{Math.round(median)} ms</span>

@@ -6,15 +6,16 @@ import App from "./components/App";
 
 import type { AppState } from "..";
 
-export default function render({
-  tests,
-  state,
-  error,
-  nutrientScore,
-  loadTimeInNutrientScore,
-  pdf,
-  licenseKey,
-}: AppState) {
+export default function render(appState: AppState) {
+  const {
+    tests,
+    state,
+    error,
+    nutrientScore,
+    loadTimeInNutrientScore,
+    document: pdf,
+    licenseKey,
+  } = appState;
   const root = createRoot(document.getElementById("root")!);
 
   root.render(

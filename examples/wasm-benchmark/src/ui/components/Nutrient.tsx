@@ -1,12 +1,18 @@
 import React from "react";
+import { NutrientWindow } from "../../index";
 
-export default class Nutrient extends React.Component {
-  ref = React.createRef();
+interface NutrientProps {
+  pdf: ArrayBuffer | null;
+  licenseKey: string | null;
+}
+
+export default class Nutrient extends React.Component<NutrientProps> {
+  ref = React.createRef<HTMLDivElement>();
 
   async componentDidMount() {
     const { pdf, licenseKey } = this.props;
 
-    window.NutrientViewer.load({
+    (NutrientWindow.NutrientViewer as any).load({
       document: pdf,
       licenseKey,
       container: this.ref.current,

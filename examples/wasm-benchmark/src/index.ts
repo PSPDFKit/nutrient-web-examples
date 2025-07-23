@@ -61,7 +61,7 @@ render(state);
 
     await Promise.all(preFetchAssets);
 
-    const score = await benchmark.run((updatedTests) => {
+    const score = await benchmark.run((updatedTests: Record<string, { state: string; progress: number }>) => {
       state.tests = updatedTests;
       render(state);
     });
