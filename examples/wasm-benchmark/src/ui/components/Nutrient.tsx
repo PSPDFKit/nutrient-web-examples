@@ -1,5 +1,6 @@
 import React from "react";
 import { NutrientWindow } from "../../index";
+import { getConfigOptionsFromURL } from "../../lib/utils";
 
 interface NutrientProps {
   pdf: ArrayBuffer | null;
@@ -18,6 +19,7 @@ export default class Nutrient extends React.Component<NutrientProps> {
       container: this.ref.current,
       standaloneInstancesPoolSize: 1,
       disableWebAssemblyStreaming: false,
+      baseUrl: getConfigOptionsFromURL().nutrientConfig.baseUrl,
     });
   }
 

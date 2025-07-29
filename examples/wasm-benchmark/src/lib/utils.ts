@@ -73,6 +73,7 @@ export function getConfigOptionsFromURL() {
       standaloneInstancesPoolSize: Number.isNaN(standaloneInstancesPoolSize)
         ? 0
         : standaloneInstancesPoolSize,
+      baseUrl: window.location.origin + (params.baseUrl || import.meta.env.BASE_URL) + 'vendor/nutrient/',
     },
     writeResults: params.writeResults === "true",
   };

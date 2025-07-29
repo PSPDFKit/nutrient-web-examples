@@ -10,7 +10,7 @@ export const NutrientWindow = window as unknown as Window & {
 }
 
 // PDF to benchmark against.
-const PDF = "./assets/default.pdf";
+const PDF = import.meta.env.BASE_URL + "assets/default.pdf";
 
 export type AppState = {
   tests: Record<string, { state: string; progress: number }>;
@@ -44,6 +44,8 @@ render(state);
       await fetch(PDF).then((r) => r.arrayBuffer()),
       await fetch("./license-key").then((response) => response.text()),
     ]);
+
+    console.log(licenseKey)
 
     const { nutrientConfig } = getConfigOptionsFromURL();
 

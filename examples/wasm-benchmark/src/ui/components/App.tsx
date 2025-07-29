@@ -43,7 +43,7 @@ class App extends Component<Props> {
             nutrientScore={nutrientScore}
             loadTimeInNutrientScore={loadTimeInNutrientScore}
             pdf={pdf || null}
-            licenseKey={licenseKey || null}
+            licenseKey={licenseKey || ''}
           />
         )}
       </div>

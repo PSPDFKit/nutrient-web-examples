@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     viteTsconfigPaths(),
   ],
+  base: process.env.PUBLIC_URL || '/',
   build: {
     outDir: 'build',
   },
