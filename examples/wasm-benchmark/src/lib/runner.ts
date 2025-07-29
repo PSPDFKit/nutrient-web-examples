@@ -5,15 +5,20 @@ import {
   median,
 } from "./utils";
 
-export function createRunner(licenseKey) {
-  const tests = {};
+type TestData = {
+  benchmarkFn: () => Promise<any>;
+  opts: Record<string, any>;
+  state: string;
+  progress: number;
+  totalTime: number;
+  medians: Array<{ name: string; median: number }>;
+};
+
+export function createRunner(licenseKey: string) {
+  const tests = {} as Record<string, TestData>;
 
   // Register a benchmark to test
-  function bench(id, benchmarkFn, opts) {
-    if (typeof opts === "undefined") {
-      opts = {};
-    }
-
+  function bench(id: string, benchmarkFn: () => Promise<any>, opts: Record<string, any> = {}) {
     tests[id] = {
       benchmarkFn,
       opts,
@@ -26,7 +31,7 @@ export function createRunner(licenseKey) {
 
   // Run the test suite. The `onChange` callback will fire whenever the progress
   // of a single test is changed.
-  async function run(onChange) {
+  async function run(onChange: (tests: Record<string, TestData>) => void) {
     function notify() {
       onChange(tests);
     }
@@ -47,7 +52,7 @@ export function createRunner(licenseKey) {
 
       notify();
 
-      const measurements = {};
+      const measurements: Record<string, Array<{ name: string; duration: number }>> = {};
 
       for (let i = 0; i < totalRuns; i++) {
         clearAllTimings();
@@ -56,7 +61,7 @@ export function createRunner(licenseKey) {
 
         // benchmarkFn returns an array of performance measurement objects. In
         // a first step, we filter those results.
-        results.forEach((result) => {
+        results.forEach((result: any) => {
           const { name } = result;
 
           if (!measurements[name]) {
@@ -83,7 +88,7 @@ export function createRunner(licenseKey) {
       // Collect all relevant timings.
       const medians = Object.keys(measurements).map((name) => ({
         name,
-        median: median(measurements[name].map((m) => m.duration)),
+        median: median(measurements[name].map((m: any) => m.duration)),
       }));
       const totalTime = Math.round(
         medians.reduce((sum, { median }) => sum + median, 0),
@@ -92,7 +97,7 @@ export function createRunner(licenseKey) {
       // Add the total time of the test to the final score.
       if (score.hasOwnProperty(opts.bucket)) {
         if (opts.bucket !== "load" || score.load === 0) {
-          score[opts.bucket] += totalTime;
+          (score as any)[opts.bucket] += totalTime;
         }
       }
 
@@ -109,7 +114,7 @@ export function createRunner(licenseKey) {
     return score;
   }
 
-  function load(pdf, conf = {}) {
+  function load(pdf: any, conf: any = {}) {
     const defaultConf = getConfigOptionsFromURL().nutrientConfig;
     const configuration = Object.assign(
       {
@@ -121,10 +126,10 @@ export function createRunner(licenseKey) {
       conf,
     );
 
-    return window.NutrientViewer.load(configuration).then((instance) => ({
+    return (window as any).NutrientViewer.load(configuration).then((instance: any) => ({
       instance,
       unload: () => {
-        window.NutrientViewer.unload(instance);
+        (window as any).NutrientViewer.unload(instance);
         instance = null;
         pdf = null;
       },

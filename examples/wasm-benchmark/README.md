@@ -54,7 +54,7 @@ You can build an optimized version using the following command:
 PUBLIC_URL="/webassembly-benchmark/" npm run build
 ```
 
-Where `PUBLIC_URL` must be set according to the final URL, where the application is hosted.
+Where `PUBLIC_URL` must be set according to the final URL, where the application is hosted, so the benchmark will be available at `http://your-domain.com/webassembly-benchmark/`.
 
 ## Optimizations
 

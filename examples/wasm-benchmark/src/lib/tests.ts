@@ -1,7 +1,8 @@
+import { NutrientWindow } from "..";
 import { createRunner } from "./runner";
 import { clearAllTimings, isMobileOS, isWasmSupported } from "./utils";
 
-export function createBenchmark(pdf, licenseKey, conf) {
+export function createBenchmark(pdf: any, licenseKey: any, conf: any) {
   // Factory to create our test suite. It will register all tests in the runner.
   const isWasm = isWasmSupported()
 
@@ -11,13 +12,13 @@ export function createBenchmark(pdf, licenseKey, conf) {
     "Test-Rendering",
     async () => {
       const instance = await prepareInstance();
-      const totalPageCount = instance.totalPageCount;
+      const totalPageCount = (instance as any).totalPageCount;
 
       const promises = [];
 
       for (let pageIndex = 0; pageIndex < totalPageCount; pageIndex++) {
         promises.push(
-          instance.renderPageAsArrayBuffer({ height: 1024 }, pageIndex),
+          (instance as any).renderPageAsArrayBuffer({ height: 1024 }, pageIndex),
         );
       }
 
@@ -47,7 +48,7 @@ export function createBenchmark(pdf, licenseKey, conf) {
       const promises = [];
 
       for (let i = 0; i < 50; i++) {
-        promises.push(instance.search("the"));
+        promises.push((instance as any).search("the"));
       }
 
       performance.mark("searchStart");
@@ -71,12 +72,12 @@ export function createBenchmark(pdf, licenseKey, conf) {
 
       performance.mark("exportStart");
       await Promise.all([
-        instance.exportPDF(),
-        instance.exportPDF(),
-        instance.exportPDF({ flatten: true }),
-        instance.exportPDF({ flatten: true }),
-        instance.exportXFDF(),
-        instance.exportXFDF(),
+        (instance as any).exportPDF(),
+        (instance as any).exportPDF(),
+        (instance as any).exportPDF({ flatten: true }),
+        (instance as any).exportPDF({ flatten: true }),
+        (instance as any).exportXFDF(),
+        (instance as any).exportXFDF(),
       ]);
       performance.mark("exportEnd");
 
@@ -95,10 +96,10 @@ export function createBenchmark(pdf, licenseKey, conf) {
     async () => {
       const instance = await prepareInstance();
 
-      const annotation = new window.NutrientViewer.Annotations.TextAnnotation({
+      const annotation = new NutrientWindow.NutrientViewer.Annotations.TextAnnotation({
         pageIndex: 0,
         text: { format: "plain", value: "test" },
-        boundingBox: new window.NutrientViewer.Geometry.Rect({
+        boundingBox: new NutrientWindow.NutrientViewer.Geometry.Rect({
           width: 200,
           height: 30,
         }),
@@ -108,15 +109,15 @@ export function createBenchmark(pdf, licenseKey, conf) {
       performance.mark("createAnnotationStart");
 
       const annotations = (
-        await Promise.all(range.map(() => instance.create(annotation)))
-      ).map((createdAnnotations) => createdAnnotations[0]);
+        await Promise.all(range.map(() => (instance as any).create(annotation)))
+      ).map((createdAnnotations: any) => createdAnnotations[0]);
 
       // Nutrient Web SDK will only write annotations back to the PDF when it
       // has to. To make sure this is happening, we profile the exportPDF
       // endpoint.
-      await instance.exportPDF();
+      await (instance as any).exportPDF();
 
-      await Promise.all(annotations.map((a) => instance.delete(a.id)));
+      await Promise.all(annotations.map((a: any) => (instance as any).delete(a.id)));
 
       performance.mark("createAnnotationEnd");
 
@@ -158,8 +159,8 @@ export function createBenchmark(pdf, licenseKey, conf) {
 
   // We want to reuse the instance in the following tests. To achieve this, we
   // store it in the function closure.
-  let instance;
-  let unload;
+  let instance: any | null = null;
+  let unload: any | null = null;
 
   async function prepareInstance(canReuseLastOne = true, clearTimings = true) {
     if (!canReuseLastOne) {
@@ -184,13 +185,15 @@ export function createBenchmark(pdf, licenseKey, conf) {
   // regular.
   //
   // This will always return at least one.
-  function scaleRuns(runs) {
-    const params = {};
+  function scaleRuns(runs: number) {
+    const params = {} as Record<string, string>;
 
-    window.location.search
+    NutrientWindow.location.search
       .substring(1)
-      .replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
+      .replace(/([^=&]+)=([^&]*)/g, (m: string, key: string, value: string) => {
         params[decodeURIComponent(key)] = decodeURIComponent(value);
+
+        return "";
       });
 
     let runsScaleFactor = 1;

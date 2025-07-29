@@ -1,17 +1,25 @@
 import React from "react";
+import { NutrientWindow } from "../../index";
+import { getConfigOptionsFromURL } from "../../lib/utils";
 
-export default class Nutrient extends React.Component {
-  ref = React.createRef();
+interface NutrientProps {
+  pdf: ArrayBuffer | null;
+  licenseKey: string | null;
+}
+
+export default class Nutrient extends React.Component<NutrientProps> {
+  ref = React.createRef<HTMLDivElement>();
 
   async componentDidMount() {
     const { pdf, licenseKey } = this.props;
 
-    window.NutrientViewer.load({
+    (NutrientWindow.NutrientViewer as any).load({
       document: pdf,
       licenseKey,
       container: this.ref.current,
       standaloneInstancesPoolSize: 1,
       disableWebAssemblyStreaming: false,
+      baseUrl: getConfigOptionsFromURL().nutrientConfig.baseUrl,
     });
   }
 

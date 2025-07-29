@@ -1,13 +1,28 @@
-import "details-polyfill";
-
 import { createBenchmark } from "./lib/tests";
 import { getConfigOptionsFromURL } from "./lib/utils";
 import render from "./ui/render";
 
-// PDF to benchmark against.
-const PDF = "./assets/default.pdf";
+import type NutrientViewer from "@nutrient-sdk/viewer";
 
-const state = {
+export const NutrientWindow = window as unknown as Window & {
+  NutrientViewer: typeof NutrientViewer,
+  ga: any
+}
+
+// PDF to benchmark against.
+const PDF = import.meta.env.BASE_URL + "assets/default.pdf";
+
+export type AppState = {
+  tests: Record<string, { state: string; progress: number }>;
+  error: Error | unknown | null;
+  state: string;
+  nutrientScore: number;
+  loadTimeInNutrientScore: number;
+  document: ArrayBuffer | null;
+  licenseKey: string | null;
+};
+
+const state: AppState = {
   tests: {
     // We set the first test to running so we avoid a state where all is idle.
     "Test-Initialization": { state: "running", progress: 0 },
@@ -30,11 +45,13 @@ render(state);
       await fetch("./license-key").then((response) => response.text()),
     ]);
 
+    console.log(licenseKey)
+
     const { nutrientConfig } = getConfigOptionsFromURL();
 
     const benchmark = createBenchmark(pdf, licenseKey, nutrientConfig);
 
-    state.pdf = pdf;
+    state.document = pdf;
     state.licenseKey = licenseKey;
     render(state);
 
@@ -48,7 +65,7 @@ render(state);
 
     await Promise.all(preFetchAssets);
 
-    const score = await benchmark.run((updatedTests) => {
+    const score = await benchmark.run((updatedTests: Record<string, { state: string; progress: number }>) => {
       state.tests = updatedTests;
       render(state);
     });
@@ -60,8 +77,8 @@ render(state);
     );
     render(state);
 
-    if (window.ga) {
-      window.ga(
+    if (NutrientWindow.ga) {
+      NutrientWindow.ga(
         "send",
         "event",
         "wasmbench",
@@ -69,7 +86,7 @@ render(state);
         "wasm-score",
         state.nutrientScore,
       );
-      window.ga(
+      NutrientWindow.ga(
         "send",
         "event",
         "wasmbench",
