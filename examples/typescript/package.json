@@ -57,7 +57,8 @@
   },
   "overrides": {
     "path-to-regexp": "^3.3.0",
-    "cross-spawn": "^7.0.5",
-    "http-proxy-middleware": "^2.0.9"
+    "cross-spawn": "^7.0.6",
+    "http-proxy-middleware": "^2.0.9",
+    "on-headers": "^1.1.0"
   }
 }

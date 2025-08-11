@@ -39,6 +39,7 @@
     "cross-spawn": "^7.0.5",
     "serialize-javascript": "^6.0.2",
     "multer": "^2.0.1",
-    "tar-fs": "^3.0.9"
+    "tar-fs": "^3.0.9",
+    "tmp": "^0.2.4"
   }
 }
