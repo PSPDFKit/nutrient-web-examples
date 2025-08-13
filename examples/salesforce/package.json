@@ -47,6 +47,6 @@
     ]
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.5.0"
+    "@nutrient-sdk/viewer": "1.6.0"
   }
 }
