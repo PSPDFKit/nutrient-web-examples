@@ -23,7 +23,7 @@ export default function Introduction() {
           benchmark based on{" "}
           <a href="https://www.nutrient.io/web">Nutrient Web SDK</a>. Want to
           know more about the benchmark? Read the{" "}
-          <a href="https://www.nutrient.io/blog/2018/a-real-world-webassembly-benchmark/">
+          <a href="https://www.nutrient.io/blog/a-real-world-webassembly-benchmark/">
             announcement blog post
           </a>
           .

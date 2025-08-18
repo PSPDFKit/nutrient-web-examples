@@ -150,7 +150,7 @@ export default class Benchmark extends React.Component<Props> {
                 <p>
                   Read about how you can{" "}
                   <a
-                    href="https://www.nutrient.io/blog/2018/optimize-webassembly-startup-performance"
+                    href="https://www.nutrient.io/blog/optimize-webassembly-startup-performance"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
