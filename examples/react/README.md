@@ -88,6 +88,6 @@ Please ensure you’ve signed [our CLA][cla] so that we can accept your contribu
 [getting started]: https://www.nutrient.io/getting-started/web/?frontend=react&download=npm&integration=module
 [react existing project]: https://www.nutrient.io/getting-started/web/?frontend=react&project=existing-project
 [react guides]: https://www.nutrient.io/guides/web/react/
-[how to convert html to pdf using react]: https://www.nutrient.io/blog/2022/how-to-convert-html-to-pdf-using-react/
-[how to build a react.js pdf viewer with react-pdf]: https://www.nutrient.io/blog/2021/how-to-build-a-reactjs-pdf-viewer-with-react-pdf/
+[how to convert html to pdf using react]: https://www.nutrient.io/blog/how-to-convert-html-to-pdf-using-react/
+[how to build a react.js pdf viewer with react-pdf]: https://www.nutrient.io/blog/how-to-build-a-reactjs-pdf-viewer-with-react-pdf/
 [cla]: https://www.nutrient.io/guides/web/current/miscellaneous/contributing/

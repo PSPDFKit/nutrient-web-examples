@@ -10,7 +10,7 @@ A Benchmark for WebAssembly (Wasm, WA) that uses [Nutrient Web SDK](https://www.
 
 The rendering engine of [Nutrient Web SDK](https://www.nutrient.io/web/) Standalone is written in C/C++ and compiled to Wasm.
 
-Get your score in the [live demo](http://iswebassemblyfastyet.com/) and learn more in our [blog post](https://www.nutrient.io/blog/2018/a-real-world-webassembly-benchmark/).
+Get your score in the [live demo](http://iswebassemblyfastyet.com/) and learn more in our [blog post](https://www.nutrient.io/blog/a-real-world-webassembly-benchmark/).
 
 ## Prerequisites
 
