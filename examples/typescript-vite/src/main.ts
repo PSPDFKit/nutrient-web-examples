@@ -4,9 +4,8 @@ import "./style.css";
 async function load() {
   const container = document.querySelector(".container") as HTMLElement;
 
-  // Wait for SDK script to load (CDN only)
-  while (!window.NutrientViewer) {
-    await new Promise((resolve) => setTimeout(resolve, 100));
+  if (!window.NutrientViewer) {
+    return;
   }
 
   // Ensure there's only one NutrientViewer instance
