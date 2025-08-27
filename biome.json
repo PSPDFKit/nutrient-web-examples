@@ -4,7 +4,7 @@
     "ignore": [
       "examples/angular/.angular/cache/*",
       "examples/*/public/*",
-      "examples/blazor/wasm/wwwroot/css/*", 
+      "examples/blazor/wasm/wwwroot/css/*",
       "examples/wasm-benchmark/*",
       "examples/asp-net/*",
       "examples/svelte-kit",
