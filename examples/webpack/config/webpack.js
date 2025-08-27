@@ -78,9 +78,11 @@ const config = {
   },
 
   // When using CDN, exclude Nutrient from webpack bundle
-  externals: useCdn ? {
-    "@nutrient-sdk/viewer": "NutrientViewer"
-  } : {},
+  externals: useCdn
+    ? {
+        "@nutrient-sdk/viewer": "NutrientViewer",
+      }
+    : {},
 
   plugins: [
     // Automatically insert <script src="[name].js"><script> to the page.

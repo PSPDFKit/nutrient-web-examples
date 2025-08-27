@@ -19,15 +19,16 @@ import dragDrop from "drag-drop";
 import { processFiles } from "./lib/utils";
 
 // Use CDN version if available (global), otherwise use npm package
-const NutrientViewer = typeof window !== "undefined" && window.NutrientViewer 
-  ? window.NutrientViewer 
-  : NutrientViewerNpm;
+const NutrientViewer =
+  typeof window !== "undefined" && window.NutrientViewer
+    ? window.NutrientViewer
+    : NutrientViewerNpm;
 
 let hasUnsavedAnnotations = false;
 let isAlreadyLoaded = false;
 
 // Load the default sample PDF on page load
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   loadDefaultPDF();
 });
 
@@ -35,15 +36,17 @@ window.addEventListener('DOMContentLoaded', () => {
  * Loads the default sample PDF from the assets folder
  */
 function loadDefaultPDF() {
-  fetch('./assets/nutrient-web-demo.pdf')
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => {
+  fetch("./assets/nutrient-web-demo.pdf")
+    .then((response) => response.arrayBuffer())
+    .then((arrayBuffer) => {
       load([arrayBuffer]);
     })
-    .catch(error => {
-      console.error('Failed to load default PDF:', error);
+    .catch((error) => {
+      console.error("Failed to load default PDF:", error);
       // If default PDF fails to load, show a fallback message
-      console.log('You can still upload your own PDF using the controls above.');
+      console.log(
+        "You can still upload your own PDF using the controls above.",
+      );
     });
 }
 
@@ -135,7 +138,7 @@ let destroyListener = dragDrop("#body", {
   },
 });
 
-function destroyDragAndDrop() {
+function _destroyDragAndDrop() {
   if (destroyListener) {
     destroyListener();
     destroyListener = null;
