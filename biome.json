@@ -4,11 +4,11 @@
     "includes": [
       "**/*",
       "!examples/angular/.angular/cache/*",
-      "!examples/*/public/*",
+      "!examples/*/public/*", 
       "!examples/blazor/wasm/wwwroot/css/*",
       "!examples/wasm-benchmark/*",
       "!examples/asp-net/*",
-      "!examples/svelte-kit/*",
+      "!examples/svelte-kit",
       "!examples/salesforce/*"
     ],
     "ignoreUnknown": true
