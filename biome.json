@@ -1,15 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": [
-      "**/*",
-      "!examples/angular/.angular/cache/*",
-      "!examples/*/public/*", 
-      "!examples/blazor/wasm/wwwroot/css/*",
-      "!examples/wasm-benchmark/*",
-      "!examples/asp-net/*",
-      "!examples/svelte-kit",
-      "!examples/salesforce/*"
+    "ignore": [
+      "examples/angular/.angular/cache/*",
+      "examples/*/public/*",
+      "examples/blazor/wasm/wwwroot/css/*", 
+      "examples/wasm-benchmark/*",
+      "examples/asp-net/*",
+      "examples/svelte-kit",
+      "examples/salesforce/*"
     ],
     "ignoreUnknown": true
   },
