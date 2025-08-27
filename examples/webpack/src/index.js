@@ -5,17 +5,47 @@
  * Once a PDF is dropped or selected we read it from disk as an ArrayBuffer
  * which we can then pass to NutrientViewer.load() to initialize the viewer with the given PDF.
  *
+ * This example supports both CDN and npm package loading approaches:
+ * - CDN: Uses global window.NutrientViewer (default)
+ * - npm package: Uses ES6 import (fallback when CDN not available)
+ *
  * We also add an `Export PDF` button to the main toolbar and monitor changes to
  * inform the users when they are about to leave the page or open a new document
  * and there is unsaved(exported) work.
  */
 
-import NutrientViewer from "@nutrient-sdk/viewer";
+import NutrientViewerNpm from "@nutrient-sdk/viewer";
 import dragDrop from "drag-drop";
 import { processFiles } from "./lib/utils";
 
+// Use CDN version if available (global), otherwise use npm package
+const NutrientViewer = typeof window !== "undefined" && window.NutrientViewer 
+  ? window.NutrientViewer 
+  : NutrientViewerNpm;
+
 let hasUnsavedAnnotations = false;
 let isAlreadyLoaded = false;
+
+// Load the default sample PDF on page load
+window.addEventListener('DOMContentLoaded', () => {
+  loadDefaultPDF();
+});
+
+/**
+ * Loads the default sample PDF from the assets folder
+ */
+function loadDefaultPDF() {
+  fetch('./assets/nutrient-web-demo.pdf')
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+      load([arrayBuffer]);
+    })
+    .catch(error => {
+      console.error('Failed to load default PDF:', error);
+      // If default PDF fails to load, show a fallback message
+      console.log('You can still upload your own PDF using the controls above.');
+    });
+}
 
 /**
  * Creates an onAnnotationsChange handler that
@@ -88,9 +118,8 @@ function shouldPreventLoad() {
 }
 
 /**
- * This code handles drag and drop behaviour. Once you have selected a PDF, the drag and
- * drop instance is destroyed. This means this only works for the first PDF. If you
- * want to load more PDFs, please use file picker.
+ * This code handles drag and drop behaviour. Users can drag and drop multiple PDFs
+ * throughout the session.
  */
 let destroyListener = dragDrop("#body", {
   onDrop: (files) => {
@@ -100,7 +129,6 @@ let destroyListener = dragDrop("#body", {
 
     processFiles(files)
       .then((arrayBuffers) => {
-        destroyDragAndDrop();
         load(arrayBuffers);
       })
       .catch(onFail);
@@ -110,7 +138,6 @@ let destroyListener = dragDrop("#body", {
 function destroyDragAndDrop() {
   if (destroyListener) {
     destroyListener();
-    document.querySelector(".drag-text").classList.add("is-hidden");
     destroyListener = null;
   }
 }
@@ -119,7 +146,6 @@ function destroyDragAndDrop() {
  * The code below handles the file picket via the systems's default File Picker.
  */
 function onFileSelectSuccess(pdfArrayBuffers) {
-  destroyDragAndDrop();
   load(pdfArrayBuffers);
 }
 
