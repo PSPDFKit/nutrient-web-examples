@@ -171,4 +171,3 @@ document.querySelector("#selectFile").addEventListener("change", (event) => {
 
   event.target.value = null;
 });
-

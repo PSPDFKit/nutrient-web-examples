@@ -39,4 +39,3 @@ export function fileToArrayBuffer(file) {
 export function processFiles(files) {
   return Promise.all(files.map(fileToArrayBuffer));
 }
-
