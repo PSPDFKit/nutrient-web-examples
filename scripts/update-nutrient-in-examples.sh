@@ -14,11 +14,19 @@ upgrade_npm_in_example() {
 
   echo -e "\n${Green}Upgrading npm in ${Yellow}${directory}${Green} example${NoColor}"
 
-  npm install @nutrient-sdk/viewer@latest --save --save-exact
+  if [ -f "pnpm-lock.yaml" ]; then
+    pnpm install @nutrient-sdk/viewer@latest --save --save-exact
 
-  npm install
+    pnpm install
 
-  npm audit fix --package-lock-only --audit-level=none
+    pnpm audit fix > /dev/null
+  elif [ -f "package-lock.json" ]; then
+    npm install @nutrient-sdk/viewer@latest --save --save-exact
+
+    npm install
+
+    npm audit fix > /dev/null
+  fi
 
   popd > /dev/null
 }
@@ -34,6 +42,7 @@ upgrade_version_in_salesforce() {
 upgrade_npm_in_example "webpack"
 upgrade_npm_in_example "react"
 upgrade_npm_in_example "vue"
+upgrade_npm_in_example "vue-composition-api"
 upgrade_npm_in_example "pwa"
 upgrade_npm_in_example "electron"
 upgrade_npm_in_example "typescript"
@@ -41,6 +50,7 @@ upgrade_npm_in_example "elm"
 upgrade_npm_in_example "nextjs"
 upgrade_npm_in_example "gatsbyjs"
 upgrade_npm_in_example "svelte"
+upgrade_npm_in_example "svelte-kit"
 upgrade_npm_in_example "angular"
 upgrade_npm_in_example "electron-nodeintegration"
 upgrade_npm_in_example "nuxtjs"
