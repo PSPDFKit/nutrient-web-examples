@@ -26,7 +26,7 @@
   "devDependencies": {
     "@electron/packager": "^18.3.6",
     "@electron/remote": "^2.1.2",
-    "electron": "^33.2.0"
+    "electron": "^35.7.5"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.7.0"
