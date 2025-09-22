@@ -13,9 +13,6 @@ export default function Introduction() {
             alt="WebAssembly Benchmark by Nutrient"
           />
         </a>
-        <h1 className="HeaderTitle">
-          Wasm Benchmark
-        </h1>
       </header>
       <div className="Description">
         <p>

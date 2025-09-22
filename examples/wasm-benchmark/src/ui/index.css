@@ -77,19 +77,6 @@ p {
   height: 35px;
 }
 
-.HeaderTitle {
-  display: inline-block;
-  align-items: center;
-  font-size: 16px;
-  font-weight: normal;
-  font-family: "ABC Monument Grotesk", Arial;
-  width: min-content;
-  border-left: 1px solid black;
-  padding-left: 12px;
-  padding-top: 4px;
-  height: 50px;
-}
-
 .Description {
   margin: 0 0 3.75rem 0;
   font-size: 1.25rem;
