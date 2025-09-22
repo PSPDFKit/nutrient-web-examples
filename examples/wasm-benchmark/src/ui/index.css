@@ -64,21 +64,22 @@ p {
   flex-direction: row;
   text-align: left;
   padding: 27.5px 0;
+  border-bottom: 1px solid #C2B8AE;
 }
 
 .HeaderLogo {
   display: flex;
   align-items: center;
-  height: 50px
+  height: 40px
 }
 
 .HeaderLogo img {
   display: inline-block;
-  height: 35px;
+  height: 28px;
 }
 
 .Description {
-  margin: 0 0 3.75rem 0;
+  margin: 3.75rem 0;
   font-size: 1.25rem;
   line-height: 2.0625rem;
 }
