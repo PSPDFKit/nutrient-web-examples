@@ -1,7 +1,0 @@
-.idea
-node_modules
-public/nutrient-viewer.js
-public/nutrient-viewer-lib
-public/index.d.ts
-.next
-.tool-versions
