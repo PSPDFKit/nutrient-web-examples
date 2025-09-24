@@ -35,7 +35,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../../../../examples/JS/basic-viewer/implementation.js";
+} from "../examples/basic-viewer/implementation.js";
 
 const containerRef = ref(null);
 

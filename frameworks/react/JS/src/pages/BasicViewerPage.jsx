@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../../../../../examples/js/basic-viewer/implementation.js";
+} from "../examples/basic-viewer/implementation.js";
 
 function BasicViewerPage() {
   const containerRef = useRef(null);

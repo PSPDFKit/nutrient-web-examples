@@ -19,6 +19,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nutrient-sdk/viewer": "^1.7.0",
     "@nuxt/devtools": "latest",
     "nuxt": "^3.17.4",
     "vue-tsc": "^2.0.0"

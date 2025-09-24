@@ -34,7 +34,7 @@
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../../../examples/TS/basic-viewer/implementation";
+} from "../examples/basic-viewer/implementation";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 

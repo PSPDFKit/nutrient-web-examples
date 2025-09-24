@@ -1,13 +1,6 @@
 /// <reference types="next" />
 /// <reference types="next/image-types/global" />
+/// <reference path="./.next/types/routes.d.ts" />
 
-import type NutrientViewer from "@nutrient-sdk/viewer";
-
-declare global {
-  interface Window {
-    // Nutrient Web SDK will be available on window.NutrientViewer once loaded via CDN
-    NutrientViewer?: typeof NutrientViewer;
-  }
-}
-
-export {};
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.

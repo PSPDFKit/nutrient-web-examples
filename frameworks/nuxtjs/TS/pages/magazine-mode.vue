@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { loadMagazineViewer, unloadMagazineViewer } from '../../examples/ts/magazine-mode/implementation'
+import { loadMagazineViewer, unloadMagazineViewer } from '../examples/magazine-mode/implementation'
 
 const containerRef = ref<HTMLDivElement | null>(null)
 

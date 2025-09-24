@@ -35,7 +35,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../../../../examples/JS/magazine-mode/implementation.js";
+} from "../examples/magazine-mode/implementation.js";
 
 const containerRef = ref(null);
 
