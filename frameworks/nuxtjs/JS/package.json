@@ -1,0 +1,25 @@
+{
+  "name": "nutrient-web-framework-nuxtjs-js",
+  "version": "1.0.0",
+  "description": "Nuxt.js JavaScript framework template for Nutrient Web SDK",
+  "private": true,
+  "keywords": [
+    "nutrient",
+    "pdf",
+    "viewer",
+    "nuxtjs",
+    "javascript",
+    "framework-template"
+  ],
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "nuxt": "^3.17.4"
+  }
+}

@@ -8,6 +8,7 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@nutrient-sdk/viewer": "^1.7.0",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.7",
     "concurrently": "^9.1.2",
@@ -28,7 +29,7 @@
     "check-biome-version": "./scripts/check-biome-version.sh"
   },
   "lint-staged": {
-    "*": ["biome check --write --no-errors-on-unmatched"]
+    "*.{js,ts,jsx,tsx,json,md,css,html}": ["biome check --write --no-errors-on-unmatched"]
   },
   "pnpm": {
     "overrides": {

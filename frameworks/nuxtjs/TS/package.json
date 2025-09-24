@@ -1,0 +1,26 @@
+{
+  "name": "nutrient-web-framework-nuxtjs-ts",
+  "version": "1.0.0",
+  "description": "Nuxt.js TypeScript framework template for Nutrient Web SDK",
+  "private": true,
+  "keywords": [
+    "nutrient",
+    "pdf",
+    "viewer",
+    "nuxtjs",
+    "typescript",
+    "framework-template"
+  ],
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "nuxt": "^3.17.4",
+    "vue-tsc": "^2.0.0"
+  }
+}
