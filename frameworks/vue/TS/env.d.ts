@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import NutrientViewer from "@nutrient-sdk/viewer";
+import type NutrientViewer from "@nutrient-sdk/viewer";
 
 declare global {
   interface Window {
@@ -8,5 +8,3 @@ declare global {
     NutrientViewer?: typeof NutrientViewer;
   }
 }
-
-export {};

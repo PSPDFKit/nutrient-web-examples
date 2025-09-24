@@ -1,9 +1,10 @@
-import Script from 'next/script';
-import { ReactNode } from 'react';
+import Script from "next/script";
+import type { ReactNode } from "react";
 
 export const metadata = {
-  title: 'Nutrient Web SDK - Next.js TypeScript Examples',
-  description: 'Explore different ways to integrate Nutrient Web SDK with Next.js and TypeScript',
+  title: "Nutrient Web SDK - Next.js TypeScript Examples",
+  description:
+    "Explore different ways to integrate Nutrient Web SDK with Next.js and TypeScript",
 };
 
 interface RootLayoutProps {
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           strategy="beforeInteractive"
         />
       </head>
-      <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+      <body style={{ margin: 0, fontFamily: "system-ui, sans-serif" }}>
         {children}
       </body>
     </html>

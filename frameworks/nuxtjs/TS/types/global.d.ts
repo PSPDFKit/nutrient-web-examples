@@ -6,5 +6,3 @@ declare global {
     NutrientViewer?: typeof NutrientViewer;
   }
 }
-
-export {};

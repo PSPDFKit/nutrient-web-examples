@@ -29,7 +29,7 @@
     "check-biome-version": "./scripts/check-biome-version.sh"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,json,md,css,html}": ["biome check --write --no-errors-on-unmatched"]
+    "*": ["biome check --write --no-errors-on-unmatched"]
   },
   "pnpm": {
     "overrides": {

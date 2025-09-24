@@ -66,18 +66,23 @@
 <script setup>
 const examples = [
   {
-    path: '/basic-viewer',
-    title: 'Basic Viewer',
-    description: 'Simple PDF document loading with basic controls',
-    features: ['Document loading', 'Zoom controls', 'Page navigation']
+    path: "/basic-viewer",
+    title: "Basic Viewer",
+    description: "Simple PDF document loading with basic controls",
+    features: ["Document loading", "Zoom controls", "Page navigation"],
   },
   {
-    path: '/magazine-mode',
-    title: 'Magazine Mode',
-    description: 'Advanced magazine-style reader with custom features',
-    features: ['Double-page layout', 'Custom toolbar', 'Fullscreen support', 'iOS optimization']
-  }
-]
+    path: "/magazine-mode",
+    title: "Magazine Mode",
+    description: "Advanced magazine-style reader with custom features",
+    features: [
+      "Double-page layout",
+      "Custom toolbar",
+      "Fullscreen support",
+      "iOS optimization",
+    ],
+  },
+];
 </script>
 
 <style>

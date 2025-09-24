@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import BasicViewerPage from './pages/BasicViewerPage';
-import MagazineModePage from './pages/MagazineModePage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BasicViewerPage from "./pages/BasicViewerPage";
+import HomePage from "./pages/HomePage";
+import MagazineModePage from "./pages/MagazineModePage";
 
 function App() {
   return (

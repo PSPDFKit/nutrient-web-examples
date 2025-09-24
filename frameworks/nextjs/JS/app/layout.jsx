@@ -1,8 +1,9 @@
-import Script from 'next/script';
+import Script from "next/script";
 
 export const metadata = {
-  title: 'Nutrient Web SDK - Next.js Examples',
-  description: 'Explore different ways to integrate Nutrient Web SDK with Next.js',
+  title: "Nutrient Web SDK - Next.js Examples",
+  description:
+    "Explore different ways to integrate Nutrient Web SDK with Next.js",
 };
 
 export default function RootLayout({ children }) {
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
           strategy="beforeInteractive"
         />
       </head>
-      <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+      <body style={{ margin: 0, fontFamily: "system-ui, sans-serif" }}>
         {children}
       </body>
     </html>

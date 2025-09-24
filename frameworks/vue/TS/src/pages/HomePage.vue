@@ -65,24 +65,29 @@
 
 <script setup lang="ts">
 interface Example {
-  path: string
-  title: string
-  description: string
-  features: string[]
+  path: string;
+  title: string;
+  description: string;
+  features: string[];
 }
 
 const examples: Example[] = [
   {
-    path: '/basic-viewer',
-    title: 'Basic Viewer',
-    description: 'Simple PDF document loading with basic controls',
-    features: ['Document loading', 'Zoom controls', 'Page navigation']
+    path: "/basic-viewer",
+    title: "Basic Viewer",
+    description: "Simple PDF document loading with basic controls",
+    features: ["Document loading", "Zoom controls", "Page navigation"],
   },
   {
-    path: '/magazine-mode',
-    title: 'Magazine Mode',
-    description: 'Advanced magazine-style reader with custom features',
-    features: ['Double-page layout', 'Custom toolbar', 'Fullscreen support', 'iOS optimization']
-  }
-]
+    path: "/magazine-mode",
+    title: "Magazine Mode",
+    description: "Advanced magazine-style reader with custom features",
+    features: [
+      "Double-page layout",
+      "Custom toolbar",
+      "Fullscreen support",
+      "iOS optimization",
+    ],
+  },
+];
 </script>

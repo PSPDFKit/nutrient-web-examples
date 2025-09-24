@@ -29,30 +29,33 @@
 </template>
 
 <script setup lang="ts">
-import { loadMagazineViewer, unloadMagazineViewer } from '../examples/magazine-mode/implementation'
+import {
+  loadMagazineViewer,
+  unloadMagazineViewer,
+} from "../examples/magazine-mode/implementation";
 
-const containerRef = ref<HTMLDivElement | null>(null)
+const containerRef = ref<HTMLDivElement | null>(null);
 
 onMounted(async () => {
   // Wait for NutrientViewer to be available
   while (!window.NutrientViewer) {
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
-  const container = containerRef.value
-  const { NutrientViewer } = window
+  const container = containerRef.value;
+  const { NutrientViewer } = window;
 
   if (container && NutrientViewer) {
-    loadMagazineViewer(NutrientViewer, container)
+    loadMagazineViewer(NutrientViewer, container);
   }
-})
+});
 
 onUnmounted(() => {
-  const container = containerRef.value
-  const { NutrientViewer } = window
-  
+  const container = containerRef.value;
+  const { NutrientViewer } = window;
+
   if (container && NutrientViewer) {
-    unloadMagazineViewer(NutrientViewer, container)
+    unloadMagazineViewer(NutrientViewer, container);
   }
-})
+});
 </script>
