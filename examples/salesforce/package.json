@@ -19,6 +19,7 @@
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^1.1.2",
     "@prettier/plugin-xml": "^2.0.1",
+    "@salesforce/cli": "^2.107.6",
     "@salesforce/eslint-config-lwc": "^3.2.3",
     "@salesforce/eslint-plugin-aura": "^2.0.0",
     "@salesforce/eslint-plugin-lightning": "^1.0.0",
