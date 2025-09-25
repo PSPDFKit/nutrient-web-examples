@@ -1,80 +1,75 @@
-<template>
-  <div class="page-container">
-    <nav class="nav-bar">
-      <NuxtLink to="/" class="back-link">
-        ← Back to Examples
-      </NuxtLink>
-      <h2 class="page-title">Custom Overlays</h2>
-      <span class="page-description">
-        Interactive overlays that appear on page clicks
-      </span>
-    </nav>
-
-    <div ref="containerRef" class="viewer-container" />
-  </div>
-</template>
-
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
-} from "~/examples/custom-overlays/implementation";
+} from "../examples/custom-overlays/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
   const container = containerRef.value;
-  const { NutrientViewer } = window;
 
-  if (container && NutrientViewer) {
-    loadCustomOverlaysViewer(NutrientViewer, container);
+  if (!container) return;
+
+  let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+
+  try {
+    nutrientViewer = loadNutrientViewer();
+
+    nutrientViewer.unload(container);
+
+    loadCustomOverlaysViewer(nutrientViewer, container);
+  } catch (error) {
+    console.error("Failed to load Nutrient Viewer:", error);
   }
+
+  return () => {
+    if (nutrientViewer && container) {
+      unloadCustomOverlaysViewer(nutrientViewer, container);
+    }
+  };
 });
 
 onUnmounted(() => {
   const container = containerRef.value;
   const { NutrientViewer } = window;
 
-  if (NutrientViewer && container) {
+  if (container && NutrientViewer) {
     unloadCustomOverlaysViewer(NutrientViewer, container);
   }
 });
 </script>
 
-<style scoped>
-.page-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+<template>
+  <div :style="{ height: '100vh', display: 'flex', flexDirection: 'column' }">
+    <nav
+      :style="{
+        padding: '1rem',
+        backgroundColor: '#f5f5f5',
+        borderBottom: '1px solid #ddd',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+      }"
+    >
+      <router-link
+        to="/"
+        :style="{
+          textDecoration: 'none',
+          color: '#4A8FED',
+          fontSize: '0.9rem',
+        }"
+      >
+        ← Back to Examples
+      </router-link>
+      <h2 :style="{ margin: 0, fontSize: '1.1rem' }">Custom Overlays</h2>
+      <span :style="{ fontSize: '0.9rem', color: '#666' }">
+        Interactive overlays that appear on page clicks
+      </span>
+    </nav>
 
-.nav-bar {
-  padding: 1rem;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.back-link {
-  text-decoration: none;
-  color: #4a8fed;
-  font-size: 0.9rem;
-}
-
-.page-title {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.page-description {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.viewer-container {
-  flex: 1;
-  width: 100%;
-}
-</style>
+    <div ref="containerRef" :style="{ flex: 1, width: '100%' }" />
+  </div>
+</template>
