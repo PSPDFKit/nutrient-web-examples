@@ -48,11 +48,25 @@ function HomePage() {
         <header className="homepage-header">
           <div className="homepage-tech-stack">
             <div className="tech-item">
-              <NutrientLogo />
+              <a
+                href="https://www.nutrient.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-no-style"
+              >
+                <NutrientLogo />
+              </a>
             </div>
             <div className="tech-plus">+</div>
             <div className="tech-item">
-              <ReactLogo />
+              <a
+                href="https://react.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-no-style"
+              >
+                <ReactLogo />
+              </a>
             </div>
           </div>
           <p className="homepage-subtitle">Select an example to get started</p>
