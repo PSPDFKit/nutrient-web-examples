@@ -33,7 +33,7 @@ import { loadNutrientViewer } from "../../utils/loadNutrientViewer";
 export class CustomOverlaysPageComponent implements AfterViewInit, OnDestroy {
   @ViewChild("container", { static: true }) containerRef!: ElementRef;
 
-  private nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+  private nutrientViewer!: ReturnType<typeof loadNutrientViewer>;
 
   async ngAfterViewInit() {
     const container = this.containerRef.nativeElement;
