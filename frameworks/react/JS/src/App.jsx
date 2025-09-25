@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BasicViewerPage from "./pages/BasicViewerPage";
+import CustomOverlaysPage from "./pages/CustomOverlaysPage";
 import HomePage from "./pages/HomePage";
 import MagazineModePage from "./pages/MagazineModePage";
 
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/basic-viewer" element={<BasicViewerPage />} />
         <Route path="/magazine-mode" element={<MagazineModePage />} />
+        <Route path="/custom-overlays" element={<CustomOverlaysPage />} />
       </Routes>
     </BrowserRouter>
   );

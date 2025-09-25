@@ -29,7 +29,7 @@ export function loadBasicViewer(
  * @param nutrientViewer - The nutrientViewer object (from CDN)
  * @param container - The container element
  */
-export async function unloadBasicViewer(
+export function unloadBasicViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
 ) {
