@@ -1,5 +1,5 @@
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
-import type { Configuration } from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
+import type NutrientViewer from "@nutrient-sdk/viewer";
+import type { Configuration } from "@nutrient-sdk/viewer";
 
 /**
  * Load a PDF viewer with custom overlays functionality

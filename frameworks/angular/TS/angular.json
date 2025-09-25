@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nutrient-angular-app": {
+    "nutrient-angular-ts": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "css"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,16 +13,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/nutrient-angular-app",
+            "outputPath": "dist/nutrient-angular-ts",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico"],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": [
-              "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.7.0/nutrient-viewer.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -59,15 +53,34 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "nutrient-angular-app:build:production"
+              "buildTarget": "nutrient-angular-ts:build:production"
             },
             "development": {
-              "buildTarget": "nutrient-angular-app:build:development"
+              "buildTarget": "nutrient-angular-ts:build:development"
             }
           },
           "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "nutrient-angular-ts:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
+            "scripts": []
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

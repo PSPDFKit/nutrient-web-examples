@@ -1,5 +1,15 @@
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
-import type { Configuration } from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
+import type NutrientViewer from "@nutrient-sdk/viewer";
+import type { Configuration } from "@nutrient-sdk/viewer";
+
+type ToolbarItem =
+  | { type: "sidebar-bookmarks" }
+  | { type: "sidebar-thumbnails" }
+  | { type: "highlighter" }
+  | { type: "zoom-in" }
+  | { type: "zoom-out" }
+  | { type: "spacer" }
+  | { type: "search" }
+  | { type: "custom"; title: string; onPress: () => void };
 
 // Extended Document interface for cross-browser fullscreen support
 interface ExtendedDocument extends Document {
@@ -76,14 +86,14 @@ async function load(
   };
 
   // Customize the toolbar
-  const toolbarItems = [
-    { type: "sidebar-bookmarks", dropdownGroup: null },
-    { type: "sidebar-thumbnails", dropdownGroup: null },
-    { type: "highlighter" },
-    { type: "zoom-in" },
-    { type: "zoom-out" },
-    { type: "spacer" },
-    { type: "search" },
+  const toolbarItems: ToolbarItem[] = [
+    { type: "sidebar-bookmarks" as const },
+    { type: "sidebar-thumbnails" as const },
+    { type: "highlighter" as const },
+    { type: "zoom-in" as const },
+    { type: "zoom-out" as const },
+    { type: "spacer" as const },
+    { type: "search" as const },
   ];
 
   // Only add the fullscreenToolbarItem if the browser supports fullscreen mode

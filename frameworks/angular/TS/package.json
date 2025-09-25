@@ -14,28 +14,36 @@
   ],
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 3000",
+    "start": "ng serve",
     "build": "ng build",
-    "dev": "ng serve --port 3000"
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
   "dependencies": {
-    "@angular/animations": "^17.0.0",
-    "@angular/common": "^17.0.0",
-    "@angular/compiler": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "@angular/forms": "^17.0.0",
-    "@angular/platform-browser": "^17.0.0",
-    "@angular/platform-browser-dynamic": "^17.0.0",
-    "@angular/router": "^17.0.0",
-    "@nutrient-sdk/viewer": "^1.7.0",
+    "@angular/animations": "^19.2.9",
+    "@angular/common": "^19.2.9",
+    "@angular/compiler": "^19.2.9",
+    "@angular/core": "^19.2.9",
+    "@angular/forms": "^19.2.9",
+    "@angular/platform-browser": "^19.2.9",
+    "@angular/platform-browser-dynamic": "^19.2.9",
+    "@angular/router": "^19.2.9",
+    "@nutrient-sdk/viewer": "1.6.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.0",
-    "@angular/cli": "^17.0.0",
-    "@angular/compiler-cli": "^17.0.0",
-    "typescript": "~5.2.0"
+    "@angular-devkit/build-angular": "^19.2.10",
+    "@angular/cli": "^19.2.10",
+    "@angular/compiler-cli": "^19.2.9",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.5.2"
   }
 }

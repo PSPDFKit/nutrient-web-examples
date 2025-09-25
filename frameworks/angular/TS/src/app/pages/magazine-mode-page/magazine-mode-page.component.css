@@ -1,0 +1,37 @@
+.magazine-mode-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.magazine-mode-nav {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.magazine-mode-back-link {
+  text-decoration: none;
+  color: #4a8fed;
+  font-size: 0.9rem;
+}
+
+.magazine-mode-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.magazine-mode-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.magazine-mode-content {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  min-height: 400px;
+}

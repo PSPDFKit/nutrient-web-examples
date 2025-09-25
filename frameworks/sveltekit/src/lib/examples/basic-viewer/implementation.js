@@ -4,8 +4,6 @@
  * This is the simplest way to load a PDF document with Nutrient Web SDK.
  */
 
-import type NutrientViewer from "@nutrient-sdk/viewer";
-
 /**
  * Load a basic PDF viewer
  * @param nutrientViewer - The NutrientViewer object (from CDN)
@@ -14,8 +12,8 @@ import type NutrientViewer from "@nutrient-sdk/viewer";
  * @returns Promise that resolves when the viewer is loaded
  */
 export function loadBasicViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
+  nutrientViewer,
+  container,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
   return nutrientViewer.load({
@@ -29,9 +27,6 @@ export function loadBasicViewer(
  * @param nutrientViewer - The nutrientViewer object (from CDN)
  * @param container - The container element
  */
-export function unloadBasicViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
-) {
+export function unloadBasicViewer(nutrientViewer, container) {
   nutrientViewer.unload(container);
 }

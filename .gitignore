@@ -8,6 +8,7 @@ pspdfkit-lib/
 open-iconic
 .next/
 .nuxt/
+.angular/
 dist/
 analytics.js
 .DS_Store

@@ -4,7 +4,7 @@
  * This is the simplest way to load a PDF document with Nutrient Web SDK.
  */
 
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
+import type NutrientViewer from "@nutrient-sdk/viewer";
 
 /**
  * Load a basic PDF viewer
