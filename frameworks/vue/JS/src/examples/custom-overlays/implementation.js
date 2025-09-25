@@ -1,5 +1,5 @@
 /**
- * Custom Overlays Implementation (JavaScript)
+ * Custom Overlays Implementation for Next.js (TypeScript)
  *
  * This example demonstrates advanced Nutrient Web SDK features:
  * - Custom overlay items that appear on page clicks
@@ -10,25 +10,22 @@
 
 /**
  * Load a PDF viewer with custom overlays functionality
- * @param {Object} NutrientViewer - The NutrientViewer object (from CDN or import)
- * @param {HTMLElement} container - The container element to mount the viewer
- * @param {string} [document] - URL to the PDF document
- * @returns {Promise} Promise that resolves when the viewer is loaded
+ * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param container - The container element to mount the viewer
+ * @param document - URL to the PDF document
+ * @returns Promise that resolves when the viewer is loaded
  */
 export async function loadCustomOverlaysViewer(
-  NutrientViewer,
+  nutrientViewer,
   container,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
-  if (!NutrientViewer) {
+  if (!nutrientViewer) {
     throw new Error("NutrientViewer is required");
   }
 
-  // Ensure there's only one NutrientViewer instance
-  NutrientViewer.unload(container);
-
   // Load the viewer with custom overlays configuration
-  return load(NutrientViewer, {
+  return load(nutrientViewer, {
     container,
     document,
   });
@@ -36,22 +33,22 @@ export async function loadCustomOverlaysViewer(
 
 /**
  * Internal load function with custom overlays configuration
- * @param {Object} NutrientViewer - The NutrientViewer object
- * @param {Object} defaultConfiguration - Base configuration object
+ * @param nutrientViewer - The NutrientViewer object
+ * @param defaultConfiguration - Base configuration object
  */
-function load(NutrientViewer, defaultConfiguration) {
-  return NutrientViewer.load(defaultConfiguration).then((instance) => {
+function load(nutrientViewer, defaultConfiguration) {
+  return nutrientViewer.load(defaultConfiguration).then((instance) => {
     console.log("Nutrient Web SDK successfully loaded!!", instance);
 
     // Every time a user clicks on the page, we show a custom overlay item on
     // this page.
     instance.addEventListener("page.press", (event) => {
       if (event.pageIndex === 0) {
-        instance.setCustomOverlayItem(getOverlayItemForPage1(NutrientViewer));
+        instance.setCustomOverlayItem(getOverlayItemForPage1(nutrientViewer));
       }
 
       if (event.pageIndex === 1) {
-        instance.setCustomOverlayItem(getOverlayItemForPage2(NutrientViewer));
+        instance.setCustomOverlayItem(getOverlayItemForPage2(nutrientViewer));
       }
     });
 
@@ -59,7 +56,7 @@ function load(NutrientViewer, defaultConfiguration) {
   });
 }
 
-function getOverlayItemForPage1(NutrientViewer) {
+function getOverlayItemForPage1(nutrientViewer) {
   // We create a div element with an emoji and a short text.
   const overlayElement = document.createElement("div");
 
@@ -71,15 +68,15 @@ function getOverlayItemForPage1(NutrientViewer) {
   // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement
   // that we created above as a node, the pageIndex we get from our onPress
   // event and define the position on the page.
-  return new NutrientViewer.CustomOverlayItem({
+  return new nutrientViewer.CustomOverlayItem({
     id: "overlay-item-first-page",
     node: overlayElement,
     pageIndex: 0,
-    position: new NutrientViewer.Geometry.Point({ x: 300, y: 50 }),
+    position: new nutrientViewer.Geometry.Point({ x: 300, y: 50 }),
   });
 }
 
-function getOverlayItemForPage2(NutrientViewer) {
+function getOverlayItemForPage2(nutrientViewer) {
   const overlayElement = document.createElement("div");
 
   // In this case we embed a video to the page
@@ -89,21 +86,21 @@ function getOverlayItemForPage2(NutrientViewer) {
   // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement
   // that we created above as a node, the pageIndex we get from our onPress
   // event and define the position on the page.
-  return new NutrientViewer.CustomOverlayItem({
+  return new nutrientViewer.CustomOverlayItem({
     id: "overlay-item-second-page",
     node: overlayElement,
     pageIndex: 1,
-    position: new NutrientViewer.Geometry.Point({ x: 55, y: 220 }),
+    position: new nutrientViewer.Geometry.Point({ x: 55, y: 220 }),
   });
 }
 
 /**
  * Unload the custom overlays viewer from a container
- * @param {Object} NutrientViewer - The NutrientViewer object (from CDN or import)
- * @param {HTMLElement} container - The container element
+ * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param container - The container element
  */
-export async function unloadCustomOverlaysViewer(NutrientViewer, container) {
-  if (NutrientViewer) {
-    NutrientViewer.unload(container);
+export async function unloadCustomOverlaysViewer(nutrientViewer, container) {
+  if (nutrientViewer) {
+    nutrientViewer.unload(container);
   }
 }

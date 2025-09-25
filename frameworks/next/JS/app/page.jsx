@@ -1,7 +1,7 @@
 import Link from "next/link";
 import "./page.css";
+import NextLogo from "./components/logos/NextLogo";
 import { NutrientLogo } from "./components/logos/NutrientLogo";
-import ReactLogo from "./components/logos/ReactLogo";
 
 function HomePage() {
   const examples = [
@@ -58,7 +58,7 @@ function HomePage() {
                 rel="noopener noreferrer"
                 className="link-no-style"
               >
-                <ReactLogo />
+                <NextLogo />
               </a>
             </div>
           </div>

@@ -4,21 +4,29 @@ import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
 } from "../examples/custom-overlays/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 function CustomOverlaysPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const { NutrientViewer } = window;
 
-    if (container && NutrientViewer) {
-      loadCustomOverlaysViewer(NutrientViewer, container);
+    if (!container) return;
+
+    let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+
+    try {
+      nutrientViewer = loadNutrientViewer();
+
+      loadCustomOverlaysViewer(nutrientViewer, container);
+    } catch (error) {
+      console.error("Failed to load Nutrient Viewer:", error);
     }
 
     return () => {
-      if (NutrientViewer && container) {
-        unloadCustomOverlaysViewer(NutrientViewer, container);
+      if (nutrientViewer && container) {
+        unloadCustomOverlaysViewer(nutrientViewer, container);
       }
     };
   }, []);

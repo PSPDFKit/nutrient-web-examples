@@ -19,8 +19,6 @@ function MagazineModePage() {
     try {
       nutrientViewer = loadNutrientViewer();
 
-      nutrientViewer.unload(container);
-
       loadMagazineViewer(nutrientViewer, container);
     } catch (error) {
       console.error("Failed to load Nutrient Viewer:", error);

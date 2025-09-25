@@ -1,18 +1,9 @@
-/**
- * Custom Overlays Implementation (TypeScript)
- *
- * This example demonstrates advanced Nutrient Web SDK features:
- * - Custom overlay items that appear on page clicks
- * - Interactive overlays with HTML content
- * - Event handling for page interactions
- * - Dynamic overlay positioning
- */
-
 import type NutrientViewer from "@nutrient-sdk/viewer";
 import type { Configuration } from "@nutrient-sdk/viewer";
 
 /**
  * Load a PDF viewer with custom overlays functionality
+ *
  * @param nutrientViewer - The NutrientViewer object (from CDN)
  * @param container - The container element to mount the viewer
  * @param document - URL to the PDF document
@@ -39,11 +30,12 @@ export async function loadCustomOverlaysViewer(
 
 /**
  * Internal load function with custom overlays configuration
+ *
  * @param nutrientViewer - The NutrientViewer object
  * @param defaultConfiguration - Base configuration object
  */
 function load(
-  nutrientViewer: typeof NutrientViewer,
+  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
   defaultConfiguration: Configuration,
 ) {
   return nutrientViewer.load(defaultConfiguration).then((instance) => {
@@ -65,7 +57,9 @@ function load(
   });
 }
 
-function getOverlayItemForPage1(nutrientViewer: typeof NutrientViewer) {
+function getOverlayItemForPage1(
+  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
+) {
   // We create a div element with an emoji and a short text.
   const overlayElement = document.createElement("div");
 
@@ -74,9 +68,7 @@ function getOverlayItemForPage1(nutrientViewer: typeof NutrientViewer) {
   overlayElement.innerHTML =
     "<p>👋 This is an overlay item that appears when clicking on the first page. Find out what happens when you click on the second page.";
 
-  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement
-  // that we created above as a node, the pageIndex we get from our onPress
-  // event and define the position on the page.
+  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement that we created above as a node, the pageIndex we get from our onPress event and define the position on the page.
   return new nutrientViewer.CustomOverlayItem({
     id: "overlay-item-first-page",
     node: overlayElement,
@@ -85,16 +77,16 @@ function getOverlayItemForPage1(nutrientViewer: typeof NutrientViewer) {
   });
 }
 
-function getOverlayItemForPage2(nutrientViewer: typeof NutrientViewer) {
+function getOverlayItemForPage2(
+  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
+) {
   const overlayElement = document.createElement("div");
 
   // In this case we embed a video to the page
   overlayElement.innerHTML =
     '<iframe src="https://player.vimeo.com/video/227250697" width="500" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 
-  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement
-  // that we created above as a node, the pageIndex we get from our onPress
-  // event and define the position on the page.
+  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement that we created above as a node, the pageIndex we get from our onPress event and define the position on the page.
   return new nutrientViewer.CustomOverlayItem({
     id: "overlay-item-second-page",
     node: overlayElement,
@@ -105,6 +97,7 @@ function getOverlayItemForPage2(nutrientViewer: typeof NutrientViewer) {
 
 /**
  * Unload the custom overlays viewer from a container
+ *
  * @param nutrientViewer - The NutrientViewer object (from CDN)
  * @param container - The container element
  */

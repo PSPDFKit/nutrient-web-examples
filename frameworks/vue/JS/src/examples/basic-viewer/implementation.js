@@ -1,41 +1,22 @@
 /**
- * Basic Nutrient Viewer Implementation
+ * Basic Nutrient Viewer Implementation for React (TypeScript)
  *
  * This is the simplest way to load a PDF document with Nutrient Web SDK.
- * Framework implementations should import this and call loadBasicViewer() with their container element.
  */
 
 /**
  * Load a basic PDF viewer
- * @param {Object} NutrientViewer - The NutrientViewer object (from CDN or import)
- * @param {HTMLElement} container - The container element to mount the viewer
- * @param {string} [document] - URL to the PDF document
- * @returns {Promise} Promise that resolves when the viewer is loaded
+ * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param container - The container element to mount the viewer
+ * @param document - URL to the PDF document
+ * @returns Promise that resolves when the viewer is loaded
  */
-export async function loadBasicViewer(
-  NutrientViewer,
+export function loadBasicViewer(
+  nutrientViewer,
   container,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
-  if (!NutrientViewer) {
-    throw new Error("NutrientViewer is required");
-  }
-
-  // Ensure there's only one NutrientViewer instance - be defensive about cleanup
-  try {
-    await NutrientViewer.unload(container);
-    // Wait a bit to ensure cleanup is complete
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  } catch (error) {
-    // Ignore unload errors - container might not have an instance
-    console.debug(
-      "Container unload (expected if no previous instance):",
-      error,
-    );
-  }
-
-  // Load the viewer with basic configuration
-  return NutrientViewer.load({
+  return nutrientViewer.load({
     container,
     document,
   });
@@ -43,15 +24,9 @@ export async function loadBasicViewer(
 
 /**
  * Unload the viewer from a container
- * @param {Object} NutrientViewer - The NutrientViewer object (from CDN or import)
- * @param {HTMLElement} container - The container element
+ * @param nutrientViewer - The nutrientViewer object (from CDN)
+ * @param container - The container element
  */
-export async function unloadBasicViewer(NutrientViewer, container) {
-  if (NutrientViewer && container) {
-    try {
-      await NutrientViewer.unload(container);
-    } catch (error) {
-      console.debug("Container unload error (may be expected):", error);
-    }
-  }
+export function unloadBasicViewer(nutrientViewer, container) {
+  nutrientViewer.unload(container);
 }

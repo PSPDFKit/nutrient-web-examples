@@ -1,100 +1,15 @@
-<template>
-  <div :style="{ 
-    backgroundColor: '#efebe7', 
-    minHeight: '100vh',
-    padding: '2rem 0'
-  }">
-    <div :style="{ 
-      maxWidth: '1200px', 
-      margin: '0 auto',
-      padding: '0 2rem'
-    }">
-      <div :style="{ textAlign: 'center', marginBottom: '2rem' }">
-        <svg width="100%" height="36" viewBox="0 0 208 36" fill="none" xmlns="http://www.w3.org/2000/svg" :style="{ maxWidth: '208px', margin: '0 auto' }">
-          <path d="M4.1524 22.1521C1.8582 22.1521 0 20.2939 0 17.9997C0 15.7055 1.8582 13.8473 4.1524 13.8473C6.44659 13.8473 8.30479 15.7055 8.30479 17.9997C8.30479 20.2939 6.44659 22.1521 4.1524 22.1521ZM45.6763 13.8473C43.3821 13.8473 41.524 15.7055 41.524 17.9997C41.524 20.2939 43.3821 22.1521 45.6763 22.1521C47.9705 22.1521 49.8287 20.2939 49.8287 17.9997C49.8287 15.7055 47.9705 13.8473 45.6763 13.8473ZM6.34071 28.1647C4.58424 29.6388 4.35379 32.259 5.82789 34.0154C7.30199 35.7719 9.92215 36.0024 11.6786 34.5283C13.4351 33.0542 13.6655 30.434 12.1914 28.6775C10.7173 26.9211 8.09717 26.6906 6.34071 28.1647ZM43.488 7.8346C45.2445 6.3605 45.475 3.74033 44.0009 1.98387C42.5268 0.227407 39.9066 -0.0030509 38.1501 1.47105C36.3937 2.94515 36.1632 5.56531 37.6373 7.32177C39.1114 9.07824 41.7316 9.3087 43.488 7.8346ZM11.6786 1.47313C9.92215 -0.000974749 7.30199 0.227407 5.82789 1.98595C4.35379 3.74449 4.58217 6.36257 6.34071 7.83667C8.09925 9.31077 10.7173 9.08239 12.1914 7.32385C13.6655 5.56531 13.4372 2.94723 11.6786 1.47313ZM43.488 28.1647C41.7316 26.6906 39.1114 26.919 37.6373 28.6775C36.1632 30.434 36.3916 33.0542 38.1501 34.5283C39.9066 36.0024 42.5268 35.774 44.0009 34.0154C45.475 32.259 45.2466 29.6388 43.488 28.1647ZM32.8849 19.2661C31.1284 17.792 28.5083 18.0204 27.0342 19.779C25.5601 21.5375 25.7884 24.1556 27.547 25.6297C29.3055 27.1038 31.9236 26.8754 33.3977 25.1169C34.8718 23.3583 34.6434 20.7402 32.8849 19.2661ZM22.2818 10.3696C20.5253 8.89553 17.9051 9.12391 16.431 10.8825C14.9569 12.641 15.1853 15.2591 16.9438 16.7332C18.7024 18.2073 21.3205 17.9789 22.7946 16.2204C24.2687 14.4618 24.0403 11.8437 22.2818 10.3696Z" fill="#1A1414"></path>
-          <path d="M83.2482 4.00294H86.8124V32.0934H82.7174L73.1011 15.2088C72.579 14.2696 71.494 12.1667 69.849 8.90002H69.8111C69.8636 10.1017 69.9103 11.4113 69.9482 12.8288C69.9861 14.2463 70.0065 15.3079 70.0065 16.0109V32.0934H66.4424V4.00294H70.4382L80.0749 20.6921C80.559 21.5292 81.434 23.1654 82.6999 25.6096L83.4057 26.96H83.4436C83.3911 25.8896 83.3445 24.6559 83.3065 23.2588C83.2686 21.8617 83.2482 20.7388 83.2482 19.89V4.00294ZM104.254 23.2996C104.254 27.4792 102.53 29.5675 99.0828 29.5675C98.3128 29.5675 97.639 29.4975 97.0645 29.3604C96.4899 29.2234 95.9474 28.9054 95.4399 28.4096C95.0607 28.045 94.7865 27.6279 94.6174 27.1671C94.4482 26.7034 94.3461 26.2396 94.314 25.7759C94.282 25.3121 94.2645 24.6617 94.2645 23.8275V12.0354H90.5428V24.0229C90.5428 24.9621 90.572 25.7788 90.6303 26.4729C90.6886 27.1671 90.8374 27.8525 91.0707 28.5409C91.304 29.2292 91.6657 29.8242 92.147 30.3346C92.8645 31.1046 93.7074 31.6734 94.6728 32.0379C95.6382 32.4025 96.7757 32.5863 98.0824 32.5863C99.5203 32.5863 100.772 32.2859 101.842 31.685C102.912 31.0842 103.714 30.2238 104.251 29.0979V32.0963H107.856V12.0354H104.251V23.2996H104.254ZM118.677 6.45294H115.113V12.0354H110.901V15.0513H115.113V27.1584C115.113 28.9725 115.603 30.2821 116.583 31.0871C117.563 31.8921 119.141 32.2917 121.322 32.2917C121.871 32.2917 122.416 32.2625 122.959 32.2042C123.501 32.1459 123.947 32.07 124.3 31.9796L124.222 28.6896C123.215 28.9259 122.346 29.0425 121.617 29.0425C120.888 29.0425 120.275 28.9871 119.864 28.8763C119.453 28.7654 119.152 28.5671 118.963 28.2784C118.773 27.9896 118.68 27.5784 118.68 27.0446V15.0571H124.379V12.0413H118.68V6.45294H118.677ZM134.73 12.9746C133.456 13.7329 132.63 14.6721 132.251 15.795V12.0354H128.646V32.0934H132.251V22.9059C132.251 20.8029 132.563 19.1638 133.19 17.9884C133.817 16.8129 134.666 16.0079 135.737 15.5704C136.807 15.1329 138.108 14.9142 139.633 14.9142C140.246 14.9142 140.666 14.9346 140.887 14.9725L140.966 11.5454C140.103 11.5454 139.554 11.5571 139.321 11.5834C137.53 11.7525 136.002 12.2163 134.727 12.9746H134.73ZM170.287 18.5979C170.588 19.785 170.737 21.0217 170.737 22.2992C170.737 22.6784 170.731 22.9584 170.716 23.1421H155.497C155.535 25.35 156.025 26.9921 156.967 28.0684C157.906 29.1446 159.318 29.6842 161.199 29.6842C162.897 29.6842 164.215 29.3167 165.157 28.5788C166.099 27.8409 166.691 26.715 166.939 25.1984L170.424 25.4725C169.981 27.8088 168.978 29.5792 167.417 30.7809C165.857 31.9825 163.798 32.5834 161.237 32.5834C158.154 32.5834 155.754 31.6034 154.027 29.6463C152.394 27.8175 151.577 25.2771 151.577 22.025C151.577 20.5229 151.79 19.1346 152.213 17.8629C152.636 16.5884 153.269 15.4888 154.103 14.5613C154.978 13.5696 156.016 12.8171 157.218 12.3096C158.419 11.7992 159.744 11.5454 161.193 11.5454C162.812 11.5454 164.32 11.8896 165.717 12.575C167.114 13.2604 168.217 14.2434 169.027 15.5238C169.564 16.3871 169.981 17.4109 170.282 18.5979H170.287ZM167.015 20.2225C167.003 19.6479 166.898 19.0238 166.703 18.3529C166.507 17.6821 166.254 17.1163 165.939 16.6584C165.428 15.9 164.792 15.3488 164.028 15.0017C163.264 14.6546 162.334 14.4825 161.237 14.4825C160.14 14.4825 159.181 14.675 158.358 15.06C157.536 15.445 156.92 15.9788 156.518 16.6554C156.177 17.2038 155.934 17.7929 155.783 18.4171C155.634 19.0442 155.549 19.645 155.538 20.2196H167.018L167.015 20.2225ZM190.672 15.6113C190.444 14.9113 190.094 14.3075 189.625 13.8C188.893 13.03 188.044 12.4613 187.079 12.0967C186.113 11.7321 184.97 11.5484 183.652 11.5484C180.583 11.5484 178.518 12.7354 177.462 15.1125V12.0384H173.857V32.0963H177.462V21.0275C177.462 18.5075 178.005 16.7984 179.087 15.9059C180.172 15.0104 181.371 14.5642 182.692 14.5642C183.436 14.5642 184.089 14.6342 184.652 14.7713C185.212 14.9084 185.749 15.2263 186.259 15.7221C186.638 16.0867 186.915 16.5067 187.09 16.9763C187.265 17.4459 187.37 17.9184 187.402 18.3967C187.434 18.8721 187.452 19.5371 187.452 20.3859V32.0992H191.194V20.1904C191.194 19.2367 191.165 18.4113 191.107 17.7113C191.048 17.0113 190.902 16.3142 190.675 15.6142L190.672 15.6113ZM207.338 15.0513V12.0354H201.639V6.45294H198.074V12.0354H193.863V15.0513H198.074V27.1584C198.074 28.9725 198.564 30.2821 199.544 31.0871C200.524 31.8921 202.102 32.2917 204.284 32.2917C204.832 32.2917 205.378 32.2625 205.92 32.2042C206.463 32.1459 206.909 32.07 207.262 31.9796L207.183 28.6896C206.177 28.9259 205.308 29.0425 204.579 29.0425C203.849 29.0425 203.237 28.9871 202.826 28.8763C202.414 28.7654 202.114 28.5671 201.924 28.2784C201.735 27.9896 201.642 27.5784 201.642 27.0446V15.0571H207.341L207.338 15.0513ZM144.557 32.1225H148.162V12.0646H144.557V32.1225ZM146.359 3.41669C144.904 3.41669 143.725 4.59502 143.725 6.05044C143.725 7.50585 144.904 8.68419 146.359 8.68419C147.814 8.68419 148.993 7.50585 148.993 6.05044C148.993 4.59502 147.814 3.41669 146.359 3.41669Z" fill="#1A1414"></path>
-        </svg>
-      </div>
-    <header :style="{ textAlign: 'center', marginBottom: '3rem' }">
-      <div :style="{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        gap: '1rem',
-        marginBottom: '1rem'
-      }">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 16.1A5 5 0 0 1 5.9 20M6.5 9.9a3.5 3.5 0 0 0-5.4 2.1" stroke="#4FC08D" strokeWidth="1.5" fill="none"/>
-          <path d="m8 20.4 4-6.9L16 20.4" stroke="#4FC08D" strokeWidth="1.5" fill="none"/>
-          <path d="M12 2 6 13.5 18 13.5Z" fill="#4FC08D"/>
-        </svg>
-        <h1 :style="{ margin: 0 }">Nutrient Web SDK - Vue Examples</h1>
-      </div>
-      <p :style="{ fontSize: '1.1rem', color: '#666' }">
-        Build reactive and progressive PDF applications with Vue's intuitive approach
-      </p>
-    </header>
+<script setup lang="ts">
+import NutrientLogo from "../components/logos/NutrientLogo.vue";
+import VueLogo from "../components/logos/VueLogo.vue";
 
-    <div :style="{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-      gap: '2rem'
-    }">
-      <div
-        v-for="example in examples"
-        :key="example.path"
-        :style="{
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          padding: '1.5rem',
-          backgroundColor: 'white',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-        }"
-      >
-        <h3 :style="{ margin: '0 0 1rem 0' }">{{ example.title }}</h3>
-        <p :style="{ color: '#666', marginBottom: '1rem' }">
-          {{ example.description }}
-        </p>
-        
-        <h4 :style="{ fontSize: '0.9rem', margin: '1rem 0 0.5rem 0' }">Features:</h4>
-        <ul :style="{ fontSize: '0.9rem', color: '#555' }">
-          <li v-for="feature in example.features" :key="feature">
-            {{ feature }}
-          </li>
-        </ul>
-        
-        <router-link
-          :to="example.path"
-          :style="{
-            display: 'inline-block',
-            marginTop: '1rem',
-            padding: '0.5rem 1rem',
-            backgroundColor: '#4A8FED',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '4px',
-            fontSize: '0.9rem'
-          }"
-        >
-          View Example →
-        </router-link>
-      </div>
-    </div>
+interface Example {
+  path: string;
+  title: string;
+  description: string;
+  features: string[];
+}
 
-    <footer :style="{ textAlign: 'center', marginTop: '3rem', color: '#666' }">
-      <p>
-        Learn more: 
-        <a href="https://www.nutrient.io/guides/web/" target="_blank" rel="noopener noreferrer">
-          Nutrient Web SDK Documentation
-        </a>
-      </p>
-    </footer>
-    </div>
-  </div>
-</template>
-
-<script setup>
-const examples = [
+const examples: Example[] = [
   {
     path: "/basic-viewer",
     title: "Basic Viewer",
@@ -112,5 +27,241 @@ const examples = [
       "iOS optimization",
     ],
   },
+  {
+    path: "/custom-overlays",
+    title: "Custom Overlays",
+    description: "Interactive overlays that appear on page clicks",
+    features: [
+      "Page click events",
+      "HTML overlay content",
+      "Dynamic positioning",
+      "Video embedding",
+    ],
+  },
 ];
 </script>
+
+<template>
+  <div class="homepage">
+    <div class="homepage-container">
+      <header class="homepage-header">
+        <h1 class="homepage-title">TypeScript Examples</h1>
+        <div class="homepage-tech-stack">
+          <div class="tech-item">
+            <a
+              to="https://www.nutrient.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-no-style"
+            >
+              <NutrientLogo />
+            </a>
+          </div>
+          <div class="tech-plus">+</div>
+          <div class="tech-item">
+            <a
+              to="https://vuejs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-no-style"
+            >
+              <VueLogo />
+            </a>
+          </div>
+        </div>
+        <p class="homepage-subtitle">Select an example to get started</p>
+      </header>
+
+      <div class="examples-grid">
+        <div
+          v-for="example in examples"
+          :key="example.path"
+          class="example-card"
+        >
+          <h3 class="example-title">{{ example.title }}</h3>
+          <p class="example-description">
+            {{ example.description }}
+          </p>
+
+          <h4 class="features-title">Features:</h4>
+          <ul class="features-list">
+            <li v-for="feature in example.features" :key="feature">
+              {{ feature }}
+            </li>
+          </ul>
+
+          <div class="button-container">
+            <router-link :to="example.path" class="view-button">
+              View
+            </router-link>
+          </div>
+        </div>
+      </div>
+
+      <footer class="homepage-footer">
+        <p>
+          Learn more:
+          <a
+            href="https://www.nutrient.io/guides/web/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Nutrient Web SDK Documentation
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.homepage {
+  background-color: #efebe7;
+  min-height: 100vh;
+  padding: 2em 0;
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
+}
+
+.homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2em;
+  padding-bottom: 2em;
+}
+
+.homepage-logo {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.homepage-logo svg {
+  max-width: 208px;
+  margin: 0 auto;
+}
+
+.homepage-header {
+  text-align: center;
+  margin-bottom: 4em;
+}
+
+.homepage-tech-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  width: 4em;
+}
+
+.tech-item svg {
+  width: 100%;
+}
+
+.react-title {
+  margin: 0;
+  font-size: 2em;
+  color: #61dafb;
+}
+
+.nutrient-title {
+  margin: 0;
+  font-size: 2em;
+  color: #1a1414;
+}
+
+.tech-plus {
+  font-size: 3em;
+  font-weight: 300;
+  color: #888;
+}
+
+.homepage-subtitle {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 4em;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2em;
+}
+
+.example-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.example-title {
+  margin: 0 0 1em 0;
+}
+
+.example-description {
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.features-title {
+  font-size: 0.9em;
+  margin: 1em 0 0.5em 0;
+}
+
+.features-list {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.button-container {
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+.view-button {
+  display: block;
+  width: 100%;
+  padding: 0.75em 1em;
+  background-color: #c2b8ae;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: none;
+  box-sizing: border-box;
+  text-transform: uppercase;
+}
+
+.view-button:hover {
+  background-color: #d4cbc4;
+}
+
+.homepage-footer {
+  text-align: center;
+  margin-top: 4em;
+  padding-top: 2em;
+  color: #666;
+}
+
+.link-no-style {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
