@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/basic-viewer/+page.svelte";

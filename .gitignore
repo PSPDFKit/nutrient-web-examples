@@ -9,6 +9,7 @@ open-iconic
 .next/
 .nuxt/
 .angular/
+.svelte-kit/
 dist/
 analytics.js
 .DS_Store

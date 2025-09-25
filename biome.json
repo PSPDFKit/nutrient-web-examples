@@ -8,7 +8,8 @@
       "./examples/wasm-benchmark/*",
       "./examples/asp-net/*",
       "./examples/svelte-kit",
-      "./examples/salesforce/*"
+      "./examples/salesforce/*",
+      "**/frameworks/sveltekit/**/.svelte-kit/**"
     ],
     "ignoreUnknown": true
   },
