@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./HomePage.css";
 
 function HomePage() {
   const examples = [
@@ -33,28 +34,15 @@ function HomePage() {
   ];
 
   return (
-    <div
-      style={{
-        backgroundColor: "#efebe7",
-        minHeight: "100vh",
-        padding: "2rem 0",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 2rem",
-        }}
-      >
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+    <div className="homepage">
+      <div className="homepage-container">
+        <div className="homepage-logo">
           <svg
             width="100%"
             height="36"
             viewBox="0 0 208 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ maxWidth: "208px", margin: "0 auto" }}
             role="img"
             aria-label="Nutrient logo"
           >
@@ -68,27 +56,10 @@ function HomePage() {
             />
           </svg>
         </div>
-        <header style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h1
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "600",
-              margin: "0 0 2rem 0",
-              color: "#1A1414",
-            }}
-          >
-            JavaScript Examples
-          </h1>
-          <div style={{ marginBottom: "2rem" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.75rem",
-                marginBottom: "1rem",
-              }}
-            >
+        <header className="homepage-header">
+          <h1 className="homepage-title">JavaScript Examples</h1>
+          <div className="homepage-tech-stack">
+            <div className="tech-item">
               <svg
                 width="40"
                 height="40"
@@ -103,38 +74,14 @@ function HomePage() {
                   <ellipse rx="11" ry="4.2" transform="rotate(120)" />
                 </g>
               </svg>
-              <h2 style={{ margin: 0, fontSize: "1.8rem", color: "#61dafb" }}>
-                React
-              </h2>
+              <h2 className="react-title">React</h2>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "1.5rem 0",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "2rem",
-                  fontWeight: "300",
-                  color: "#888",
-                }}
-              >
-                +
-              </div>
+            <div className="tech-plus-container">
+              <div className="tech-plus">+</div>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.75rem",
-              }}
-            >
+            <div className="tech-item">
               <svg
                 width="60"
                 height="45"
@@ -153,88 +100,27 @@ function HomePage() {
                   fill="#1A1414"
                 />
               </svg>
-              <h2 style={{ margin: 0, fontSize: "1.8rem", color: "#1A1414" }}>
-                Nutrient
-              </h2>
+              <h2 className="nutrient-title">Nutrient</h2>
             </div>
           </div>
-          <p
-            style={{ fontSize: "1.1rem", color: "#666", marginBottom: "3rem" }}
-          >
-            Select an example to get started
-          </p>
+          <p className="homepage-subtitle">Select an example to get started</p>
         </header>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-            gap: "2rem",
-          }}
-        >
+        <div className="examples-grid">
           {examples.map((example) => (
-            <div
-              key={example.path}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "12px",
-                padding: "2rem",
-                backgroundColor: "white",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                transition: "all 0.3s ease",
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
-              }}
-            >
-              <h3 style={{ margin: "0 0 1rem 0" }}>{example.title}</h3>
-              <p style={{ color: "#666", marginBottom: "1rem" }}>
-                {example.description}
-              </p>
+            <div key={example.path} className="example-card">
+              <h3 className="example-title">{example.title}</h3>
+              <p className="example-description">{example.description}</p>
 
-              <h4 style={{ fontSize: "0.9rem", margin: "1rem 0 0.5rem 0" }}>
-                Features:
-              </h4>
-              <ul style={{ fontSize: "0.9rem", color: "#555" }}>
+              <h4 className="features-title">Features:</h4>
+              <ul className="features-list">
                 {example.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
 
-              <div style={{ marginTop: "auto", paddingTop: "1rem" }}>
-                <Link
-                  to={example.path}
-                  style={{
-                    display: "inline-block",
-                    width: "100%",
-                    padding: "0.75rem 1rem",
-                    backgroundColor: "#c2b8ae",
-                    color: "white",
-                    textDecoration: "none",
-                    borderRadius: "8px",
-                    fontSize: "0.9rem",
-                    fontWeight: "500",
-                    textAlign: "center",
-                    transition: "all 0.2s ease",
-                    border: "none",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#d4cbc4";
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#c2b8ae";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
+              <div className="button-container">
+                <Link to={example.path} className="view-button">
                   View
                 </Link>
               </div>
@@ -242,9 +128,7 @@ function HomePage() {
           ))}
         </div>
 
-        <footer
-          style={{ textAlign: "center", marginTop: "3rem", color: "#666" }}
-        >
+        <footer className="homepage-footer">
           <p>
             Learn more:{" "}
             <a

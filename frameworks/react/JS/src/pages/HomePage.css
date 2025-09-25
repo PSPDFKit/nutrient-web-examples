@@ -1,0 +1,150 @@
+.homepage {
+  background-color: #efebe7;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.homepage-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.homepage-logo svg {
+  max-width: 208px;
+  margin: 0 auto;
+}
+
+.homepage-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.homepage-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 2rem 0;
+  color: #1a1414;
+}
+
+.homepage-tech-stack {
+  margin-bottom: 2rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.react-title {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #61dafb;
+}
+
+.nutrient-title {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #1a1414;
+}
+
+.tech-plus-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.tech-plus {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #888;
+}
+
+.homepage-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.example-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.example-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.example-title {
+  margin: 0 0 1rem 0;
+}
+
+.example-description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.features-title {
+  font-size: 0.9rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.features-list {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.button-container {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.view-button {
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #c2b8ae;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: none;
+  box-sizing: border-box;
+}
+
+.view-button:hover {
+  background-color: #d4cbc4;
+  transform: translateY(-1px);
+}
+
+.homepage-footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: #666;
+}
