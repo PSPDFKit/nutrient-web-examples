@@ -20,8 +20,6 @@ function BasicViewerPage() {
     try {
       nutrientViewer = loadNutrientViewer();
 
-      nutrientViewer.unload(container);
-
       loadBasicViewer(nutrientViewer, container);
     } catch (error) {
       console.error("Failed to load Nutrient Viewer:", error);
