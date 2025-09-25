@@ -1,9 +1,9 @@
 <script>
 import { onDestroy, onMount } from "svelte";
 import {
-  loadBasicViewer,
-  unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
+  loadMagazineViewer,
+  unloadMagazineViewer,
+} from "../examples/magazine-mode/implementation";
 import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 const container = null;
@@ -15,7 +15,7 @@ onMount(async () => {
   try {
     nutrientViewer = loadNutrientViewer();
 
-    loadBasicViewer(nutrientViewer, container);
+    loadMagazineViewer(nutrientViewer, container);
   } catch (error) {
     console.error("Failed to load Nutrient Viewer:", error);
   }
@@ -23,7 +23,7 @@ onMount(async () => {
 
 onDestroy(() => {
   if (nutrientViewer && container) {
-    unloadBasicViewer(nutrientViewer, container);
+    unloadMagazineViewer(nutrientViewer, container);
   }
 });
 

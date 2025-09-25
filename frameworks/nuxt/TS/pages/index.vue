@@ -45,7 +45,6 @@ const examples: Example[] = [
   <div class="homepage">
     <div class="homepage-container">
       <header class="homepage-header">
-        <h1 class="homepage-title">TypeScript Examples</h1>
         <div class="homepage-tech-stack">
           <div class="tech-item">
             <a

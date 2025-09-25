@@ -14,8 +14,9 @@ onMount(async () => {
   if (!container) return;
 
   try {
-    nutrientViewer = await loadNutrientViewer();
-    await loadBasicViewer(nutrientViewer, container);
+    nutrientViewer = loadNutrientViewer();
+
+    loadBasicViewer(nutrientViewer, container);
   } catch (error) {
     console.error("Failed to load Nutrient Viewer:", error);
   }
@@ -23,9 +24,7 @@ onMount(async () => {
 
 onDestroy(() => {
   if (nutrientViewer && container) {
-    unloadBasicViewer(nutrientViewer, container).catch((error) => {
-      console.debug("Cleanup error (may be expected):", error);
-    });
+    unloadBasicViewer(nutrientViewer, container);
   }
 });
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
 import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadBasicViewer,
