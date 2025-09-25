@@ -6,7 +6,7 @@
  * For package installations, it imports from @nutrient-sdk/viewer.
  */
 
-import type NutrientViewer from "@nutrient-sdk/viewer";
+import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
 
 /**
  * Load NutrientViewer instance

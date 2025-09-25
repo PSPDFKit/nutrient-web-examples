@@ -1,3 +1,35 @@
+<script setup>
+import {
+  loadBasicViewer,
+  unloadBasicViewer,
+} from "../examples/basic-viewer/implementation.js";
+
+const containerRef = ref(null);
+
+onMounted(async () => {
+  // Wait for NutrientViewer to be available
+  while (!window.NutrientViewer) {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+
+  const container = containerRef.value;
+  const { NutrientViewer } = window;
+
+  if (container && NutrientViewer) {
+    loadBasicViewer(NutrientViewer, container);
+  }
+});
+
+onUnmounted(() => {
+  const container = containerRef.value;
+  const { NutrientViewer } = window;
+
+  if (container && NutrientViewer) {
+    unloadBasicViewer(NutrientViewer, container);
+  }
+});
+</script>
+
 <template>
   <div :style="{ height: '100vh', display: 'flex', flexDirection: 'column' }">
     <nav
@@ -29,35 +61,3 @@
     <div ref="containerRef" :style="{ flex: 1, width: '100%' }" />
   </div>
 </template>
-
-<script setup>
-import {
-  loadBasicViewer,
-  unloadBasicViewer,
-} from "../../examples/js/basic-viewer/implementation.js";
-
-const containerRef = ref(null);
-
-onMounted(async () => {
-  // Wait for NutrientViewer to be available
-  while (!window.NutrientViewer) {
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
-
-  const container = containerRef.value;
-  const { NutrientViewer } = window;
-
-  if (container && NutrientViewer) {
-    loadBasicViewer(NutrientViewer, container);
-  }
-});
-
-onUnmounted(() => {
-  const container = containerRef.value;
-  const { NutrientViewer } = window;
-
-  if (container && NutrientViewer) {
-    unloadBasicViewer(NutrientViewer, container);
-  }
-});
-</script>

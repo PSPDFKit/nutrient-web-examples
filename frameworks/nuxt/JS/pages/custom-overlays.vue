@@ -1,23 +1,35 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from "vue";
 import {
-  loadMagazineViewer,
-  unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation.js";
+  loadCustomOverlaysViewer,
+  unloadCustomOverlaysViewer,
+} from "../examples/custom-overlays/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 const containerRef = ref(null);
 
-onMounted(async () => {
-  // Wait for NutrientViewer to be available
-  while (!window.NutrientViewer) {
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
-
+onMounted(() => {
   const container = containerRef.value;
-  const { NutrientViewer } = window;
 
-  if (container && NutrientViewer) {
-    loadMagazineViewer(NutrientViewer, container);
+  if (!container) return;
+
+  let nutrientViewer = null;
+
+  try {
+    nutrientViewer = loadNutrientViewer();
+
+    nutrientViewer.unload(container);
+
+    loadCustomOverlaysViewer(nutrientViewer, container);
+  } catch (error) {
+    console.error("Failed to load Nutrient Viewer:", error);
   }
+
+  return () => {
+    if (nutrientViewer && container) {
+      unloadCustomOverlaysViewer(nutrientViewer, container);
+    }
+  };
 });
 
 onUnmounted(() => {
@@ -25,7 +37,7 @@ onUnmounted(() => {
   const { NutrientViewer } = window;
 
   if (container && NutrientViewer) {
-    unloadMagazineViewer(NutrientViewer, container);
+    unloadCustomOverlaysViewer(NutrientViewer, container);
   }
 });
 </script>
@@ -42,7 +54,7 @@ onUnmounted(() => {
         gap: '1rem',
       }"
     >
-      <NuxtLink
+      <router-link
         to="/"
         :style="{
           textDecoration: 'none',
@@ -51,10 +63,10 @@ onUnmounted(() => {
         }"
       >
         ← Back to Examples
-      </NuxtLink>
-      <h2 :style="{ margin: 0, fontSize: '1.1rem' }">Magazine Mode</h2>
+      </router-link>
+      <h2 :style="{ margin: 0, fontSize: '1.1rem' }">Custom Overlays</h2>
       <span :style="{ fontSize: '0.9rem', color: '#666' }">
-        Double-page layout with custom toolbar and fullscreen support
+        Interactive overlays that appear on page clicks
       </span>
     </nav>
 

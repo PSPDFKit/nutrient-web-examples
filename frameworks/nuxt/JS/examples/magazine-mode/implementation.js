@@ -1,25 +1,12 @@
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
-import type { Configuration } from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
-
-// Extended Document interface for cross-browser fullscreen support
-interface ExtendedDocument extends Document {
-  mozFullScreenElement?: Element;
-  webkitFullscreenElement?: Element;
-  msFullscreenElement?: Element;
-  mozFullScreenEnabled?: boolean;
-  msFullScreenEnabled?: boolean;
-  webkitFullscreenEnabled?: boolean;
-  webkitExitFullscreen?: () => void;
-  mozCancelFullScreen?: () => void;
-  msExitFullscreen?: () => void;
-}
-
-// Extended HTMLElement interface for cross-browser fullscreen support
-interface ExtendedHTMLElement extends HTMLElement {
-  mozRequestFullScreen?: () => void;
-  webkitRequestFullscreen?: () => void;
-  msRequestFullscreen?: () => void;
-}
+/**
+ * Magazine Mode Implementation for React (TypeScript)
+ *
+ * This example demonstrates advanced Nutrient Web SDK features:
+ * - Custom view state (double page layout)
+ * - Custom toolbar configuration
+ * - Fullscreen support with cross-browser compatibility
+ * - iOS-specific fullscreen handling
+ */
 
 /**
  * Load a magazine-style PDF viewer with advanced features
@@ -28,8 +15,8 @@ interface ExtendedHTMLElement extends HTMLElement {
  * @param document - URL to the PDF document
  */
 export function loadMagazineViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
+  nutrientViewer,
+  container,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
   // Load the viewer with magazine-specific configuration
@@ -44,10 +31,7 @@ export function loadMagazineViewer(
  * @param nutrientViewer - The NutrientViewer object
  * @param defaultConfiguration - Base configuration object
  */
-async function load(
-  nutrientViewer: typeof NutrientViewer,
-  defaultConfiguration: Configuration,
-) {
+async function load(nutrientViewer, defaultConfiguration) {
   const initialViewState = new nutrientViewer.ViewState({
     scrollMode: nutrientViewer.ScrollMode.PER_SPREAD,
     layoutMode: nutrientViewer.LayoutMode.DOUBLE,
@@ -56,16 +40,12 @@ async function load(
 
   // A custom toolbar item to toggle full screen mode
   const fullScreenToolbarItem = {
-    type: "custom" as const,
+    type: "custom",
     title: "Toggle full screen mode",
     onPress: () => {
       // We use the parent container of our mount node. This is necessary for
       // the iOS specific fixes applied in the iOSFullscreenFix() function.
-      const containerElement =
-        defaultConfiguration.container instanceof HTMLElement
-          ? defaultConfiguration.container
-          : document.getElementById(defaultConfiguration.container as string);
-      const container = containerElement?.parentNode as HTMLElement;
+      const container = defaultConfiguration.container.parentNode;
 
       if (isFullscreenEnabled()) {
         exitFullscreen();
@@ -112,26 +92,24 @@ async function load(
 /**
  * Check if fullscreen is currently enabled
  */
-function isFullscreenEnabled(): boolean {
-  const doc = document as ExtendedDocument;
+function isFullscreenEnabled() {
   return !!(
-    doc.fullscreenElement ||
-    doc.mozFullScreenElement ||
-    doc.webkitFullscreenElement ||
-    doc.msFullscreenElement
+    document.fullscreenElement ||
+    document.mozFullScreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement
   );
 }
 
 /**
  * Check if fullscreen is supported by the browser
  */
-function isFullScreenSupported(): boolean {
-  const doc = document as ExtendedDocument;
+function isFullScreenSupported() {
   return !!(
-    doc.fullscreenEnabled ||
-    doc.mozFullScreenEnabled ||
-    doc.msFullScreenEnabled ||
-    doc.webkitFullscreenEnabled
+    document.fullscreenEnabled ||
+    document.mozFullScreenEnabled ||
+    document.msFullScreenEnabled ||
+    document.webkitFullscreenEnabled
   );
 }
 
@@ -139,34 +117,32 @@ function isFullScreenSupported(): boolean {
  * Request fullscreen mode with cross-browser compatibility
  * @param element - Element to make fullscreen
  */
-function requestFullScreen(element: HTMLElement): void {
+function requestFullScreen(element) {
   iOSFullscreenFix(element);
 
-  const extendedElement = element as ExtendedHTMLElement;
-  if (extendedElement.requestFullscreen) {
-    extendedElement.requestFullscreen();
-  } else if (extendedElement.mozRequestFullScreen) {
-    extendedElement.mozRequestFullScreen();
-  } else if (extendedElement.webkitRequestFullscreen) {
-    extendedElement.webkitRequestFullscreen();
-  } else if (extendedElement.msRequestFullscreen) {
-    extendedElement.msRequestFullscreen();
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
   }
 }
 
 /**
  * Exit fullscreen mode with cross-browser compatibility
  */
-function exitFullscreen(): void {
-  const doc = document as ExtendedDocument;
-  if (doc.webkitExitFullscreen) {
-    doc.webkitExitFullscreen();
-  } else if (doc.mozCancelFullScreen) {
-    doc.mozCancelFullScreen();
-  } else if (doc.msExitFullscreen) {
-    doc.msExitFullscreen();
-  } else if (doc.exitFullscreen) {
-    doc.exitFullscreen();
+function exitFullscreen() {
+  if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
   }
 }
 
@@ -178,7 +154,7 @@ function exitFullscreen(): void {
  * background color so that the controls become visible.
  * @param element - Element to apply iOS fixes to
  */
-function iOSFullscreenFix(element: HTMLElement): void {
+function iOSFullscreenFix(element) {
   const iOS =
     !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
@@ -211,9 +187,6 @@ function iOSFullscreenFix(element: HTMLElement): void {
  * @param nutrientViewer - The NutrientViewer object (from CDN)
  * @param container - The container element
  */
-export function unloadMagazineViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
-) {
+export function unloadMagazineViewer(nutrientViewer, container) {
   nutrientViewer.unload(container);
 }

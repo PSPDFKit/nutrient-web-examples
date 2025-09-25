@@ -1,4 +1,4 @@
-import type NutrientViewer from "@nutrient-sdk/viewer";
+import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
 
 declare global {
   interface Window {

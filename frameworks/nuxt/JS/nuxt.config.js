@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       ],
       script: [
         {
-          src: "https://cdn.nutrient.io/1.6.0/nutrient-viewer.js",
+          src: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.7.0/nutrient-viewer.js",
           defer: true,
         },
       ],
