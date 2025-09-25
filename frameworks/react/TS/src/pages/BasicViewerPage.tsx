@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { loadBasicViewer } from "../examples/basic-viewer/implementation";
+import {
+  loadBasicViewer,
+  unloadBasicViewer,
+} from "../examples/basic-viewer/implementation";
 import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 import "./BasicViewerPage.css";
 
@@ -9,29 +12,24 @@ function BasicViewerPage() {
 
   useEffect(() => {
     const container = containerRef.current;
+
     if (!container) return;
 
-    let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>>;
+    let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
 
-    const initViewer = async () => {
-      try {
-        nutrientViewer = await loadNutrientViewer();
+    try {
+      nutrientViewer = loadNutrientViewer();
 
-        // Unload any existing instance
-        nutrientViewer.unload(container);
+      nutrientViewer.unload(container);
 
-        await loadBasicViewer(nutrientViewer, container);
-      } catch (error) {
-        console.error("Failed to load Nutrient Viewer:", error);
-      }
-    };
-
-    initViewer();
+      loadBasicViewer(nutrientViewer, container);
+    } catch (error) {
+      console.error("Failed to load Nutrient Viewer:", error);
+    }
 
     return () => {
       if (nutrientViewer && container) {
-        // Use synchronous unload like the working example
-        nutrientViewer.unload(container);
+        unloadBasicViewer(nutrientViewer, container);
       }
     };
   }, []);

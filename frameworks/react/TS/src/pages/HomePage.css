@@ -38,6 +38,11 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  width: 4em;
+}
+
+.tech-item svg {
+  width: 100%;
 }
 
 .react-title {
@@ -83,7 +88,6 @@
 }
 
 .example-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
@@ -129,7 +133,6 @@
 
 .view-button:hover {
   background-color: #d4cbc4;
-  transform: translateY(-1px);
 }
 
 .homepage-footer {

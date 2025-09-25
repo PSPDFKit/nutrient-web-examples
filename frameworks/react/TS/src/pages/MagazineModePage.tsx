@@ -4,21 +4,31 @@ import {
   loadMagazineViewer,
   unloadMagazineViewer,
 } from "../examples/magazine-mode/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 function MagazineModePage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const { NutrientViewer } = window;
 
-    if (container && NutrientViewer) {
-      loadMagazineViewer(NutrientViewer, container);
+    if (!container) return;
+
+    let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+
+    try {
+      nutrientViewer = loadNutrientViewer();
+
+      nutrientViewer.unload(container);
+
+      loadMagazineViewer(nutrientViewer, container);
+    } catch (error) {
+      console.error("Failed to load Nutrient Viewer:", error);
     }
 
     return () => {
-      if (NutrientViewer && container) {
-        unloadMagazineViewer(NutrientViewer, container);
+      if (nutrientViewer && container) {
+        unloadMagazineViewer(nutrientViewer, container);
       }
     };
   }, []);
