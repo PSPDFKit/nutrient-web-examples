@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.7.0",
-    "nuxt": "^3.17.4",
-    "vue": "^3.5.15"
+    "nuxt": "^3.19.2",
+    "vue": "^3.5.22"
   }
 }
