@@ -1,0 +1,41 @@
+{
+  "name": "nutrient-web-framework-angular-ts",
+  "version": "1.0.0",
+  "description": "Angular TypeScript demo app with Nutrient Web SDK examples and routing",
+  "private": true,
+  "keywords": [
+    "nutrient",
+    "pdf",
+    "viewer",
+    "angular",
+    "typescript",
+    "demo-app",
+    "routing"
+  ],
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --port 3000",
+    "build": "ng build",
+    "dev": "ng serve --port 3000"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@nutrient-sdk/viewer": "^1.7.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
+    "@angular/cli": "^17.0.0",
+    "@angular/compiler-cli": "^17.0.0",
+    "typescript": "~5.2.0"
+  }
+}

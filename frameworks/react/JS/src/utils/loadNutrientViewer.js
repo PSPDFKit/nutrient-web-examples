@@ -12,14 +12,36 @@
  * @throws Error if NutrientViewer cannot be loaded
  */
 export async function loadNutrientViewer() {
-  // For CDN installation: get from window object
-  const { NutrientViewer } = window;
+  // For CDN installation: wait for and get from window object
+  const waitForNutrientViewer = () => {
+    return new Promise((resolve, reject) => {
+      // Check if already available
+      if (window.NutrientViewer) {
+        resolve(window.NutrientViewer);
+        return;
+      }
 
-  if (!NutrientViewer) {
-    throw new Error(
-      "NutrientViewer is not available. Make sure the Nutrient Web SDK is properly loaded via CDN.",
-    );
-  }
+      // Wait for CDN script to load
+      let attempts = 0;
+      const maxAttempts = 50; // 5 seconds total (50 * 100ms)
 
-  return NutrientViewer;
+      const checkInterval = setInterval(() => {
+        attempts++;
+
+        if (window.NutrientViewer) {
+          clearInterval(checkInterval);
+          resolve(window.NutrientViewer);
+        } else if (attempts >= maxAttempts) {
+          clearInterval(checkInterval);
+          reject(
+            new Error(
+              "NutrientViewer is not available. Make sure the Nutrient Web SDK is properly loaded via CDN.",
+            ),
+          );
+        }
+      }, 100);
+    });
+  };
+
+  return await waitForNutrientViewer();
 }

@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import {
-  loadBasicViewer,
-  unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
+import { loadBasicViewer } from "../examples/basic-viewer/implementation";
 import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+import "./BasicViewerPage.css";
 
 function BasicViewerPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +16,10 @@ function BasicViewerPage() {
     const initViewer = async () => {
       try {
         nutrientViewer = await loadNutrientViewer();
+
+        // Unload any existing instance
+        nutrientViewer.unload(container);
+
         await loadBasicViewer(nutrientViewer, container);
       } catch (error) {
         console.error("Failed to load Nutrient Viewer:", error);
@@ -28,40 +30,25 @@ function BasicViewerPage() {
 
     return () => {
       if (nutrientViewer && container) {
-        unloadBasicViewer(nutrientViewer, container);
+        // Use synchronous unload like the working example
+        nutrientViewer.unload(container);
       }
     };
   }, []);
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      <nav
-        style={{
-          padding: "1rem",
-          backgroundColor: "#f5f5f5",
-          borderBottom: "1px solid #ddd",
-          display: "flex",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <Link
-          to="/"
-          style={{
-            textDecoration: "none",
-            color: "#4A8FED",
-            fontSize: "0.9rem",
-          }}
-        >
+    <div className="basic-viewer-container">
+      <nav className="basic-viewer-nav">
+        <Link to="/" className="basic-viewer-back-link">
           ← Back to Examples
         </Link>
-        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Basic Viewer</h2>
-        <span style={{ fontSize: "0.9rem", color: "#666" }}>
+        <h2 className="basic-viewer-title">Basic Viewer</h2>
+        <span className="basic-viewer-subtitle">
           Simple PDF viewing with standard controls
         </span>
       </nav>
 
-      <div ref={containerRef} style={{ flex: 1, width: "100%" }} />
+      <div ref={containerRef} className="basic-viewer-content" />
     </div>
   );
 }

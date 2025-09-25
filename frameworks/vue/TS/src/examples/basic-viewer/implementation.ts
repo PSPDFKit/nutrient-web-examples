@@ -15,16 +15,22 @@ import type NutrientViewer from "@nutrient-sdk/viewer";
  * @returns Promise that resolves when the viewer is loaded
  */
 export async function loadBasicViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
+  nutrientViewer,
+  container,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
-  if (!nutrientViewer) {
-    throw new Error("nutrientViewer is required");
+  // Ensure there's only one nutrientViewer instance - be defensive about cleanup
+  try {
+    await nutrientViewer.unload(container);
+    // Wait a bit to ensure cleanup is complete
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  } catch (error) {
+    // Ignore unload errors - container might not have an instance
+    console.debug(
+      "Container unload (expected if no previous instance):",
+      error,
+    );
   }
-
-  // Ensure there's only one nutrientViewer instance
-  nutrientViewer.unload(container);
 
   // Load the viewer with basic configuration
   return nutrientViewer.load({
@@ -38,11 +44,12 @@ export async function loadBasicViewer(
  * @param nutrientViewer - The nutrientViewer object (from CDN)
  * @param container - The container element
  */
-export async function unloadBasicViewer(
-  nutrientViewer: typeof NutrientViewer,
-  container: HTMLElement,
-) {
-  if (nutrientViewer) {
-    nutrientViewer.unload(container);
+export async function unloadBasicViewer(nutrientViewer, container) {
+  if (nutrientViewer && container) {
+    try {
+      await nutrientViewer.unload(container);
+    } catch (error) {
+      console.debug("Container unload error (may be expected):", error);
+    }
   }
 }

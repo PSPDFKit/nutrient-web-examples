@@ -21,8 +21,18 @@ export async function loadBasicViewer(
     throw new Error("NutrientViewer is required");
   }
 
-  // Ensure there's only one NutrientViewer instance
-  NutrientViewer.unload(container);
+  // Ensure there's only one NutrientViewer instance - be defensive about cleanup
+  try {
+    await NutrientViewer.unload(container);
+    // Wait a bit to ensure cleanup is complete
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  } catch (error) {
+    // Ignore unload errors - container might not have an instance
+    console.debug(
+      "Container unload (expected if no previous instance):",
+      error,
+    );
+  }
 
   // Load the viewer with basic configuration
   return NutrientViewer.load({
@@ -37,7 +47,11 @@ export async function loadBasicViewer(
  * @param {HTMLElement} container - The container element
  */
 export async function unloadBasicViewer(NutrientViewer, container) {
-  if (NutrientViewer) {
-    NutrientViewer.unload(container);
+  if (NutrientViewer && container) {
+    try {
+      await NutrientViewer.unload(container);
+    } catch (error) {
+      console.debug("Container unload error (may be expected):", error);
+    }
   }
 }
