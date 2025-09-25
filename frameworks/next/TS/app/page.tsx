@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
-import "./HomePage.css";
-import { NutrientLogo } from "../components/logos/NutrientLogo";
-import ReactLogo from "../components/logos/ReactLogo";
+import Link from "next/link";
+import "./page.css";
+import { NutrientLogo } from "./components/logos/NutrientLogo";
+import ReactLogo from "./components/logos/ReactLogo";
+
+interface Example {
+  path: string;
+  title: string;
+  description: string;
+  features: string[];
+}
 
 function HomePage() {
-  const examples = [
+  const examples: Example[] = [
     {
       path: "/basic-viewer",
       title: "Basic Viewer",
@@ -41,25 +48,25 @@ function HomePage() {
         <header className="homepage-header">
           <div className="homepage-tech-stack">
             <div className="tech-item">
-              <Link
-                to="https://www.nutrient.io"
+              <a
+                href="https://www.nutrient.io"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-no-style"
               >
                 <NutrientLogo />
-              </Link>
+              </a>
             </div>
             <div className="tech-plus">+</div>
             <div className="tech-item">
-              <Link
-                to="https://react.dev/"
+              <a
+                href="https://react.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-no-style"
               >
                 <ReactLogo />
-              </Link>
+              </a>
             </div>
           </div>
           <p className="homepage-subtitle">Select an example to get started</p>
@@ -79,7 +86,7 @@ function HomePage() {
               </ul>
 
               <div className="button-container">
-                <Link to={example.path} className="view-button">
+                <Link href={example.path} className="view-button">
                   View
                 </Link>
               </div>
