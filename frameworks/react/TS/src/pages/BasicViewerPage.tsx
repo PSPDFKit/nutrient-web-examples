@@ -4,21 +4,31 @@ import {
   loadBasicViewer,
   unloadBasicViewer,
 } from "../examples/basic-viewer/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 function BasicViewerPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const { NutrientViewer } = window;
+    if (!container) return;
 
-    if (container && NutrientViewer) {
-      loadBasicViewer(NutrientViewer, container);
-    }
+    let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>>;
+
+    const initViewer = async () => {
+      try {
+        nutrientViewer = await loadNutrientViewer();
+        await loadBasicViewer(nutrientViewer, container);
+      } catch (error) {
+        console.error("Failed to load Nutrient Viewer:", error);
+      }
+    };
+
+    initViewer();
 
     return () => {
-      if (NutrientViewer && container) {
-        unloadBasicViewer(NutrientViewer, container);
+      if (nutrientViewer && container) {
+        unloadBasicViewer(nutrientViewer, container);
       }
     };
   }, []);

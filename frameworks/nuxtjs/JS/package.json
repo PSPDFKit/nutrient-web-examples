@@ -18,6 +18,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {
+    "@nutrient-sdk/viewer": "^1.7.0"
+  },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "nuxt": "^3.17.4"

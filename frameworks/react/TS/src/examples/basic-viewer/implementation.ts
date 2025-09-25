@@ -18,10 +18,6 @@ export async function loadBasicViewer(
   container: HTMLElement,
   document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
 ) {
-  if (!nutrientViewer) {
-    throw new Error("nutrientViewer is required");
-  }
-
   // Ensure there's only one nutrientViewer instance
   nutrientViewer.unload(container);
 
