@@ -30,7 +30,7 @@
   "scripts": {
     "verify-installation": "node scripts/verify-install.js && node scripts/copy-nutrient-files.js",
     "prestart": "npm run verify-installation",
-    "start": "react-scripts start",
+    "start": "node scripts/start.js",
     "prebuild": "npm run verify-installation",
     "build": "react-scripts build",
     "test": "react-scripts test",
