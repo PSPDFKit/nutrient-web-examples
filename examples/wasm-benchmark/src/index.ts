@@ -55,16 +55,6 @@ render(state);
     state.licenseKey = licenseKey;
     render(state);
 
-    // We pre-fetch some assets in order to not affect the benchmark results.
-    const preFetchAssets = [
-       "./vendor/@nutrient-sdk/viewer/nutrient-viewer-lib/nutrient-viewer.wasm.js",
-       "./vendor/@nutrient-sdk/viewer/nutrient-viewer-lib/nutrient-viewer.wasm",
-    ]
-      .filter(Boolean)
-      .map((asset) => fetch(asset));
-
-    await Promise.all(preFetchAssets);
-
     const score = await benchmark.run((updatedTests: Record<string, { state: string; progress: number }>) => {
       state.tests = updatedTests;
       render(state);
