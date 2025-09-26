@@ -68,4 +68,4 @@ function CustomOverlaysPage() {
   );
 }
 
-export default MagazineModePage;
+export default CustomOverlaysPage;
