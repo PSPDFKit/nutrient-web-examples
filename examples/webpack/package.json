@@ -35,10 +35,13 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.js",
-    "prestart": "node bin/verify-install.js && npm run build",
+    "build:npm": "cross-env NODE_ENV=production USE_NPM=true webpack --config config/webpack.js",
+    "prestart": "npm run build",
+    "prestart:npm": "node bin/verify-install.js && npm run build:npm",
     "start": "serve -l 8080 ./dist",
-    "prestart:dev": "node bin/verify-install.js",
-    "start:dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.js --progress"
+    "start:npm": "serve -l 8080 ./dist",
+    "start:dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.js --progress",
+    "start:dev:npm": "cross-env NODE_ENV=development USE_NPM=true webpack serve --config config/webpack.js --progress"
   },
   "overrides": {
     "path-to-regexp": "^3.3.0",

@@ -25,12 +25,15 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
  */
 const isDev = process.env.NODE_ENV === "development";
 
+/**
+ * Determine whether to use npm package instead of CDN version.
+ * CDN is now the default. Set USE_NPM=true to include Nutrient in webpack bundle.
+ *
+ * $ USE_NPM=true npm run build
+ */
+const useCdn = process.env.USE_NPM !== "true";
+
 const filesToCopy = [
-  // Nutrient files.
-  {
-    from: "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
-    to: "./nutrient-viewer-lib",
-  },
   // Application CSS.
   {
     from: "./src/index.css",
@@ -42,6 +45,14 @@ const filesToCopy = [
     to: "./assets",
   },
 ];
+
+// Only copy Nutrient files when NOT using CDN
+if (!useCdn) {
+  filesToCopy.unshift({
+    from: "./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib",
+    to: "./nutrient-viewer-lib",
+  });
+}
 
 /**
  * webpack main configuration object.
@@ -65,6 +76,13 @@ const config = {
   resolve: {
     modules: [path.resolve("./src"), path.resolve("./node_modules")],
   },
+
+  // When using CDN, exclude Nutrient from webpack bundle
+  externals: useCdn
+    ? {
+        "@nutrient-sdk/viewer": "NutrientViewer",
+      }
+    : {},
 
   plugins: [
     // Automatically insert <script src="[name].js"><script> to the page.

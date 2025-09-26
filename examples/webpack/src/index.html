@@ -8,15 +8,22 @@
     />
     <title>Nutrient</title>
     <link rel="stylesheet" href="./index.css" />
+    <!-- Load Nutrient Web SDK from CDN (comment out to use npm package instead) -->
+    <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.6.0/nutrient-viewer.js"></script>
   </head>
   <body id="body">
     <header>
-      <span class="drag-text">
-      <b>Drag and Drop a file</b> &nbsp; or &nbsp;
+      <div class="info-text">
+        <span>📄 Sample PDF loaded by default</span> &nbsp;•&nbsp; 
+        <span class="upload-options">
+          <span class="drag-text">
+            <b>Drag and Drop your own PDF</b> &nbsp; or &nbsp;
+          </span>
+          <div class="upload-btn-wrapper">
+            <button class="btn">Upload a file</button>
+            <input id="selectFile" type="file" accept="application/pdf" name="pdf" />
+          </div>
         </span>
-      <div class="upload-btn-wrapper">
-        <button class="btn">Upload a file</button>
-        <input id="selectFile" type="file" accept="application/pdf" name="pdf" />
       </div>
     </header>
     <div class="App"></div>

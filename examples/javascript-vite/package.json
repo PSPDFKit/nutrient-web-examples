@@ -1,0 +1,28 @@
+{
+  "name": "nutrient-web-example-javascript-vite",
+  "description": "Standalone PDF viewer web application built with Nutrient Web SDK and Vite",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:npm": "cross-env USE_NPM=true vite",
+    "build": "vite build",
+    "build:npm": "cross-env USE_NPM=true vite build",
+    "preview": "vite preview",
+    "preview:npm": "cross-env USE_NPM=true vite preview"
+  },
+  "dependencies": {
+    "@nutrient-sdk/viewer": "1.6.0",
+    "drag-drop": "^7.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "rollup-plugin-copy": "^3.5.0",
+    "vite": "^5.0.0"
+  },
+  "keywords": ["pdf", "viewer", "vite", "javascript", "nutrient", "web", "sdk"],
+  "author": "Nutrient (https://www.nutrient.io)",
+  "homepage": "https://www.nutrient.io/web",
+  "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
+  "readme": "https://www.nutrient.io/guides/web"
+}
