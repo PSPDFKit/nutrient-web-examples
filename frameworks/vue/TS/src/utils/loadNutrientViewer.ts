@@ -1,4 +1,4 @@
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
+import type NutrientViewer from "@nutrient-sdk/viewer";
 
 export function loadNutrientViewer(): typeof NutrientViewer {
   if (!window.NutrientViewer) {
