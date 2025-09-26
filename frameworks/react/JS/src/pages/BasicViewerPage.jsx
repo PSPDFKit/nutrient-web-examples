@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { loadBasicViewer } from "../nutrient/basic-viewer/implementation.js";
+import {
+  loadBasicViewer,
+  unloadBasicViewer,
+} from "../nutrient/basic-viewer/implementation.js";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer.js";
 import "./BasicViewerPage.css";
 
