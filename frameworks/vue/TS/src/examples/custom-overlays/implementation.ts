@@ -1,5 +1,6 @@
 import type NutrientViewer from "@nutrient-sdk/viewer";
 import type { Configuration } from "@nutrient-sdk/viewer";
+import { nutrientConfig } from "../nutrient-config";
 
 /**
  * Load a PDF viewer with custom overlays functionality
@@ -12,7 +13,7 @@ import type { Configuration } from "@nutrient-sdk/viewer";
 export async function loadCustomOverlaysViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
-  document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
+  document = nutrientConfig.documentUrl,
 ) {
   if (!nutrientViewer) {
     throw new Error("NutrientViewer is required");
@@ -21,11 +22,14 @@ export async function loadCustomOverlaysViewer(
   // Ensure there's only one NutrientViewer instance
   nutrientViewer.unload(container);
 
-  // Load the viewer with custom overlays configuration
-  return load(nutrientViewer, {
+  const config = {
     container,
     document,
-  });
+    ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
+  };
+
+  // Load the viewer with custom overlays configuration
+  return load(nutrientViewer, config);
 }
 
 /**

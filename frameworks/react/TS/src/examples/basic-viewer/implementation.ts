@@ -5,10 +5,11 @@
  */
 
 import type NutrientViewer from "@nutrient-sdk/viewer";
+import { nutrientConfig } from "../nutrient-config";
 
 /**
  * Load a basic PDF viewer
- * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param nutrientViewer - The NutrientViewer object (from CDN or package)
  * @param container - The container element to mount the viewer
  * @param document - URL to the PDF document
  * @returns Promise that resolves when the viewer is loaded
@@ -16,12 +17,15 @@ import type NutrientViewer from "@nutrient-sdk/viewer";
 export function loadBasicViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
-  document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
+  document = nutrientConfig.documentUrl,
 ) {
-  return nutrientViewer.load({
+  const config = {
     container,
     document,
-  });
+    ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
+  };
+
+  return nutrientViewer.load(config);
 }
 
 /**

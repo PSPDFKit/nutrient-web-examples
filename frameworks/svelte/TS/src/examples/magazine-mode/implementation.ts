@@ -1,5 +1,6 @@
 import type NutrientViewer from "@nutrient-sdk/viewer";
 import type { Configuration } from "@nutrient-sdk/viewer";
+import { nutrientConfig } from "../nutrient-config";
 
 type ToolbarItem =
   | { type: "sidebar-bookmarks" }
@@ -40,13 +41,16 @@ interface ExtendedHTMLElement extends HTMLElement {
 export function loadMagazineViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
-  document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
+  document = nutrientConfig.documentUrl,
 ) {
-  // Load the viewer with magazine-specific configuration
-  return load(nutrientViewer, {
+  const config = {
     container,
     document,
-  });
+    ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
+  };
+
+  // Load the viewer with magazine-specific configuration
+  return load(nutrientViewer, config);
 }
 
 /**

@@ -16,17 +16,18 @@ function MagazineModePage() {
 
     if (!container) return;
 
-    let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+    let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>> | null =
+      null;
 
-    try {
-      nutrientViewer = loadNutrientViewer();
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
 
-      nutrientViewer.unload(container);
+      if (container && nutrientViewer) {
+        unloadMagazineViewer(nutrientViewer, container);
 
-      loadMagazineViewer(nutrientViewer, container);
-    } catch (error) {
-      console.error("Failed to load Nutrient Viewer:", error);
-    }
+        loadMagazineViewer(nutrientViewer, container);
+      }
+    })();
 
     return () => {
       if (nutrientViewer && container) {

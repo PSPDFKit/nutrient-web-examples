@@ -17,15 +17,15 @@ function BasicViewerPage() {
 
     if (!container) return;
 
-    let nutrientViewer;
+    let nutrientViewer = null;
 
-    try {
-      nutrientViewer = loadNutrientViewer();
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
 
-      loadBasicViewer(nutrientViewer, container);
-    } catch (error) {
-      console.error("Failed to load Nutrient Viewer:", error);
-    }
+      if (container && nutrientViewer) {
+        loadBasicViewer(nutrientViewer, container);
+      }
+    })();
 
     return () => {
       if (nutrientViewer && container) {

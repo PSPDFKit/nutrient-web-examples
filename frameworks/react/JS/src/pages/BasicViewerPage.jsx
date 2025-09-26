@@ -9,29 +9,24 @@ function BasicViewerPage() {
 
   useEffect(() => {
     const container = containerRef.current;
+
     if (!container) return;
 
-    let nutrientViewer;
+    let nutrientViewer = null;
 
-    const initViewer = async () => {
-      try {
-        nutrientViewer = await loadNutrientViewer();
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
 
-        // Unload any existing instance
-        nutrientViewer.unload(container);
+      if (container && nutrientViewer) {
+        unloadBasicViewer(nutrientViewer, container);
 
-        await loadBasicViewer(nutrientViewer, container);
-      } catch (error) {
-        console.error("Failed to load Nutrient Viewer:", error);
+        loadBasicViewer(nutrientViewer, container);
       }
-    };
-
-    initViewer();
+    })();
 
     return () => {
       if (nutrientViewer && container) {
-        // Use synchronous unload like the working example
-        nutrientViewer.unload(container);
+        unloadBasicViewer(nutrientViewer, container);
       }
     };
   }, []);

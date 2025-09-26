@@ -1,16 +1,8 @@
-/**
- * Custom Overlays Implementation for Next.js (TypeScript)
- *
- * This example demonstrates advanced Nutrient Web SDK features:
- * - Custom overlay items that appear on page clicks
- * - Interactive overlays with HTML content
- * - Event handling for page interactions
- * - Dynamic overlay positioning
- */
+import { nutrientConfig } from "../nutrient-config.js";
 
 /**
  * Load a PDF viewer with custom overlays functionality
- * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param nutrientViewer - The NutrientViewer object (from CDN or package)
  * @param container - The container element to mount the viewer
  * @param document - URL to the PDF document
  * @returns Promise that resolves when the viewer is loaded
@@ -18,7 +10,7 @@
 export async function loadCustomOverlaysViewer(
   nutrientViewer,
   container,
-  document = "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
+  document = nutrientConfig.documentUrl,
 ) {
   if (!nutrientViewer) {
     throw new Error("NutrientViewer is required");
@@ -27,11 +19,14 @@ export async function loadCustomOverlaysViewer(
   // Ensure there's only one NutrientViewer instance
   nutrientViewer.unload(container);
 
-  // Load the viewer with custom overlays configuration
-  return load(nutrientViewer, {
+  const config = {
     container,
     document,
-  });
+    ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
+  };
+
+  // Load the viewer with custom overlays configuration
+  return load(nutrientViewer, config);
 }
 
 /**
