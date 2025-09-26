@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NutrientLogo from "../components/logos/NutrientLogo.vue";
-import VueLogo from "../components/logos/VueLogo.vue";
+import NuxtLogo from "../components/logos/NuxtLogo.vue";
 
 interface Example {
   path: string;
@@ -64,7 +64,7 @@ const examples: Example[] = [
               rel="noopener noreferrer"
               class="link-no-style"
             >
-              <VueLogo />
+              <NuxtLogo />
             </a>
           </div>
         </div>

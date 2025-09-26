@@ -1,6 +1,6 @@
 <script setup>
 import NutrientLogo from "../components/logos/NutrientLogo.vue";
-import VueLogo from "../components/logos/VueLogo.vue";
+import NuxtLogo from "../components/logos/NuxtLogo.vue";
 
 const examples = [
   {
