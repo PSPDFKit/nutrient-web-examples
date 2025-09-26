@@ -14,15 +14,17 @@ function CustomOverlaysPage() {
 
     if (!container) return;
 
-    let nutrientViewer;
+    let nutrientViewer = null;
 
-    try {
-      nutrientViewer = loadNutrientViewer();
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
 
-      loadCustomOverlaysViewer(nutrientViewer, container);
-    } catch (error) {
-      console.error("Failed to load Nutrient Viewer:", error);
-    }
+      if (container && nutrientViewer) {
+        unloadCustomOverlaysViewer(nutrientViewer, container);
+
+        loadCustomOverlaysViewer(nutrientViewer, container);
+      }
+    })();
 
     return () => {
       if (nutrientViewer && container) {

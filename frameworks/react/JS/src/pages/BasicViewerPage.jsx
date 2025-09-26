@@ -18,8 +18,6 @@ function BasicViewerPage() {
       nutrientViewer = await loadNutrientViewer();
 
       if (container && nutrientViewer) {
-        unloadBasicViewer(nutrientViewer, container);
-
         loadBasicViewer(nutrientViewer, container);
       }
     })();

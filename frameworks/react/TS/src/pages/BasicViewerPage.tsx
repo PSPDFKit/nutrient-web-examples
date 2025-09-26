@@ -15,15 +15,18 @@ function BasicViewerPage() {
 
     if (!container) return;
 
-    let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+    let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>> | null =
+      null;
 
-    try {
-      nutrientViewer = loadNutrientViewer();
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
 
-      loadBasicViewer(nutrientViewer, container);
-    } catch (error) {
-      console.error("Failed to load Nutrient Viewer:", error);
-    }
+      if (container && nutrientViewer) {
+        unloadBasicViewer(nutrientViewer, container);
+
+        loadBasicViewer(nutrientViewer, container);
+      }
+    })();
 
     return () => {
       if (nutrientViewer && container) {

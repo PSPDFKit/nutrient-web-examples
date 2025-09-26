@@ -10,15 +10,24 @@ function MagazineModePage() {
 
   useEffect(() => {
     const container = containerRef.current;
-    const { NutrientViewer } = window;
 
-    if (container && NutrientViewer) {
-      loadMagazineViewer(NutrientViewer, container);
-    }
+    if (!container) return;
+
+    let nutrientViewer = null;
+
+    (async () => {
+      nutrientViewer = await loadNutrientViewer();
+
+      if (container && nutrientViewer) {
+        unloadMagazineViewer(nutrientViewer, container);
+
+        loadMagazineViewer(nutrientViewer, container);
+      }
+    })();
 
     return () => {
-      if (NutrientViewer) {
-        unloadMagazineViewer(NutrientViewer, container);
+      if (nutrientViewer && container) {
+        unloadMagazineViewer(nutrientViewer, container);
       }
     };
   }, []);
