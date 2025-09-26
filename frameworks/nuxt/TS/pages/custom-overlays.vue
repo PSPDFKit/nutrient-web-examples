@@ -3,8 +3,8 @@ import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
-} from "../examples/custom-overlays/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/custom-overlays/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 

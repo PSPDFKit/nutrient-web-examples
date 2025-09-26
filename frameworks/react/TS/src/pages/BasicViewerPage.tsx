@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import "./BasicViewerPage.css";
 
 function BasicViewerPage() {

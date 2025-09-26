@@ -4,8 +4,8 @@ import { onDestroy, onMount } from "svelte";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 let container: HTMLDivElement;
 let nutrientViewer: typeof NutrientViewer | null = null;

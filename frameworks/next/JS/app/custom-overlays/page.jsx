@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
-} from "../../examples/custom-overlays/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../../nutrient/custom-overlays/implementation";
+import { loadNutrientViewer } from "../../nutrient/loadNutrientViewer";
 
 function CustomOverlaysPage() {
   const containerRef = useRef(null);

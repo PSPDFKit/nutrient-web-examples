@@ -3,8 +3,8 @@ import { onDestroy, onMount } from "svelte";
 import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
-} from "../examples/custom-overlays/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/custom-overlays/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const container = null;
 let nutrientViewer = null;

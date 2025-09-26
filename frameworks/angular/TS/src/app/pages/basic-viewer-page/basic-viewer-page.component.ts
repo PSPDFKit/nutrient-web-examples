@@ -6,8 +6,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { loadBasicViewer } from "../../../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../../utils/loadNutrientViewer";
+import { loadBasicViewer } from "../../../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../../../nutrient/loadNutrientViewer";
 
 @Component({
   selector: "app-basic-viewer-page",

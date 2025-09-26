@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation.js";
+} from "../nutrient/magazine-mode/implementation.js";
 
 function MagazineModePage() {
   const containerRef = useRef(null);

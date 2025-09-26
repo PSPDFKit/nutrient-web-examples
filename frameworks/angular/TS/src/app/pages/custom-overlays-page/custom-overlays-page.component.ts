@@ -6,8 +6,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { loadCustomOverlaysViewer } from "../../../examples/custom-overlays/implementation";
-import { loadNutrientViewer } from "../../utils/loadNutrientViewer";
+import { loadCustomOverlaysViewer } from "../../../nutrient/custom-overlays/implementation";
+import { loadNutrientViewer } from "../../../nutrient/loadNutrientViewer";
 
 @Component({
   selector: "app-custom-overlays-page",
@@ -33,7 +33,7 @@ import { loadNutrientViewer } from "../../utils/loadNutrientViewer";
 export class CustomOverlaysPageComponent implements AfterViewInit, OnDestroy {
   @ViewChild("container", { static: true }) containerRef!: ElementRef;
 
-  private nutrientViewer!: ReturnType<typeof loadNutrientViewer>;
+  private nutrientViewer!: Awaited<ReturnType<typeof loadNutrientViewer>>;
 
   async ngAfterViewInit() {
     const container = this.containerRef.nativeElement;

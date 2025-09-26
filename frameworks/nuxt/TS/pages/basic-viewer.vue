@@ -4,8 +4,8 @@ import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 let nutrientViewer: ReturnType<typeof loadNutrientViewer>;

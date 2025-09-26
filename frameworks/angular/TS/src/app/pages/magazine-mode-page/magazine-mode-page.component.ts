@@ -6,8 +6,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { loadMagazineViewer } from "../../../examples/magazine-mode/implementation";
-import { loadNutrientViewer } from "../../utils/loadNutrientViewer";
+import { loadNutrientViewer } from "../../../nutrient/loadNutrientViewer";
+import { loadMagazineViewer } from "../../../nutrient/magazine-mode/implementation";
 
 @Component({
   selector: "app-magazine-mode-page",

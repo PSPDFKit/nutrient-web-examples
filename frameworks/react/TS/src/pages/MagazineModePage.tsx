@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/magazine-mode/implementation";
 
 function MagazineModePage() {
   const containerRef = useRef<HTMLDivElement>(null);

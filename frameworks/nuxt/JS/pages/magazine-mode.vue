@@ -2,7 +2,7 @@
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation.js";
+} from "../nutrient/magazine-mode/implementation.js";
 
 const containerRef = ref(null);
 

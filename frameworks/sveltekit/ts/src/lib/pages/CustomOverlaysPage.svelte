@@ -4,8 +4,8 @@ import { onDestroy, onMount } from "svelte";
 import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
-} from "../examples/custom-overlays/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/custom-overlays/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 let container: HTMLDivElement;
 let nutrientViewer: typeof NutrientViewer | null = null;

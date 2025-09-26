@@ -1,11 +1,11 @@
 <script lang="ts">
 import type NutrientViewer from "@nutrient-sdk/viewer";
 import { onDestroy, onMount } from "svelte";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/magazine-mode/implementation";
 
 let container: HTMLDivElement;
 let nutrientViewer: typeof NutrientViewer | null = null;

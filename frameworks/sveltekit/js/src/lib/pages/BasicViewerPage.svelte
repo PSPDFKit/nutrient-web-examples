@@ -3,8 +3,8 @@ import { onDestroy, onMount } from "svelte";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const container = null;
 let nutrientViewer = null;

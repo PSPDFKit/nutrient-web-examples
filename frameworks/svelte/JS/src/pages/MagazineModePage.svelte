@@ -1,10 +1,10 @@
 <script>
 import { onDestroy, onMount } from "svelte";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/magazine-mode/implementation";
 
 const container = null;
 let nutrientViewer = null;

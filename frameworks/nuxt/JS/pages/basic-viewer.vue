@@ -2,7 +2,7 @@
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../examples/basic-viewer/implementation.js";
+} from "../nutrient/basic-viewer/implementation.js";
 
 const containerRef = ref(null);
 

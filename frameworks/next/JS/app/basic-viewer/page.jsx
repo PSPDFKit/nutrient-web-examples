@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 import {
   loadBasicViewer,
   unloadBasicViewer,
-} from "../../examples/basic-viewer/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../../nutrient/loadNutrientViewer";
 import "./BasicViewerPage.css";
 
 function BasicViewerPage() {

@@ -16,8 +16,8 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
-import { loadBasicViewer } from "../examples/basic-viewer/implementation.js";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer.js";
+import { loadBasicViewer } from "../nutrient/basic-viewer/implementation.js";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer.js";
 
 const containerRef = ref(null);
 let nutrientViewer = null;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../examples/magazine-mode/implementation";
-import { loadNutrientViewer } from "../utils/loadNutrientViewer";
+} from "../nutrient/magazine-mode/implementation";
 
 const containerRef = ref<HTMLDivElement | null>(null);
 
