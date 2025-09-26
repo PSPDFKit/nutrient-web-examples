@@ -6,21 +6,31 @@ import {
   loadCustomOverlaysViewer,
   unloadCustomOverlaysViewer,
 } from "../../examples/custom-overlays/implementation";
+import { loadNutrientViewer } from "../utils/loadNutrientViewer";
 
 function CustomOverlaysPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const { NutrientViewer } = window;
 
-    if (container && NutrientViewer) {
-      loadCustomOverlaysViewer(NutrientViewer, container);
+    if (!container) return;
+
+    let nutrientViewer = null;
+
+    try {
+      nutrientViewer = loadNutrientViewer();
+
+      nutrientViewer.unload(container);
+
+      loadCustomOverlaysViewer(nutrientViewer, container);
+    } catch (error) {
+      console.error("Failed to load Nutrient Viewer:", error);
     }
 
     return () => {
-      if (NutrientViewer && container) {
-        unloadCustomOverlaysViewer(NutrientViewer, container);
+      if (nutrientViewer && container) {
+        unloadCustomOverlaysViewer(nutrientViewer, container);
       }
     };
   }, []);
@@ -47,9 +57,9 @@ function CustomOverlaysPage() {
         >
           ← Back to Examples
         </Link>
-        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Custom Overlays</h2>
+        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Magazine Mode</h2>
         <span style={{ fontSize: "0.9rem", color: "#666" }}>
-          Interactive overlays that appear on page clicks
+          Double-page layout with custom toolbar and fullscreen support
         </span>
       </nav>
 
@@ -58,4 +68,4 @@ function CustomOverlaysPage() {
   );
 }
 
-export default CustomOverlaysPage;
+export default MagazineModePage;
