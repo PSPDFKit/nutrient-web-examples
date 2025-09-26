@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type NutrientViewer from "@nutrient-sdk/viewer";
 import { onMounted, onUnmounted, ref } from "vue";
 import {
   loadBasicViewer,
@@ -8,7 +7,9 @@ import {
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const containerRef = ref<HTMLDivElement | null>(null);
-let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
+
+let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>> | null =
+  null;
 
 onMounted(async () => {
   const container = containerRef.value;
@@ -16,7 +17,7 @@ onMounted(async () => {
   if (!container) return;
 
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     loadBasicViewer(nutrientViewer, container);
   } catch (error) {

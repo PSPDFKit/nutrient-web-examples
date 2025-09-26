@@ -1,23 +1,35 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
   loadMagazineViewer,
   unloadMagazineViewer,
-} from "../nutrient/magazine-mode/implementation.js";
+} from "../nutrient/magazine-mode/implementation";
 
 const containerRef = ref(null);
 
+let nutrientViewer = null;
+
 onMounted(async () => {
-  // Wait for NutrientViewer to be available
-  while (!window.NutrientViewer) {
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
-
   const container = containerRef.value;
-  const { NutrientViewer } = window;
 
-  if (container && NutrientViewer) {
-    loadMagazineViewer(NutrientViewer, container);
+  if (!container) return;
+
+  try {
+    nutrientViewer = await loadNutrientViewer();
+
+    nutrientViewer.unload(container);
+
+    loadMagazineViewer(nutrientViewer, container);
+  } catch (error) {
+    console.error("Failed to load Nutrient Viewer:", error);
   }
+
+  return () => {
+    if (nutrientViewer && container) {
+      unloadMagazineViewer(nutrientViewer, container);
+    }
+  };
 });
 
 onUnmounted(() => {
@@ -42,7 +54,7 @@ onUnmounted(() => {
         gap: '1rem',
       }"
     >
-      <NuxtLink
+      <router-link
         to="/"
         :style="{
           textDecoration: 'none',
@@ -51,7 +63,7 @@ onUnmounted(() => {
         }"
       >
         ← Back to Examples
-      </NuxtLink>
+      </router-link>
       <h2 :style="{ margin: 0, fontSize: '1.1rem' }">Magazine Mode</h2>
       <span :style="{ fontSize: '0.9rem', color: '#666' }">
         Double-page layout with custom toolbar and fullscreen support

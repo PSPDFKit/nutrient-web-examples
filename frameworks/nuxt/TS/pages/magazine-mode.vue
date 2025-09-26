@@ -8,15 +8,16 @@ import {
 
 const containerRef = ref<HTMLDivElement | null>(null);
 
-onMounted(() => {
+let nutrientViewer: Awaited<ReturnType<typeof loadNutrientViewer>> | null =
+  null;
+
+onMounted(async () => {
   const container = containerRef.value;
 
   if (!container) return;
 
-  let nutrientViewer: ReturnType<typeof loadNutrientViewer>;
-
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     nutrientViewer.unload(container);
 

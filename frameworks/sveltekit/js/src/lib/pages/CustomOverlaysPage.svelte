@@ -13,7 +13,7 @@ onMount(async () => {
   if (!container) return;
 
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     loadCustomOverlaysViewer(nutrientViewer, container);
   } catch (error) {

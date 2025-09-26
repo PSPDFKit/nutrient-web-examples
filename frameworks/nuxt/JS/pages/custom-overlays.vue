@@ -8,15 +8,15 @@ import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
 const containerRef = ref(null);
 
-onMounted(() => {
+let nutrientViewer = null;
+
+onMounted(async () => {
   const container = containerRef.value;
 
   if (!container) return;
 
-  let nutrientViewer = null;
-
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     nutrientViewer.unload(container);
 

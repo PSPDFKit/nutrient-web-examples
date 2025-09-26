@@ -1,3 +1,47 @@
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
+import {
+  loadMagazineViewer,
+  unloadMagazineViewer,
+} from "../nutrient/magazine-mode/implementation";
+
+const containerRef = ref(null);
+
+let nutrientViewer = null;
+
+onMounted(async () => {
+  const container = containerRef.value;
+
+  if (!container) return;
+
+  try {
+    nutrientViewer = await loadNutrientViewer();
+
+    nutrientViewer.unload(container);
+
+    loadMagazineViewer(nutrientViewer, container);
+  } catch (error) {
+    console.error("Failed to load Nutrient Viewer:", error);
+  }
+
+  return () => {
+    if (nutrientViewer && container) {
+      unloadMagazineViewer(nutrientViewer, container);
+    }
+  };
+});
+
+onUnmounted(() => {
+  const container = containerRef.value;
+  const { NutrientViewer } = window;
+
+  if (container && NutrientViewer) {
+    unloadMagazineViewer(NutrientViewer, container);
+  }
+});
+</script>
+
 <template>
   <div :style="{ height: '100vh', display: 'flex', flexDirection: 'column' }">
     <nav
@@ -29,31 +73,3 @@
     <div ref="containerRef" :style="{ flex: 1, width: '100%' }" />
   </div>
 </template>
-
-<script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import {
-  loadMagazineViewer,
-  unloadMagazineViewer,
-} from "../nutrient/magazine-mode/implementation.js";
-
-const containerRef = ref(null);
-
-onMounted(() => {
-  const container = containerRef.value;
-  const { NutrientViewer } = window;
-
-  if (container && NutrientViewer) {
-    loadMagazineViewer(NutrientViewer, container);
-  }
-});
-
-onUnmounted(() => {
-  const container = containerRef.value;
-  const { NutrientViewer } = window;
-
-  if (container && NutrientViewer) {
-    unloadMagazineViewer(NutrientViewer, container);
-  }
-});
-</script>

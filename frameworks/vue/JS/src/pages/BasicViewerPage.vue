@@ -1,3 +1,38 @@
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import {
+  loadBasicViewer,
+  unloadBasicViewer,
+} from "../nutrient/basic-viewer/implementation";
+import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
+
+const containerRef = ref(null);
+
+let nutrientViewer = null;
+
+onMounted(async () => {
+  const container = containerRef.value;
+
+  if (!container) return;
+
+  try {
+    nutrientViewer = await loadNutrientViewer();
+
+    loadBasicViewer(nutrientViewer, container);
+  } catch (error) {
+    console.error("Failed to load Nutrient Viewer:", error);
+  }
+});
+
+onUnmounted(() => {
+  const container = containerRef.value;
+
+  if (nutrientViewer && container) {
+    unloadBasicViewer(nutrientViewer, container);
+  }
+});
+</script>
+
 <template>
   <div class="basic-viewer-container">
     <nav class="basic-viewer-nav">
@@ -13,40 +48,6 @@
     <div ref="containerRef" class="basic-viewer-content" />
   </div>
 </template>
-
-<script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import { loadBasicViewer } from "../nutrient/basic-viewer/implementation.js";
-import { loadNutrientViewer } from "../nutrient/loadNutrientViewer.js";
-
-const containerRef = ref(null);
-let nutrientViewer = null;
-
-onMounted(async () => {
-  const container = containerRef.value;
-  if (!container) return;
-
-  try {
-    nutrientViewer = await loadNutrientViewer();
-
-    // Unload any existing instance
-    nutrientViewer.unload(container);
-
-    await loadBasicViewer(nutrientViewer, container);
-  } catch (error) {
-    console.error("Failed to load Nutrient Viewer:", error);
-  }
-});
-
-onUnmounted(() => {
-  const container = containerRef.value;
-
-  if (container && nutrientViewer) {
-    // Use synchronous unload like the working example
-    nutrientViewer.unload(container);
-  }
-});
-</script>
 
 <style scoped>
 .basic-viewer-container {
@@ -66,7 +67,7 @@ onUnmounted(() => {
 
 .basic-viewer-back-link {
   text-decoration: none;
-  color: #4A8FED;
+  color: #4a8fed;
   font-size: 0.9rem;
 }
 

@@ -14,7 +14,7 @@ onMount(async () => {
   if (!container) return;
 
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     loadBasicViewer(nutrientViewer, container);
   } catch (error) {
