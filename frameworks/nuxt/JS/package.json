@@ -16,13 +16,13 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare || echo 'Nuxt prepare failed, continuing...'"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "^1.7.0"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^2.6.5",
     "nuxt": "^3.17.4"
   }
 }
