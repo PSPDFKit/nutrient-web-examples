@@ -16,7 +16,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "svelte-kit sync"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "^1.7.0"
