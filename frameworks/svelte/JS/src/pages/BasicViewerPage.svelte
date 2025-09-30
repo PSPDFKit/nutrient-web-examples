@@ -6,7 +6,7 @@ import {
 } from "../nutrient/basic-viewer/implementation";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
-const container = null;
+let container = null;
 let nutrientViewer = null;
 
 onMount(async () => {
