@@ -35,10 +35,9 @@ onMounted(async () => {
 
 onUnmounted(() => {
   const container = containerRef.value;
-  const { NutrientViewer } = window;
 
-  if (container && NutrientViewer) {
-    unloadCustomOverlaysViewer(NutrientViewer, container);
+  if (nutrientViewer && container) {
+    unloadCustomOverlaysViewer(nutrientViewer, container);
   }
 });
 </script>

@@ -39,7 +39,7 @@ export async function loadCustomOverlaysViewer(
  * @param defaultConfiguration - Base configuration object
  */
 function load(
-  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
+  nutrientViewer: typeof NutrientViewer,
   defaultConfiguration: Configuration,
 ) {
   return nutrientViewer.load(defaultConfiguration).then((instance) => {
@@ -61,9 +61,7 @@ function load(
   });
 }
 
-function getOverlayItemForPage1(
-  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
-) {
+function getOverlayItemForPage1(nutrientViewer: typeof NutrientViewer) {
   // We create a div element with an emoji and a short text.
   const overlayElement = document.createElement("div");
 
@@ -81,9 +79,7 @@ function getOverlayItemForPage1(
   });
 }
 
-function getOverlayItemForPage2(
-  nutrientViewer: NonNullable<typeof window.NutrientViewer>,
-) {
+function getOverlayItemForPage2(nutrientViewer: typeof NutrientViewer) {
   const overlayElement = document.createElement("div");
 
   // In this case we embed a video to the page

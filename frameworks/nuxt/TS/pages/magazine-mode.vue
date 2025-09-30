@@ -35,10 +35,9 @@ onMounted(async () => {
 
 onUnmounted(() => {
   const container = containerRef.value;
-  const { NutrientViewer } = window;
 
-  if (container && NutrientViewer) {
-    unloadMagazineViewer(NutrientViewer, container);
+  if (nutrientViewer && container) {
+    unloadMagazineViewer(nutrientViewer, container);
   }
 });
 </script>
