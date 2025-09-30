@@ -6,14 +6,14 @@ import {
 } from "../nutrient/custom-overlays/implementation";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 
-let container = null;
+const container = null;
 let nutrientViewer = null;
 
 onMount(async () => {
   if (!container) return;
 
   try {
-    nutrientViewer = loadNutrientViewer();
+    nutrientViewer = await loadNutrientViewer();
 
     loadCustomOverlaysViewer(nutrientViewer, container);
   } catch (error) {
