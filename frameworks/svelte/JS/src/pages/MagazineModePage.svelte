@@ -6,7 +6,7 @@ import {
   unloadMagazineViewer,
 } from "../nutrient/magazine-mode/implementation";
 
-const container = null;
+let container = null;
 let nutrientViewer = null;
 
 onMount(async () => {
