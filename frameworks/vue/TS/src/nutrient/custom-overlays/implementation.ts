@@ -38,7 +38,7 @@ export async function loadCustomOverlaysViewer(
  * @param nutrientViewer - The NutrientViewer object
  * @param defaultConfiguration - Base configuration object
  */
-function load(
+async function load(
   nutrientViewer: NonNullable<typeof window.NutrientViewer>,
   defaultConfiguration: Configuration,
 ) {

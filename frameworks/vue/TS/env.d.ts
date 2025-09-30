@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type NutrientViewer from "frameworks/next/ts/node_modules/@nutrient-sdk/viewer/dist";
+import type NutrientViewer from "@nutrient-sdk/viewer";
 
 declare global {
   interface Window {
