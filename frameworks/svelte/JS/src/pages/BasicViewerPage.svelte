@@ -46,7 +46,7 @@ function goBack() {
   <div 
     bind:this={container} 
     class="container"
-  />
+  ></div>
 </div>
 
 <style>

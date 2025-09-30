@@ -1,15 +1,8 @@
-<script setup lang="ts">
+<script setup>
 import NutrientLogo from "../components/logos/NutrientLogo.vue";
 import VueLogo from "../components/logos/VueLogo.vue";
 
-interface Example {
-  path: string;
-  title: string;
-  description: string;
-  features: string[];
-}
-
-const examples: Example[] = [
+const examples = [
   {
     path: "/basic-viewer",
     title: "Basic Viewer",

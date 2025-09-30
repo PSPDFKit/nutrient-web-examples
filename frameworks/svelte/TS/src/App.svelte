@@ -140,12 +140,6 @@ const examples: Example[] = [
     margin-bottom: 4em;
   }
 
-  .homepage-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-
   .homepage-tech-stack {
     display: flex;
     align-items: center;
@@ -160,12 +154,6 @@ const examples: Example[] = [
     gap: 0.75em;
     width: 4em;
     justify-content: center;
-  }
-
-  .tech-name {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: #4A8FED;
   }
 
   .tech-plus {
