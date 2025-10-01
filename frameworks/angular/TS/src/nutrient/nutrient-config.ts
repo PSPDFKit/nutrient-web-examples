@@ -13,9 +13,9 @@ export interface NutrientConfig {
  * Default configuration for Nutrient Web SDK
  */
 export const nutrientConfig: NutrientConfig = {
-  // For CDN installations, this should be undefined
+  // For CDN installations, point to the CDN baseUrl
   // For package installations, this will be set to your local asset path
-  baseUrl: undefined,
+  baseUrl: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.7.0/",
 
   // Default document for examples - you can change this to your own PDF
   documentUrl: "https://www.nutrient.io/downloads/nutrient-web-demo.pdf",
