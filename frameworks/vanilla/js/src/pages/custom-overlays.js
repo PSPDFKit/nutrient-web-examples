@@ -28,17 +28,15 @@ app.innerHTML = `
 // Load the viewer
 const container = document.getElementById("viewer-content");
 
-loadNutrientViewer().then((nutrientViewer) => {
-  if (container) {
-    loadCustomOverlaysViewer(nutrientViewer, container);
-  }
-});
-
-// Cleanup on page unload
-window.addEventListener("beforeunload", () => {
+if (container) {
   loadNutrientViewer().then((nutrientViewer) => {
-    if (container) {
-      unloadCustomOverlaysViewer(nutrientViewer, container);
-    }
+    loadCustomOverlaysViewer(nutrientViewer, container);
   });
-});
+
+  // Cleanup on page unload
+  window.addEventListener("beforeunload", () => {
+    loadNutrientViewer().then((nutrientViewer) => {
+      unloadCustomOverlaysViewer(nutrientViewer, container);
+    });
+  });
+}

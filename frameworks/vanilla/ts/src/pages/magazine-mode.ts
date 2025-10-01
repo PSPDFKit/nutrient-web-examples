@@ -2,8 +2,8 @@ import "../styles/main.css";
 import "../styles/viewer.css";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
-  loadMagazineModeViewer,
-  unloadMagazineModeViewer,
+  loadMagazineViewer,
+  unloadMagazineViewer,
 } from "../nutrient/magazine-mode/implementation";
 
 // Get the app container
@@ -34,13 +34,13 @@ const container = document.getElementById("viewer-content");
 
 if (container) {
   loadNutrientViewer().then((nutrientViewer) => {
-    loadMagazineModeViewer(nutrientViewer, container);
+    loadMagazineViewer(nutrientViewer, container);
   });
 
   // Cleanup on page unload
   window.addEventListener("beforeunload", () => {
     loadNutrientViewer().then((nutrientViewer) => {
-      unloadMagazineModeViewer(nutrientViewer, container);
+      unloadMagazineViewer(nutrientViewer, container);
     });
   });
 }

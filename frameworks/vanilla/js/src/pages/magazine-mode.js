@@ -2,8 +2,8 @@ import "../styles/main.css";
 import "../styles/viewer.css";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer.js";
 import {
-  loadMagazineModeViewer,
-  unloadMagazineModeViewer,
+  loadMagazineViewer,
+  unloadMagazineViewer,
 } from "../nutrient/magazine-mode/implementation.js";
 
 // Get the app container
@@ -28,17 +28,15 @@ app.innerHTML = `
 // Load the viewer
 const container = document.getElementById("viewer-content");
 
-loadNutrientViewer().then((nutrientViewer) => {
-  if (container) {
-    loadMagazineModeViewer(nutrientViewer, container);
-  }
-});
-
-// Cleanup on page unload
-window.addEventListener("beforeunload", () => {
+if (container) {
   loadNutrientViewer().then((nutrientViewer) => {
-    if (container) {
-      unloadMagazineModeViewer(nutrientViewer, container);
-    }
+    loadMagazineViewer(nutrientViewer, container);
   });
-});
+
+  // Cleanup on page unload
+  window.addEventListener("beforeunload", () => {
+    loadNutrientViewer().then((nutrientViewer) => {
+      unloadMagazineViewer(nutrientViewer, container);
+    });
+  });
+}

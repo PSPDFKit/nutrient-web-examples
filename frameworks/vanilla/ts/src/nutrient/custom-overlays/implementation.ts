@@ -1,76 +1,111 @@
-/**
- * Custom Overlays Implementation for Vanilla TypeScript
- *
- * Demonstrates interactive overlays that appear on page clicks
- */
-
 import type NutrientViewer from "@nutrient-sdk/viewer";
+import type { Configuration } from "@nutrient-sdk/viewer";
 import { nutrientConfig } from "../nutrient-config";
 
 /**
- * Load the viewer with custom overlay functionality
- * @param nutrientViewer - The NutrientViewer object
- * @param container - The container element
+ * Load a PDF viewer with custom overlays functionality
+ *
+ * @param nutrientViewer - The NutrientViewer object (from CDN)
+ * @param container - The container element to mount the viewer
  * @param document - URL to the PDF document
+ * @returns Promise that resolves when the viewer is loaded
  */
 export async function loadCustomOverlaysViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
   document = nutrientConfig.documentUrl,
 ) {
+  if (!nutrientViewer) {
+    throw new Error("NutrientViewer is required");
+  }
+
+  // Ensure there's only one NutrientViewer instance
+  nutrientViewer.unload(container);
+
   const config = {
     container,
     document,
     ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
   };
 
-  const instance = await nutrientViewer.load(config);
-
-  // Add click event listener for custom overlays
-  instance.addEventListener("page.click", (event) => {
-    const { pageIndex, point } = event;
-
-    // Create overlay content
-    const overlayElement = document.createElement("div");
-    overlayElement.innerHTML = `
-      <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-        <h3 style="margin: 0 0 10px 0;">Page ${pageIndex + 1}</h3>
-        <p style="margin: 0;">Clicked at: (${Math.round(point.x)}, ${Math.round(
-          point.y,
-        )})</p>
-        <button id="close-overlay" style="margin-top: 10px; padding: 5px 10px;">Close</button>
-      </div>
-    `;
-
-    // Add overlay to the instance
-    const overlay = new nutrientViewer.Overlay({
-      element: overlayElement,
-      pageIndex,
-      position: point,
-      onDisappear: () => overlay.remove(),
-    });
-
-    // Close button handler
-    overlayElement
-      .querySelector("#close-overlay")
-      ?.addEventListener("click", () => {
-        overlay.remove();
-      });
-
-    instance.setCustomOverlayItem(overlay);
-  });
-
-  return instance;
+  // Load the viewer with custom overlays configuration
+  return load(nutrientViewer, config);
 }
 
 /**
- * Unload the viewer from a container
+ * Internal load function with custom overlays configuration
+ *
  * @param nutrientViewer - The NutrientViewer object
+ * @param defaultConfiguration - Base configuration object
+ */
+function load(
+  nutrientViewer: typeof NutrientViewer,
+  defaultConfiguration: Configuration,
+) {
+  return nutrientViewer.load(defaultConfiguration).then((instance) => {
+    console.log("Nutrient Web SDK successfully loaded!!", instance);
+
+    // Every time a user clicks on the page, we show a custom overlay item on
+    // this page.
+    instance.addEventListener("page.press", (event) => {
+      if (event.pageIndex === 0) {
+        instance.setCustomOverlayItem(getOverlayItemForPage1(nutrientViewer));
+      }
+
+      if (event.pageIndex === 1) {
+        instance.setCustomOverlayItem(getOverlayItemForPage2(nutrientViewer));
+      }
+    });
+
+    return instance;
+  });
+}
+
+function getOverlayItemForPage1(nutrientViewer: typeof NutrientViewer) {
+  // We create a div element with an emoji and a short text.
+  const overlayElement = document.createElement("div");
+
+  overlayElement.style.cssText =
+    "width: 300px;background: #FFF; border: 1px #333 solid; font-family: sans-serif; font-size: 14px; padding: 20px;";
+  overlayElement.innerHTML =
+    "<p>👋 This is an overlay item that appears when clicking on the first page. Find out what happens when you click on the second page.";
+
+  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement that we created above as a node, the pageIndex we get from our onPress event and define the position on the page.
+  return new nutrientViewer.CustomOverlayItem({
+    id: "overlay-item-first-page",
+    node: overlayElement,
+    pageIndex: 0,
+    position: new nutrientViewer.Geometry.Point({ x: 300, y: 50 }),
+  });
+}
+
+function getOverlayItemForPage2(nutrientViewer: typeof NutrientViewer) {
+  const overlayElement = document.createElement("div");
+
+  // In this case we embed a video to the page
+  overlayElement.innerHTML =
+    '<iframe src="https://player.vimeo.com/video/227250697" width="500" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+
+  // Then we return a NutrientViewer.CustomOverlayItem which uses the overlayElement that we created above as a node, the pageIndex we get from our onPress event and define the position on the page.
+  return new nutrientViewer.CustomOverlayItem({
+    id: "overlay-item-second-page",
+    node: overlayElement,
+    pageIndex: 1,
+    position: new nutrientViewer.Geometry.Point({ x: 55, y: 220 }),
+  });
+}
+
+/**
+ * Unload the custom overlays viewer from a container
+ *
+ * @param nutrientViewer - The NutrientViewer object (from CDN)
  * @param container - The container element
  */
-export function unloadCustomOverlaysViewer(
+export async function unloadCustomOverlaysViewer(
   nutrientViewer: typeof NutrientViewer,
   container: HTMLElement,
 ) {
-  nutrientViewer.unload(container);
+  if (nutrientViewer) {
+    nutrientViewer.unload(container);
+  }
 }

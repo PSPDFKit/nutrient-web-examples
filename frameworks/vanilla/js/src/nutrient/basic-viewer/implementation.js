@@ -1,5 +1,5 @@
 /**
- * Basic Nutrient Viewer Implementation for Vanilla JavaScript
+ * Basic Nutrient Viewer Implementation for React (JavaScript)
  *
  * This is the simplest way to load a PDF document with Nutrient Web SDK.
  */
@@ -21,8 +21,12 @@ export function loadBasicViewer(
   const config = {
     container,
     document,
-    ...(nutrientConfig.baseUrl && { baseUrl: nutrientConfig.baseUrl }),
   };
+
+  // Add baseUrl if configured (for package installations)
+  if (nutrientConfig.baseUrl) {
+    config.baseUrl = nutrientConfig.baseUrl;
+  }
 
   return nutrientViewer.load(config);
 }

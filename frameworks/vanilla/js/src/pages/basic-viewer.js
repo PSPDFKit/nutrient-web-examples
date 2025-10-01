@@ -28,17 +28,15 @@ app.innerHTML = `
 // Load the viewer
 const container = document.getElementById("viewer-content");
 
-loadNutrientViewer().then((nutrientViewer) => {
-  if (container) {
-    loadBasicViewer(nutrientViewer, container);
-  }
-});
-
-// Cleanup on page unload
-window.addEventListener("beforeunload", () => {
+if (container) {
   loadNutrientViewer().then((nutrientViewer) => {
-    if (container) {
-      unloadBasicViewer(nutrientViewer, container);
-    }
+    loadBasicViewer(nutrientViewer, container);
   });
-});
+
+  // Cleanup on page unload
+  window.addEventListener("beforeunload", () => {
+    loadNutrientViewer().then((nutrientViewer) => {
+      unloadBasicViewer(nutrientViewer, container);
+    });
+  });
+}
