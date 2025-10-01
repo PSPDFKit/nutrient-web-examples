@@ -6,7 +6,7 @@ import {
   unloadWatermarksViewer,
 } from "../nutrient/watermarks/implementation";
 
-const container = null;
+let container = null;
 let nutrientViewer = null;
 
 onMount(async () => {
