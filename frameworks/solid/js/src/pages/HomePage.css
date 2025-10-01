@@ -1,0 +1,149 @@
+.homepage {
+  background-color: #efebe7;
+  min-height: 100vh;
+  padding: 2em 0;
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
+}
+
+.homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2em;
+  padding-bottom: 2em;
+}
+
+.homepage-logo {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.homepage-logo svg {
+  max-width: 208px;
+  margin: 0 auto;
+}
+
+.homepage-header {
+  text-align: center;
+  margin-bottom: 4em;
+}
+
+.homepage-tech-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  width: 4em;
+}
+
+.tech-item svg {
+  width: 100%;
+}
+
+.solid-title {
+  margin: 0;
+  font-size: 2em;
+  color: #2c4f7c;
+}
+
+.nutrient-title {
+  margin: 0;
+  font-size: 2em;
+  color: #1a1414;
+}
+
+.tech-plus {
+  font-size: 3em;
+  font-weight: 300;
+  color: #888;
+}
+
+.homepage-subtitle {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 4em;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2em;
+}
+
+.example-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.example-title {
+  margin: 0 0 1em 0;
+}
+
+.example-description {
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.features-title {
+  font-size: 0.9em;
+  margin: 1em 0 0.5em 0;
+}
+
+.features-list {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.button-container {
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+.view-button {
+  display: block;
+  width: 100%;
+  padding: 0.75em 1em;
+  background-color: #c2b8ae;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: none;
+  box-sizing: border-box;
+  text-transform: uppercase;
+}
+
+.view-button:hover {
+  background-color: #d4cbc4;
+}
+
+.homepage-footer {
+  text-align: center;
+  margin-top: 4em;
+  padding-top: 2em;
+  color: #666;
+}
+
+.link-no-style {
+  text-decoration: none;
+  color: inherit;
+}

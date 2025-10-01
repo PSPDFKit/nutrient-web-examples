@@ -1,0 +1,37 @@
+.viewer-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer-nav {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.viewer-back-link {
+  text-decoration: none;
+  color: #4a8fed;
+  font-size: 0.9rem;
+}
+
+.viewer-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.viewer-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.viewer-content {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  min-height: 400px;
+}
