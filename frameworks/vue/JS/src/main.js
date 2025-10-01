@@ -6,12 +6,14 @@ import BasicViewerPage from "./pages/BasicViewerPage.vue";
 import CustomOverlayPage from "./pages/CustomOverlayPage.vue";
 import HomePage from "./pages/HomePage.vue";
 import MagazineModePage from "./pages/MagazineModePage.vue";
+import WatermarksPage from "./pages/WatermarksPage.vue";
 
 const routes = [
   { path: "/", component: HomePage },
   { path: "/basic-viewer", component: BasicViewerPage },
   { path: "/magazine-mode", component: MagazineModePage },
   { path: "/custom-overlays", component: CustomOverlayPage },
+  { path: "/watermarks", component: WatermarksPage },
 ];
 
 const router = createRouter({

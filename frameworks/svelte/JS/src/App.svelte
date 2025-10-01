@@ -5,6 +5,7 @@ import SvelteLogo from "./components/logos/SvelteLogo.svelte";
 import BasicViewerPage from "./pages/BasicViewerPage.svelte";
 import CustomOverlaysPage from "./pages/CustomOverlaysPage.svelte";
 import MagazineModePage from "./pages/MagazineModePage.svelte";
+import WatermarksPage from "./pages/WatermarksPage.svelte";
 
 const examples = [
   {
@@ -33,6 +34,17 @@ const examples = [
       "HTML overlay content",
       "Dynamic positioning",
       "Video embedding",
+    ],
+  },
+  {
+    path: "/watermarks",
+    title: "Watermarks",
+    description: "Add watermarks to PDFs using JavaScript",
+    features: [
+      "Custom watermark text",
+      "Watermark rotation",
+      "Transparency control",
+      "Print integration",
     ],
   },
 ];
@@ -102,6 +114,9 @@ const examples = [
     </Route>
     <Route path="/custom-overlays">
       <CustomOverlaysPage />
+    </Route>
+    <Route path="/watermarks">
+      <WatermarksPage />
     </Route>
   </Router>
 </main>

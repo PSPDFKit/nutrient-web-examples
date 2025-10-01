@@ -31,6 +31,17 @@ const examples = [
       "Video embedding",
     ],
   },
+  {
+    path: "/watermarks",
+    title: "Watermarks",
+    description: "Add watermarks to PDFs using JavaScript",
+    features: [
+      "Custom watermark text",
+      "Watermark rotation",
+      "Transparency control",
+      "Print integration",
+    ],
+  },
 ];
 </script>
 

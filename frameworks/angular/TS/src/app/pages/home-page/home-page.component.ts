@@ -61,9 +61,7 @@ interface Example {
             </ul>
 
             <div class="button-container">
-              <a [routerLink]="example.path" class="view-button">
-                View
-              </a>
+              <a [routerLink]="example.path" class="view-button"> View </a>
             </div>
           </div>
         </div>
@@ -113,6 +111,17 @@ export class HomePageComponent {
         "HTML overlay content",
         "Dynamic positioning",
         "Video embedding",
+      ],
+    },
+    {
+      path: "/watermarks",
+      title: "Watermarks",
+      description: "Add watermarks to PDFs using JavaScript",
+      features: [
+        "Custom watermark text",
+        "Watermark rotation",
+        "Transparency control",
+        "Print integration",
       ],
     },
   ];

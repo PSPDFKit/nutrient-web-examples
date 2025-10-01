@@ -74,6 +74,23 @@ app.innerHTML = `
             <a href="/custom-overlays.html" class="view-button">View</a>
           </div>
         </div>
+
+        <div class="example-card">
+          <h3 class="example-title">Watermarks</h3>
+          <p class="example-description">Add watermarks to PDFs using JavaScript</p>
+
+          <h4 class="features-title">Features:</h4>
+          <ul class="features-list">
+            <li>Custom watermark text</li>
+            <li>Watermark rotation</li>
+            <li>Transparency control</li>
+            <li>Print integration</li>
+          </ul>
+
+          <div class="button-container">
+            <a href="/watermarks.html" class="view-button">View</a>
+          </div>
+        </div>
       </div>
 
       <footer class="homepage-footer">
