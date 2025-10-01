@@ -33,7 +33,7 @@ import { loadMagazineViewer } from "../../../nutrient/magazine-mode/implementati
 export class MagazineModePageComponent implements AfterViewInit, OnDestroy {
   @ViewChild("container", { static: true }) containerRef!: ElementRef;
 
-  private nutrientViewer!: ReturnType<typeof loadNutrientViewer>;
+  private nutrientViewer!: Awaited<ReturnType<typeof loadNutrientViewer>>;
 
   async ngAfterViewInit() {
     const container = this.containerRef.nativeElement;

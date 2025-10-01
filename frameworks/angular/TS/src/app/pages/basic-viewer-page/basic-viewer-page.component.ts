@@ -33,7 +33,7 @@ import { loadNutrientViewer } from "../../../nutrient/loadNutrientViewer";
 export class BasicViewerPageComponent implements AfterViewInit, OnDestroy {
   @ViewChild("container", { static: true }) containerRef!: ElementRef;
 
-  private nutrientViewer!: ReturnType<typeof loadNutrientViewer>;
+  private nutrientViewer!: Awaited<ReturnType<typeof loadNutrientViewer>>;
 
   async ngAfterViewInit() {
     const container = this.containerRef.nativeElement;
