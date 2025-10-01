@@ -23,6 +23,8 @@ function WatermarksPage() {
       nutrientViewer = await loadNutrientViewer();
 
       if (container && nutrientViewer) {
+        unloadWatermarksViewer(nutrientViewer, container);
+
         loadWatermarksViewer(nutrientViewer, container);
       }
     })();
