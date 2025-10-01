@@ -1,7 +1,7 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import NutrientLogo from "~/components/logos/NutrientLogo";
-import SolidLogo from "~/components/logos/SolidLogo";
+import SolidStartLogo from "~/components/logos/SolidLogo";
 import "./index.css";
 
 export default function Home() {
@@ -61,7 +61,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   class="link-no-style"
                 >
-                  <SolidLogo />
+                  <SolidStartLogo />
                 </a>
               </div>
             </div>
@@ -70,14 +70,14 @@ export default function Home() {
 
           <div class="examples-grid">
             {examples.map((example) => (
-              <div class="example-card" key={example.path}>
+              <div class="example-card">
                 <h3 class="example-title">{example.title}</h3>
                 <p class="example-description">{example.description}</p>
 
                 <h4 class="features-title">Features:</h4>
                 <ul class="features-list">
                   {example.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
+                    <li>{feature}</li>
                   ))}
                 </ul>
 

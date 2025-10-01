@@ -74,14 +74,14 @@ function HomePage() {
 
         <div class="examples-grid">
           {examples.map((example) => (
-            <div class="example-card" key={example.path}>
+            <div class="example-card">
               <h3 class="example-title">{example.title}</h3>
               <p class="example-description">{example.description}</p>
 
               <h4 class="features-title">Features:</h4>
               <ul class="features-list">
                 {example.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
+                  <li>{feature}</li>
                 ))}
               </ul>
 

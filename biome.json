@@ -21,5 +21,17 @@
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
-  }
+  },
+  "overrides": [
+    {
+      "include": ["frameworks/solid/**", "frameworks/solidstart/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useJsxKeyInIterable": "off"
+          }
+        }
+      }
+    }
+  ]
 }

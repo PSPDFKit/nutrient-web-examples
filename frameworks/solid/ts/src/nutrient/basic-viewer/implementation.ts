@@ -1,5 +1,5 @@
 /**
- * Basic Nutrient Viewer Implementation for SolidJS (TypeScript)
+ * Basic Nutrient Viewer Implementation for React (TypeScript)
  *
  * This is the simplest way to load a PDF document with Nutrient Web SDK.
  */

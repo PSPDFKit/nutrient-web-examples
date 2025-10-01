@@ -1,87 +1,136 @@
-const SolidLogo = () => (
+const SolidStartLogo = () => (
   <svg
+    width="500"
+    height="500"
+    viewBox="0 0 500 500"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 166 155.3"
     role="img"
-    aria-label="SolidJS logo"
+    aria-label="SolidStart logo"
   >
+    <path
+      d="M233.205 430.856L304.742 425.279C304.742 425.279 329.208 421.295 343.569 397.659L293.041 385.443L233.205 430.856Z"
+      fill="url(#paint0_linear_solidstart)"
+    />
+    <path
+      d="M134.278 263.278C113.003 264.341 73.6443 268.059 73.6443 268.059L245.173 392.614L284.265 402.44L343.569 397.925L170.977 273.105C170.977 273.105 157.148 263.278 137.203 263.278C136.139 263.278 135.342 263.278 134.278 263.278Z"
+      fill="url(#paint1_linear_solidstart)"
+    />
+    <path
+      d="M355.536 238.58L429.2 234.065C429.2 234.065 454.464 230.348 468.825 206.977L416.435 193.964L355.536 238.58Z"
+      fill="url(#paint2_linear_solidstart)"
+    />
+    <path
+      d="M251.289 68.6128C229.217 69.4095 188.795 72.5964 188.795 72.5964L367.503 200.072L407.926 210.429L469.09 206.712L289.318 78.9702C289.318 78.9702 274.426 68.6128 253.417 68.6128C252.885 68.6128 252.087 68.6128 251.289 68.6128Z"
+      fill="url(#paint3_linear_solidstart)"
+    />
+    <path
+      d="M31.0946 295.679C30.8287 295.945 30.8287 296.21 30.8287 296.475L77.8993 330.469L202.623 420.764C228.95 439.62 264.586 431.653 282.67 402.44L187.465 333.921L110.077 277.62C100.504 270.715 89.8663 267.528 79.2289 267.528C60.6134 267.528 42.2639 277.354 31.0946 295.679Z"
+      fill="url(#paint4_linear_solidstart)"
+    />
+    <path
+      d="M147.043 99.9505C147.043 100.216 146.776 100.482 146.511 100.747L195.442 135.538L244.374 170.062L325.751 227.957C353.142 247.345 389.841 239.642 407.925 210.695L358.461 175.374L308.997 140.318L228.153 82.6881C218.047 75.5177 206.611 72.0652 195.442 72.0652C176.561 72.3308 158.212 81.8915 147.043 99.9505Z"
+      fill="url(#paint5_linear_solidstart)"
+    />
+    <path
+      d="M112.471 139.255L175.497 208.305C178.423 212.289 181.614 216.006 185.337 219.193L308.199 354.105L369.364 350.387C387.448 321.439 380.002 282.135 352.611 262.748L271.234 204.852L222.568 170.328L173.636 135.538L112.471 139.255Z"
+      fill="url(#paint6_linear_solidstart)"
+    />
+    <path
+      d="M111.939 140.052C94.1213 168.734 101.567 207.509 128.427 226.629L209.005 283.994L258.735 319.049L308.199 354.105C326.283 325.158 318.836 285.852 291.445 266.465L112.471 139.255C112.471 139.521 112.204 139.787 111.939 140.052Z"
+      fill="url(#paint7_linear_solidstart)"
+    />
     <defs>
       <linearGradient
-        id="a"
+        id="paint0_linear_solidstart"
+        x1="359.728"
+        y1="56.8062"
+        x2="265.623"
+        y2="521.28"
         gradientUnits="userSpaceOnUse"
-        x1="27.5"
-        y1="3"
-        x2="152"
-        y2="63.5"
       >
-        <stop offset=".1" stop-color="#76b3e1" />
-        <stop offset=".3" stop-color="#dcf2fd" />
-        <stop offset="1" stop-color="#76b3e1" />
+        <stop stop-color="#1593F5" />
+        <stop offset="1" stop-color="#0084CE" />
       </linearGradient>
       <linearGradient
-        id="b"
+        id="paint1_linear_solidstart"
+        x1="350.496"
+        y1="559.872"
+        x2="-44.0802"
+        y2="-73.2062"
         gradientUnits="userSpaceOnUse"
-        x1="95.8"
-        y1="32.6"
-        x2="74"
-        y2="105.2"
       >
-        <stop offset="0" stop-color="#76b3e1" />
-        <stop offset=".5" stop-color="#4377bb" />
-        <stop offset="1" stop-color="#1f3b77" />
+        <stop stop-color="#1593F5" />
+        <stop offset="1" stop-color="#0084CE" />
       </linearGradient>
       <linearGradient
-        id="c"
+        id="paint2_linear_solidstart"
+        x1="610.25"
+        y1="570.526"
+        x2="372.635"
+        y2="144.034"
         gradientUnits="userSpaceOnUse"
-        x1="18.4"
-        y1="64.2"
-        x2="144.3"
-        y2="149.8"
       >
-        <stop offset="0" stop-color="#315aa9" />
-        <stop offset=".5" stop-color="#518ac8" />
-        <stop offset="1" stop-color="#315aa9" />
+        <stop stop-color="white" />
+        <stop offset="1" stop-color="#15ABFF" />
       </linearGradient>
       <linearGradient
-        id="d"
+        id="paint3_linear_solidstart"
+        x1="188.808"
+        y1="-180.608"
+        x2="390.515"
+        y2="281.703"
         gradientUnits="userSpaceOnUse"
-        x1="75.2"
-        y1="74.5"
-        x2="24.4"
-        y2="260.8"
       >
-        <stop offset="0" stop-color="#4377bb" />
-        <stop offset=".5" stop-color="#1a336b" />
-        <stop offset="1" stop-color="#1a336b" />
+        <stop stop-color="white" />
+        <stop offset="1" stop-color="#79CFFF" />
+      </linearGradient>
+      <linearGradient
+        id="paint4_linear_solidstart"
+        x1="415.84"
+        y1="-4.74684"
+        x2="95.1922"
+        y2="439.83"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#0057E5" />
+        <stop offset="1" stop-color="#0084CE" />
+      </linearGradient>
+      <linearGradient
+        id="paint5_linear_solidstart"
+        x1="343.141"
+        y1="-21.5427"
+        x2="242.301"
+        y2="256.708"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" />
+        <stop offset="1" stop-color="#15ABFF" />
+      </linearGradient>
+      <linearGradient
+        id="paint6_linear_solidstart"
+        x1="469.095"
+        y1="533.421"
+        x2="-37.6939"
+        y2="-135.731"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" />
+        <stop offset="1" stop-color="#79CFFF" />
+      </linearGradient>
+      <linearGradient
+        id="paint7_linear_solidstart"
+        x1="380.676"
+        y1="-89.0869"
+        x2="120.669"
+        y2="424.902"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" />
+        <stop offset="1" stop-color="#79CFFF" />
       </linearGradient>
     </defs>
-    <path
-      d="M163 35S110-4 69 5l-3 1c-6 2-11 5-14 9l-2 3-15 26 26 5c11 7 25 10 38 7l46 9 18-30z"
-      fill="#76b3e1"
-    />
-    <path
-      d="M163 35S110-4 69 5l-3 1c-6 2-11 5-14 9l-2 3-15 26 26 5c11 7 25 10 38 7l46 9 18-30z"
-      opacity=".3"
-      fill="url(#a)"
-    />
-    <path
-      d="M52 35l-4 1c-17 5-22 21-13 35 10 13 31 20 48 15l62-21S92 26 52 35z"
-      fill="#518ac8"
-    />
-    <path
-      d="M52 35l-4 1c-17 5-22 21-13 35 10 13 31 20 48 15l62-21S92 26 52 35z"
-      opacity=".3"
-      fill="url(#b)"
-    />
-    <path
-      d="M134 80a45 45 0 00-48-15L24 85 4 120l112 19 20-36c4-7 3-15-2-23z"
-      fill="url(#c)"
-    />
-    <path
-      d="M114 115a45 45 0 00-48-15L4 120s53 40 94 30l3-1c17-5 23-21 13-34z"
-      fill="url(#d)"
-    />
   </svg>
 );
 
-export default SolidLogo;
+export default SolidStartLogo;

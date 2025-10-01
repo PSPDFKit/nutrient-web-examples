@@ -3,8 +3,8 @@ import { A } from "@solidjs/router";
 import { onCleanup, onMount } from "solid-js";
 import { loadNutrientViewer } from "../nutrient/loadNutrientViewer";
 import {
-  loadMagazineModeViewer,
-  unloadMagazineModeViewer,
+  loadMagazineViewer,
+  unloadMagazineViewer,
 } from "../nutrient/magazine-mode/implementation";
 import "./BasicViewerPage.css";
 
@@ -18,14 +18,14 @@ function MagazineModePage() {
     nutrientViewer = await loadNutrientViewer();
 
     if (containerRef && nutrientViewer) {
-      unloadMagazineModeViewer(nutrientViewer, containerRef);
-      loadMagazineModeViewer(nutrientViewer, containerRef);
+      unloadMagazineViewer(nutrientViewer, containerRef);
+      loadMagazineViewer(nutrientViewer, containerRef);
     }
   });
 
   onCleanup(() => {
     if (nutrientViewer && containerRef) {
-      unloadMagazineModeViewer(nutrientViewer, containerRef);
+      unloadMagazineViewer(nutrientViewer, containerRef);
     }
   });
 
