@@ -7,6 +7,7 @@ import {
 } from "../nutrient/watermarks/implementation";
 
 const container = null;
+
 let nutrientViewer = null;
 
 onMount(async () => {
