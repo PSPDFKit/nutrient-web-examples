@@ -8,6 +8,7 @@ import {
 } from "../nutrient/watermarks/implementation";
 
 const container: HTMLElement | null = null;
+
 let nutrientViewer: typeof NutrientViewer | null = null;
 
 onMount(async () => {

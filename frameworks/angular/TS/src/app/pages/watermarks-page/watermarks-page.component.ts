@@ -10,7 +10,7 @@ import { loadNutrientViewer } from "../../../nutrient/loadNutrientViewer";
 import {
   loadWatermarksViewer,
   unloadWatermarksViewer,
-} from "../../../nutrient/watermarks/implementation";
+} from "../../nutrient/watermarks/implementation";
 
 @Component({
   selector: "app-watermarks-page",
@@ -40,6 +40,7 @@ export class WatermarksPageComponent implements AfterViewInit, OnDestroy {
 
   async ngAfterViewInit() {
     const container = this.containerRef.nativeElement;
+
     if (!container) return;
 
     try {
