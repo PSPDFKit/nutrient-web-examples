@@ -32,6 +32,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["frameworks/svelte/**", "frameworks/sveltekit/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
     }
   ]
 }
