@@ -22,7 +22,9 @@
     "vite": "^7.1.5"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"],
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ],
     "overrides": {
       "cookie": "^0.7.0",
       "brace-expansion@>=1.0.0 <=1.1.11": "^1.1.12",
@@ -30,6 +32,6 @@
     }
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.7.0"
+    "@nutrient-sdk/viewer": "1.8.0"
   }
 }

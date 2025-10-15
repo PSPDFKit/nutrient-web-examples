@@ -25,7 +25,7 @@ const Viewport = (props) => {
       // Gatsby needs client-side only packages need to be imported asynchronously
       // https://www.gatsbyjs.com/docs/using-client-side-only-packages/
       nutrientScript.src =
-        "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.7.0/nutrient-viewer.js";
+        "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.8.0/nutrient-viewer.js";
       document.head.appendChild(nutrientScript);
 
       return () => {
