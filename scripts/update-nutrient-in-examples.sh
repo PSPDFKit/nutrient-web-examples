@@ -17,26 +17,20 @@ upgrade_npm_in_example() {
   if [ -f "pnpm-lock.yaml" ]; then
     pnpm install @nutrient-sdk/viewer@latest --save --save-exact
 
-    pnpm install
+    pnpm install > /dev/null
 
-    pnpm audit fix > /dev/null
+    pnpm audit fix > /dev/null || true
   elif [ -f "package-lock.json" ]; then
     npm install @nutrient-sdk/viewer@latest --save --save-exact
 
-    npm install
+    npm install > /dev/null
 
-    npm audit fix > /dev/null
+    npm audit fix > /dev/null || true
   fi
 
   popd > /dev/null
-}
 
-upgrade_version_in_gatsbyjs() {
-  node ./scripts/update-version-in-gatsby.js
-}
-
-upgrade_version_in_salesforce() {
-  node ./scripts/update-version-in-salesforce.js
+  node ./scripts/update-nutrient-in-cdn.js "${directory}"
 }
 
 upgrade_npm_in_example "webpack"
@@ -57,5 +51,5 @@ upgrade_npm_in_example "nuxtjs"
 upgrade_npm_in_example "laravel"
 upgrade_npm_in_example "vite"
 upgrade_npm_in_example "salesforce"
-upgrade_version_in_gatsbyjs
-upgrade_version_in_salesforce
+upgrade_npm_in_example "javascript-vite"
+upgrade_npm_in_example "typescript-vite"

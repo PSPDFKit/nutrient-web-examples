@@ -12,14 +12,14 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^6.1.0",
-    "@sveltejs/kit": "^2.41.0",
-    "@sveltejs/vite-plugin-svelte": "^6.2.0",
+    "@sveltejs/adapter-auto": "^7.0.0",
+    "@sveltejs/kit": "^2.47.3",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "rollup-plugin-copy": "^3.5.0",
-    "svelte": "^5.38.10",
-    "svelte-check": "^4.3.1",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.5"
+    "svelte": "^5.41.3",
+    "svelte-check": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -28,7 +28,7 @@
     "overrides": {
       "cookie": "^0.7.0",
       "brace-expansion@>=1.0.0 <=1.1.11": "^1.1.12",
-      "vite": "^7.1.5"
+      "vite": "^7.1.12"
     }
   },
   "dependencies": {
