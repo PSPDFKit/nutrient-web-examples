@@ -34,6 +34,7 @@
     "overrides": {
       "http-proxy-middleware": "^2.0.9",
       "on-headers": "^1.1.0"
-    }
+    },
+    "onlyBuiltDependencies": ["@biomejs/biome"]
   }
 }

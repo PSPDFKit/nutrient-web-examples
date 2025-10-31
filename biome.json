@@ -9,7 +9,8 @@
       "examples/asp-net/*",
       "examples/svelte-kit",
       "examples/salesforce/*",
-      "examples/laravel/*"
+      "examples/laravel/*",
+      "examples/nuxtjs/.output/*"
     ],
     "ignoreUnknown": true
   },
