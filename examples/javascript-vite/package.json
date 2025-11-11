@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:npm": "cross-env USE_NPM=true vite",
+    "dev:npm": "cross-env VITE_USE_NPM=true vite",
     "build": "vite build",
-    "build:npm": "cross-env USE_NPM=true vite build",
+    "build:npm": "cross-env VITE_USE_NPM=true vite build",
     "preview": "vite preview",
-    "preview:npm": "cross-env USE_NPM=true vite preview"
+    "preview:npm": "cross-env VITE_USE_NPM=true vite preview"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.8.0",
