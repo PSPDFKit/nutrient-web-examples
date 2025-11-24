@@ -50,7 +50,7 @@ To use the npm package bundled with webpack instead of CDN:
 1. **Comment out the CDN script** in `src/index.html`:
    ```html
    <!-- Comment this line: -->
-   <!-- <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.8.0/nutrient-viewer.js"></script> -->
+   <!-- <script src="https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.9.1/nutrient-viewer.js"></script> -->
    ```
 
 2. **Run with npm flag**:

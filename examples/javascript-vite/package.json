@@ -12,7 +12,7 @@
     "preview:npm": "cross-env VITE_USE_NPM=true vite preview"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.8.0",
+    "@nutrient-sdk/viewer": "1.9.1",
     "drag-drop": "^7.2.0"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@
     "svelte": "^4.2.19"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.8.0",
+    "@nutrient-sdk/viewer": "1.9.1",
     "sirv-cli": "^2.0.2"
   }
 }
