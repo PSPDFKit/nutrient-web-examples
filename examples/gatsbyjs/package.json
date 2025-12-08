@@ -24,7 +24,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "prettier": "^3.6.2"
+    "baseline-browser-mapping": "^2.9.5",
+    "prettier": "^3.7.4"
   },
   "overrides": {
     "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
@@ -34,8 +35,8 @@
     "path-to-regexp": "^0.1.12",
     "body-parser": "^1.20.3",
     "send": "^0.19.1",
-    "axios": "^1.12.2",
-    "cookie": "^1.0.2",
+    "axios": "^1.13.2",
+    "cookie": "^1.1.1",
     "cross-spawn": "^7.0.6",
     "serialize-javascript": "^6.0.2",
     "multer": "^2.0.2",
