@@ -2,7 +2,7 @@ import copy from "rollup-plugin-copy";
 import { defineConfig } from "vite";
 
 // Check if we should use npm package instead of CDN
-const useNpm = process.env.USE_NPM === "true";
+const useNpm = process.env.VITE_USE_NPM === "true";
 
 export default defineConfig({
   plugins: useNpm

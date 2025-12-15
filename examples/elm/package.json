@@ -3,7 +3,12 @@
   "description": "PDF viewer web application built with Nutrient Web SDK and Elm",
   "version": "1.0.0",
   "main": "index.js",
-  "keywords": ["elm", "pdf", "viewer", "webpack"],
+  "keywords": [
+    "elm",
+    "pdf",
+    "viewer",
+    "webpack"
+  ],
   "author": "Nutrient (https://www.nutrient.io)",
   "homepage": "https://www.nutrient.io/web",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
