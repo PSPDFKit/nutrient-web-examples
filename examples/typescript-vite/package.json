@@ -13,6 +13,6 @@
     "vite": "^6.3.6"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.8.0"
+    "@nutrient-sdk/viewer": "1.9.1"
   }
 }
