@@ -11,7 +11,7 @@
     "start:e2e": "npm run dev"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.9.1",
+    "@nutrient-sdk/viewer": "1.10.0",
     "nuxt": "^3.20.2",
     "vue": "^3.5.25"
   }

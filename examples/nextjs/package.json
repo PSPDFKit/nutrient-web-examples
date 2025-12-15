@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.9.1",
+    "@nutrient-sdk/viewer": "1.10.0",
     "copy-webpack-plugin": "^13.0.1",
     "next": "^15.5.8",
     "react": "^19.2.3",
