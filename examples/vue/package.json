@@ -10,7 +10,7 @@
     "start:e2e": "npm run dev -- --port 3000"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.9.1",
+    "@nutrient-sdk/viewer": "1.10.0",
     "vue": "^3.5.21"
   },
   "devDependencies": {

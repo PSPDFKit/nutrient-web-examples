@@ -28,7 +28,7 @@
     "electron": "^35.7.5"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.9.1"
+    "@nutrient-sdk/viewer": "1.10.0"
   },
   "overrides": {
     "minimatch": "^3.0.5",

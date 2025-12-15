@@ -26,7 +26,7 @@
     "start:e2e": "vite --port 3000"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.9.1",
+    "@nutrient-sdk/viewer": "1.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
