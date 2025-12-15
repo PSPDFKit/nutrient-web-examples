@@ -10,7 +10,8 @@
       "examples/svelte-kit",
       "examples/salesforce/*",
       "examples/laravel/*",
-      "examples/nuxtjs/.output/*"
+      "examples/nuxtjs/.output/*",
+      "examples/**/*.page"
     ],
     "ignoreUnknown": true
   },

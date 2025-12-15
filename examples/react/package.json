@@ -19,7 +19,7 @@
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "readme": "https://www.nutrient.io/guides/web",
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.8.0",
+    "@nutrient-sdk/viewer": "1.9.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.4",
