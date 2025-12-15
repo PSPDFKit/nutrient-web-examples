@@ -33,7 +33,8 @@
   "pnpm": {
     "overrides": {
       "http-proxy-middleware": "^2.0.9",
-      "on-headers": "^1.1.0"
+      "on-headers": "^1.1.0",
+      "node-forge": "^1.3.2"
     },
     "onlyBuiltDependencies": ["@biomejs/biome"]
   }
