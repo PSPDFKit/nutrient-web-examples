@@ -5,10 +5,10 @@
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "dependencies": {
     "@nutrient-sdk/viewer": "1.8.0",
-    "copy-webpack-plugin": "^13.0.0",
-    "next": "^15.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "copy-webpack-plugin": "^13.0.1",
+    "next": "^15.5.8",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "scripts": {
     "dev": "next dev",
