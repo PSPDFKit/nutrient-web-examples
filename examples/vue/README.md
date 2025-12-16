@@ -1,56 +1,33 @@
-# Nutrient Web SDK Example – Vue
+# vue-project
 
-This example shows how to integrate [PSPDFKit for Web](https://www.nutrient.io/web/) into a Vue.js app.
+This template should help get you started developing with Vue 3 in Vite.
 
-## Prerequisites
+## Recommended IDE Setup
 
-- [Node.js](http://nodejs.org/)
-- Nutrient Web SDK (get your free trial [here](https://www.nutrient.io/try/))
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Support, Issues and License Questions
+## Type Support for `.vue` Imports in TS
 
-Nutrient offers support for customers with an active SDK license via https://www.nutrient.io/support/request/
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-Are you [evaluating our SDK](https://www.nutrient.io/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://www.nutrient.io/sales/
+## Customize configuration
 
-## Getting Started
+See [Vite Configuration Reference](https://vite.dev/config/).
 
-Clone the repo:
+## Project Setup
 
-```bash
-git clone https://github.com/PSPDFKit/nutrient-web-examples.git
-cd nutrient-web-examples/examples/vue
+```sh
+pnpm install
 ```
 
-Install the project dependencies with `npm`:
+### Compile and Hot-Reload for Development
 
-```bash
-npm install
+```sh
+pnpm dev
 ```
 
-## Vue Component
+### Type-Check, Compile and Minify for Production
 
-The Vue component which implements the Nutrient Web SDK integration is included at `src/App.vue` with the rest of the example.
-
-In order to make the Nutrient Web SDK's library available for building, we have to copy the `nutrient-viewer-lib/` directory from `node_modules/@nutrient-sdk/viewer/dist/` into the `public/js/` directory. This is done in the `package.json` script `verify-installation` which is executed by `serve`.
-
-## Running the Example
-
-We are ready to launch the app! 🎉
-
-```bash
-npm run build
-npm run serve
+```sh
+pnpm build
 ```
-
-You can now open http://localhost:4173 in your browser and enjoy!
-
-## License
-
-This software is licensed under a [modified BSD license](LICENSE).
-
-## Contributing
-
-Please ensure
-[you have signed our CLA](https://www.nutrient.io/guides/web/current/miscellaneous/contributing/) so that we can
-accept your contributions.

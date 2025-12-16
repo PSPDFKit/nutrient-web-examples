@@ -1,81 +1,59 @@
-<template>
-  <div class="pdf-container"></div>
-</template>
+<script setup lang="ts">
+import type * as Nutrient from "@nutrient-sdk/viewer";
 
-<script>
-let loadPromiseResolve;
+interface Props {
+  pdfFile: string;
+}
 
-const loadPromise = new Promise((resolve) => {
-  loadPromiseResolve = resolve;
+const props = defineProps<Props>();
+const emit = defineEmits<{
+  loaded: [instance: Nutrient.Instance];
+}>();
+
+const container = ref<HTMLDivElement | null>(null);
+let instance: Nutrient.Instance | null = null;
+
+async function loadViewer() {
+  if (!container.value || !window.NutrientViewer) return;
+
+  if (instance) {
+    window.NutrientViewer.unload(container.value);
+  }
+
+  instance = await window.NutrientViewer.load({
+    container: container.value,
+    document: props.pdfFile,
+    useCDN: true,
+  });
+
+  emit("loaded", instance);
+}
+
+watch(
+  () => props.pdfFile,
+  () => {
+    loadViewer();
+  },
+);
+
+onMounted(() => {
+  loadViewer();
 });
 
-useHead({
-  script: [
-    {
-      src: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.3.0/nutrient-viewer.js",
-      type: "text/javascript",
-      onload: () => loadPromiseResolve(),
-    },
-  ],
+onUnmounted(() => {
+  if (container.value) {
+    window.NutrientViewer?.unload(container.value);
+  }
 });
-
-/**
- * Nutrient Web SDK example component.
- */
-export default {
-  name: "Nutrient",
-  /**
-   * The component receives `pdfFile` as a prop, which is type of `String` and is required.
-   */
-  props: {
-    pdfFile: {
-      type: String,
-      required: true,
-    },
-  },
-  Nutrient: null,
-  /**
-   * We wait until the template has been rendered to load the document into the library.
-   */
-  mounted() {
-    loadPromise.then(() => {
-      this.loadNutrient().then((instance) => {
-        this.$emit("loaded", instance);
-      });
-    });
-  },
-  /**
-   * We watch for `pdfFile` prop changes and trigger unloading and loading when there's a new document to load.
-   */
-  watch: {
-    pdfFile(val) {
-      if (val) {
-        this.loadNutrient();
-      }
-    },
-  },
-  /**
-   * Our component has the `loadNutrient` method. This unloads and cleans up the component and triggers document loading.
-   */
-  methods: {
-    async loadNutrient() {
-      if (this.Nutrient) {
-        this.Nutrient.unload(".pdf-container");
-      }
-
-      this.Nutrient = window.NutrientViewer;
-
-      return window.NutrientViewer.load({
-        document: this.pdfFile,
-        container: ".pdf-container",
-      });
-    },
-  },
-};
 </script>
+
+<template>
+  <div ref="container" class="pdf-container" />
+</template>
 
 <style scoped>
 .pdf-container {
   height: 100vh;
+  position: relative;
 }
 </style>

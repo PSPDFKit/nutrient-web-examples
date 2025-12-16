@@ -1,44 +1,52 @@
-<script>
-import Nutrient from "./PdfViewerComponent.svelte";
+<script lang="ts">
+import PdfViewer from "./lib/PdfViewer.svelte";
 
-let doc = "document.pdf";
-const errorMsg = "";
+let currentDocument = $state("document.pdf");
 
-function openDocument(e) {
-  doc = window.URL.createObjectURL(e.target.files[0]);
+function handleOpen() {
+  currentDocument =
+    currentDocument === "document.pdf" ? "another-example.pdf" : "document.pdf";
 }
 </script>
 
 <main>
-  <form>
-    <label for="file-upload" class="custom-file-upload"> Open PDF </label>
-    <input
-      id="file-upload"
-      type="file"
-      on:change={openDocument}
-      accept="application/pdf"
-    />
-  </form>
-  <span class="error">{errorMsg}</span>
-  <Nutrient document={doc} bind:errorMsg />
+  <button class="app-button" type="button" onclick={handleOpen}>
+    Open another document
+  </button>
+  <div class="app-viewer">
+    <PdfViewer document={currentDocument} />
+  </div>
 </main>
 
 <style>
-  input[type="file"] {
-    display: none;
+  :global(body) {
+    margin: 0;
+    padding: 0;
   }
-  .custom-file-upload {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .app-button {
     background: #4a8fed;
-    padding: 10px;
+    border: none;
+    border-radius: 4px;
     color: #fff;
-    font: inherit;
-    font-size: 20px;
+    cursor: pointer;
+    font-size: 16px;
     font-weight: bold;
-    margin-top: 0.5rem;
+    margin: 10px auto;
+    padding: 10px 20px;
+  }
+
+  .app-button:hover {
+    background: #3a7ddd;
+  }
+
+  .app-viewer {
+    flex: 1;
   }
 </style>

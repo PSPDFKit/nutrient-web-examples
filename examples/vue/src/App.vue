@@ -1,77 +1,83 @@
+<script setup lang="ts">
+import type * as Nutrient from "@nutrient-sdk/viewer";
+import { onMounted, onUnmounted, ref, useTemplateRef, watch } from "vue";
+
+const containerRef = useTemplateRef("container");
+const currentDocument = ref("document.pdf");
+let instance: Nutrient.Instance | null = null;
+
+async function loadDocument() {
+  const container = containerRef.value;
+  if (!container || !window.NutrientViewer) return;
+
+  if (instance) {
+    window.NutrientViewer.unload(container);
+  }
+
+  instance = await window.NutrientViewer.load({
+    container,
+    document: currentDocument.value,
+    useCDN: true,
+  });
+}
+
+function handleOpen() {
+  currentDocument.value =
+    currentDocument.value === "document.pdf"
+      ? "another-example.pdf"
+      : "document.pdf";
+}
+
+watch(currentDocument, () => {
+  loadDocument();
+});
+
+onMounted(() => {
+  loadDocument();
+});
+
+onUnmounted(() => {
+  const container = containerRef.value;
+  if (container) {
+    window.NutrientViewer?.unload(container);
+  }
+});
+</script>
+
 <template>
-  <div id="app">
-    <label for="file-upload" class="custom-file-upload">
-    Open PDF
-    </label>
-    <input id="file-upload" type="file" @change="openDocument" class="btn" />
-    <NutrientContainer :pdfFile="pdfFile" @loaded="handleLoaded" />
+  <div class="app">
+    <button class="app-button" type="button" @click="handleOpen">
+      Open another document
+    </button>
+    <div ref="container" class="app-viewer" />
   </div>
 </template>
 
-<script>
-import NutrientContainer from "@/components/NutrientContainer.vue";
-
-export default {
-  data() {
-    return {
-      pdfFile: this.pdfFile || "/example.pdf",
-    };
-  },
-  /**
-   * render NutrientContainer component
-   */
-  components: {
-    NutrientContainer,
-  },
-  /**
-   * Our component has two methods - one to check when the document is loaded, and the other to open the document.
-   */
-  methods: {
-    handleLoaded(instance) {
-      console.log("Nutrient has loaded: ", instance);
-      // do something
-    },
-
-    openDocument() {
-      // to access Vue instance data properties, use `this` keyword
-      if (this.pdfFile) {
-        window.URL.revokeObjectURL(this.pdfFile);
-      }
-      this.pdfFile = window.URL.createObjectURL(event.target.files[0]);
-    },
-  },
-};
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style scoped>
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-body {
-  margin: 0;
+.app-button {
+  background: #4a8fed;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px auto;
+  padding: 10px 20px;
 }
 
-input[type="file"] {
-    display: none;
+.app-button:hover {
+  background: #3a7ddd;
 }
 
-.custom-file-upload {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background:#4A8FED;
-    padding:10px;
-    color:#fff;
-    font:inherit;
-    font-size: 16px;
-    font-weight: bold;
+.app-viewer {
+  flex: 1;
+  position: relative;
 }
-
 </style>
