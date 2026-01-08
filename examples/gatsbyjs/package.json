@@ -42,8 +42,9 @@
     "multer": "^2.0.2",
     "tar-fs": "^3.1.1",
     "tmp": "^0.2.5",
-    "@parcel/cache": "2.16.0",
-    "@parcel/core": "2.16.0",
-    "@parcel/reporter-dev-server": "^2.16.0"
+    "@parcel/cache": "^2.16.3",
+    "@parcel/core": "^2.16.3",
+    "@parcel/reporter-dev-server": "^2.16.3",
+    "qs": "^6.14.1"
   }
 }
