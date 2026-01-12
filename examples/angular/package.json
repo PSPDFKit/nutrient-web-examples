@@ -39,6 +39,8 @@
     "typescript": "~5.9.3"
   },
   "overrides": {
-    "qs": "^6.14.1"
+    "qs": "^6.14.1",
+    "@angular/core": "21.0.7",
+    "@angular/compiler": "21.0.7"
   }
 }
