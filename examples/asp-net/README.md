@@ -28,7 +28,13 @@ If Visual Studio informs you that some packages are missing then click on the "R
 
 ## Standalone
 
-After you have downloaded [Nutrient Web SDK](https://customers.www.nutrient.io/download/web/latest), place the contents of the dist directory in `/wwwroot/lib/nutrient/`.
+Obtain the URL to download the latest Nutrient Web SDK version by running `curl` in the command line:
+
+```bash
+curl https://registry.npmjs.org/@nutrient-sdk/viewer/ | jq '.versions[."dist-tags".latest].dist.tarball'
+```
+
+Copy and paste the URL into your browser to download the SDK, and place the contents of the `dist` directory in `/wwwroot/lib/nutrient/`.
 
 Make sure your `/wwwroot/lib/nutrient/` folder contains the file `nutrient-viewer.js` and a `nutrient-viewer-lib` directory with library assets.
 
