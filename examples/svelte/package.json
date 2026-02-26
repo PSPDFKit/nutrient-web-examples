@@ -10,8 +10,8 @@
     "start:e2e": "sirv public --no-clear --port 3000"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.1",
-    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-commonjs": "^28.0.9",
+    "@rollup/plugin-node-resolve": "^15.3.1",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.27.3",
     "rollup-plugin-copy": "^3.5.0",

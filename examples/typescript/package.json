@@ -32,16 +32,16 @@
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "eslint": "^9.15.0",
-    "html-webpack-plugin": "^5.6.3",
-    "jiti": "^2.0.0",
+    "html-webpack-plugin": "^5.6.6",
+    "jiti": "^2.6.1",
     "ncp": "^2.0.0",
-    "prettier": "^3.3.3",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.15.0",
-    "webpack": "^5.96.1",
+    "prettier": "^3.8.1",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "webpack": "^5.105.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.3"
   },
   "scripts": {
     "copy-files": "copyfiles -u 5 ./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib/**/*.* ./src/nutrient-viewer-lib",
@@ -56,15 +56,16 @@
     "start:e2e": "npm run start:dev"
   },
   "overrides": {
-    "ajv": "^8.18.0",
-    "minimatch": "3.1.4",
     "path-to-regexp": "^3.3.0",
     "cross-spawn": "^7.0.6",
     "http-proxy-middleware": "^2.0.9",
     "on-headers": "^1.1.0",
-    "qs": "^6.14.2",
     "serve-handler": {
       "minimatch": "3.1.4"
+    },
+    "qs": "^6.15.0",
+    "serve": {
+      "ajv": "^8.18.0"
     }
   }
 }
