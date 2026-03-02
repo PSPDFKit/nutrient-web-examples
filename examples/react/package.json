@@ -52,15 +52,15 @@
   ],
   "overrides": {
     "nth-check": "^2.0.1",
-    "minimatch": "^3.0.5",
+    "minimatch": "3.1.4",
     "loader-utils": "^2.0.4",
     "json5": "^2.2.2",
     "postcss": "^8.4.31",
-    "rollup": "^3.29.5",
+    "rollup": "^3.30.0",
     "cross-spawn": "^7.0.5",
     "express": "^4.21.2",
     "http-proxy-middleware": "^2.0.9",
     "webpack-dev-server": "^5.2.2",
-    "qs": "^6.14.1"
+    "qs": "^6.14.2"
   }
 }

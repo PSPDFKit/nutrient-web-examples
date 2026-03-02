@@ -27,7 +27,7 @@
   "dependencies": {
     "@nutrient-sdk/viewer": "1.12.0",
     "idb": "^2.1.3",
-    "serve": "^14.2.4",
+    "serve": "^13.0.4",
     "workbox-sw": "^7.3.0"
   },
   "devDependencies": {
@@ -38,13 +38,17 @@
     "workbox-cli": "^7.3.0"
   },
   "overrides": {
-    "minimatch": "^3.0.5",
+    "ajv": "^8.18.0",
+    "minimatch": "3.1.4",
     "json5": "^2.2.2",
     "latest-version": "^9.0.0",
     "path-to-regexp": "^3.3.0",
-    "rollup": "^3.29.5",
+    "rollup": "^3.30.0",
     "cross-spawn": "^7.0.6",
     "tmp": "^0.2.4",
-    "on-headers": "^1.1.0"
+    "on-headers": "^1.1.0",
+    "serve-handler": {
+      "minimatch": "3.1.4"
+    }
   }
 }
