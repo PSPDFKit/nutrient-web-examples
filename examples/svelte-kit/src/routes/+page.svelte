@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onDestroy, onMount } from "svelte";
 
-const container: HTMLDivElement | null = null;
+let container: HTMLDivElement | null = null;
 let NutrientViewer: typeof import("@nutrient-sdk/viewer").default | undefined;
 
 onMount(async () => {

@@ -22,10 +22,10 @@
   "dependencies": {
     "@nutrient-sdk/viewer": "1.12.0",
     "drag-drop": "^7.2.0",
-    "serve": "^14.2.5"
+    "serve": "^13.0.4"
   },
   "devDependencies": {
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "copy-webpack-plugin": "^13.0.0",
     "cross-env": "^7.0.3",
     "html-webpack-plugin": "^5.6.3",
@@ -44,10 +44,15 @@
     "start:dev:npm": "cross-env NODE_ENV=development USE_NPM=true webpack serve --config config/webpack.js --progress"
   },
   "overrides": {
+    "ajv": "^8.18.0",
+    "minimatch": "3.1.4",
     "path-to-regexp": "^3.3.0",
     "cross-spawn": "^7.0.6",
     "http-proxy-middleware": "^2.0.9",
     "on-headers": "^1.1.0",
-    "qs": "^6.14.1"
+    "qs": "^6.14.2",
+    "serve-handler": {
+      "minimatch": "3.1.4"
+    }
   }
 }
