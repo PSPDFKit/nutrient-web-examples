@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import PdfViewerComponent from "./components/PdfViewerComponent";
+import PdfViewerComponent from "./components/PdfViewerComponent.jsx";
 import "./App.css";
 
 function App() {

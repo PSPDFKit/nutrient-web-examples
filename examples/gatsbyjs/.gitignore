@@ -3,11 +3,11 @@
 # dependencies
 /node_modules
 
-# serve and build folder
-/public
+# build output
+/dist
 
-# GatsbyJS cache
-.cache
+# Nutrient viewer library (copied at install time)
+/public/nutrient-viewer-lib
 
 # misc
 .DS_Store
@@ -16,4 +16,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-static/nutrient-viewer-lib
+

@@ -1,45 +1,30 @@
 {
   "name": "nutrient-web-example-gatsbyjs",
   "private": true,
-  "description": "Basic integration of Nutrient Web SDK in GatsbyJS",
+  "description": "Basic integration of Nutrient Web SDK in React + Vite (migrated from GatsbyJS)",
   "version": "1.0.0",
   "license": "SEE LICENSE IN https://www.nutrient.io/legal/Nutrient_SDK_User_Evaluation_Subscription_Agreement",
   "engines": {
     "npm": ">=8.3.0"
   },
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop --port 3000",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "start": "npm run dev",
     "start:e2e": "npm run start"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.13.0",
-    "gatsby": "^5.16.1",
-    "gatsby-source-filesystem": "^5.16.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.13.2"
   },
   "devDependencies": {
-    "baseline-browser-mapping": "^2.10.0",
-    "prettier": "^3.8.1"
+    "@vitejs/plugin-react": "^6.0.1",
+    "prettier": "^3.8.1",
+    "vite": "^8.0.3"
   },
-  "overrides": {
-    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
-      "react": "^18.3.1"
-    },
-    "ajv@^6.0.0": "^6.14.0",
-    "ajv@^8.0.0": "^8.18.0",
-    "cookie": "^1.1.1",
-    "qs": "^6.14.2",
-    "tmp": "^0.2.5",
-    "@parcel/cache": "^2.16.3",
-    "@parcel/core": "^2.16.3",
-    "@parcel/reporter-dev-server": "^2.16.3",
-    "webpack": "^5.105.4",
-    "serialize-javascript": "^7.0.4"
-  }
+  "overrides": {}
 }

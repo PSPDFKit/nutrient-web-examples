@@ -15,7 +15,7 @@ export default function PdfViewerComponent(props) {
         // The document to open.
         document: props.document,
         // Use the public directory URL as a base URL. Nutrient will download its library assets from here.
-        baseUrl: `${window.location.protocol}//${window.location.host}/${process.env.PUBLIC_URL}`,
+        baseUrl: `${window.location.protocol}//${window.location.host}/nutrient-viewer-lib/`,
       });
     })();
 
