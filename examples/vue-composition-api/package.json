@@ -8,8 +8,7 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build",
-    "start:e2e": "vite --port 3000"
+    "type-check": "vue-tsc --build"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.13.0",
