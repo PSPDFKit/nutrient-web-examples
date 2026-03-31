@@ -116,8 +116,9 @@ The shared Playwright test (`tests/load.test.ts`) verifies two things:
 The `scripts/e2e-tests.sh` script iterates over all examples (except excluded ones)
 and runs this test against each.
 
-**Excluded from e2e** (no `start:e2e` or non-Node): webpack, blazor, gatsbyjs,
-laravel, salesforce, wasm-benchmark, electron, electron-nodeintegration, asp-net.
+**Excluded from e2e** (no `start:e2e`, non-Node, or requires pnpm): webpack, blazor, gatsbyjs,
+laravel, salesforce, wasm-benchmark, electron, electron-nodeintegration, asp-net,
+svelte-kit, vue-composition-api.
 
 ## CI
 
