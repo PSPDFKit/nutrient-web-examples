@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # array of directories to exclude
-exclude_dirs=("examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel" "examples/salesforce" "examples/wasm-benchmark" "examples/electron-nodeintegration" "examples/electron" "examples/asp-net")
+exclude_dirs=("examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel" "examples/salesforce" "examples/wasm-benchmark" "examples/electron-nodeintegration" "examples/electron" "examples/asp-net" "examples/svelte-kit" "examples/vue-composition-api" "examples/svelte" "examples/react")
 
 failed=()
 
