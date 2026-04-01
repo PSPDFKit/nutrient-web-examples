@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:e2e": "vite --port 3000"
   },
   "devDependencies": {
     "typescript": "^5.9.2",

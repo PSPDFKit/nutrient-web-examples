@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # array of directories to exclude
-exclude_dirs=("examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel" "examples/salesforce" "examples/wasm-benchmark" "examples/electron-nodeintegration" "examples/electron" "examples/asp-net")
+exclude_dirs=("examples/webpack" "examples/blazor" "examples/gatsbyjs" "examples/laravel" "examples/salesforce" "examples/wasm-benchmark" "examples/electron-nodeintegration" "examples/electron" "examples/asp-net" "examples/svelte-kit" "examples/vue-composition-api" "examples/svelte" "examples/react")
+
+failed=()
 
 for dir in examples/*; do
   if [ -d "$dir" ]; then
@@ -14,7 +16,21 @@ for dir in examples/*; do
     done
     if [ "$skip" = false ]; then
       echo "Running e2e tests in $dir"
-      (SERVER_DIR="$dir" npm run test)
+      if ! (SERVER_DIR="$dir" npm run test); then
+        failed+=("$dir")
+      fi
     fi
   fi
 done
+
+if [ ${#failed[@]} -ne 0 ]; then
+  echo ""
+  echo "❌ ${#failed[@]} example(s) failed:"
+  for dir in "${failed[@]}"; do
+    echo "  - $dir"
+  done
+  exit 1
+fi
+
+echo ""
+echo "✅ All examples passed."

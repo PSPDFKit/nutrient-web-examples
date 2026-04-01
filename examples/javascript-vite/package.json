@@ -9,7 +9,8 @@
     "build": "vite build",
     "build:npm": "cross-env VITE_USE_NPM=true vite build",
     "preview": "vite preview",
-    "preview:npm": "cross-env VITE_USE_NPM=true vite preview"
+    "preview:npm": "cross-env VITE_USE_NPM=true vite preview",
+    "start:e2e": "vite --port 3000"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.13.0",
