@@ -36,6 +36,6 @@
     }
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.0"
+    "@nutrient-sdk/viewer": "1.13.1"
   }
 }
