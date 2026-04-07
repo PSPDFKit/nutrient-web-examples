@@ -17,7 +17,7 @@
     "start:e2e": "npm run start"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.0",
+    "@nutrient-sdk/viewer": "1.13.1",
     "gatsby": "^5.16.1",
     "gatsby-source-filesystem": "^5.16.0",
     "react": "^18.3.1",
