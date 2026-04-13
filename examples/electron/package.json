@@ -24,14 +24,10 @@
     "electron"
   ],
   "devDependencies": {
-    "@electron/packager": "^18.4.4",
-    "electron": "^35.7.5"
+    "@electron/packager": "^19.1.0",
+    "electron": "^41.2.0"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.13.1"
-  },
-  "overrides": {
-    "minimatch": "^3.0.5",
-    "cross-spawn": "^7.0.5"
   }
 }
