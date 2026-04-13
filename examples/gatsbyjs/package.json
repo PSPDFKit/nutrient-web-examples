@@ -24,8 +24,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "baseline-browser-mapping": "^2.10.0",
-    "prettier": "^3.8.1"
+    "baseline-browser-mapping": "^2.10.18",
+    "prettier": "^3.8.2"
   },
   "overrides": {
     "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
@@ -40,6 +40,7 @@
     "@parcel/core": "^2.16.3",
     "@parcel/reporter-dev-server": "^2.16.3",
     "webpack": "^5.105.4",
-    "serialize-javascript": "^7.0.4"
+    "serialize-javascript": "^7.0.4",
+    "axios": "^1.15.0"
   }
 }
