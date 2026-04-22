@@ -19,7 +19,7 @@
   "devDependencies": {
     "cross-env": "^10.0.0",
     "rollup-plugin-copy": "^3.5.0",
-    "vite": "^7.1.7"
+    "vite": "^8.0.9"
   },
   "keywords": ["pdf", "viewer", "vite", "javascript", "nutrient", "web", "sdk"],
   "author": "Nutrient (https://www.nutrient.io)",
