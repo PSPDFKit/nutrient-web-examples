@@ -28,6 +28,6 @@
     "electron": "^41.2.0"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.1"
+    "@nutrient-sdk/viewer": "1.14.0"
   }
 }

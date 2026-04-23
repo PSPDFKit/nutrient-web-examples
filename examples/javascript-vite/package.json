@@ -13,7 +13,7 @@
     "start:e2e": "vite --port 3000"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.1",
+    "@nutrient-sdk/viewer": "1.14.0",
     "drag-drop": "^7.2.0"
   },
   "devDependencies": {
