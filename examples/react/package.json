@@ -29,7 +29,7 @@
     "start:e2e": "npm run start"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.1",
+    "@nutrient-sdk/viewer": "1.14.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",

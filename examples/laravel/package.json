@@ -16,7 +16,7 @@
     "postcss": "^8.5.9"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.13.1"
+    "@nutrient-sdk/viewer": "1.14.0"
   },
   "overrides": {
     "webpack-dev-server": "^5.2.3",
