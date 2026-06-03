@@ -41,6 +41,10 @@
     "@parcel/reporter-dev-server": "^2.16.3",
     "webpack": "^5.105.4",
     "serialize-javascript": "^7.0.4",
-    "axios": "^1.15.0"
+    "axios": "^1.15.0",
+    "immutable": "^3.8.3",
+    "lodash": "^4.18.1",
+    "path-to-regexp": "^0.1.13",
+    "uuid": "^11.1.1"
   }
 }
