@@ -17,6 +17,7 @@
     "vue": "^3.5.25"
   },
   "overrides": {
-    "serialize-javascript": "^7.0.4"
+    "serialize-javascript": "^7.0.4",
+    "esbuild": "^0.28.1"
   }
 }
