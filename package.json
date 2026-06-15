@@ -12,9 +12,9 @@
     "@types/node": "^22.10.7",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
+    "lint-staged": "^17.0.7",
     "typescript": "^5.9.3",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.5"
   },
   "scripts": {
     "install-dependencies": "./scripts/install-dependencies.sh",
@@ -35,8 +35,12 @@
       "ajv": "^8.18.0",
       "http-proxy-middleware": "^2.0.9",
       "on-headers": "^1.1.0",
-      "node-forge": "^1.3.2",
-      "qs": "^6.14.2"
+      "node-forge": "^1.4.0",
+      "qs": "^6.14.2",
+      "shell-quote": "^1.8.4",
+      "fast-uri": "^3.1.1",
+      "picomatch": "^2.3.2",
+      "path-to-regexp": "^0.1.13"
     },
     "onlyBuiltDependencies": ["@biomejs/biome"]
   }
