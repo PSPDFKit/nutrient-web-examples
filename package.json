@@ -40,7 +40,8 @@
       "shell-quote": "^1.8.4",
       "fast-uri": "^3.1.1",
       "picomatch": "^2.3.2",
-      "path-to-regexp": "^0.1.13"
+      "path-to-regexp": "^0.1.13",
+      "ws": "^8.21.0"
     },
     "onlyBuiltDependencies": ["@biomejs/biome"]
   }
