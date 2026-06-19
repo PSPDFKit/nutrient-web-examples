@@ -17,27 +17,31 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "@lwc/eslint-plugin-lwc": "^1.1.2",
-    "@prettier/plugin-xml": "^2.0.1",
-    "@salesforce/eslint-config-lwc": "^3.2.3",
-    "@salesforce/eslint-plugin-aura": "^2.0.0",
-    "@salesforce/eslint-plugin-lightning": "^1.0.0",
-    "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "@lwc/eslint-plugin-lwc": "^1.9.0",
+    "@prettier/plugin-xml": "^2.2.0",
+    "@salesforce/eslint-config-lwc": "~3.6.0",
+    "@salesforce/eslint-plugin-aura": "^2.1.0",
+    "@salesforce/eslint-plugin-lightning": "^1.0.1",
+    "@salesforce/sfdx-lwc-jest": "^1.4.1",
     "adm-zip": "^0.5.9",
-    "eslint": "^8.11.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jest": "^26.1.2",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^26.9.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.3.7",
+    "lint-staged": "^12.5.0",
     "ncp": "^2.0.0",
-    "prettier": "^2.6.0",
-    "prettier-plugin-apex": "^1.10.0"
+    "prettier": "^2.8.8",
+    "prettier-plugin-apex": "^1.13.0"
   },
   "overrides": {
     "json5@< 1.0.2": "^1.0.2",
     "json5@>= 2.0.0": "^2.2.2",
     "cross-spawn": "^7.0.6",
-    "axios": "^1.15.0"
+    "axios": "^1.15.0",
+    "ws": "^7.5.11",
+    "postcss": "^8.5.10",
+    "form-data@<3.0.5": "^3.0.5",
+    "form-data@>=4.0.0 <4.0.6": "^4.0.6"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
