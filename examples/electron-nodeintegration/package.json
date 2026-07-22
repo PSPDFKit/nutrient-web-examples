@@ -29,6 +29,6 @@
     "electron": "^41.2.0"
   },
   "dependencies": {
-    "@nutrient-sdk/viewer": "1.17.0"
+    "@nutrient-sdk/viewer": "1.18.0"
   }
 }
