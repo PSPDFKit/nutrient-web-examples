@@ -15,5 +15,9 @@
     "build": "next build",
     "start": "next start",
     "start:e2e": "npm run dev"
+  },
+  "overrides": {
+    "sharp": "^0.35.0",
+    "postcss": "^8.5.10"
   }
 }

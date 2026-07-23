@@ -4,13 +4,22 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  ajv: ^8.18.0
+  '@babel/helpers': ^7.27.1
+  brace-expansion@>=1.0.0 <=1.1.11: ^1.1.12
+  brace-expansion@>=2.0.0 <=2.0.1: ^2.0.2
+  minimatch: 3.1.4
+  rollup: ^4.59.0
+  picomatch: ^2.3.2
+
 importers:
 
   .:
     dependencies:
       '@nutrient-sdk/viewer':
-        specifier: 1.17.0
-        version: 1.17.0
+        specifier: 1.18.0
+        version: 1.18.0
       vue:
         specifier: ^3.5.32
         version: 3.5.32(typescript@5.9.3)
@@ -387,8 +396,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nutrient-sdk/viewer@1.17.0':
-    resolution: {integrity: sha512-oOBnkbfexw2ikd9Ow7dugDeOtwls+tF+Ta8yURC/e3Gla4kWXT3YYhdcAoeQy2Ua1ACWGuvvfBiXYvb+LMyRJg==}
+  '@nutrient-sdk/viewer@1.18.0':
+    resolution: {integrity: sha512-aOLp+K3rT2nw1l6zhROSyam9EzAOIxipwXuIIylzKG8/vxlhjEb13Pv6h++VlBhvRyNDQNSt0KCLHq43A0W6fw==}
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
@@ -784,7 +793,7 @@ packages:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
-      picomatch: ^3 || ^4
+      picomatch: ^2.3.2
     peerDependenciesMeta:
       picomatch:
         optional: true
@@ -1068,10 +1077,6 @@ packages:
   picomatch@2.3.2:
     resolution: {integrity: sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA==}
     engines: {node: '>=8.6'}
-
-  picomatch@4.0.4:
-    resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
-    engines: {node: '>=12'}
 
   pidtree@1.0.0:
     resolution: {integrity: sha512-avfAvjB9Dd0wdj3rjJX//yS+G79OO0KrS5pJHFJENjYGX6N4SMgEDBBI/yFy0lloOYSaC6XQxzpOAMPfSYFV/Q==}
@@ -1600,7 +1605,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.0
 
-  '@nutrient-sdk/viewer@1.17.0':
+  '@nutrient-sdk/viewer@1.18.0':
     dependencies:
       '@types/react': 18.3.19
 
@@ -1840,7 +1845,7 @@ snapshots:
       alien-signals: 3.1.2
       muggle-string: 0.4.1
       path-browserify: 1.0.1
-      picomatch: 4.0.4
+      picomatch: 2.3.2
 
   '@vue/reactivity@3.5.32':
     dependencies:
@@ -1996,9 +2001,9 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
-  fdir@6.5.0(picomatch@4.0.4):
+  fdir@6.5.0(picomatch@2.3.2):
     optionalDependencies:
-      picomatch: 4.0.4
+      picomatch: 2.3.2
 
   fill-range@7.1.1:
     dependencies:
@@ -2188,7 +2193,7 @@ snapshots:
       ansi-styles: 6.2.1
       cross-spawn: 7.0.6
       memorystream: 0.3.1
-      picomatch: 4.0.4
+      picomatch: 2.3.2
       pidtree: 1.0.0
       read-package-json-fast: 6.0.0
       shell-quote: 1.8.4
@@ -2222,8 +2227,6 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@2.3.2: {}
-
-  picomatch@4.0.4: {}
 
   pidtree@1.0.0: {}
 
@@ -2317,8 +2320,8 @@ snapshots:
 
   tinyglobby@0.2.16:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@2.3.2)
+      picomatch: 2.3.2
 
   to-regex-range@5.0.1:
     dependencies:
@@ -2335,7 +2338,7 @@ snapshots:
   unplugin-utils@0.3.0:
     dependencies:
       pathe: 2.0.3
-      picomatch: 4.0.4
+      picomatch: 2.3.2
 
   update-browserslist-db@1.1.2(browserslist@4.24.4):
     dependencies:
@@ -2400,8 +2403,8 @@ snapshots:
   vite@7.3.5(@types/node@22.12.0)(lightningcss@1.32.0):
     dependencies:
       esbuild: 0.27.7
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@2.3.2)
+      picomatch: 2.3.2
       postcss: 8.5.10
       rollup: 4.60.2
       tinyglobby: 0.2.16

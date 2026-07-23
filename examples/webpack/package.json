@@ -44,9 +44,10 @@
     "start:dev:npm": "cross-env NODE_ENV=development USE_NPM=true webpack serve --config config/webpack.js --progress"
   },
   "overrides": {
+    "fast-uri": "^3.1.4",
     "path-to-regexp": "^3.3.0",
     "cross-spawn": "^7.0.6",
-    "http-proxy-middleware": "^2.0.9",
+    "http-proxy-middleware": "^2.0.10",
     "on-headers": "^1.1.0",
     "serve-handler": {
       "minimatch": "3.1.4"

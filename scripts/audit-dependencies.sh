@@ -8,6 +8,7 @@ echo -e "\033[37;1mAuditing npm vulnerabilities in examples\033[0m\r"
 vuln_dirs=()
 vuln_counts=()
 vuln_severities=()
+error_dirs=()
 
 for dir in examples/*; do
     if [ -d "$dir" ]; then
@@ -18,24 +19,34 @@ for dir in examples/*; do
 
         result=0
         initialresult=0
+        audit_error=0
+        has_lockfile=0
 
         if [ -f "pnpm-lock.yaml" ]; then
-            initialresult=$(pnpm audit --json | jq -r '.metadata.vulnerabilities.total // 0')
-
-            pnpm audit fix > /dev/null
-
-            audit_json=$(pnpm audit --json)
-            result=$(echo "$audit_json" | jq -r '.metadata.vulnerabilities.total // 0')
+            has_lockfile=1
+            initial_json=$(pnpm audit --json 2>/dev/null)
+            pnpm audit fix > /dev/null 2>&1
+            audit_json=$(pnpm audit --json 2>/dev/null)
         elif [ -f "package-lock.json" ]; then
-            initialresult=$(npm audit --json | jq -r '.metadata.vulnerabilities.total // 0')
-
-            npm audit fix > /dev/null
-
-            audit_json=$(npm audit --json)
-            result=$(echo "$audit_json" | jq -r '.metadata.vulnerabilities.total // 0')
+            has_lockfile=1
+            initial_json=$(npm audit --json 2>/dev/null)
+            npm audit fix > /dev/null 2>&1
+            audit_json=$(npm audit --json 2>/dev/null)
         fi
 
-        if (( initialresult > 0 )); then
+        if (( has_lockfile )); then
+            # jq -e exits non-zero when the audit output is missing or unparseable
+            # (e.g. pnpm's legacy /quick endpoint returning HTTP 400 as npmjs.org
+            # retires it). Guarding here avoids the previous `// 0` fallback, which
+            # silently reported a failed audit as "no vulnerabilities found".
+            initialresult=$(printf '%s' "$initial_json" | jq -e -r '.metadata.vulnerabilities.total' 2>/dev/null) || audit_error=1
+            result=$(printf '%s' "$audit_json" | jq -e -r '.metadata.vulnerabilities.total' 2>/dev/null) || audit_error=1
+        fi
+
+        if (( audit_error )); then
+            echo -e "  \033[91mAudit could not complete\033[0m (registry endpoint error — result unknown)"
+            error_dirs+=("$dir")
+        elif (( initialresult > 0 )); then
             ((fixed = initialresult - result))
             echo -e "  \033[93mFound:     ${initialresult}\033[0m"
             echo -e "  \033[92mFixed:     $fixed\033[0m"
@@ -80,8 +91,10 @@ echo -e "\n\033[37;1m───────────────────�
 echo -e "\033[37;1mSummary\033[0m"
 echo -e "\033[37;1m──────────────────────────────────────\033[0m"
 
-if [ ${#vuln_dirs[@]} -eq 0 ]; then
+if [ ${#vuln_dirs[@]} -eq 0 ] && [ ${#error_dirs[@]} -eq 0 ]; then
     echo -e "\033[92;1mAll examples are vulnerability-free!\033[0m"
+elif [ ${#vuln_dirs[@]} -eq 0 ]; then
+    echo -e "\033[92mNo remaining vulnerabilities found.\033[0m"
 else
     total_remaining=0
     for i in "${!vuln_dirs[@]}"; do
@@ -89,4 +102,11 @@ else
         ((total_remaining += vuln_counts[$i]))
     done
     echo -e "\n  \033[31;1m${#vuln_dirs[@]} example(s) with ${total_remaining} total remaining vulnerabilities\033[0m"
+fi
+
+if [ ${#error_dirs[@]} -gt 0 ]; then
+    echo -e "\n  \033[91;1m${#error_dirs[@]} example(s) could not be audited (registry endpoint error):\033[0m"
+    for d in "${error_dirs[@]}"; do
+        echo -e "  \033[91m${d}\033[0m"
+    done
 fi
