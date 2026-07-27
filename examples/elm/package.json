@@ -28,6 +28,9 @@
     "loader-utils": "^2.0.4",
     "cross-spawn": "^7.0.5",
     "http-proxy-middleware": "^2.0.10",
-    "qs": "^6.15.2"
+    "qs": "^6.15.2",
+    "glob": {
+      "minimatch": "^10.2.5"
+    }
   }
 }

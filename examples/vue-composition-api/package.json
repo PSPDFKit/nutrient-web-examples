@@ -32,9 +32,13 @@
       "@babel/helpers": "^7.27.1",
       "brace-expansion@>=1.0.0 <=1.1.11": "^1.1.12",
       "brace-expansion@>=2.0.0 <=2.0.1": "^2.0.2",
-      "minimatch": "3.1.4",
+      "minimatch": "^10.2.5",
       "rollup": "^4.59.0",
-      "picomatch": "^2.3.2"
+      "postcss": "^8.5.23",
+      "shell-quote": "^1.10.0",
+      "picomatch@<2.3.2": "^2.3.2",
+      "esbuild@>=0.27.3 <0.28.1": ">=0.28.1",
+      "@babel/core@<=7.29.0": ">=7.29.6"
     }
   }
 }

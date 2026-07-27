@@ -41,7 +41,10 @@
     "ws": "^7.5.11",
     "postcss": "^8.5.10",
     "form-data@<3.0.5": "^3.0.5",
-    "form-data@>=4.0.0 <4.0.6": "^4.0.6"
+    "form-data@>=4.0.0 <4.0.6": "^4.0.6",
+    "glob": {
+      "minimatch": "^10.2.5"
+    }
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [

@@ -47,7 +47,8 @@
     "loader-utils": "^2.0.4",
     "http-proxy-middleware": "^2.0.10",
     "serialize-javascript": "^7.0.5",
-    "@tootallnate/once": "^3.0.1"
+    "@tootallnate/once": "^3.0.1",
+    "svgo": "^2.8.3"
   },
   "browserslist": [
     "Firefox ESR",

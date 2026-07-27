@@ -10,6 +10,15 @@ vuln_counts=()
 vuln_severities=()
 error_dirs=()
 
+# npm reports `.metadata.vulnerabilities.total`; pnpm omits it and only emits the
+# per-severity buckets. Derive the total from those buckets when it is absent so
+# a pnpm example isn't misreported as un-auditable. Erroring out on a missing or
+# non-object `vulnerabilities` keeps genuine registry failures distinguishable
+# from a clean audit.
+audit_total_filter='.metadata.vulnerabilities
+    | if type != "object" then error("no audit metadata") else . end
+    | .total // ([.info, .low, .moderate, .high, .critical] | map(. // 0) | add)'
+
 for dir in examples/*; do
     if [ -d "$dir" ]; then
 
@@ -25,7 +34,11 @@ for dir in examples/*; do
         if [ -f "pnpm-lock.yaml" ]; then
             has_lockfile=1
             initial_json=$(pnpm audit --json 2>/dev/null)
-            pnpm audit fix > /dev/null 2>&1
+            # pnpm spells this `--fix` (there is no `pnpm audit fix` subcommand),
+            # and it only writes overrides into package.json — the install is what
+            # actually applies them to the lockfile and node_modules.
+            pnpm audit --fix > /dev/null 2>&1
+            pnpm install --no-frozen-lockfile > /dev/null 2>&1
             audit_json=$(pnpm audit --json 2>/dev/null)
         elif [ -f "package-lock.json" ]; then
             has_lockfile=1
@@ -36,11 +49,11 @@ for dir in examples/*; do
 
         if (( has_lockfile )); then
             # jq -e exits non-zero when the audit output is missing or unparseable
-            # (e.g. pnpm's legacy /quick endpoint returning HTTP 400 as npmjs.org
-            # retires it). Guarding here avoids the previous `// 0` fallback, which
-            # silently reported a failed audit as "no vulnerabilities found".
-            initialresult=$(printf '%s' "$initial_json" | jq -e -r '.metadata.vulnerabilities.total' 2>/dev/null) || audit_error=1
-            result=$(printf '%s' "$audit_json" | jq -e -r '.metadata.vulnerabilities.total' 2>/dev/null) || audit_error=1
+            # (e.g. the registry returning an HTTP error). Guarding here avoids the
+            # previous `// 0` fallback, which silently reported a failed audit as
+            # "no vulnerabilities found".
+            initialresult=$(printf '%s' "$initial_json" | jq -e -r "$audit_total_filter" 2>/dev/null) || audit_error=1
+            result=$(printf '%s' "$audit_json" | jq -e -r "$audit_total_filter" 2>/dev/null) || audit_error=1
         fi
 
         if (( audit_error )); then

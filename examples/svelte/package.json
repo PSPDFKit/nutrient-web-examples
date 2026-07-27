@@ -25,6 +25,9 @@
     "sirv-cli": "^2.0.2"
   },
   "overrides": {
-    "serialize-javascript": "^7.0.4"
+    "serialize-javascript": "^7.0.4",
+    "glob": {
+      "minimatch": "^10.2.5"
+    }
   }
 }
