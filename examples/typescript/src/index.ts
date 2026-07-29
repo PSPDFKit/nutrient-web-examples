@@ -1,6 +1,6 @@
-import NutrientViewer from "@nutrient-sdk/viewer";
+import NutrientViewer, { type Instance } from "@nutrient-sdk/viewer";
 
-let instance: unknown = null;
+let instance: Instance | null = null;
 
 function load(document: string) {
   console.log(`Loading ${document}...`);
@@ -14,10 +14,12 @@ function load(document: string) {
         title: "Random annotation",
         className: "randomAnnotation",
         onPress: () => {
-          if (!(instance instanceof NutrientViewer.Instance)) return;
+          if (!instance) return;
 
           // Get page 0 dimensions
-          const { width, height } = instance.pageInfoForIndex(0);
+          const pageInfo = instance.pageInfoForIndex(0);
+          if (!pageInfo) return;
+          const { width, height } = pageInfo;
           // Create a rectangle annotation in page 0 with random position
           // and dimensions
           const left =
@@ -72,17 +74,15 @@ function load(document: string) {
     .catch(console.error);
 }
 
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
-
 let objectUrl = "";
 
-document.addEventListener("change", (event: HTMLInputEvent) => {
+document.addEventListener("change", (event: Event) => {
+  const target = event.target as HTMLInputElement | null;
+
   if (
-    event.target &&
-    event.target.className === "chooseFile" &&
-    event.target.files instanceof FileList
+    target &&
+    target.className === "chooseFile" &&
+    target.files instanceof FileList
   ) {
     NutrientViewer.unload(".container");
 
@@ -90,7 +90,7 @@ document.addEventListener("change", (event: HTMLInputEvent) => {
       URL.revokeObjectURL(objectUrl);
     }
 
-    objectUrl = URL.createObjectURL(event.target.files[0]);
+    objectUrl = URL.createObjectURL(target.files[0]);
     load(objectUrl);
   }
 });
