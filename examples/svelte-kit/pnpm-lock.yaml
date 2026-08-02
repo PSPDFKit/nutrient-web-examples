@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@nutrient-sdk/viewer':
-        specifier: 1.17.0
-        version: 1.17.0
+        specifier: 1.19.0
+        version: 1.19.0
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^7.0.1
@@ -246,8 +246,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nutrient-sdk/viewer@1.17.0':
-    resolution: {integrity: sha512-oOBnkbfexw2ikd9Ow7dugDeOtwls+tF+Ta8yURC/e3Gla4kWXT3YYhdcAoeQy2Ua1ACWGuvvfBiXYvb+LMyRJg==}
+  '@nutrient-sdk/viewer@1.19.0':
+    resolution: {integrity: sha512-roCUgANrEmFbEfOxbOVNzTWYMlbX0gyhFYopLI5HYHAAR6j9CeobtPjT/8xbFdeWqFoZO9nUt1+NCeZHV4BUZQ==}
 
   '@oxc-project/types@0.137.0':
     resolution: {integrity: sha512-WT+Gb24i8hmvo85AIv2oEYouEXkRlKAlT9WaCa3TfLgNCN+GhrJOGZuIlMouAh38Qe4QOx26eUOVsq70qXrywA==}
@@ -995,7 +995,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.0
 
-  '@nutrient-sdk/viewer@1.17.0':
+  '@nutrient-sdk/viewer@1.19.0':
     dependencies:
       '@types/react': 18.3.19
 
