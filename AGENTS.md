@@ -85,8 +85,8 @@ SERVER_DIR=examples/javascript-vite npm run test
 # Audit and fix vulnerabilities across all examples
 npm run audit-fix
 
-# Bump Nutrient SDK version in all examples
-npm run update-nutrient-version
+# Bump Nutrient SDK version in all examples (version is required)
+npm run update-nutrient-version -- 1.21.0
 ```
 
 ## Adding a New Example
