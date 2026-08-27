@@ -22,8 +22,12 @@ concurrency:
 
 jobs:
   update:
-    timeout-minutes: 60
+    timeout-minutes: 90
     runs-on: ubuntu-latest
+    env:
+      # Root install runs `prepare`, which points core.hooksPath at .husky and
+      # would gate the bot's commit on lint-staged and the Biome version check.
+      HUSKY: "0"
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -51,6 +55,27 @@ jobs:
           VERSION: ${{ steps.check.outputs.version }}
         run: ./scripts/update-nutrient-in-examples.sh "$VERSION"
 
+      - name: Check every CDN reference was bumped
+        if: steps.check.outputs.should_update == 'true'
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          # The CDN file map in update-nutrient-in-cdn.js is hand-maintained, so an
+          # example that gains a script tag without an entry is left behind in
+          # silence. examples/salesforce/README.md is exempt: its version is an
+          # illustration, not a pin.
+          stale="$(grep -rEn "pspdfkit-web@[0-9]+\.[0-9]+\.[0-9]+" examples/ \
+            --exclude-dir=node_modules --exclude-dir=dist \
+            --exclude-dir=.next --exclude-dir=.nuxt \
+            | grep -v "pspdfkit-web@${VERSION}" \
+            | grep -v '^examples/salesforce/README.md:' || true)"
+
+          if [ -n "$stale" ]; then
+            echo "CDN references not updated to ${VERSION}:" >&2
+            echo "$stale" >&2
+            exit 1
+          fi
+
       - name: Install root dependencies
         if: steps.check.outputs.should_update == 'true'
         run: pnpm install --frozen-lockfile
@@ -65,7 +90,7 @@ jobs:
 
       # A pull request opened with GITHUB_TOKEN does not trigger the Biome or
       # Playwright workflows, and main requires no status checks, so the bump
-      # would otherwise arrive with no signal at all. Verify it here instead.
+      # would otherwise arrive with no signal at all.
       - name: Run e2e smoke tests
         id: e2e
         if: steps.check.outputs.should_update == 'true'
@@ -89,9 +114,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          # Scoped to examples/: installing at the root can leave a stray
-          # package-lock.json, which is not gitignored.
-          git add examples/
+          # `pnpm run format` writes unsafe Biome fixes repository-wide, and a dev
+          # server may leave build output behind; neither belongs in a bump.
+          git add -u examples/
           if git diff --cached --quiet; then
             echo "Detection reported ${VERSION} was needed but nothing changed." >&2
             exit 1
@@ -108,12 +133,13 @@ jobs:
           BRANCH: ${{ steps.check.outputs.branch }}
           E2E_OUTCOME: ${{ steps.e2e.outcome }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BASE: ${{ github.ref_name }}
         run: |
           if [ "$E2E_OUTCOME" = "success" ]; then
             e2e_result="✅ passed"
             draft=""
           else
-            e2e_result="❌ failed — see the run log and the playwright-report artifact"
+            e2e_result="❌ failed. The failing examples are named at the end of the run log."
             draft="--draft"
           fi
 
@@ -126,7 +152,7 @@ jobs:
           pull request created by \`GITHUB_TOKEN\` does not trigger the Biome or
           Playwright workflows, so the checks tab here will be empty.
 
-          - Formatting (\`pnpm run format\`): applied
+          - Formatting (\`pnpm run format\`): applied to \`examples/\`
           - E2E smoke tests (\`pnpm run e2e-tests\`): ${e2e_result}
 
           [Workflow run](${RUN_URL})
@@ -135,6 +161,15 @@ jobs:
           gh pr create \
             --title "Update examples with Nutrient SDK version $VERSION" \
             --body-file /tmp/pr-body.md \
-            --base main \
+            --base "$BASE" \
             --head "$BRANCH" \
             $draft
+
+      - name: Fail the run when the e2e suite failed
+        if: steps.check.outputs.should_update == 'true' && steps.e2e.outcome != 'success'
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          echo "::error::E2E failed for ${VERSION}. The pull request was opened as a draft,"
+          echo "::error::and GitHub does not request code owners on drafts."
+          exit 1

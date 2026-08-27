@@ -38,6 +38,9 @@ upgrade_npm_in_example() {
     npm install > /dev/null
 
     npm audit fix > /dev/null || true
+  else
+    echo "examples/${directory} has no lockfile, so nothing would be installed." >&2
+    exit 1
   fi
 
   popd > /dev/null
