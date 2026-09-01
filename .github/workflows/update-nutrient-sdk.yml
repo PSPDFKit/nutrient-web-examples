@@ -64,10 +64,16 @@ jobs:
           # example that gains a script tag without an entry is left behind in
           # silence. examples/salesforce/README.md is exempt: its version is an
           # illustration, not a pin.
-          stale="$(grep -rEn "pspdfkit-web@[0-9]+\.[0-9]+\.[0-9]+" examples/ \
+          #
+          # -o prints one match per line rather than one line per match, so a
+          # line carrying both a bumped and a stale reference cannot have the
+          # stale one dropped along with the whole line. The exclusion escapes
+          # the dots in ${VERSION} and anchors on $, so 1.20.1 cannot swallow a
+          # stale 1.20.10 as a prefix of it.
+          stale="$(grep -rEon "pspdfkit-web@[0-9]+\.[0-9]+\.[0-9]+" examples/ \
             --exclude-dir=node_modules --exclude-dir=dist \
             --exclude-dir=.next --exclude-dir=.nuxt \
-            | grep -v "pspdfkit-web@${VERSION}" \
+            | grep -vE "pspdfkit-web@${VERSION//./\\.}$" \
             | grep -v '^examples/salesforce/README.md:' || true)"
 
           if [ -n "$stale" ]; then
@@ -157,6 +163,35 @@ jobs:
 
           [Workflow run](${RUN_URL})
           BODY
+
+          # Nothing retries a draft. The scheduled job treats any pull request
+          # for this branch as "handled" whatever its state, so without these
+          # instructions the version is parked on whoever opens the draft next,
+          # with no way to re-run the suite from the pull request itself.
+          if [ "$E2E_OUTCOME" != "success" ]; then
+            cat >> /tmp/pr-body.md <<RECOVERY
+
+          ## This draft needs a human
+
+          The e2e suite failed, so this was opened as a draft and GitHub did not
+          request code owners on it. It will not retry on its own: every future
+          scheduled run sees this pull request and skips ${VERSION}. Re-running
+          the workflow for ${VERSION} will not help either, for the same reason.
+
+          Pick one:
+
+          - **You want the checks to run here.** Close this pull request and
+            reopen it. Reopening it yourself fires \`pull_request: reopened\`,
+            which the Biome and Playwright workflows act on, so they run against
+            this bump and report in the checks tab. Marking a draft ready for
+            review triggers nothing, so it is not a substitute.
+          - **The bump needs a fix.** Push it to \`${BRANCH}\`. A push from
+            your own account runs those same checks. Then mark this ready for
+            review.
+          - **The bump is genuinely broken.** Close this pull request and leave
+            the branch in place. ${VERSION} will not be proposed again.
+          RECOVERY
+          fi
 
           gh pr create \
             --title "Update examples with Nutrient SDK version $VERSION" \

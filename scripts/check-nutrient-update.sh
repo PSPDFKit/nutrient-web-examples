@@ -9,6 +9,7 @@ REPO_ROOT="${SCRIPT_DIR}/.."
 # the repository is on.
 REFERENCE_EXAMPLE="react"
 
+PACKAGE_URL="https://registry.npmjs.org/@nutrient-sdk/viewer"
 DIST_TAGS_URL="https://registry.npmjs.org/-/package/@nutrient-sdk/viewer/dist-tags"
 
 requested="${1:-}"
@@ -23,6 +24,34 @@ fi
 if ! [[ "${latest}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Refusing to act on non-stable version \"${latest}\"." >&2
   exit 1
+fi
+
+# A dispatched version is typed by hand, and the dist-tag is not there to vouch
+# for it. Without this, a typo gets through detection and only surfaces as an
+# npm 404 well into the bump, long after the branch has been created.
+#
+# No ordering check accompanies it, because none is needed: any version that has
+# been bumped before still has its pull request, and the check below refuses a
+# branch that already has one, whatever state that pull request is in.
+#
+# -f is deliberately absent so that a 404 and an unreachable registry stay
+# distinguishable; without it curl reports both as the same failure.
+if [ -n "${requested}" ]; then
+  curl_status=0
+  http_code="$(curl -sSL --retry 3 --retry-delay 2 -o /dev/null \
+    -w '%{http_code}' "${PACKAGE_URL}/${requested}")" || curl_status=$?
+
+  if [ "${curl_status}" -ne 0 ]; then
+    echo "Could not reach the npm registry to check ${requested}" \
+      "(curl exited ${curl_status})." >&2
+    exit 1
+  fi
+
+  if [ "${http_code}" != "200" ]; then
+    echo "@nutrient-sdk/viewer@${requested} is not published on the registry" \
+      "(HTTP ${http_code})." >&2
+    exit 1
+  fi
 fi
 
 # jq -r prints "null" and exits 0 for a missing key, which would silently
