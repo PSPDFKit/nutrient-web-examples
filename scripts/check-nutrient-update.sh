@@ -9,6 +9,7 @@ REPO_ROOT="${SCRIPT_DIR}/.."
 # the repository is on.
 REFERENCE_EXAMPLE="react"
 
+PACKAGE_URL="https://registry.npmjs.org/@nutrient-sdk/viewer"
 DIST_TAGS_URL="https://registry.npmjs.org/-/package/@nutrient-sdk/viewer/dist-tags"
 
 requested="${1:-}"
@@ -23,6 +24,20 @@ fi
 if ! [[ "${latest}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Refusing to act on non-stable version \"${latest}\"." >&2
   exit 1
+fi
+
+# A dispatched version is typed by hand, and the dist-tag is not there to vouch
+# for it. Without this, a typo gets through detection and only surfaces as an
+# npm 404 well into the bump, long after the branch has been created.
+#
+# A version older than current is deliberately allowed: dispatching one is how a
+# bad release gets rolled back.
+if [ -n "${requested}" ]; then
+  if ! curl -fsSL --retry 3 --retry-delay 2 -o /dev/null \
+    "${PACKAGE_URL}/${requested}"; then
+    echo "@nutrient-sdk/viewer@${requested} is not published on the registry." >&2
+    exit 1
+  fi
 fi
 
 # jq -r prints "null" and exits 0 for a missing key, which would silently
