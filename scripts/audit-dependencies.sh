@@ -34,10 +34,10 @@ for dir in examples/*; do
         if [ -f "pnpm-lock.yaml" ]; then
             has_lockfile=1
             initial_json=$(pnpm audit --json 2>/dev/null)
-            # pnpm spells this `--fix` (there is no `pnpm audit fix` subcommand),
-            # and it only writes overrides into package.json — the install is what
-            # actually applies them to the lockfile and node_modules.
-            pnpm audit --fix > /dev/null 2>&1
+            # pnpm 11 writes fixes to pnpm-workspace.yaml when using the override
+            # method. The install applies those overrides to the lockfile and
+            # node_modules.
+            pnpm audit --fix=override > /dev/null 2>&1
             pnpm install --no-frozen-lockfile > /dev/null 2>&1
             audit_json=$(pnpm audit --json 2>/dev/null)
         elif [ -f "package-lock.json" ]; then

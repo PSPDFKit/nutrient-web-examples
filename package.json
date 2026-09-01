@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "packageManager": "pnpm@11.20.0",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.56.1",
@@ -29,22 +30,5 @@
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]
-  },
-  "pnpm": {
-    "overrides": {
-      "ajv": "^8.18.0",
-      "http-proxy-middleware": "^2.0.10",
-      "on-headers": "^1.1.0",
-      "node-forge": "^1.4.0",
-      "qs": "^6.15.1",
-      "shell-quote": "^1.9.0",
-      "fast-uri": "^3.1.4",
-      "picomatch": "^2.3.2",
-      "path-to-regexp": "^0.1.13",
-      "ws": "^8.21.0",
-      "websocket-driver": "^0.7.5",
-      "uuid": "^11.1.1"
-    },
-    "onlyBuiltDependencies": ["@biomejs/biome"]
   }
 }

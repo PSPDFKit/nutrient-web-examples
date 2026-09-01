@@ -17,9 +17,9 @@ upgrade_npm_in_example() {
   if [ -f "pnpm-lock.yaml" ]; then
     pnpm install @nutrient-sdk/viewer@latest --save --save-exact
 
-    pnpm install > /dev/null
+    pnpm audit --fix=override > /dev/null || true
 
-    pnpm audit fix > /dev/null || true
+    pnpm install --no-frozen-lockfile > /dev/null
   elif [ -f "package-lock.json" ]; then
     npm install @nutrient-sdk/viewer@latest --save --save-exact
 
