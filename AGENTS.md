@@ -40,6 +40,7 @@ nutrient-web-examples/
 │   ├── audit-dependencies.sh     # npm audit fix across examples
 │   ├── update-nutrient-in-examples.sh  # Bump SDK version everywhere
 │   ├── update-nutrient-in-cdn.js       # Update CDN URLs
+│   ├── check-nutrient-update.sh        # Detect a new SDK release (CI)
 │   └── check-biome-version.sh    # Verify Biome version consistency
 ├── playwright.config.ts      # Playwright config (uses SERVER_DIR env var)
 └── biome.json                # Biome formatter config
@@ -85,8 +86,8 @@ SERVER_DIR=examples/javascript-vite npm run test
 # Audit and fix vulnerabilities across all examples
 npm run audit-fix
 
-# Bump Nutrient SDK version in all examples
-npm run update-nutrient-version
+# Bump Nutrient SDK version in all examples (version is required)
+npm run update-nutrient-version -- <version>
 ```
 
 ## Adding a New Example
@@ -124,6 +125,13 @@ svelte-kit, vue-composition-api.
 
 - **Biome** — Code formatting check on every push/PR
 - **Playwright** — Smoke tests on push/PR to main (installs all deps, runs e2e)
+- **Update Nutrient SDK** — Daily check for a new `@nutrient-sdk/viewer` release.
+  Bumps every example listed in `update-nutrient-in-examples.sh`, formats with
+  Biome, runs the e2e suite inside the job, then opens a PR. A passing suite
+  opens it ready for review, so CODEOWNERS requests `@PSPDFKit/web`; a failing
+  one opens it as a draft and fails the run, because GitHub does not request
+  code owners on drafts. Can be run on demand via `workflow_dispatch`,
+  optionally against a specific version.
 
 ## Code Style
 
