@@ -30,8 +30,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
-        with:
-          version: 10
 
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
@@ -155,6 +153,8 @@ jobs:
           pull request created by \`GITHUB_TOKEN\` does not trigger the Biome or
           Playwright workflows, so the checks tab here will be empty.
 
+          - Dependency audit fixes: pnpm examples may include security overrides
+            in \`pnpm-workspace.yaml\` and the corresponding lockfile updates
           - Formatting (\`pnpm run format\`): applied to \`examples/\`
           - E2E smoke tests (\`pnpm run e2e-tests\`): ${e2e_result}
 

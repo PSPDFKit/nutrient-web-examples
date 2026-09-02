@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.56.1",
@@ -23,28 +24,12 @@
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
     "test": "playwright test",
+    "test:pnpm-workflows": "./tests/pnpm-workflows.test.sh",
     "audit-fix": "./scripts/audit-dependencies.sh",
     "update-nutrient-version": "./scripts/update-nutrient-in-examples.sh",
     "check-biome-version": "./scripts/check-biome-version.sh"
   },
   "lint-staged": {
     "*": ["biome check --write --no-errors-on-unmatched"]
-  },
-  "pnpm": {
-    "overrides": {
-      "ajv": "^8.18.0",
-      "http-proxy-middleware": "^2.0.10",
-      "on-headers": "^1.1.0",
-      "node-forge": "^1.4.0",
-      "qs": "^6.15.1",
-      "shell-quote": "^1.9.0",
-      "fast-uri": "^3.1.4",
-      "picomatch": "^2.3.2",
-      "path-to-regexp": "^0.1.13",
-      "ws": "^8.21.0",
-      "websocket-driver": "^0.7.5",
-      "uuid": "^11.1.1"
-    },
-    "onlyBuiltDependencies": ["@biomejs/biome"]
   }
 }

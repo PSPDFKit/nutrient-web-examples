@@ -2,6 +2,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# shellcheck source=./pnpm-helpers.sh
+source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
 VERSION="${1:-}"
 
@@ -27,11 +29,15 @@ upgrade_npm_in_example() {
   echo -e "\n${Green}Upgrading ${Yellow}${directory}${Green} to ${Yellow}${VERSION}${NoColor}"
 
   if [ -f "pnpm-lock.yaml" ]; then
+    require_local_pnpm_workspace "examples/${directory}"
     pnpm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
 
-    pnpm install > /dev/null
+    run_pnpm_audit_fix
 
-    pnpm audit fix > /dev/null || true
+    # pnpm 11 treats an unapproved dependency build as an error. Keep this
+    # fail-fast so the automated bump never continues with only some examples
+    # updated; stderr remains visible in the workflow log.
+    run_pnpm_install_quietly --no-frozen-lockfile
   elif [ -f "package-lock.json" ]; then
     npm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
 

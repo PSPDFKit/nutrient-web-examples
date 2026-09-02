@@ -71,24 +71,34 @@ This updates `package.json` in every example directory.
 ## Commands
 
 ```bash
-# Install all example dependencies
-npm run install-dependencies
+# One-time: enable the package-manager shims bundled with Node.js
+corepack enable
+
+# Install the root and all example dependencies with the pinned pnpm version
+pnpm install --frozen-lockfile
+pnpm run install-dependencies
 
 # Format code (Biome)
-npm run format
+pnpm run format
 
 # Run e2e smoke tests (starts each example, checks PSPDFKit loads)
-npm run e2e-tests
+pnpm run e2e-tests
 
 # Run Playwright directly for a single example
-SERVER_DIR=examples/javascript-vite npm run test
+SERVER_DIR=examples/javascript-vite pnpm run test
 
 # Audit and fix vulnerabilities across all examples
-npm run audit-fix
+pnpm run audit-fix
 
 # Bump Nutrient SDK version in all examples (version is required)
-npm run update-nutrient-version -- <version>
+pnpm run update-nutrient-version -- <version>
 ```
+
+The root `packageManager` field pins pnpm, and Corepack applies that pin to every
+directory below the root, including the npm-based examples. If you enabled
+Corepack's npm shim (`corepack enable npm`), set `COREPACK_ENABLE_STRICT=0` before
+running `npm` inside an example by hand; the scripts and the Playwright config set it
+for you. Root-level scripts, hooks, and docs use pnpm.
 
 ## Adding a New Example
 
@@ -96,6 +106,8 @@ npm run update-nutrient-version -- <version>
 2. Add a `package.json` with:
    - `start` script — dev server
    - `start:e2e` script — dev server on port 3000 (for Playwright)
+   - If it uses `pnpm-lock.yaml`, a sibling `pnpm-workspace.yaml`; the scripts
+     reject pnpm examples without one so they cannot silently join the root workspace.
 3. The example must call `PSPDFKit.load()` and render `.PSPDFKit-Container`
 4. Add a `README.md` following the pattern of existing examples:
    - Prerequisites
@@ -104,7 +116,7 @@ npm run update-nutrient-version -- <version>
 5. Use the current pinned `@nutrient-sdk/viewer` version
 6. Run the Playwright smoke test against your example:
    ```bash
-   SERVER_DIR=examples/<framework-name> npm run test
+   SERVER_DIR=examples/<framework-name> pnpm run test
    ```
 7. Update the root `README.md` if adding a new framework category
 

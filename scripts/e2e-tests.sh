@@ -16,7 +16,7 @@ for dir in examples/*; do
     done
     if [ "$skip" = false ]; then
       echo "Running e2e tests in $dir"
-      if ! (SERVER_DIR="$dir" npm run test); then
+      if ! (SERVER_DIR="$dir" pnpm run test); then
         failed+=("$dir")
       fi
     fi

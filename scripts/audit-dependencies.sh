@@ -1,7 +1,11 @@
 #!/bin/bash
-# Runs npm/pnpm audit fix on all examples and outputs the result
+# Runs npm/pnpm audit fix on all examples and outputs the result.
+# This aggregate report deliberately does not enable errexit: predicates and
+# arithmetic expressions below use nonzero statuses as ordinary control flow.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# shellcheck source=./pnpm-helpers.sh
+source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
 echo -e "\033[37;1mAuditing npm vulnerabilities in examples\033[0m\r"
 
@@ -29,17 +33,30 @@ for dir in examples/*; do
         result=0
         initialresult=0
         audit_error=0
+        audit_error_reason="pnpm/npm command failed or returned invalid data"
         has_lockfile=0
+        initial_json=""
+        audit_json=""
 
         if [ -f "pnpm-lock.yaml" ]; then
             has_lockfile=1
-            initial_json=$(pnpm audit --json 2>/dev/null)
-            # pnpm spells this `--fix` (there is no `pnpm audit fix` subcommand),
-            # and it only writes overrides into package.json — the install is what
-            # actually applies them to the lockfile and node_modules.
-            pnpm audit --fix > /dev/null 2>&1
-            pnpm install --no-frozen-lockfile > /dev/null 2>&1
-            audit_json=$(pnpm audit --json 2>/dev/null)
+            if ! require_local_pnpm_workspace "$dir"; then
+                audit_error=1
+                audit_error_reason="no sibling pnpm-workspace.yaml"
+            else
+                initial_json=$(pnpm audit --json 2>/dev/null)
+                # pnpm writes override fixes to the local workspace file. The
+                # install applies them to the lockfile and node_modules. Real
+                # command failures remain visible and make the audit fail.
+                if ! run_pnpm_audit_fix; then
+                    audit_error=1
+                elif ! run_pnpm_install_quietly --no-frozen-lockfile; then
+                    audit_error=1
+                    audit_error_reason="pnpm install failed; inspect ${dir}/pnpm-workspace.yaml for partial allowBuilds changes"
+                else
+                    audit_json=$(pnpm audit --json 2>/dev/null)
+                fi
+            fi
         elif [ -f "package-lock.json" ]; then
             has_lockfile=1
             initial_json=$(npm audit --json 2>/dev/null)
@@ -57,7 +74,7 @@ for dir in examples/*; do
         fi
 
         if (( audit_error )); then
-            echo -e "  \033[91mAudit could not complete\033[0m (registry endpoint error — result unknown)"
+            echo -e "  \033[91mAudit could not complete\033[0m (${audit_error_reason})"
             error_dirs+=("$dir")
         elif (( initialresult > 0 )); then
             ((fixed = initialresult - result))
@@ -106,9 +123,7 @@ echo -e "\033[37;1m────────────────────�
 
 if [ ${#vuln_dirs[@]} -eq 0 ] && [ ${#error_dirs[@]} -eq 0 ]; then
     echo -e "\033[92;1mAll examples are vulnerability-free!\033[0m"
-elif [ ${#vuln_dirs[@]} -eq 0 ]; then
-    echo -e "\033[92mNo remaining vulnerabilities found.\033[0m"
-else
+elif [ ${#vuln_dirs[@]} -gt 0 ]; then
     total_remaining=0
     for i in "${!vuln_dirs[@]}"; do
         echo -e "  \033[31m${vuln_dirs[$i]}: ${vuln_counts[$i]} vulnerabilities\033[0m (${vuln_severities[$i]})"
@@ -118,8 +133,9 @@ else
 fi
 
 if [ ${#error_dirs[@]} -gt 0 ]; then
-    echo -e "\n  \033[91;1m${#error_dirs[@]} example(s) could not be audited (registry endpoint error):\033[0m"
+    echo -e "\n  \033[91;1m${#error_dirs[@]} example(s) could not be audited:\033[0m"
     for d in "${error_dirs[@]}"; do
         echo -e "  \033[91m${d}\033[0m"
     done
+    exit 1
 fi
