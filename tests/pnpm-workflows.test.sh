@@ -79,6 +79,14 @@ source "${REPO_ROOT}/scripts/pnpm-helpers.sh"
 [[ "${pnpm_config_minimum_release_age:-}" == "0" ]] || \
   fail "pnpm callers do not effectively opt out of the minimum release age"
 
+for lockfile in "${REPO_ROOT}"/examples/*/pnpm-lock.yaml; do
+  workspace="$(dirname "$lockfile")/pnpm-workspace.yaml"
+  [ -f "$workspace" ] || \
+    fail "${workspace#"${REPO_ROOT}/"} is missing"
+  grep -q '^minimumReleaseAge: 0$' "$workspace" || \
+    fail "${workspace#"${REPO_ROOT}/"} does not disable the minimum release age for direct installs"
+done
+
 fixture="$(mktemp -d)"
 trap 'rm -rf "$fixture"' EXIT
 cd "$fixture"
