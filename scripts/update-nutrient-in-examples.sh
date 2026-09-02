@@ -5,14 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=./pnpm-helpers.sh
 source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
-# pnpm 11 applies a 24-hour minimum-release-age by default and, for an exact
-# version younger than that, records an exclusion in the nearest
-# pnpm-workspace.yaml. This script exists to install a release that is hours
-# old, so opt out here instead of letting every bump rewrite the tracked example
-# workspace files. The env form also covers `pnpm audit --fix`, which ignores
-# the --config flag.
-export pnpm_config_minimum_release_age=0
-
 VERSION="${1:-}"
 
 if [ -z "${VERSION}" ]; then
@@ -40,7 +32,7 @@ upgrade_npm_in_example() {
     require_local_pnpm_workspace "examples/${directory}"
     pnpm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
 
-    run_pnpm_audit_fix > /dev/null
+    run_pnpm_audit_fix
 
     # pnpm 11 treats an unapproved dependency build as an error. Keep this
     # fail-fast so the automated bump never continues with only some examples

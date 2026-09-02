@@ -17,8 +17,9 @@ setup_pnpm_step() {
 }
 
 # Corepack applies the root packageManager pin to every directory below it and,
-# with its strict npm shim enabled, rejects npm and npx. Root-level workflows,
-# hooks, runners, and docs therefore use pnpm.
+# with its strict npm shim enabled, rejects npm package-management commands.
+# Bare npx remains transparent to Corepack, so ban it as unpinned execution too.
+# Root-level workflows, hooks, runners, and docs therefore use pnpm.
 npm_invocation='(^|[^[:alnum:]])(npm (run|exec|install|ci)|npx)( |$)'
 
 actual_package_manager="$(node -p "require('${REPO_ROOT}/package.json').packageManager")"
@@ -40,8 +41,10 @@ grep -q 'run: pnpm install --frozen-lockfile && pnpm run install-dependencies' \
 
 for file in .github/workflows/playwright.yml .github/workflows/update-nutrient-sdk.yml \
   .github/pull_request_template.md AGENTS.md README.md .husky/pre-commit scripts/e2e-tests.sh; do
+  [ -f "${REPO_ROOT}/${file}" ] || \
+    fail "${file} is missing; the npm guard no longer covers it"
   if grep -Eq "$npm_invocation" "${REPO_ROOT}/${file}"; then
-    fail "${file} invokes npm at the repository root, which Corepack rejects in this pnpm project"
+    fail "${file} invokes npm or unpinned npx at the repository root"
   fi
 done
 
@@ -60,15 +63,6 @@ grep -q '^export COREPACK_ENABLE_STRICT=0$' "${REPO_ROOT}/scripts/pnpm-helpers.s
 grep -q 'COREPACK_ENABLE_STRICT: "0"' "${REPO_ROOT}/playwright.config.ts" || \
   fail "playwright.config.ts must set COREPACK_ENABLE_STRICT=0 for the example web servers"
 
-# pnpm 11 defaults minimum-release-age to 24 hours and records an exclusion for
-# every newer version in the nearest pnpm-workspace.yaml. The bump installs a
-# version released hours earlier and the audit fix installs fresh patches, so
-# without this opt-out both rewrite the tracked example workspace files.
-for script in audit-dependencies.sh update-nutrient-in-examples.sh; do
-  grep -q '^export pnpm_config_minimum_release_age=0$' "${REPO_ROOT}/scripts/${script}" || \
-    fail "${script} does not opt out of pnpm's minimum release age"
-done
-
 for script in audit-dependencies.sh install-dependencies.sh update-nutrient-in-examples.sh; do
   script_path="${REPO_ROOT}/scripts/${script}"
   grep -q 'pnpm-helpers.sh' "$script_path" || \
@@ -79,6 +73,11 @@ done
 
 # shellcheck source=../scripts/pnpm-helpers.sh
 source "${REPO_ROOT}/scripts/pnpm-helpers.sh"
+
+# pnpm 11 checks every lockfile entry against minimum-release-age during install.
+# The shared opt-out keeps all three callers on one effective policy.
+[[ "${pnpm_config_minimum_release_age:-}" == "0" ]] || \
+  fail "pnpm callers do not effectively opt out of the minimum release age"
 
 fixture="$(mktemp -d)"
 trap 'rm -rf "$fixture"' EXIT
@@ -98,7 +97,24 @@ mkdir bin
 cat > bin/pnpm <<'PNPM'
 #!/bin/bash
 printf '%s\n' "$*" > "${PNPM_ARGS_FILE}"
-echo "simulated audit failure" >&2
+
+if [ "${PNPM_MODE:-fail}" = "fail-install" ]; then
+  if [ "${1:-}" = "audit" ] && [ "${2:-}" = "--json" ]; then
+    printf '%s\n' '{"metadata":{"vulnerabilities":{"total":0}}}'
+    exit 0
+  fi
+  if [ "${1:-}" = "audit" ]; then
+    echo "3 overrides were added to pnpm-workspace.yaml"
+    exit 0
+  fi
+fi
+
+if [ -n "${PNPM_SUCCESS_OUTPUT:-}" ]; then
+  printf '%s\n' "$PNPM_SUCCESS_OUTPUT"
+  exit 0
+fi
+
+echo "simulated pnpm failure" >&2
 exit 42
 PNPM
 chmod +x bin/pnpm
@@ -111,9 +127,9 @@ status=$?
 set -e
 
 [[ "$status" -eq 42 ]] || fail "pnpm audit failure status was swallowed"
-[[ "$(cat pnpm-args.txt)" == 'audit --fix=override' ]] || \
+[[ "$(cat pnpm-args.txt)" == 'audit --fix=override --ignore-registry-errors' ]] || \
   fail "pnpm audit fix used unexpected arguments"
-grep -q 'simulated audit failure' audit-stderr.txt || \
+grep -q 'simulated pnpm failure' audit-stderr.txt || \
   fail "pnpm audit failure details were hidden"
 
 set +e
@@ -124,7 +140,44 @@ set -e
 [[ "$status" -eq 42 ]] || fail "pnpm install failure status was swallowed"
 [[ "$(cat pnpm-args.txt)" == 'install --no-frozen-lockfile' ]] || \
   fail "pnpm install used unexpected arguments"
-grep -q 'simulated audit failure' install-stderr.txt || \
+grep -q 'simulated pnpm failure' install-stderr.txt || \
   fail "pnpm install failure details were hidden"
+
+PNPM_SUCCESS_OUTPUT="3 overrides were added" run_pnpm_audit_fix >audit-success.txt
+[[ "$(cat audit-success.txt)" == '3 overrides were added' ]] || \
+  fail "successful pnpm mutation output was hidden"
+
+install_case="${fixture}/install-case"
+mkdir -p "${install_case}/scripts" "${install_case}/examples/example"
+cp "${REPO_ROOT}/scripts/install-dependencies.sh" \
+  "${REPO_ROOT}/scripts/pnpm-helpers.sh" "${install_case}/scripts/"
+touch "${install_case}/examples/example/pnpm-lock.yaml" \
+  "${install_case}/examples/example/pnpm-workspace.yaml"
+set +e
+(cd "$install_case" && scripts/install-dependencies.sh) >install-script-stdout.txt 2>install-script-stderr.txt
+status=$?
+set -e
+[[ "$status" -eq 42 ]] || \
+  fail "install-dependencies.sh did not fail fast when pnpm install failed"
+
+audit_case="${fixture}/audit-case"
+mkdir -p "${audit_case}/scripts" "${audit_case}/examples/example"
+cp "${REPO_ROOT}/scripts/audit-dependencies.sh" \
+  "${REPO_ROOT}/scripts/pnpm-helpers.sh" "${audit_case}/scripts/"
+touch "${audit_case}/examples/example/pnpm-lock.yaml" \
+  "${audit_case}/examples/example/pnpm-workspace.yaml"
+set +e
+PNPM_MODE=fail-install \
+  bash -c 'cd "$1" && scripts/audit-dependencies.sh' _ "$audit_case" \
+  >audit-script-stdout.txt 2>audit-script-stderr.txt
+status=$?
+set -e
+[[ "$status" -eq 1 ]] || \
+  fail "audit-dependencies.sh did not fail when an example could not be audited"
+grep -q 'examples/example/pnpm-workspace.yaml' audit-script-stdout.txt || \
+  fail "audit failure did not name the workspace file that may have changed"
+if grep -q 'No remaining vulnerabilities found' audit-script-stdout.txt; then
+  fail "audit failure printed a contradictory success summary"
+fi
 
 echo "pnpm workflow checks passed"

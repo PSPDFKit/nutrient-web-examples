@@ -156,6 +156,8 @@ jobs:
           pull request created by \`GITHUB_TOKEN\` does not trigger the Biome or
           Playwright workflows, so the checks tab here will be empty.
 
+          - Dependency audit fixes: pnpm examples may include security overrides
+            in \`pnpm-workspace.yaml\` and the corresponding lockfile updates
           - Formatting (\`pnpm run format\`): applied to \`examples/\`
           - E2E smoke tests (\`pnpm run e2e-tests\`): ${e2e_result}
 

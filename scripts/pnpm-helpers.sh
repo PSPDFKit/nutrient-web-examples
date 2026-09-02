@@ -5,6 +5,12 @@
 # root and, with its strict npm shim enabled, would reject those npm calls.
 export COREPACK_ENABLE_STRICT=0
 
+# pnpm 11 applies its minimum release age to every lockfile entry during
+# install, not only while resolving new versions. All scripts must use the same
+# policy so a lockfile written by the audit or update script remains installable
+# in CI. The opt-out also avoids tracked minimumReleaseAgeExclude entries.
+export pnpm_config_minimum_release_age=0
+
 require_local_pnpm_workspace() {
   local example="${1:-The current directory}"
 
@@ -23,13 +29,16 @@ run_pnpm_command_quietly() {
     printf '%s\n' "$output" >&2
     return "$status"
   fi
+  if [ -n "$output" ]; then
+    printf '%s\n' "$output"
+  fi
 }
 
 run_pnpm_audit_fix() {
   # A successful fix exits zero even when the initial audit found advisories.
   # Preserve every real pnpm failure instead of hiding bad flags, registry
   # failures, or an unwritable workspace file.
-  run_pnpm_command_quietly audit --fix=override
+  run_pnpm_command_quietly audit --fix=override --ignore-registry-errors
 }
 
 run_pnpm_install_quietly() {

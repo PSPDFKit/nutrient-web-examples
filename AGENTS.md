@@ -71,6 +71,9 @@ This updates `package.json` in every example directory.
 ## Commands
 
 ```bash
+# One-time: enable the package-manager shims bundled with Node.js
+corepack enable
+
 # Install the root and all example dependencies with the pinned pnpm version
 pnpm install --frozen-lockfile
 pnpm run install-dependencies

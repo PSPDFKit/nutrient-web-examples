@@ -1,15 +1,11 @@
 #!/bin/bash
-# Runs npm/pnpm audit fix on all examples and outputs the result
+# Runs npm/pnpm audit fix on all examples and outputs the result.
+# This aggregate report deliberately does not enable errexit: predicates and
+# arithmetic expressions below use nonzero statuses as ordinary control flow.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=./pnpm-helpers.sh
 source "${SCRIPT_DIR}/pnpm-helpers.sh"
-
-# pnpm 11 applies a 24-hour minimum-release-age by default and records an
-# exclusion in the nearest pnpm-workspace.yaml for every fresh patch it lets
-# through. The fix below exists to install those patches, so opt out instead of
-# accumulating exclusions in the tracked example workspace files.
-export pnpm_config_minimum_release_age=0
 
 echo -e "\033[37;1mAuditing npm vulnerabilities in examples\033[0m\r"
 
@@ -52,10 +48,11 @@ for dir in examples/*; do
                 # pnpm writes override fixes to the local workspace file. The
                 # install applies them to the lockfile and node_modules. Real
                 # command failures remain visible and make the audit fail.
-                if ! run_pnpm_audit_fix > /dev/null; then
+                if ! run_pnpm_audit_fix; then
                     audit_error=1
                 elif ! run_pnpm_install_quietly --no-frozen-lockfile; then
                     audit_error=1
+                    audit_error_reason="pnpm install failed; inspect ${dir}/pnpm-workspace.yaml for partial allowBuilds changes"
                 else
                     audit_json=$(pnpm audit --json 2>/dev/null)
                 fi
@@ -126,9 +123,7 @@ echo -e "\033[37;1m────────────────────�
 
 if [ ${#vuln_dirs[@]} -eq 0 ] && [ ${#error_dirs[@]} -eq 0 ]; then
     echo -e "\033[92;1mAll examples are vulnerability-free!\033[0m"
-elif [ ${#vuln_dirs[@]} -eq 0 ]; then
-    echo -e "\033[92mNo remaining vulnerabilities found.\033[0m"
-else
+elif [ ${#vuln_dirs[@]} -gt 0 ]; then
     total_remaining=0
     for i in "${!vuln_dirs[@]}"; do
         echo -e "  \033[31m${vuln_dirs[$i]}: ${vuln_counts[$i]} vulnerabilities\033[0m (${vuln_severities[$i]})"
