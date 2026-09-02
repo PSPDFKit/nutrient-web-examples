@@ -9,6 +9,18 @@ fail() {
   exit 1
 }
 
+# Prints the body of the "Setup pnpm" step: everything after its name line up to
+# the next step, so a `version:` input is caught wherever it sits in the step and
+# a neighbouring step's `node-version:` never is.
+setup_pnpm_step() {
+  awk '/name: Setup pnpm/ { inside = 1; next } inside && /^ *- / { exit } inside { print }' "$1"
+}
+
+# Corepack applies the root packageManager pin to every directory below it and,
+# with its strict npm shim enabled, rejects npm and npx. Root-level workflows,
+# hooks, runners, and docs therefore use pnpm.
+npm_invocation='(^|[^[:alnum:]])(npm (run|exec|install|ci)|npx)( |$)'
+
 actual_package_manager="$(node -p "require('${REPO_ROOT}/package.json').packageManager")"
 [[ "$actual_package_manager" == "$EXPECTED_PACKAGE_MANAGER" ]] || \
   fail "packageManager is not pinned to the expected integrity hash"
@@ -17,7 +29,7 @@ for workflow in playwright.yml update-nutrient-sdk.yml; do
   workflow_path="${REPO_ROOT}/.github/workflows/${workflow}"
   grep -q 'name: Setup pnpm' "$workflow_path" || \
     fail "${workflow} does not set up pnpm"
-  if grep -A3 'name: Setup pnpm' "$workflow_path" | grep -q 'version:'; then
+  if setup_pnpm_step "$workflow_path" | grep -Eq '^[[:space:]]*version:'; then
     fail "${workflow} overrides the packageManager pnpm version"
   fi
 done
@@ -26,12 +38,36 @@ grep -q 'run: pnpm install --frozen-lockfile && pnpm run install-dependencies' \
   "${REPO_ROOT}/.github/workflows/playwright.yml" || \
   fail "Playwright CI does not use the pinned pnpm for the root install"
 
-if grep -Eq 'run: npm (run|exec)' "${REPO_ROOT}/.github/workflows/playwright.yml"; then
-  fail "Playwright CI bypasses the pinned package manager"
-fi
-if grep -Eq '^npm (run|exec|install)' "${REPO_ROOT}/AGENTS.md"; then
-  fail "AGENTS.md documents npm commands that Corepack rejects in this pnpm project"
-fi
+for file in .github/workflows/playwright.yml .github/workflows/update-nutrient-sdk.yml \
+  .github/pull_request_template.md AGENTS.md README.md .husky/pre-commit scripts/e2e-tests.sh; do
+  if grep -Eq "$npm_invocation" "${REPO_ROOT}/${file}"; then
+    fail "${file} invokes npm at the repository root, which Corepack rejects in this pnpm project"
+  fi
+done
+
+# Under pnpm 11 `pnpm run` verifies dependencies first (installing them by
+# default), so the workflow calls this script directly and the repository
+# downgrades that check to a warning so scripts never mutate the tree.
+grep -q 'run: ./tests/pnpm-workflows.test.sh' "${REPO_ROOT}/.github/workflows/playwright.yml" || \
+  fail "Playwright CI must run this script directly instead of through pnpm run"
+grep -q '^verifyDepsBeforeRun: warn$' "${REPO_ROOT}/pnpm-workspace.yaml" || \
+  fail "pnpm-workspace.yaml must set verifyDepsBeforeRun: warn so pnpm run never installs implicitly"
+
+# The scripts and the e2e web server intentionally run npm inside the npm-based
+# examples; Corepack would reject that under the root pin unless strict mode is off.
+grep -q '^export COREPACK_ENABLE_STRICT=0$' "${REPO_ROOT}/scripts/pnpm-helpers.sh" || \
+  fail "pnpm-helpers.sh must export COREPACK_ENABLE_STRICT=0 for the npm examples"
+grep -q 'COREPACK_ENABLE_STRICT: "0"' "${REPO_ROOT}/playwright.config.ts" || \
+  fail "playwright.config.ts must set COREPACK_ENABLE_STRICT=0 for the example web servers"
+
+# pnpm 11 defaults minimum-release-age to 24 hours and records an exclusion for
+# every newer version in the nearest pnpm-workspace.yaml. The bump installs a
+# version released hours earlier and the audit fix installs fresh patches, so
+# without this opt-out both rewrite the tracked example workspace files.
+for script in audit-dependencies.sh update-nutrient-in-examples.sh; do
+  grep -q '^export pnpm_config_minimum_release_age=0$' "${REPO_ROOT}/scripts/${script}" || \
+    fail "${script} does not opt out of pnpm's minimum release age"
+done
 
 for script in audit-dependencies.sh install-dependencies.sh update-nutrient-in-examples.sh; do
   script_path="${REPO_ROOT}/scripts/${script}"

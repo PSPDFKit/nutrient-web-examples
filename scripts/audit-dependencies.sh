@@ -5,6 +5,12 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=./pnpm-helpers.sh
 source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
+# pnpm 11 applies a 24-hour minimum-release-age by default and records an
+# exclusion in the nearest pnpm-workspace.yaml for every fresh patch it lets
+# through. The fix below exists to install those patches, so opt out instead of
+# accumulating exclusions in the tracked example workspace files.
+export pnpm_config_minimum_release_age=0
+
 echo -e "\033[37;1mAuditing npm vulnerabilities in examples\033[0m\r"
 
 vuln_dirs=()
@@ -31,6 +37,7 @@ for dir in examples/*; do
         result=0
         initialresult=0
         audit_error=0
+        audit_error_reason="pnpm/npm command failed or returned invalid data"
         has_lockfile=0
         initial_json=""
         audit_json=""
@@ -39,6 +46,7 @@ for dir in examples/*; do
             has_lockfile=1
             if ! require_local_pnpm_workspace "$dir"; then
                 audit_error=1
+                audit_error_reason="no sibling pnpm-workspace.yaml"
             else
                 initial_json=$(pnpm audit --json 2>/dev/null)
                 # pnpm writes override fixes to the local workspace file. The
@@ -69,7 +77,7 @@ for dir in examples/*; do
         fi
 
         if (( audit_error )); then
-            echo -e "  \033[91mAudit could not complete\033[0m (pnpm/npm command failed or returned invalid data)"
+            echo -e "  \033[91mAudit could not complete\033[0m (${audit_error_reason})"
             error_dirs+=("$dir")
         elif (( initialresult > 0 )); then
             ((fixed = initialresult - result))

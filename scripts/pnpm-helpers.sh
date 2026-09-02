@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# These helpers back scripts that run npm inside the npm-based examples below
+# the root pnpm pin. Corepack applies that pin to every directory under the
+# root and, with its strict npm shim enabled, would reject those npm calls.
+export COREPACK_ENABLE_STRICT=0
+
 require_local_pnpm_workspace() {
   local example="${1:-The current directory}"
 

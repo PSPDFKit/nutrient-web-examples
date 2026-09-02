@@ -91,6 +91,12 @@ pnpm run audit-fix
 pnpm run update-nutrient-version -- <version>
 ```
 
+The root `packageManager` field pins pnpm, and Corepack applies that pin to every
+directory below the root, including the npm-based examples. If you enabled
+Corepack's npm shim (`corepack enable npm`), set `COREPACK_ENABLE_STRICT=0` before
+running `npm` inside an example by hand; the scripts and the Playwright config set it
+for you. Root-level scripts, hooks, and docs use pnpm.
+
 ## Adding a New Example
 
 1. Create `examples/<framework-name>/`

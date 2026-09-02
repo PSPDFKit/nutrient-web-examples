@@ -33,6 +33,9 @@ export default defineConfig({
   ],
   webServer: {
     command: `cd ${process.env.SERVER_DIR} && npm run start:e2e`,
+    // The examples are npm projects, but Corepack applies the root pnpm pin to
+    // them and rejects npm when its strict npm shim is enabled.
+    env: { COREPACK_ENABLE_STRICT: "0" },
     url: "http://localhost:3000",
     reuseExistingServer: true,
   },

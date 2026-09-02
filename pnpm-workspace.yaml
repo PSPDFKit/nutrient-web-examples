@@ -1,6 +1,11 @@
 packages:
   - "."
 
+# pnpm 11 defaults verify-deps-before-run to "install", which would run a
+# networked install from `pnpm run` (the pre-commit hook included) whenever
+# node_modules is out of date. Warn instead so scripts never mutate the tree.
+verifyDepsBeforeRun: warn
+
 allowBuilds:
   "@biomejs/biome": true
 

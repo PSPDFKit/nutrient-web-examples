@@ -5,6 +5,14 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=./pnpm-helpers.sh
 source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
+# pnpm 11 applies a 24-hour minimum-release-age by default and, for an exact
+# version younger than that, records an exclusion in the nearest
+# pnpm-workspace.yaml. This script exists to install a release that is hours
+# old, so opt out here instead of letting every bump rewrite the tracked example
+# workspace files. The env form also covers `pnpm audit --fix`, which ignores
+# the --config flag.
+export pnpm_config_minimum_release_age=0
+
 VERSION="${1:-}"
 
 if [ -z "${VERSION}" ]; then

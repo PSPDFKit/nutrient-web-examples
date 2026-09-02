@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: lts/*
       - name: Check pnpm workflows
-        run: pnpm run test:pnpm-workflows
+        run: ./tests/pnpm-workflows.test.sh
       - name: Install dependencies
         run: pnpm install --frozen-lockfile && pnpm run install-dependencies
       - name: Install Playwright Browsers
