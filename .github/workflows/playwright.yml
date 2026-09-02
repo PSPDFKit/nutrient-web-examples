@@ -16,15 +16,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: lts/*
+      - name: Check pnpm workflows
+        run: pnpm run test:pnpm-workflows
       - name: Install dependencies
-        run: npm install && npm run install-dependencies
+        run: pnpm install --frozen-lockfile && pnpm run install-dependencies
       - name: Install Playwright Browsers
-        run: npm exec playwright install chromium --with-deps
+        run: pnpm exec playwright install chromium --with-deps
       - name: Run Playwright tests
-        run: npm run e2e-tests
+        run: pnpm run e2e-tests
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: ${{ !cancelled() }}
         with:

@@ -2,6 +2,20 @@
 set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# shellcheck source=./pnpm-helpers.sh
+source "${SCRIPT_DIR}/pnpm-helpers.sh"
+
+VERSION="${1:-}"
+
+if [ -z "${VERSION}" ]; then
+  echo "Usage: $0 <version>" >&2
+  exit 1
+fi
+
+if ! [[ "${VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "Expected a semver version, got \"${VERSION}\"." >&2
+  exit 1
+fi
 
 Green='\033[0;32m'
 Yellow='\033[0;33m'
@@ -12,25 +26,32 @@ upgrade_npm_in_example() {
 
   pushd "${SCRIPT_DIR}/../examples/${directory}/"  > /dev/null
 
-  echo -e "\n${Green}Upgrading npm in ${Yellow}${directory}${Green} example${NoColor}"
+  echo -e "\n${Green}Upgrading ${Yellow}${directory}${Green} to ${Yellow}${VERSION}${NoColor}"
 
   if [ -f "pnpm-lock.yaml" ]; then
-    pnpm install @nutrient-sdk/viewer@latest --save --save-exact
+    require_local_pnpm_workspace "examples/${directory}"
+    pnpm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
 
-    pnpm audit --fix=override > /dev/null || true
+    run_pnpm_audit_fix > /dev/null
 
-    pnpm install --no-frozen-lockfile > /dev/null
+    # pnpm 11 treats an unapproved dependency build as an error. Keep this
+    # fail-fast so the automated bump never continues with only some examples
+    # updated; stderr remains visible in the workflow log.
+    run_pnpm_install_quietly --no-frozen-lockfile
   elif [ -f "package-lock.json" ]; then
-    npm install @nutrient-sdk/viewer@latest --save --save-exact
+    npm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
 
     npm install > /dev/null
 
     npm audit fix > /dev/null || true
+  else
+    echo "examples/${directory} has no lockfile, so nothing would be installed." >&2
+    exit 1
   fi
 
   popd > /dev/null
 
-  node ./scripts/update-nutrient-in-cdn.js "${directory}"
+  node "${SCRIPT_DIR}/update-nutrient-in-cdn.js" "${directory}" "${VERSION}"
 }
 
 upgrade_npm_in_example "webpack"

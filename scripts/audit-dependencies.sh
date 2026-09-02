@@ -2,6 +2,8 @@
 # Runs npm/pnpm audit fix on all examples and outputs the result
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# shellcheck source=./pnpm-helpers.sh
+source "${SCRIPT_DIR}/pnpm-helpers.sh"
 
 echo -e "\033[37;1mAuditing npm vulnerabilities in examples\033[0m\r"
 
@@ -30,16 +32,26 @@ for dir in examples/*; do
         initialresult=0
         audit_error=0
         has_lockfile=0
+        initial_json=""
+        audit_json=""
 
         if [ -f "pnpm-lock.yaml" ]; then
             has_lockfile=1
-            initial_json=$(pnpm audit --json 2>/dev/null)
-            # pnpm 11 writes fixes to pnpm-workspace.yaml when using the override
-            # method. The install applies those overrides to the lockfile and
-            # node_modules.
-            pnpm audit --fix=override > /dev/null 2>&1
-            pnpm install --no-frozen-lockfile > /dev/null 2>&1
-            audit_json=$(pnpm audit --json 2>/dev/null)
+            if ! require_local_pnpm_workspace "$dir"; then
+                audit_error=1
+            else
+                initial_json=$(pnpm audit --json 2>/dev/null)
+                # pnpm writes override fixes to the local workspace file. The
+                # install applies them to the lockfile and node_modules. Real
+                # command failures remain visible and make the audit fail.
+                if ! run_pnpm_audit_fix > /dev/null; then
+                    audit_error=1
+                elif ! run_pnpm_install_quietly --no-frozen-lockfile; then
+                    audit_error=1
+                else
+                    audit_json=$(pnpm audit --json 2>/dev/null)
+                fi
+            fi
         elif [ -f "package-lock.json" ]; then
             has_lockfile=1
             initial_json=$(npm audit --json 2>/dev/null)
@@ -57,7 +69,7 @@ for dir in examples/*; do
         fi
 
         if (( audit_error )); then
-            echo -e "  \033[91mAudit could not complete\033[0m (registry endpoint error — result unknown)"
+            echo -e "  \033[91mAudit could not complete\033[0m (pnpm/npm command failed or returned invalid data)"
             error_dirs+=("$dir")
         elif (( initialresult > 0 )); then
             ((fixed = initialresult - result))
@@ -118,8 +130,9 @@ else
 fi
 
 if [ ${#error_dirs[@]} -gt 0 ]; then
-    echo -e "\n  \033[91;1m${#error_dirs[@]} example(s) could not be audited (registry endpoint error):\033[0m"
+    echo -e "\n  \033[91;1m${#error_dirs[@]} example(s) could not be audited:\033[0m"
     for d in "${error_dirs[@]}"; do
         echo -e "  \033[91m${d}\033[0m"
     done
+    exit 1
 fi

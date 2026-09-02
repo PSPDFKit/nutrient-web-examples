@@ -40,6 +40,7 @@ nutrient-web-examples/
 │   ├── audit-dependencies.sh     # npm audit fix across examples
 │   ├── update-nutrient-in-examples.sh  # Bump SDK version everywhere
 │   ├── update-nutrient-in-cdn.js       # Update CDN URLs
+│   ├── check-nutrient-update.sh        # Detect a new SDK release (CI)
 │   └── check-biome-version.sh    # Verify Biome version consistency
 ├── playwright.config.ts      # Playwright config (uses SERVER_DIR env var)
 └── biome.json                # Biome formatter config
@@ -70,23 +71,24 @@ This updates `package.json` in every example directory.
 ## Commands
 
 ```bash
-# Install all example dependencies
-npm run install-dependencies
+# Install the root and all example dependencies with the pinned pnpm version
+pnpm install --frozen-lockfile
+pnpm run install-dependencies
 
 # Format code (Biome)
-npm run format
+pnpm run format
 
 # Run e2e smoke tests (starts each example, checks PSPDFKit loads)
-npm run e2e-tests
+pnpm run e2e-tests
 
 # Run Playwright directly for a single example
-SERVER_DIR=examples/javascript-vite npm run test
+SERVER_DIR=examples/javascript-vite pnpm run test
 
 # Audit and fix vulnerabilities across all examples
-npm run audit-fix
+pnpm run audit-fix
 
-# Bump Nutrient SDK version in all examples
-npm run update-nutrient-version
+# Bump Nutrient SDK version in all examples (version is required)
+pnpm run update-nutrient-version -- <version>
 ```
 
 ## Adding a New Example
@@ -95,6 +97,8 @@ npm run update-nutrient-version
 2. Add a `package.json` with:
    - `start` script — dev server
    - `start:e2e` script — dev server on port 3000 (for Playwright)
+   - If it uses `pnpm-lock.yaml`, a sibling `pnpm-workspace.yaml`; the scripts
+     reject pnpm examples without one so they cannot silently join the root workspace.
 3. The example must call `PSPDFKit.load()` and render `.PSPDFKit-Container`
 4. Add a `README.md` following the pattern of existing examples:
    - Prerequisites
@@ -103,7 +107,7 @@ npm run update-nutrient-version
 5. Use the current pinned `@nutrient-sdk/viewer` version
 6. Run the Playwright smoke test against your example:
    ```bash
-   SERVER_DIR=examples/<framework-name> npm run test
+   SERVER_DIR=examples/<framework-name> pnpm run test
    ```
 7. Update the root `README.md` if adding a new framework category
 
@@ -124,6 +128,13 @@ svelte-kit, vue-composition-api.
 
 - **Biome** — Code formatting check on every push/PR
 - **Playwright** — Smoke tests on push/PR to main (installs all deps, runs e2e)
+- **Update Nutrient SDK** — Daily check for a new `@nutrient-sdk/viewer` release.
+  Bumps every example listed in `update-nutrient-in-examples.sh`, formats with
+  Biome, runs the e2e suite inside the job, then opens a PR. A passing suite
+  opens it ready for review, so CODEOWNERS requests `@PSPDFKit/web`; a failing
+  one opens it as a draft and fails the run, because GitHub does not request
+  code owners on drafts. Can be run on demand via `workflow_dispatch`,
+  optionally against a specific version.
 
 ## Code Style
 

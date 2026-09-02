@@ -6,7 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "packageManager": "pnpm@11.20.0",
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.56.1",
@@ -24,6 +24,7 @@
     "e2e-tests": "./scripts/e2e-tests.sh",
     "lint-staged": "lint-staged",
     "test": "playwright test",
+    "test:pnpm-workflows": "./tests/pnpm-workflows.test.sh",
     "audit-fix": "./scripts/audit-dependencies.sh",
     "update-nutrient-version": "./scripts/update-nutrient-in-examples.sh",
     "check-biome-version": "./scripts/check-biome-version.sh"

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+require_local_pnpm_workspace() {
+  local example="${1:-The current directory}"
+
+  if [ ! -f "pnpm-workspace.yaml" ]; then
+    echo "${example} has a pnpm-lock.yaml but no sibling pnpm-workspace.yaml; refusing to use an ancestor workspace." >&2
+    return 1
+  fi
+}
+
+run_pnpm_command_quietly() {
+  local output
+  local status=0
+
+  output=$(pnpm "$@" 2>&1) || status=$?
+  if (( status != 0 )); then
+    printf '%s\n' "$output" >&2
+    return "$status"
+  fi
+}
+
+run_pnpm_audit_fix() {
+  # A successful fix exits zero even when the initial audit found advisories.
+  # Preserve every real pnpm failure instead of hiding bad flags, registry
+  # failures, or an unwritable workspace file.
+  run_pnpm_command_quietly audit --fix=override
+}
+
+run_pnpm_install_quietly() {
+  # pnpm 11 fails when it encounters an unapproved dependency build. Keep the
+  # successful output quiet, but print the complete failure before propagating it.
+  run_pnpm_command_quietly install "$@"
+}
