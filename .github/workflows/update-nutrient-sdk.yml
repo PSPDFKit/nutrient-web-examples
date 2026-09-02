@@ -24,10 +24,6 @@ jobs:
   update:
     timeout-minutes: 90
     runs-on: ubuntu-latest
-    env:
-      # Root install runs `prepare`, which points core.hooksPath at .husky and
-      # would gate the bot's commit on lint-staged and the Biome version check.
-      HUSKY: "0"
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -114,12 +110,10 @@ jobs:
       - name: Commit and push the bump
         if: steps.check.outputs.should_update == 'true'
         env:
+          GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.check.outputs.version }}
           BRANCH: ${{ steps.check.outputs.branch }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
           # `pnpm run format` writes unsafe Biome fixes repository-wide, and a dev
           # server may leave build output behind; neither belongs in a bump.
           git add -u examples/
@@ -127,8 +121,11 @@ jobs:
             echo "Detection reported ${VERSION} was needed but nothing changed." >&2
             exit 1
           fi
-          git commit -m "Update examples with Nutrient SDK version $VERSION"
-          git push origin "$BRANCH"
+          # The base branch requires signed commits and the runner holds no
+          # signing key, so the commit is made through the API, which GitHub
+          # signs itself.
+          node scripts/commit-signed.js "$BRANCH" \
+            "Update examples with Nutrient SDK version $VERSION"
 
       - name: Open the pull request
         if: steps.check.outputs.should_update == 'true'
