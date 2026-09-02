@@ -12,7 +12,7 @@ const loadPromise = new Promise((resolve) => {
 useHead({
   script: [
     {
-      src: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.3.0/nutrient-viewer.js",
+      src: "https://cdn.cloud.pspdfkit.com/pspdfkit-web@1.21.0/nutrient-viewer.js",
       type: "text/javascript",
       onload: () => loadPromiseResolve(),
     },
