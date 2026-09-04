@@ -14,7 +14,7 @@ for dir in examples/*; do
 
     if [ -f "pnpm-lock.yaml" ]; then
       require_local_pnpm_workspace "$dir"
-      pnpm install
+      pnpm install "${PNPM_INSTALL_FLAGS[@]}"
     elif [ -f "package-lock.json" ]; then
       npm install
     fi

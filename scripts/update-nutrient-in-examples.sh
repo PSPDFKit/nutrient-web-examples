@@ -30,7 +30,7 @@ upgrade_npm_in_example() {
 
   if [ -f "pnpm-lock.yaml" ]; then
     require_local_pnpm_workspace "examples/${directory}"
-    pnpm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact
+    pnpm install "@nutrient-sdk/viewer@${VERSION}" --save --save-exact "${PNPM_INSTALL_FLAGS[@]}"
 
     run_pnpm_audit_fix
 
