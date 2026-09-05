@@ -25,3 +25,11 @@ overrides:
   "ws": "^8.21.0"
   "websocket-driver": "^0.7.5"
   "uuid": "^11.1.1"
+
+minimumReleaseAgeExclude:
+  - follow-redirects@1.15.12
+  - launch-editor@2.14.1
+  - webpack-dev-server@5.2.6
+  - body-parser@1.20.6
+  - fast-uri@3.1.5 || 3.1.6
+  - qs@6.15.4 || 6.16.0

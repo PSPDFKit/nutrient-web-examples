@@ -79,6 +79,16 @@ source "${REPO_ROOT}/scripts/pnpm-helpers.sh"
 [[ "${pnpm_config_minimum_release_age:-}" == "0" ]] || \
   fail "pnpm callers do not effectively opt out of the minimum release age"
 
+# Overrides written by the audit fix invalidate the virtual store, so pnpm wants
+# to purge node_modules and prompts for confirmation. The scripts capture pnpm's
+# output, which would hide the prompt and stall the run until someone answers it.
+[[ "${PNPM_INSTALL_FLAGS[*]:-}" == "--config.confirmModulesPurge=false" ]] || \
+  fail "pnpm callers do not pre-answer the modules-purge confirmation"
+for script in install-dependencies.sh update-nutrient-in-examples.sh; do
+  grep -q 'pnpm install .*\${PNPM_INSTALL_FLAGS\[@\]}' "${REPO_ROOT}/scripts/${script}" || \
+    fail "${script} calls pnpm install without the non-interactive install flags"
+done
+
 for lockfile in "${REPO_ROOT}"/examples/*/pnpm-lock.yaml; do
   workspace="$(dirname "$lockfile")/pnpm-workspace.yaml"
   [ -f "$workspace" ] || \
@@ -146,7 +156,7 @@ status=$?
 set -e
 
 [[ "$status" -eq 42 ]] || fail "pnpm install failure status was swallowed"
-[[ "$(cat pnpm-args.txt)" == 'install --no-frozen-lockfile' ]] || \
+[[ "$(cat pnpm-args.txt)" == 'install --config.confirmModulesPurge=false --no-frozen-lockfile' ]] || \
   fail "pnpm install used unexpected arguments"
 grep -q 'simulated pnpm failure' install-stderr.txt || \
   fail "pnpm install failure details were hidden"

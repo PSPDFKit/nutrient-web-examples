@@ -24,8 +24,8 @@
     "electron"
   ],
   "devDependencies": {
-    "@electron/packager": "^19.1.0",
-    "electron": "^41.2.0"
+    "@electron/packager": "^20.3.0",
+    "electron": "^44.2.0"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.21.0"

@@ -11,6 +11,13 @@ export COREPACK_ENABLE_STRICT=0
 # in CI. The opt-out also avoids tracked minimumReleaseAgeExclude entries.
 export pnpm_config_minimum_release_age=0
 
+# Changing overrides invalidates the virtual store, so `pnpm install` wants to
+# purge node_modules and asks for confirmation first. That prompt has no
+# equivalent rc/env setting, and the scripts here capture pnpm's output, so it
+# would sit invisibly waiting for a keystroke while the run looks hung. Answer
+# it up front on every install these scripts perform.
+PNPM_INSTALL_FLAGS=(--config.confirmModulesPurge=false)
+
 require_local_pnpm_workspace() {
   local example="${1:-The current directory}"
 
@@ -44,5 +51,5 @@ run_pnpm_audit_fix() {
 run_pnpm_install_quietly() {
   # pnpm 11 fails when it encounters an unapproved dependency build. Keep the
   # successful output quiet, but print the complete failure before propagating it.
-  run_pnpm_command_quietly install "$@"
+  run_pnpm_command_quietly install "${PNPM_INSTALL_FLAGS[@]}" "$@"
 }

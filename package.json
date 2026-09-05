@@ -10,12 +10,12 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.56.1",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.13.1",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "typescript": "^5.9.3",
-    "webpack-dev-server": "^5.2.5"
+    "webpack-dev-server": "^5.2.6"
   },
   "scripts": {
     "install-dependencies": "./scripts/install-dependencies.sh",
