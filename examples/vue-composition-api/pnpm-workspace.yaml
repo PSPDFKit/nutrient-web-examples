@@ -18,3 +18,6 @@ overrides:
   "picomatch@<2.3.2": "^2.3.2"
   "esbuild@>=0.27.3 <0.28.1": ">=0.28.1"
   "@babel/core@<=7.29.0": ">=7.29.6"
+  brace-expansion@>=4.0.0 <5.0.9: ^5.0.9
+  browserslist@<=4.28.6: ^4.28.7
+  nanoid@<3.3.18: ^3.3.18
