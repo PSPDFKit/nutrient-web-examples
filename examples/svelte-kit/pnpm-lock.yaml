@@ -16,6 +16,10 @@ overrides:
   svelte@<=5.55.6: '>=5.55.7'
   esbuild@>=0.27.3 <0.28.1: '>=0.28.1'
   '@sveltejs/kit@<=2.69.0': '>=2.69.1'
+  '@sveltejs/kit@<=2.70.1': ^2.70.2
+  brace-expansion@>=4.0.0 <5.0.9: ^5.0.9
+  devalue@<5.9.1: ^5.9.1
+  nanoid@<3.3.18: ^3.3.18
 
 importers:
 
@@ -27,10 +31,10 @@ importers:
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^7.0.1
-        version: 7.0.1(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2)))
+        version: 7.0.1(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2)))
       '@sveltejs/kit':
-        specifier: '>=2.69.1'
-        version: 2.70.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))
+        specifier: ^2.70.2
+        version: 2.70.3(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2))
@@ -221,10 +225,10 @@ packages:
   '@sveltejs/adapter-auto@7.0.1':
     resolution: {integrity: sha512-dvuPm1E7M9NI/+canIQ6KKQDU2AkEefEZ2Dp7cY6uKoPq9Z/PhOXABe526UdW2mN986gjVkuSLkOYIBnS/M2LQ==}
     peerDependencies:
-      '@sveltejs/kit': '>=2.69.1'
+      '@sveltejs/kit': ^2.70.2
 
-  '@sveltejs/kit@2.70.1':
-    resolution: {integrity: sha512-nY9SPHGOZro3doud9vZXDBwl9tCZIouuJztjgSHs6PAIrv9M/z5O7eOhPV5xU7CgVHA976Jwu3BA1hIFvXztkA==}
+  '@sveltejs/kit@2.70.3':
+    resolution: {integrity: sha512-UDvEYuZqAMbfB/oXIoqKvbKcb7YczK5zYrzmsGV1zRJk03jntwp8dXiYoIJotxAndsKvcPFtx9H1GRSKFdSHgg==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -302,8 +306,8 @@ packages:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
 
-  brace-expansion@5.0.8:
-    resolution: {integrity: sha512-JZyDyq3D4AUifKTPOB7DELf6XsB3WdPuNxCtob1vFXPsSXhdAiHBWJ/tJ8HAc9aH84BK+5JFZLNkJKx3G9kzQg==}
+  brace-expansion@5.0.12:
+    resolution: {integrity: sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==}
     engines: {node: 20 || >=22}
 
   braces@3.0.3:
@@ -336,8 +340,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  devalue@5.8.1:
-    resolution: {integrity: sha512-4CXDYRBGqN+57wVJkuXBYmpAVUSg3L6JAQa/DFqm238G73E1wuyc/JhGQJzN7vUf/CMphYau2zXbfWzDR5aTEw==}
+  devalue@5.9.4:
+    resolution: {integrity: sha512-sPAT4pztbu6586/hrhOnMKS17IJrvg12mXiSPSS3W5qDeN2RGgvZ0diZCm31dBbnevfVmujNO3IM2wrS4Y2Rhg==}
 
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -538,8 +542,8 @@ packages:
     resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
     engines: {node: '>=10'}
 
-  nanoid@3.3.16:
-    resolution: {integrity: sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==}
+  nanoid@3.3.19:
+    resolution: {integrity: sha512-Y2tUNy4ouw6tq5oDSKeQYGOyhkUBhNOcGV/02KC+6kd9eDGqdZd++mjMiIDilrBYvjEnCYvVtsuHCuP+okSfug==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -840,11 +844,11 @@ snapshots:
     dependencies:
       acorn: 8.17.0
 
-  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2)))':
+  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2)))':
     dependencies:
-      '@sveltejs/kit': 2.70.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))
+      '@sveltejs/kit': 2.70.3(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))
 
-  '@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))':
+  '@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.56.8)(vite@8.1.0(@types/node@22.13.2)))(svelte@5.56.8)(typescript@5.9.3)(vite@8.1.0(@types/node@22.13.2))':
     dependencies:
       '@standard-schema/spec': 1.0.0
       '@sveltejs/acorn-typescript': 1.0.11(acorn@8.17.0)
@@ -852,7 +856,7 @@ snapshots:
       '@types/cookie': 0.6.0
       acorn: 8.17.0
       cookie: 0.7.2
-      devalue: 5.8.1
+      devalue: 5.9.4
       esm-env: 1.2.2
       kleur: 4.1.5
       magic-string: 0.30.21
@@ -918,7 +922,7 @@ snapshots:
 
   balanced-match@4.0.4: {}
 
-  brace-expansion@5.0.8:
+  brace-expansion@5.0.12:
     dependencies:
       balanced-match: 4.0.4
 
@@ -942,7 +946,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  devalue@5.8.1: {}
+  devalue@5.9.4: {}
 
   dir-glob@3.0.1:
     dependencies:
@@ -1104,13 +1108,13 @@ snapshots:
 
   minimatch@10.2.5:
     dependencies:
-      brace-expansion: 5.0.8
+      brace-expansion: 5.0.12
 
   mri@1.2.0: {}
 
   mrmime@2.0.0: {}
 
-  nanoid@3.3.16: {}
+  nanoid@3.3.19: {}
 
   obug@2.1.1: {}
 
@@ -1130,7 +1134,7 @@ snapshots:
 
   postcss@8.5.23:
     dependencies:
-      nanoid: 3.3.16
+      nanoid: 3.3.19
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -1212,7 +1216,7 @@ snapshots:
       aria-query: 5.3.1
       axobject-query: 4.1.0
       clsx: 2.1.1
-      devalue: 5.8.1
+      devalue: 5.9.4
       esm-env: 1.2.2
       esrap: 2.3.0
       is-reference: 3.0.3
