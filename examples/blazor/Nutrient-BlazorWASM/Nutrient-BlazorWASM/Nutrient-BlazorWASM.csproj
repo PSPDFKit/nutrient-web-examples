@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nutrient-BlazorWASM.Client\Nutrient-BlazorWASM.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.32" />
   </ItemGroup>
 
 </Project>
