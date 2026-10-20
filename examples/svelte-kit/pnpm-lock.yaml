@@ -20,6 +20,7 @@ overrides:
   brace-expansion@>=4.0.0 <5.0.9: ^5.0.9
   devalue@<5.9.1: ^5.9.1
   nanoid@<3.3.18: ^3.3.18
+  source-map-js@>=1.0.0 <1.2.2: ^1.2.2
 
 importers:
 
@@ -614,8 +615,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  source-map-js@1.2.1:
-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
+  source-map-js@1.2.2:
+    resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
     engines: {node: '>=0.10.0'}
 
   svelte-check@4.4.6:
@@ -1136,7 +1137,7 @@ snapshots:
     dependencies:
       nanoid: 3.3.19
       picocolors: 1.1.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   queue-microtask@1.2.3: {}
 
@@ -1191,7 +1192,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  source-map-js@1.2.1: {}
+  source-map-js@1.2.2: {}
 
   svelte-check@4.4.6(picomatch@4.0.4)(svelte@5.56.8)(typescript@5.9.3):
     dependencies:
