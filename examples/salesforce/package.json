@@ -48,7 +48,8 @@
     "@tootallnate/once": "^3.0.1",
     "glob": {
       "minimatch": "^10.2.5"
-    }
+    },
+    "follow-redirects": "1.16.1"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
