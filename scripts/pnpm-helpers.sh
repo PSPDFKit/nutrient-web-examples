@@ -35,10 +35,68 @@ run_pnpm_command_quietly() {
 }
 
 run_pnpm_audit_fix() {
+  local before
+  local status=0
+
+  before="$(mktemp)"
+  cp pnpm-workspace.yaml "${before}"
+
   # A successful fix exits zero even when the initial audit found advisories.
   # Preserve every real pnpm failure instead of hiding bad flags, registry
   # failures, or an unwritable workspace file.
-  run_pnpm_command_quietly audit --fix=override --ignore-registry-errors
+  run_pnpm_command_quietly audit --fix=override --ignore-registry-errors || status=$?
+
+  if (( status == 0 )); then
+    drop_unpublished_overrides "${before}" || status=$?
+  fi
+
+  rm -f "${before}"
+  return "${status}"
+}
+
+# pnpm audit --fix=override pins the first patched version an advisory names,
+# whether or not that version was ever published. For the 1.25.0 bump it wrote
+# deepmerge@^4.3.2 into examples/svelte-kit although deepmerge stops at 4.3.1,
+# so the install that follows failed and stopped the bump for every example
+# after it. Drop each override the fix just added that no published version
+# satisfies, and say so. A registry error keeps the override, so a network
+# failure never removes a real fix.
+drop_unpublished_overrides() {
+  local before=$1
+  local line entry key value name matches
+
+  while IFS= read -r line; do
+    entry="${line#"${line%%[![:space:]]*}"}"
+    key="${entry%: *}"
+    value="${entry##*: }"
+    key="${key//[\"\']/}"
+    value="${value//[\"\']/}"
+
+    # The key is a package name with an optional version range, and a scoped
+    # name starts with its own @.
+    if [[ "${key}" == @* ]]; then
+      name="${key:1}"
+      name="@${name%%@*}"
+    else
+      name="${key%%@*}"
+    fi
+
+    # npm answers a range nothing satisfies with E404 "No match found for
+    # version", which is the case to drop. Any other failure, such as an
+    # unreachable registry, keeps the override.
+    if matches="$(npm view "${name}@${value}" version 2>&1)"; then
+      if [ -n "${matches}" ]; then
+        continue
+      fi
+    elif ! grep -q "No match found for version" <<< "${matches}"; then
+      echo "Could not look up ${name}@${value}; keeping the override for ${key}." >&2
+      continue
+    fi
+
+    echo "No published ${name} matches ${value}; dropping the audit override for ${key}." >&2
+    grep -vxF -- "${line}" pnpm-workspace.yaml > pnpm-workspace.yaml.tmp
+    mv pnpm-workspace.yaml.tmp pnpm-workspace.yaml
+  done < <(grep -vxF -f "${before}" pnpm-workspace.yaml | grep -E '^[[:space:]]+[^[:space:]#].*: ' || true)
 }
 
 run_pnpm_install_quietly() {
