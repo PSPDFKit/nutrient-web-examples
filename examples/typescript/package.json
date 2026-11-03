@@ -79,6 +79,9 @@
       "minimatch": "^10.2.5"
     },
     "brace-expansion@5": "^5.0.12",
-    "follow-redirects": "1.16.1"
+    "follow-redirects": "1.16.1",
+    "http-proxy": {
+      "follow-redirects": "^1.16.2"
+    }
   }
 }
