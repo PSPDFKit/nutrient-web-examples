@@ -13,7 +13,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "test": "node --test merge-deep.test.cjs",
     "start:e2e": "npm run start"
   },
   "dependencies": {
@@ -49,6 +49,13 @@
     "sharp": "^0.35.3",
     "brace-expansion@1": "^2.1.3",
     "brace-expansion@2": "^2.1.3",
-    "follow-redirects": "1.16.1"
+    "follow-redirects": "1.16.1",
+    "@graphql-tools/utils": "12.0.4",
+    "@graphql-tools/load": "8.1.6",
+    "@graphql-tools/code-file-loader": "8.1.23",
+    "@graphql-tools/schema": {
+      ".": "10.0.31",
+      "@graphql-tools/merge": "9.1.7"
+    }
   }
 }
