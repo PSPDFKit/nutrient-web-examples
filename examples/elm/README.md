@@ -29,6 +29,9 @@ Install the project dependencies with `npm`:
 npm install
 ```
 
+The project `.npmrc` limits new dependency resolution to releases published before October 30, 2026.
+When updating dependencies, advance this cutoff to a date at least seven days before the update.
+
 Now that everything is installed we need to configure the app to use our [Nutrient Web SDK license key](https://www.nutrient.io/guides/web/current/standalone/integration).
 
 Edit `./config/license-key` and replace the string `YOUR_LICENSE_KEY_GOES_HERE` with the license key that you received via e-mail.
