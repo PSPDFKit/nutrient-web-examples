@@ -7,7 +7,9 @@ This example uses node integration. If you're looking for an example with contex
 
 ## Prerequisites
 
-- [Node.js](http://nodejs.org/)
+- [Node.js](http://nodejs.org/) 22.12.0 or later and npm 11.21.1 or later.
+
+The `.npmrc` configuration excludes dependency releases younger than seven days when npm resolves new versions.
 
 ## Support and Issues
 
