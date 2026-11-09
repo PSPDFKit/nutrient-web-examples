@@ -7,7 +7,7 @@ This example uses context isolation, with node integration disabled. If you're l
 
 ## Prerequisites
 
-- [Node.js](http://nodejs.org/) 22.12.0 or later and npm 11.21.1 or later.
+- [Node.js](http://nodejs.org/) 22.12.0 or later and npm 11.10.0 or later.
 
 The `.npmrc` configuration excludes dependency releases younger than seven days when npm resolves new versions.
 
