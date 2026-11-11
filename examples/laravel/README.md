@@ -5,8 +5,10 @@ This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/s
 ## Prerequisites
 
 -   PHP
--   [Composer](https://getcomposer.org/download/)
+-   [Composer](https://getcomposer.org/download/) 2.11 or later
 -   [Laravel Installer](https://laravel.com/docs/8.x#the-laravel-installer)
+
+The `composer.json` configuration excludes package releases younger than seven days when Composer resolves new versions. Composer versions before 2.11 ignore this setting.
 
 You can install PHP via [XAMPP](https://www.mamp.info/en/mac/), [MAMP](https://www.apachefriends.org/index.html) or [Homebrew](https://formulae.brew.sh/formula/php).
 
