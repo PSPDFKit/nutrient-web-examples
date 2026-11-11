@@ -27,6 +27,9 @@ Install the project dependencies:
 npm install
 ```
 
+The project `.npmrc` limits new dependency resolution to releases published before October 30, 2026.
+When updating dependencies, advance this cutoff to a date at least seven days before the update.
+
 ## Running the Example
 
 We are ready to launch the app! 🎉
@@ -66,3 +69,10 @@ This software is licensed under a [modified BSD license](LICENSE).
 Please ensure
 [you have signed our CLA](https://www.nutrient.io/guides/web/current/miscellaneous/contributing/) so that we can
 accept your contributions.
+
+## Development server security
+
+Gatsby 5.16.1 requires `webpack-dev-middleware` 5.3.4, which has no patched release within its supported major version.
+The default public path `/` meets the [upstream workaround for CVE-2026-76844](https://github.com/webpack/webpack-dev-middleware/security/advisories/GHSA-g84c-rxfj-3j2c).
+If you set `GATSBY_WEBPACK_PUBLICPATH`, end its value with `/`.
+The dependency alert remains open until Gatsby supports a patched middleware version.
