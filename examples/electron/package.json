@@ -25,9 +25,12 @@
   ],
   "devDependencies": {
     "@electron/packager": "20.3.0",
-    "electron": "^41.2.0"
+    "electron": "^43.8.4"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.25.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
