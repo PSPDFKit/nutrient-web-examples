@@ -1,0 +1,32 @@
+diff --git a/node_modules/webpack-dev-middleware/dist/middleware.js b/node_modules/webpack-dev-middleware/dist/middleware.js
+index 983bf0d..90d6f15 100644
+--- a/node_modules/webpack-dev-middleware/dist/middleware.js
++++ b/node_modules/webpack-dev-middleware/dist/middleware.js
+@@ -972,6 +972,9 @@ function wrapper(context) {
+       setResponseHeader(res, "Content-Length", /** @type {number} */
+       byteLength);
+       if (method === "HEAD") {
++        if (!Buffer.isBuffer(bufferOrStream)) {
++          destroyStream(/** @type {import("fs").ReadStream} */bufferOrStream, true);
++        }
+         if (!isPartialContent) {
+           setStatusCode(res, 200);
+         }
+diff --git a/node_modules/webpack-dev-middleware/dist/utils.js b/node_modules/webpack-dev-middleware/dist/utils.js
+index abc7f46..86af904 100644
+--- a/node_modules/webpack-dev-middleware/dist/utils.js
++++ b/node_modules/webpack-dev-middleware/dist/utils.js
+@@ -500,12 +500,12 @@ function createReadStreamOrReadFile(filename, outputFileSystem, start, end) {
+   // Stream logic
+   const isFsSupportsStream = typeof outputFileSystem.createReadStream === "function";
+   if (isFsSupportsStream) {
++    byteLength = end === 0 && outputFileSystem.statSync(filename).size === 0 ? 0 : end - start + 1;
+     bufferOrStream = /** @type {import("fs").createReadStream} */
+     outputFileSystem.createReadStream(filename, {
+       start,
+       end
+     });
+-    byteLength = end === 0 ? 0 : end - start + 1;
+   } else {
+     bufferOrStream = outputFileSystem.readFileSync(filename);
+     ({

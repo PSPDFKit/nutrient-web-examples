@@ -12,7 +12,11 @@ Nutrient Web SDK is a powerful PDF SDK that enables you to view, annotate, sign,
 
 ## Prerequisites
 
-- [Node.js][]
+- [Node.js][] 24 (tested and used in CI)
+
+## Development server dependency patch
+
+`npm install` and `npm ci` apply the `webpack-dev-middleware` patch in `patches/` using `patch-package` when npm lifecycle scripts are enabled. Do not use `--ignore-scripts` for this example. It fixes incorrect response lengths for one-byte assets and first-byte ranges and closes unused streams on HEAD requests while retaining the traversal fix. Keep the patch until an upstream release fixes these responses and HEAD stream cleanup and the regression tests pass without it.
 
 ## Support and Issues
 
