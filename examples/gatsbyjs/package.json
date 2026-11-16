@@ -59,6 +59,8 @@
       ".": "10.0.31",
       "@graphql-tools/merge": "9.1.7"
     },
-    "webpack-dev-middleware": "8.6.0"
+    "webpack-dev-middleware": "8.6.0",
+    "query-string": "^9.5.1",
+    "decode-uri-component": "^0.5.1"
   }
 }
