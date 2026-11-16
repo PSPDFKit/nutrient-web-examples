@@ -1,4 +1,5 @@
-const { contextBridge } = require("electron");
+const { contextBridge, webUtils } = require("electron");
+const { pathToFileURL } = require("node:url");
 
 const {
   documentExport,
@@ -15,4 +16,7 @@ contextBridge.exposeInMainWorld("electron", {
   documentExport,
   documentImport,
   askUserToDiscardChanges,
+  // Returns a `file://` URL for a dropped `File`, which the viewer can open.
+  // Electron removed `File.path` in v32; `webUtils` replaces it.
+  getFileUrl: (file) => pathToFileURL(webUtils.getPathForFile(file)).href,
 });

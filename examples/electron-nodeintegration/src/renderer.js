@@ -2,6 +2,8 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
+const path = require("node:path");
+const { pathToFileURL } = require("node:url");
 const NutrientViewer = require("@nutrient-sdk/viewer");
 
 const {
@@ -11,6 +13,13 @@ const {
 } = require("./lib/modals");
 const dragAndDrop = require("./lib/drag-and-drop");
 const makeToolbarItems = require("./lib/toolbar");
+
+/**
+ * We append `process.platform` as a CSS class to `<body>` so we can offset
+ * the frame less window alternative on macOS.
+ * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
+ */
+document.body.classList.add(`platform-${process.platform}`);
 
 /**
  * We store the `NutrientViewer.Instance` in this variable so we can access it from
@@ -71,6 +80,12 @@ async function load(document) {
   const configuration = {
     document,
     container: "#root",
+    // Load the viewer's assets from the installed npm package. The folder must
+    // be the one that contains `nutrient-viewer-lib/`, given as an absolute URL.
+    baseUrl: pathToFileURL(
+      `${path.dirname(require.resolve("@nutrient-sdk/viewer"))}/`,
+    ).href,
+    useCDN: false,
     styleSheets: ["./nutrient.css"],
   };
 

@@ -2,6 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Content Security Policy for the viewer. It allows the app's own files,
+      the WebAssembly engine ('wasm-unsafe-eval'), the workers, images and
+      fonts the viewer creates at runtime (blob: and data: URLs), and the
+      viewer's usage metrics endpoint.
+      https://www.electronjs.org/docs/latest/tutorial/security#7-define-a-content-security-policy
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' blob:; img-src 'self' data: blob:; font-src 'self' data: blob:; connect-src 'self' data: blob: https://dam.our.services.nutrient-powered.io"
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -49,107 +60,6 @@
 
     <script src="../node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js"></script>
 
-    <script type="module">
-      import { dragAndDrop } from "./lib/drag-and-drop.js";
-      import { makeToolbarItems } from "./lib/toolbar.js";
-
-      /**
-       * We append `process.platform` ass a CSS class to `<body>` so we can offset
-       * the frame less window alternative on macOS.
-       * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
-       */
-      document.body.classList.add(
-        `platform-${window.electron.processPlatform()}`
-      );
-
-      /**
-       * We store the `NutrientViewer.Instance` in this variable so we can access it from
-       * everywhere.
-       */
-      let instance = null;
-
-      const { documentExport, documentImport, askUserToDiscardChanges } =
-        window.electron;
-
-      /**
-       * Creates an onAnnotationsChange handler that keeps track of changes.
-       *
-       * We skip the first call since `annotations.change` fires when the PDF is
-       * initialized and populated with annotations.
-       */
-      let hasUnsavedAnnotations = false;
-
-      function createOnAnnotationsChange() {
-        let initialized = false;
-
-        return () => {
-          if (initialized) {
-            hasUnsavedAnnotations = true;
-          } else {
-            initialized = true;
-          }
-        };
-      }
-
-      /**
-       * If there is an existing running instance of Nutrient, it is destroyed before
-       * a creating a new one.
-       *
-       * This process will make sure that the WebAssembly module is optimally reused.
-       */
-      async function load(document) {
-        if (instance) {
-          NutrientViewer.unload(instance);
-          hasUnsavedAnnotations = false;
-          instance = null;
-        }
-
-        // Create our custom toolbar
-        const toolbarItems = makeToolbarItems(
-          NutrientViewer.defaultToolbarItems,
-          function exportFile() {
-            documentExport(instance, () => (hasUnsavedAnnotations = false));
-          },
-          function importFile() {
-            if (hasUnsavedAnnotations) {
-              askUserToDiscardChanges(() => documentImport(load));
-            } else {
-              documentImport(load);
-            }
-          }
-        );
-
-        // Set up the configuration object. A custom style sheet is used to customize
-        // the look and feel of Nutrient.
-        const configuration = {
-          document,
-          container: "#root",
-          styleSheet: ["./nutrient.css"],
-          // appName must match the license's bundle ID
-          appName: "nutrient-electron-example",
-          // Add when using a license key
-          // licenseKey: "LICENSE KEY GOES HERE",
-        };
-
-        instance = await NutrientViewer.load(configuration);
-
-        instance.setToolbarItems(toolbarItems);
-        instance.addEventListener(
-          "annotations.change",
-          createOnAnnotationsChange()
-        );
-
-        dragAndDrop(instance, (file) => {
-          if (hasUnsavedAnnotations) {
-            askUserToDiscardChanges(() => load(file));
-          } else {
-            load(file);
-          }
-        });
-      }
-
-      // Open a default document, when the app is started.
-      window.onload = () => load("./assets/example.pdf");
-    </script>
+    <script type="module" src="./renderer.js"></script>
   </body>
 </html>

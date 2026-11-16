@@ -2,6 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Content Security Policy for the viewer. It allows the app's own files,
+      the WebAssembly engine ('wasm-unsafe-eval'), the workers, images and
+      fonts the viewer creates at runtime (blob: and data: URLs), and the
+      viewer's usage metrics endpoint.
+      https://www.electronjs.org/docs/latest/tutorial/security#7-define-a-content-security-policy
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' blob:; img-src 'self' data: blob:; font-src 'self' data: blob:; connect-src 'self' data: blob: https://dam.our.services.nutrient-powered.io"
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -47,18 +58,6 @@
     <header></header>
     <div id="root"></div>
 
-    <script>
-      /**
-       * We append `process.platform` ass a CSS class to `<body>` so we can offset
-       * the frame less window alternative on macOS.
-       * https://electronjs.org/docs/api/frameless-window#alternatives-on-macos
-       */
-      document.body.classList.add(`platform-${process.platform}`);
-
-      /**
-       * Invoke the JavaScript for the renderer process.
-       */
-      require("./renderer.js");
-    </script>
+    <script src="./renderer.js"></script>
   </body>
 </html>

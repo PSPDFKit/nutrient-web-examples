@@ -9,13 +9,13 @@ export function dragAndDrop(instance, onDrop) {
   });
   instance.contentWindow.addEventListener("drop", (event) => {
     if (event?.dataTransfer?.files?.length) {
-      const file = event.dataTransfer.files[0].path;
+      const droppedFile = event.dataTransfer.files[0];
 
-      if (event.dataTransfer.files[0].type !== "application/pdf") {
+      if (droppedFile.type !== "application/pdf") {
         return;
       }
 
-      onDrop(file);
+      onDrop(window.electron.getFileUrl(droppedFile));
     }
 
     event.preventDefault();
