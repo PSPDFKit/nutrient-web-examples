@@ -7,7 +7,11 @@ This example uses node integration. If you're looking for an example with contex
 
 ## Prerequisites
 
-- [Node.js](http://nodejs.org/)
+- [Node.js](http://nodejs.org/) 22.12.0 or later.
+
+With npm 11.10.0 or later, the `.npmrc` configuration excludes dependency releases younger than seven days when npm resolves new versions.
+
+`npm install` does not download the Electron binary. The first `npm start` downloads it, so the first start takes longer and needs internet access.
 
 ## Support and Issues
 
