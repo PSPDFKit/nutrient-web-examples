@@ -1,4 +1,5 @@
-const { contextBridge } = require("electron");
+const { contextBridge, webUtils } = require("electron");
+const { pathToFileURL } = require("node:url");
 
 const {
   documentExport,
@@ -15,4 +16,9 @@ contextBridge.exposeInMainWorld("electron", {
   documentExport,
   documentImport,
   askUserToDiscardChanges,
+  // Electron returns an empty path if the File has no backing file.
+  getFileUrl: (file) => {
+    const path = webUtils.getPathForFile(file);
+    return path ? pathToFileURL(path).href : null;
+  },
 });

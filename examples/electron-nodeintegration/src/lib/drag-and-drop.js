@@ -1,24 +1,34 @@
+const { webUtils } = require("electron");
+const { pathToFileURL } = require("node:url");
+
 /**
- * Initializes drag and drop handlers for a given `NutrientViewer.Instance`. When a
- * file is detected, the `onDrop` handler will be called.
+ * Calls `onDrop` for PDFs backed by a file on disk for the window lifetime.
  */
-module.exports = function dragAndDrop(instance, onDrop) {
-  instance.contentWindow.addEventListener("dragover", (event) => {
+module.exports = function dragAndDrop(onDrop) {
+  function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
-  });
-  instance.contentWindow.addEventListener("drop", (event) => {
-    if (event?.dataTransfer?.files?.length) {
-      const file = event.dataTransfer.files[0].path;
+  }
 
-      if (event.dataTransfer.files[0].type !== "application/pdf") {
+  function handleDrop(event) {
+    if (event?.dataTransfer?.files?.length) {
+      const droppedFile = event.dataTransfer.files[0];
+
+      if (droppedFile.type !== "application/pdf") {
         return;
       }
 
-      onDrop(file);
+      // Electron returns an empty path if the File has no backing file.
+      const path = webUtils.getPathForFile(droppedFile);
+      if (path) {
+        onDrop(pathToFileURL(path).href);
+      }
     }
 
     event.preventDefault();
     event.stopPropagation();
-  });
+  }
+
+  window.addEventListener("dragover", handleDragOver);
+  window.addEventListener("drop", handleDrop);
 };

@@ -15,13 +15,13 @@ With npm 11.10.0 or later, the `.npmrc` configuration excludes dependency releas
 
 ## Usage with a license key
 
-The example will work out of the box in demo mode, when no license key is passed. However, if used with a license key, we need to make sure that the corresponding bundle ID is passed in the `electronAppName` property of the configuration object passed to `PSPDFKit.load()` in `src/index.html`:
+The example will work out of the box in demo mode, when no license key is passed. However, if used with a license key, we need to make sure that the corresponding bundle ID is passed in the `appName` property of the configuration object passed to `NutrientViewer.load()` in `src/renderer.js`:
 
 ```js
 NutrientViewer.load({
   // other options
   licenseKey: "LICENSE KEY GOES HERE",
-  electronAppName: "BUNDLE ID GOES HERE",
+  appName: "BUNDLE ID GOES HERE",
 });
 ```
 
@@ -70,7 +70,8 @@ This repository contains an example integration of [Nutrient Electron](https://w
 | Filename         | Description                                                                                                                                                                                                                              |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/index.js`   | The main entry point used to create the Electron windows. This file does not contain major changes, with the exception of a validation to make sure that PSPDFKit is properly installed. It is responsible for loading `src/index.html`. |
-| `src/index.html` | The main HTML entry point. It will set up a simple HTML structure and load the PSPDFKit library and provided example document.                                                                                                           |
+| `src/index.html` | The main HTML entry point. It sets up the HTML structure and loads the Nutrient library and renderer script.                                                                                                                            |
+| `src/renderer.js` | Configures Nutrient, loads the example document, and handles document replacement.                                                                                                                                                     |
 | `src/preload.js` | This file is where the Node API helpers are imported and exposed to the browser window.                                                                                                                                                  |
 
 ## Build Production Packages
