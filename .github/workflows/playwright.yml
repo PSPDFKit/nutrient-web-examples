@@ -25,6 +25,8 @@ jobs:
         run: ./tests/pnpm-workflows.test.sh
       - name: Install dependencies
         run: pnpm install --frozen-lockfile && pnpm run install-dependencies
+      - name: Run security tests
+        run: pnpm run test:security
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --with-deps
       - name: Run Playwright tests

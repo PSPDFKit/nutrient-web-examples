@@ -1,0 +1,62 @@
+diff --git a/node_modules/webpack-dev-middleware/dist/middleware.js b/node_modules/webpack-dev-middleware/dist/middleware.js
+index 983bf0d..24d64b1 100644
+--- a/node_modules/webpack-dev-middleware/dist/middleware.js
++++ b/node_modules/webpack-dev-middleware/dist/middleware.js
+@@ -833,7 +833,7 @@ function wrapper(context) {
+           }
+           [start, end] = calcStartAndEnd(offset, len);
+           try {
+-            const result = createReadStreamOrReadFile(filename, extra.outputFileSystem, start, end);
++            const result = createReadStreamOrReadFile(filename, extra.outputFileSystem, start, end, len);
+             ({
+               bufferOrStream,
+               byteLength
+@@ -956,7 +956,7 @@ function wrapper(context) {
+           ({
+             bufferOrStream,
+             byteLength
+-          } = createReadStreamOrReadFile(filename, extra.outputFileSystem, start, end));
++          } = createReadStreamOrReadFile(filename, extra.outputFileSystem, start, end, len));
+         } catch (error) {
+           await errorHandler(/** @type {NodeJS.ErrnoException} */error);
+           return;
+@@ -972,6 +972,9 @@ function wrapper(context) {
+       setResponseHeader(res, "Content-Length", /** @type {number} */
+       byteLength);
+       if (method === "HEAD") {
++        if (!Buffer.isBuffer(bufferOrStream)) {
++          destroyStream(/** @type {import("fs").ReadStream} */bufferOrStream, true);
++        }
+         if (!isPartialContent) {
+           setStatusCode(res, 200);
+         }
+diff --git a/node_modules/webpack-dev-middleware/dist/utils.js b/node_modules/webpack-dev-middleware/dist/utils.js
+index abc7f46..c732f80 100644
+--- a/node_modules/webpack-dev-middleware/dist/utils.js
++++ b/node_modules/webpack-dev-middleware/dist/utils.js
+@@ -489,9 +489,10 @@ function finish(res, data) {
+  * @param {OutputFileSystem} outputFileSystem output file system
+  * @param {number} start start
+  * @param {number} end end
++ * @param {number} len selected length
+  * @returns {{ bufferOrStream: (Buffer | import("fs").ReadStream), byteLength: number }} result with buffer or stream and byte length
+  */
+-function createReadStreamOrReadFile(filename, outputFileSystem, start, end) {
++function createReadStreamOrReadFile(filename, outputFileSystem, start, end, len) {
+   /** @type {string | Buffer | import("fs").ReadStream} */
+   let bufferOrStream;
+   /** @type {number} */
+@@ -500,12 +501,12 @@ function createReadStreamOrReadFile(filename, outputFileSystem, start, end) {
+   // Stream logic
+   const isFsSupportsStream = typeof outputFileSystem.createReadStream === "function";
+   if (isFsSupportsStream) {
++    byteLength = len;
+     bufferOrStream = /** @type {import("fs").createReadStream} */
+     outputFileSystem.createReadStream(filename, {
+       start,
+       end
+     });
+-    byteLength = end === 0 ? 0 : end - start + 1;
+   } else {
+     bufferOrStream = outputFileSystem.readFileSync(filename);
+     ({

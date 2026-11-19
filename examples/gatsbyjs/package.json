@@ -14,12 +14,14 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "node --test merge-deep.test.cjs",
-    "start:e2e": "npm run start"
+    "start:e2e": "gatsby develop --port ${PORT:-3000}",
+    "postinstall": "patch-package --error-on-fail"
   },
   "dependencies": {
     "@nutrient-sdk/viewer": "1.26.0",
     "gatsby": "^5.16.1",
     "gatsby-source-filesystem": "^5.16.0",
+    "patch-package": "8.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -49,7 +51,7 @@
     "sharp": "^0.35.3",
     "brace-expansion@1": "^2.1.3",
     "brace-expansion@2": "^2.1.3",
-    "follow-redirects": "1.16.1",
+    "follow-redirects": "1.16.2",
     "@graphql-tools/utils": "12.0.4",
     "@graphql-tools/load": "8.1.6",
     "@graphql-tools/code-file-loader": "8.1.23",
@@ -57,6 +59,7 @@
       ".": "10.0.31",
       "@graphql-tools/merge": "9.1.7"
     },
+    "webpack-dev-middleware": "8.6.0",
     "query-string": "^9.5.1",
     "decode-uri-component": "^0.5.1"
   }

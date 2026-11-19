@@ -1,5 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const isolated = ["examples/gatsbyjs", "examples/react"].includes(
+  process.env.SERVER_DIR || "",
+);
+const port = isolated ? process.env.PLAYWRIGHT_PORT || "3000" : "3000";
+const baseURL = `http://localhost:${port}`;
+
 export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.test.ts",
@@ -16,7 +22,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -35,8 +41,12 @@ export default defineConfig({
     command: `cd ${process.env.SERVER_DIR} && npm run start:e2e`,
     // The examples are npm projects, but Corepack applies the root pnpm pin to
     // them and rejects npm when its strict npm shim is enabled.
-    env: { COREPACK_ENABLE_STRICT: "0" },
-    url: "http://localhost:3000",
-    reuseExistingServer: true,
+    env: {
+      COREPACK_ENABLE_STRICT: "0",
+      ...(isolated ? { PORT: port, BROWSER: "none", CI: "true" } : {}),
+    },
+    url: baseURL,
+    reuseExistingServer: !isolated,
+    timeout: isolated ? 180000 : 60000,
   },
 });

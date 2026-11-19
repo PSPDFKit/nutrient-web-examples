@@ -4,7 +4,11 @@ This example shows how to integrate [Nutrient Web SDK](https://www.nutrient.io/s
 
 ## Prerequisites
 
-- [Node.js](http://nodejs.org/)
+- [Node.js](https://nodejs.org/) 24 (tested and used in CI)
+
+## Development server dependency patch
+
+`npm install` and `npm ci` apply the `webpack-dev-middleware` patch in `patches/` using `patch-package` when npm lifecycle scripts are enabled. Do not use `--ignore-scripts` for this example. It fixes incorrect response lengths for one-byte assets and first-byte ranges and closes unused streams on HEAD requests while retaining the traversal fix. Keep the patch until an upstream release fixes these responses and HEAD stream cleanup and the regression tests pass without it.
 
 ## Support, Issues and License Questions
 
@@ -48,14 +52,7 @@ Enjoy 🍕
 
 ## Nutrient Web SDK assets
 
-In order to make the example work, the Nutrient assets need to be copied from their original location in `./node_modules/@nutrient-sdk/viewer/dist` to `./static`. This is done automatically from a postinstall script in located in `./scripts/copy-nutrient-files.js`.
-
-In case copying the files fails, you can copy them manually:
-
-- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js` to `./static/nutrient-viewer.js`.
-- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib/` to `./static/nutrient-viewer-lib/`.
-
-That's it!
+The example loads the Nutrient Web SDK assets from the CDN; no local asset copying is needed.
 
 ## License
 

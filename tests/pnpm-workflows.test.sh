@@ -39,6 +39,25 @@ grep -q 'run: pnpm install --frozen-lockfile && pnpm run install-dependencies' \
   "${REPO_ROOT}/.github/workflows/playwright.yml" || \
   fail "Playwright CI does not use the pinned pnpm for the root install"
 
+security_after_install() {
+  awk '
+    function finish_step() {
+      if (security && installed && !conditional) found=1
+      if (install && !conditional) installed=1
+      security=0; install=0; conditional=0
+    }
+    /^  test:[[:space:]]*$/ { job=1; next }
+    job && /^  [[:alnum:]_-]+:[[:space:]]*$/ { finish_step(); job=0 }
+    job && /^      - / { finish_step() }
+    job && /^[[:space:]]*(-[[:space:]]*)?if:/ { conditional=1 }
+    job && /^[[:space:]]*run: pnpm install --frozen-lockfile && pnpm run install-dependencies[[:space:]]*$/ { install=1; next }
+    job && /^[[:space:]]*run: pnpm run test:security[[:space:]]*$/ { security=1 }
+    END { finish_step(); exit !found }
+  ' "$1"
+}
+security_after_install "${REPO_ROOT}/.github/workflows/playwright.yml" || \
+  fail "Playwright CI must run security tests after installation"
+
 for file in .github/workflows/playwright.yml .github/workflows/update-nutrient-sdk.yml \
   .github/pull_request_template.md AGENTS.md README.md .husky/pre-commit scripts/e2e-tests.sh; do
   [ -f "${REPO_ROOT}/${file}" ] || \
@@ -90,6 +109,26 @@ done
 fixture="$(mktemp -d)"
 trap 'rm -rf "$fixture"' EXIT
 cd "$fixture"
+
+printf '%s\n' '  test:' '    steps:' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '      - name: Security' '        run: pnpm run test:security' > workflow.yml
+security_after_install workflow.yml || fail "workflow guard rejected valid fixture"
+printf '%s\n' '  test:' '    steps:' '      - name: Security' '        run: pnpm run test:security' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' > workflow.yml
+if security_after_install workflow.yml; then fail "workflow guard accepted security tests before installation"; fi
+printf '%s\n' '  test:' '    steps:' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '      - name: Security' '        if: false' '        run: pnpm run test:security' > workflow.yml
+if security_after_install workflow.yml; then fail "workflow guard accepted a disabled security step"; fi
+printf '%s\n' '  test:' '    steps:' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '      - if: false' '        run: pnpm run test:security' > workflow.yml
+if security_after_install workflow.yml; then fail "workflow guard accepted a step starting with a false condition"; fi
+printf '%s\n' '  test:' '    steps:' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '      - name: Security' '        run: pnpm run test:security' '        if: false' > workflow.yml
+if security_after_install workflow.yml; then fail "workflow guard accepted a condition after the security command"; fi
+
+for condition_order in before after; do
+  if [ "$condition_order" = before ]; then
+    printf '%s\n' '  test:' '    steps:' '      - name: Install' '        if: false' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '      - name: Security' '        run: pnpm run test:security' > workflow.yml
+  else
+    printf '%s\n' '  test:' '    steps:' '      - name: Install' '        run: pnpm install --frozen-lockfile && pnpm run install-dependencies' '        if: false' '      - name: Security' '        run: pnpm run test:security' > workflow.yml
+  fi
+  if security_after_install workflow.yml; then fail "workflow guard accepted conditional install ($condition_order)"; fi
+done
 
 if require_local_pnpm_workspace "fixture" 2>workspace-error.txt; then
   fail "missing pnpm-workspace.yaml was accepted"
