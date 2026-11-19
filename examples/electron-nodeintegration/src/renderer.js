@@ -26,6 +26,9 @@ document.body.classList.add(`platform-${process.platform}`);
  * everywhere.
  */
 let instance = null;
+let isLoading = false;
+let activeDocument = null;
+let pendingDocument = null;
 
 /**
  * Creates an onAnnotationsChange handler that keeps track of changes.
@@ -54,54 +57,80 @@ function createOnAnnotationsChange() {
  * This process will make sure that the WebAssembly module is optimally reused.
  */
 async function load(document) {
-  if (instance) {
-    NutrientViewer.unload(instance);
-    hasUnsavedAnnotations = false;
-    instance = null;
+  if (isLoading) {
+    pendingDocument = document === activeDocument ? null : document;
+    return;
   }
+  isLoading = true;
+  activeDocument = document;
+  try {
+    if (instance) {
+      NutrientViewer.unload(instance);
+      hasUnsavedAnnotations = false;
+      instance = null;
+    }
 
-  // Create our custom toolbar
-  const toolbarItems = makeToolbarItems(
-    function exportFile() {
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-      documentExport(instance, () => (hasUnsavedAnnotations = false));
-    },
-    function importFile() {
-      if (hasUnsavedAnnotations) {
-        askUserToDiscardChanges(() => documentImport(load));
-      } else {
-        documentImport(load);
-      }
-    },
-  );
+    // Create our custom toolbar
+    const toolbarItems = makeToolbarItems(
+      function exportFile() {
+        // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+        documentExport(instance, () => (hasUnsavedAnnotations = false));
+      },
+      function importFile() {
+        if (hasUnsavedAnnotations) {
+          askUserToDiscardChanges(() => documentImport(load));
+        } else {
+          documentImport(load);
+        }
+      },
+    );
 
-  // Set up the configuration object. A custom style sheet is used to customize
-  // the look and feel of Nutrient.
-  const configuration = {
-    document,
-    container: "#root",
-    // Load the viewer's assets from the installed npm package. The folder must
-    // be the one that contains `nutrient-viewer-lib/`, given as an absolute URL.
-    baseUrl: pathToFileURL(
-      `${path.dirname(require.resolve("@nutrient-sdk/viewer"))}/`,
-    ).href,
-    useCDN: false,
-    styleSheets: ["./nutrient.css"],
-  };
+    // Set up the configuration object. A custom style sheet is used to customize
+    // the look and feel of Nutrient.
+    const configuration = {
+      document,
+      container: "#root",
+      // Load the viewer's assets from the installed npm package. The folder must
+      // be the one that contains `nutrient-viewer-lib/`, given as an absolute URL.
+      baseUrl: pathToFileURL(
+        `${path.dirname(require.resolve("@nutrient-sdk/viewer"))}/`,
+      ).href,
+      useCDN: false,
+      styleSheets: ["./nutrient.css"],
+    };
 
-  instance = await NutrientViewer.load(configuration);
+    instance = await NutrientViewer.load(configuration);
 
-  instance.setToolbarItems(toolbarItems);
-  instance.addEventListener("annotations.change", createOnAnnotationsChange());
+    instance.setToolbarItems(toolbarItems);
+    instance.addEventListener(
+      "annotations.change",
+      createOnAnnotationsChange(),
+    );
+  } catch (error) {
+    console.error("Failed to load document:", error);
+    try {
+      NutrientViewer.unload("#root");
+      instance = null;
+    } catch (cleanupError) {
+      console.error("Failed to unload document:", cleanupError);
+    }
+  } finally {
+    isLoading = false;
+    activeDocument = null;
+    const nextDocument = pendingDocument;
+    pendingDocument = null;
+    if (nextDocument !== null) load(nextDocument);
+  }
+}
 
-  dragAndDrop(instance, (file) => {
+// Open a default document, when the app is started.
+window.onload = () => {
+  dragAndDrop((file) => {
     if (hasUnsavedAnnotations) {
       askUserToDiscardChanges(() => load(file));
     } else {
       load(file);
     }
   });
-}
-
-// Open a default document, when the app is started.
-window.onload = () => load("../assets/example.pdf");
+  load("../assets/example.pdf");
+};

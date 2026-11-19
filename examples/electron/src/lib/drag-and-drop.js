@@ -1,13 +1,13 @@
 /**
- * Initializes drag and drop handlers for a given `NutrientViewer.Instance`. When a
- * file is detected, the `onDrop` handler will be called.
+ * Calls `onDrop` for PDFs backed by a file on disk for the window lifetime.
  */
-export function dragAndDrop(instance, onDrop) {
-  instance.contentWindow.addEventListener("dragover", (event) => {
+export function dragAndDrop(onDrop) {
+  function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
-  });
-  instance.contentWindow.addEventListener("drop", (event) => {
+  }
+
+  function handleDrop(event) {
     if (event?.dataTransfer?.files?.length) {
       const droppedFile = event.dataTransfer.files[0];
 
@@ -15,10 +15,16 @@ export function dragAndDrop(instance, onDrop) {
         return;
       }
 
-      onDrop(window.electron.getFileUrl(droppedFile));
+      const fileUrl = window.electron.getFileUrl(droppedFile);
+      if (fileUrl) {
+        onDrop(fileUrl);
+      }
     }
 
     event.preventDefault();
     event.stopPropagation();
-  });
+  }
+
+  window.addEventListener("dragover", handleDragOver);
+  window.addEventListener("drop", handleDrop);
 }
