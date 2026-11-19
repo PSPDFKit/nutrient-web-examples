@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-scripts/config/webpackDevServer.config.js b/node_modules/react-scripts/config/webpackDevServer.config.js
+index 522a81b..9b5ec4b 100644
+--- a/node_modules/react-scripts/config/webpackDevServer.config.js
++++ b/node_modules/react-scripts/config/webpackDevServer.config.js
+@@ -51,6 +51,8 @@ module.exports = function (proxy, allowedHost) {
+     },
+     // Enable gzip compression of generated files.
+     compress: true,
++    // The overridden middleware has an asynchronous filename lookup.
++    magicHtml: false,
+     static: {
+       // By default WebpackDevServer serves physical files from current directory
+       // in addition to all the virtual build products that it serves from memory.

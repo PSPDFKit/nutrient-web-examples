@@ -14,7 +14,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "node --test merge-deep.test.cjs",
-    "start:e2e": "npm run start",
+    "start:e2e": "gatsby develop --port ${PORT:-3000}",
     "postinstall": "patch-package --error-on-fail"
   },
   "dependencies": {

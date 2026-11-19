@@ -16,7 +16,9 @@ Nutrient Web SDK is a powerful PDF SDK that enables you to view, annotate, sign,
 
 ## Development server dependency patch
 
-`npm install` and `npm ci` apply the `webpack-dev-middleware` patch in `patches/` using `patch-package` when npm lifecycle scripts are enabled. Do not use `--ignore-scripts` for this example. It fixes incorrect response lengths for one-byte assets and first-byte ranges and closes unused streams on HEAD requests while retaining the traversal fix. Keep the patch until an upstream release fixes these responses and HEAD stream cleanup and the regression tests pass without it.
+`npm install` and `npm ci` apply the `webpack-dev-middleware` and `react-scripts` patches in `patches/` using `patch-package` when npm lifecycle scripts are enabled. Do not use `--ignore-scripts` for this example. It fixes incorrect response lengths for one-byte assets and first-byte ranges and closes unused streams on HEAD requests while retaining the traversal fix. Keep the patch until an upstream release fixes these responses and HEAD stream cleanup and the regression tests pass without it.
+
+The `react-scripts` patch disables Webpack Dev Server 4’s optional magic HTML helper because it is incompatible with the overridden middleware. Extensionless helper URLs no longer produce helper HTML; history fallback may still serve the app. Normal viewer and asset requests are unaffected. Keep this patch while the incompatibility remains.
 
 ## Support and Issues
 

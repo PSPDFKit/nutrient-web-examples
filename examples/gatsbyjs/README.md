@@ -52,14 +52,7 @@ Enjoy 🍕
 
 ## Nutrient Web SDK assets
 
-In order to make the example work, the Nutrient assets need to be copied from their original location in `./node_modules/@nutrient-sdk/viewer/dist` to `./static`. This is done automatically from a postinstall script in located in `./scripts/copy-nutrient-files.js`.
-
-In case copying the files fails, you can copy them manually:
-
-- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer.js` to `./static/nutrient-viewer.js`.
-- Copy `./node_modules/@nutrient-sdk/viewer/dist/nutrient-viewer-lib/` to `./static/nutrient-viewer-lib/`.
-
-That's it!
+The example loads the Nutrient Web SDK assets from the CDN; no local asset copying is needed.
 
 ## License
 

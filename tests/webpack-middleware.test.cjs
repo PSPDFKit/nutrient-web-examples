@@ -14,7 +14,8 @@ function closeResource(name, close) {
     );
     close((error) => {
       clearTimeout(timer);
-      if (error && error.code !== "ERR_SERVER_NOT_RUNNING") reject(error);
+      if (error && error.code !== "ERR_SERVER_NOT_RUNNING")
+        reject(new Error(`${name} close failed`, { cause: error }));
       else resolve();
     });
   });
@@ -46,237 +47,276 @@ function request(port, url, headers = {}, method = "GET") {
       })
       .on("error", reject)
       .end();
+  }).catch((cause) => {
+    throw new Error(
+      `${method} ${url} range=${headers.Range || "none"} failed`,
+      { cause },
+    );
   });
 }
+
+function trackedPendingStream(file) {
+  let recordOpen;
+  const opened = new Promise((resolve) => {
+    recordOpen = resolve;
+  });
+  const stream = fs.createReadStream(file, {
+    fs: {
+      ...fs,
+      open(filename, flags, mode, callback) {
+        fs.open(filename, flags, mode, (error, fd) => {
+          recordOpen({ error, fd });
+          callback(error, fd);
+        });
+      },
+    },
+  });
+  return { stream, opened };
+}
+
+test("pending stream open observer detects failed opens and closed descriptors", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pending-open-"));
+  try {
+    const file = path.join(dir, "fixture.txt");
+    fs.writeFileSync(file, "fixture");
+    const success = trackedPendingStream(file);
+    assert.equal(success.stream.pending, true);
+    const closed = new Promise((resolve) =>
+      success.stream.once("close", resolve),
+    );
+    success.stream.destroy();
+    const opened = await success.opened;
+    assert.equal(opened.error, null);
+    assert.equal(typeof opened.fd, "number");
+    await closed;
+    assert.equal(success.stream.closed, true);
+    assert.equal(success.stream.fd, null);
+    const failure = trackedPendingStream(path.join(dir, "missing"));
+    failure.stream.on("error", () => {});
+    assert.ok((await failure.opened).error);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 for (const example of ["gatsbyjs", "react"]) {
   test(
     `${example} middleware rejects traversal outside webpack output`,
     { timeout: 20000 },
-    async (t) => {
-      const requireExample = createRequire(
-        path.resolve(__dirname, `../examples/${example}/package.json`),
-      );
-      const webpack = requireExample("webpack");
-      const middleware = requireExample("webpack-dev-middleware");
-      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "middleware-test-"));
-      t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
-      fs.writeFileSync(
-        path.join(dir, "entry.js"),
-        'console.log("ordinary asset");',
-      );
-      const compiler = webpack({
-        mode: "development",
-        entry: path.join(dir, "entry.js"),
-        output: {
-          path: path.join(dir, "output"),
-          filename: "bundle.js",
-          publicPath: "/assets",
-        },
-      });
-      const handler = middleware(compiler, {
-        publicPath: "/assets",
-        stats: "errors-only",
-      });
-      const server = http.createServer((req, res) =>
-        handler(req, res, () => {
-          res.statusCode = 404;
-          res.end();
-        }),
-      );
-      t.after(async () => {
-        server.closeAllConnections();
-        const results = await Promise.allSettled([
-          closeResource("server", (done) => server.close(done)),
-          closeResource("middleware", (done) => handler.close(done)),
-        ]);
-        for (const result of results) {
-          if (result.status === "rejected") throw result.reason;
-        }
-      });
-      await new Promise((resolve, reject) => {
-        server.once("error", reject);
-        server.listen(0, "127.0.0.1", resolve);
-      });
-      await new Promise((resolve, reject) => {
-        const timer = setTimeout(
-          () => reject(new Error("webpack compilation timed out")),
-          10000,
-        );
-        handler.waitUntilValid((stats) => {
-          clearTimeout(timer);
-          if (stats.hasErrors())
-            reject(new Error(stats.toString("errors-only")));
-          else resolve();
-        });
-      });
-      handler.context.outputFileSystem.writeFileSync(
-        path.join(dir, "secret.txt"),
-        "fixture secret",
-      );
-      for (const [name, content] of [
-        ["empty.txt", ""],
-        ["one.txt", "x"],
-        ["ordinary.txt", "abcdef"],
-      ]) {
-        handler.context.outputFileSystem.writeFileSync(
-          path.join(dir, "output", name),
-          content,
-        );
-      }
-      const port = server.address().port;
-      const outputFS = handler.context.outputFileSystem;
-      const originalRead = outputFS.createReadStream;
-      const originalStat = outputFS.statSync;
-      const streams = [];
-      outputFS.createReadStream = function (...args) {
-        const stream = originalRead.apply(this, args);
-        streams.push(stream);
-        return stream;
-      };
-      t.after(() => {
-        outputFS.createReadStream = originalRead;
-        outputFS.statSync = originalStat;
-        for (const stream of streams) if (!stream.destroyed) stream.destroy();
-      });
-      for (const [file, range, expected, status] of [
-        ["ordinary.txt", null, "abcdef", 200],
-        ["empty.txt", null, "", 200],
-        ["one.txt", null, "x", 200],
-        ["ordinary.txt", "bytes=0-0", "a", 206],
-        ["ordinary.txt", "bytes=2-4", "cde", 206],
-      ]) {
-        const headers = range ? { Range: range } : {};
-        for (const method of ["HEAD", "GET", "HEAD"]) {
-          const before = streams.length;
-          const result = await request(
-            port,
-            `/assets/${file}`,
-            headers,
-            method,
-          );
-          assert.equal(result.status, status);
-          assert.equal(result.body, method === "HEAD" ? "" : expected);
-          assert.equal(
-            Number(result.headers["content-length"]),
-            Buffer.byteLength(expected),
-          );
-          const created = streams.slice(before);
-          assert.equal(
-            created.length,
-            1,
-            `${method} ${file} must create a stream`,
-          );
-          const deadline = Date.now() + 1000;
-          while (!created[0].closed && Date.now() < deadline) {
-            await new Promise((resolve) => setTimeout(resolve, 10));
-          }
-          assert.equal(
-            created[0].destroyed,
-            true,
-            `${method} ${file} destroyed`,
-          );
-          assert.equal(created[0].closed, true, `${method} ${file} closed`);
-          assert.equal(created[0].fd, null, `${method} ${file} fd released`);
-        }
-      }
-      handler.context.options.cache.etag = "strong";
-      const strongBefore = streams.length;
-      const strongHead = await request(
-        port,
-        "/assets/ordinary.txt",
-        {},
-        "HEAD",
-      );
-      assert.equal(strongHead.status, 200);
-      assert.equal(strongHead.body, "");
-      assert.equal(strongHead.headers["content-length"], "6");
-      assert.ok(strongHead.headers.etag);
-      const strongStream = streams[strongBefore];
-      assert.ok(strongStream);
-      const strongDeadline = Date.now() + 1000;
-      while (!strongStream.closed && Date.now() < strongDeadline)
-        await new Promise((resolve) => setTimeout(resolve, 10));
-      assert.equal(strongStream.closed, true);
-      assert.equal(strongStream.fd, null);
-      handler.context.options.cache.etag = false;
-      let pending;
-      outputFS.createReadStream = () => {
-        pending = fs.createReadStream(path.join(dir, "missing-pending-file"));
-        streams.push(pending);
-        assert.equal(pending.pending, true);
-        return pending;
-      };
-      const pendingHead = await request(
-        port,
-        "/assets/ordinary.txt",
-        {},
-        "HEAD",
-      );
-      assert.equal(pendingHead.status, 200);
-      assert.equal(pendingHead.body, "");
-      const pendingDeadline = Date.now() + 1000;
-      while (!pending.closed && Date.now() < pendingDeadline)
-        await new Promise((resolve) => setTimeout(resolve, 10));
-      assert.equal(pending.destroyed, true);
-      assert.equal(pending.closed, true);
-      assert.equal(pending.fd, null);
-      outputFS.createReadStream = function (...args) {
-        const stream = originalRead.apply(this, args);
-        streams.push(stream);
-        return stream;
-      };
-      const beforeStatError = streams.length;
-      let injected = false;
-      outputFS.statSync = function (filename, ...args) {
-        if (
-          !injected &&
-          String(filename) === path.join(dir, "output", "one.txt") &&
-          new Error().stack.includes("createReadStreamOrReadFile")
-        ) {
-          injected = true;
-          const error = new Error("fixture stat failure");
-          error.code = "EIO";
-          throw error;
-        }
-        return originalStat.call(this, filename, ...args);
-      };
-      const statError = await request(port, "/assets/one.txt");
-      outputFS.statSync = originalStat;
-      assert.equal(injected, true);
-      assert.equal(statError.status, 500);
-      assert.equal(
-        Number(statError.headers["content-length"]),
-        Buffer.byteLength(statError.body),
-      );
-      assert.equal(streams.length, beforeStatError);
-      for (const [file, range, expected, status] of [
-        ["empty.txt", null, "", 200],
-        ["one.txt", null, "x", 200],
-        ["ordinary.txt", null, "abcdef", 200],
-        ["ordinary.txt", "bytes=0-0", "a", 206],
-        ["ordinary.txt", "bytes=2-4", "cde", 206],
-      ]) {
-        const result = await request(
-          port,
-          `/assets/${file}`,
-          range ? { Range: range } : {},
-        );
-        assert.equal(result.status, status);
-        assert.equal(result.body, expected);
-        assert.equal(
-          Number(result.headers["content-length"]),
-          Buffer.byteLength(expected),
-        );
-      }
-      const asset = await request(port, "/assets/bundle.js");
-      assert.equal(asset.status, 200);
-      assert.match(asset.body, /ordinary asset/);
-      const traversal = await request(port, "/assets../secret.txt");
-      assert.equal(traversal.status, 403);
-      assert.doesNotMatch(traversal.body, /fixture secret/);
-    },
+    async (t) => runMiddlewareChecks(t, example, false),
   );
+  test(
+    `${example} ordinary middleware responses`,
+    { timeout: 20000 },
+    async (t) => runMiddlewareChecks(t, example, true),
+  );
+}
+
+async function runMiddlewareChecks(t, example, ordinaryOnly) {
+  const requireExample = createRequire(
+    path.resolve(__dirname, `../examples/${example}/package.json`),
+  );
+  const webpack = requireExample("webpack");
+  const middleware = requireExample("webpack-dev-middleware");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "middleware-test-"));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  fs.writeFileSync(
+    path.join(dir, "entry.js"),
+    'console.log("ordinary asset");',
+  );
+  const compiler = webpack({
+    mode: "development",
+    entry: path.join(dir, "entry.js"),
+    output: {
+      path: path.join(dir, "output"),
+      filename: "bundle.js",
+      publicPath: "/assets",
+    },
+  });
+  const handler = middleware(compiler, {
+    publicPath: "/assets",
+    stats: "errors-only",
+  });
+  const server = http.createServer((req, res) =>
+    handler(req, res, () => {
+      res.statusCode = 404;
+      res.end();
+    }),
+  );
+  t.after(async () => {
+    server.closeAllConnections();
+    const results = await Promise.allSettled([
+      closeResource("server", (done) => server.close(done)),
+      closeResource("middleware", (done) => handler.close(done)),
+    ]);
+    const failures = results
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason);
+    if (failures.length)
+      throw new AggregateError(failures, "fixture cleanup failed");
+  });
+  await new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(
+      () => reject(new Error("webpack compilation timed out")),
+      10000,
+    );
+    handler.waitUntilValid((stats) => {
+      clearTimeout(timer);
+      if (stats.hasErrors()) reject(new Error(stats.toString("errors-only")));
+      else resolve();
+    });
+  });
+  handler.context.outputFileSystem.writeFileSync(
+    path.join(dir, "secret.txt"),
+    "fixture secret",
+  );
+  for (const [name, content] of [
+    ["empty.txt", ""],
+    ["one.txt", "x"],
+    ["ordinary.txt", "abcdef"],
+  ]) {
+    handler.context.outputFileSystem.writeFileSync(
+      path.join(dir, "output", name),
+      content,
+    );
+  }
+  const port = server.address().port;
+  const outputFS = handler.context.outputFileSystem;
+  const originalRead = outputFS.createReadStream;
+  const originalStat = outputFS.statSync;
+  const streams = [];
+  outputFS.createReadStream = function (...args) {
+    const stream = originalRead.apply(this, args);
+    streams.push(stream);
+    return stream;
+  };
+  t.after(() => {
+    outputFS.createReadStream = originalRead;
+    outputFS.statSync = originalStat;
+    for (const stream of streams) if (!stream.destroyed) stream.destroy();
+  });
+  for (const [file, range, expected, status] of [
+    ["ordinary.txt", null, "abcdef", 200],
+    ["empty.txt", null, "", 200],
+    ["one.txt", null, "x", 200],
+    ["ordinary.txt", "bytes=0-0", "a", 206],
+    ["ordinary.txt", "bytes=2-4", "cde", 206],
+  ]) {
+    const headers = range ? { Range: range } : {};
+    for (const method of ["HEAD", "GET", "HEAD"]) {
+      const before = streams.length;
+      const result = await request(port, `/assets/${file}`, headers, method);
+      assert.equal(result.status, status);
+      assert.equal(result.body, method === "HEAD" ? "" : expected);
+      assert.equal(
+        Number(result.headers["content-length"]),
+        Buffer.byteLength(expected),
+      );
+      if (range) {
+        assert.equal(
+          result.headers["content-range"],
+          `bytes ${range.slice("bytes=".length)}/6`,
+          `${method} /assets/${file} range=${range} Content-Range`,
+        );
+      }
+      const created = streams.slice(before);
+      for (const stream of created) {
+        const deadline = Date.now() + 1000;
+        while (!stream.closed && Date.now() < deadline) {
+          await new Promise((resolve) => setTimeout(resolve, 10));
+        }
+        assert.equal(stream.destroyed, true, `${method} ${file} destroyed`);
+        assert.equal(stream.closed, true, `${method} ${file} closed`);
+        assert.equal(stream.fd, null, `${method} ${file} fd released`);
+      }
+    }
+  }
+  handler.context.options.cache.etag = "strong";
+  const strongBefore = streams.length;
+  const strongHead = await request(port, "/assets/ordinary.txt", {}, "HEAD");
+  assert.equal(strongHead.status, 200);
+  assert.equal(strongHead.body, "");
+  assert.equal(strongHead.headers["content-length"], "6");
+  assert.ok(strongHead.headers.etag);
+  const strongRange = await request(port, "/assets/ordinary.txt", {
+    Range: "bytes=0-0",
+  });
+  assert.equal(strongRange.status, 206);
+  assert.equal(strongRange.body, "a");
+  assert.equal(strongRange.headers["content-length"], "1");
+  for (const stream of streams.slice(strongBefore)) {
+    const deadline = Date.now() + 1000;
+    while (!stream.closed && Date.now() < deadline)
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    assert.equal(stream.closed, true);
+    assert.equal(stream.fd, null);
+  }
+  handler.context.options.cache.etag = false;
+  const pendingFile = path.join(dir, "pending.txt");
+  fs.writeFileSync(pendingFile, "fixture");
+  fs.closeSync(fs.openSync(pendingFile, "r"));
+  const pendingStreams = [];
+  outputFS.createReadStream = () => {
+    const tracked = trackedPendingStream(pendingFile);
+    const pending = tracked.stream;
+    pendingStreams.push(tracked);
+    streams.push(pending);
+    assert.equal(pending.pending, true);
+    return pending;
+  };
+  const pendingHead = await request(port, "/assets/ordinary.txt", {}, "HEAD");
+  assert.equal(pendingHead.status, 200);
+  assert.equal(pendingHead.body, "");
+  for (const { stream: pending, opened } of pendingStreams) {
+    const result = await opened;
+    assert.equal(result.error, null);
+    assert.equal(typeof result.fd, "number");
+    const pendingDeadline = Date.now() + 1000;
+    while (!pending.closed && Date.now() < pendingDeadline)
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    assert.equal(pending.destroyed, true);
+    assert.equal(pending.closed, true);
+    assert.equal(pending.fd, null);
+  }
+  outputFS.createReadStream = function (...args) {
+    const stream = originalRead.apply(this, args);
+    streams.push(stream);
+    return stream;
+  };
+  let injected = false;
+  outputFS.statSync = function (filename, ...args) {
+    if (
+      !injected &&
+      String(filename) === path.join(dir, "output", "one.txt") &&
+      new Error().stack.includes("createReadStreamOrReadFile")
+    ) {
+      injected = true;
+      const error = new Error("fixture stat failure");
+      error.code = "EIO";
+      throw error;
+    }
+    return originalStat.call(this, filename, ...args);
+  };
+  const statError = await request(port, "/assets/one.txt");
+  outputFS.statSync = originalStat;
+  assert.equal(injected, false);
+  assert.equal(statError.status, 200);
+  assert.equal(statError.body, "x");
+  assert.equal(
+    Number(statError.headers["content-length"]),
+    Buffer.byteLength(statError.body),
+  );
+  const asset = await request(port, "/assets/bundle.js");
+  assert.equal(asset.status, 200);
+  assert.match(asset.body, /ordinary asset/);
+  if (ordinaryOnly) return;
+  const traversal = await request(port, "/assets../secret.txt");
+  assert.equal(traversal.status, 403);
+  assert.doesNotMatch(traversal.body, /fixture secret/);
 }
 
 test(
