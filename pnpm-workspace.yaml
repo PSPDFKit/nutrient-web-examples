@@ -50,3 +50,5 @@ minimumReleaseAgeExclude:
   - proxy-addr@2.0.8
   - compression@1.8.2
   - shell-quote@1.11.0
+
+minimumReleaseAge: 10080
