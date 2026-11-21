@@ -63,3 +63,10 @@ This software is licensed under a [modified BSD license](LICENSE).
 Please ensure
 [you have signed our CLA](https://www.nutrient.io/guides/web/current/miscellaneous/contributing/) so that we can
 accept your contributions.
+
+## Development server security
+
+Gatsby 5.16.1 uses `webpack-dev-middleware` 5.x, which has no fixed release.
+The default public path `/` meets the [upstream workaround for CVE-2026-76844](https://github.com/webpack/webpack-dev-middleware/security/advisories/GHSA-g84c-rxfj-3j2c).
+If you set `GATSBY_WEBPACK_PUBLICPATH`, end its value with `/`.
+The dependency alert remains open until Gatsby supports a patched middleware version.

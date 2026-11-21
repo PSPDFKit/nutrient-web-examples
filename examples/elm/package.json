@@ -33,9 +33,7 @@
     "glob": {
       "minimatch": "^10.2.5"
     },
-    "follow-redirects": "1.16.1",
-    "http-proxy": {
-      "follow-redirects": "^1.16.2"
-    }
+    "follow-redirects": "1.16.2",
+    "webpack-dev-middleware": "^7.4.6"
   }
 }
