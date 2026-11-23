@@ -4,7 +4,7 @@ This repository contains various examples of the usage of [Nutrient Web SDK](htt
 
 - **Demo**: https://www.nutrient.io/demo/
 - **Guides**: https://www.nutrient.io/guides/web/
-- **API**: https://www.nutrient.io/guides/web/api/
+- **API**: https://www.nutrient.io/api/web/
 
 ## Development
 
