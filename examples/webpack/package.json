@@ -44,6 +44,7 @@
     "start:dev:npm": "cross-env NODE_ENV=development USE_NPM=true webpack serve --config config/webpack.js --progress"
   },
   "overrides": {
+    "webpack-dev-middleware": "^7.4.6",
     "fast-uri": "^3.1.4",
     "path-to-regexp": "^3.3.0",
     "cross-spawn": "^7.0.6",

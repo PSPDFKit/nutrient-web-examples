@@ -6,6 +6,11 @@ module.exports = {
     "react middleware rejects traversal outside webpack output",
     "react ordinary middleware responses",
     "react redirects omit cross-realm sensitive headers",
+    "angular middleware rejects traversal outside webpack output",
+    "elm middleware rejects traversal outside webpack output",
+    "laravel middleware rejects traversal outside webpack output",
+    "typescript middleware rejects traversal outside webpack output",
+    "webpack middleware rejects traversal outside webpack output",
   ],
   "tests/middleware-length.test.cjs": [
     "gatsbyjs stream length uses selected size without another lookup",

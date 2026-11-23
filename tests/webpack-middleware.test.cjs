@@ -319,6 +319,87 @@ async function runMiddlewareChecks(t, example, ordinaryOnly) {
   assert.doesNotMatch(traversal.body, /fixture secret/);
 }
 
+// These examples resolve webpack-dev-middleware on the 7.x line through
+// webpack-dev-server, so only the traversal fix from 7.4.6 is checked here.
+for (const example of ["angular", "elm", "laravel", "typescript", "webpack"]) {
+  test(
+    `${example} middleware rejects traversal outside webpack output`,
+    { timeout: 20000 },
+    async (t) => runTraversalCheck(t, example),
+  );
+}
+
+async function runTraversalCheck(t, example) {
+  const requireExample = createRequire(
+    path.resolve(__dirname, `../examples/${example}/package.json`),
+  );
+  const webpack = requireExample("webpack");
+  const middleware = requireExample("webpack-dev-middleware");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "middleware-test-"));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  fs.writeFileSync(
+    path.join(dir, "entry.js"),
+    'console.log("ordinary asset");',
+  );
+  const compiler = webpack({
+    mode: "development",
+    entry: path.join(dir, "entry.js"),
+    output: {
+      path: path.join(dir, "output"),
+      filename: "bundle.js",
+      publicPath: "/assets",
+    },
+  });
+  const handler = middleware(compiler, {
+    publicPath: "/assets",
+    stats: "errors-only",
+  });
+  const server = http.createServer((req, res) =>
+    handler(req, res, () => {
+      res.statusCode = 404;
+      res.end();
+    }),
+  );
+  t.after(async () => {
+    server.closeAllConnections();
+    const results = await Promise.allSettled([
+      closeResource("server", (done) => server.close(done)),
+      closeResource("middleware", (done) => handler.close(done)),
+    ]);
+    const failures = results
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason);
+    if (failures.length)
+      throw new AggregateError(failures, "fixture cleanup failed");
+  });
+  await new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(
+      () => reject(new Error("webpack compilation timed out")),
+      10000,
+    );
+    handler.waitUntilValid((stats) => {
+      clearTimeout(timer);
+      if (stats.hasErrors()) reject(new Error(stats.toString("errors-only")));
+      else resolve();
+    });
+  });
+  handler.context.outputFileSystem.writeFileSync(
+    path.join(dir, "secret.txt"),
+    "fixture secret",
+  );
+  const port = server.address().port;
+  const asset = await request(port, "/assets/bundle.js");
+  assert.equal(asset.status, 200);
+  assert.match(asset.body, /ordinary asset/);
+  const traversal = await request(port, "/assets../secret.txt");
+  assert.equal(traversal.status, 403);
+  assert.doesNotMatch(traversal.body, /fixture secret/);
+}
+
 test(
   "react redirects omit cross-realm sensitive headers",
   { timeout: 20000 },
